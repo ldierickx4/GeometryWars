@@ -11,4 +11,6 @@ package geometrywars;
  */
 public class Player {
     private String naam;
+    private int y;
+    private int x;
 }

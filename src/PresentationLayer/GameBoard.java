@@ -15,8 +15,15 @@ public class GameBoard extends JFrame{
     JFrame gameBoard;
             
     public GameBoard(){
-        
+        initGameBoard();
     
+    }
+    public void initGameBoard()
+    {
+        gameBoard = new JFrame("GeometryWars");
+        gameBoard.setSize(1000, 800);
+        gameBoard.setVisible(true);
+        gameBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
 }
