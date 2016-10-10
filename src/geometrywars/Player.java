@@ -10,5 +10,5 @@ package geometrywars;
  * @author Laurens
  */
 public class Player {
-    
+    private String naam;
 }
