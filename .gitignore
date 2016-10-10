@@ -64,11 +64,10 @@ $RECYCLE.BIN/
 # NetBeans specific #
 nbproject/private/
 nbproject/build-impl.xml
-nbproject/project/properties
+nbproject/project.properties
 nbproject/project.xml
 build/
 nbbuild/
-
 dist/
 nbdist/
 nbactions.xml
