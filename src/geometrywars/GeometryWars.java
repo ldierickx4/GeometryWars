@@ -18,6 +18,7 @@ public class GeometryWars {
         // TODO code application logic here
         System.out.println("this is the first line of code for meometry wars");
         System.out.println("balteel ehja");
+        System.out.println("test");
         
     }
     
