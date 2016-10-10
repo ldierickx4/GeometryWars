@@ -5,10 +5,18 @@
  */
 package PresentationLayer;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Laurens
  */
-public class GameBoard {
+public class GameBoard extends JFrame{
+    JFrame gameBoard;
+            
+    public GameBoard(){
+        
+    
+    }
     
 }
