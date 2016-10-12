@@ -27,4 +27,23 @@ public class Player {
         ImageIcon ii =  new ImageIcon("warship.png");
         image = ii.getImage();
     }
+    public void moveUp()
+    {
+        this.y++;
+    }
+    public void moveDown()
+    {
+        this.y--;
+    }
+    public void moveLeft()
+    {
+        this.x++;
+    }
+    public void moveRight()
+    {
+        this.x--;
+    }
+    
+    
+    
 }
