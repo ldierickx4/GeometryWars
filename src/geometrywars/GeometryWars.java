@@ -23,7 +23,7 @@ public class GeometryWars {
         System.out.println("Jens");
         System.out.println("Jorre");
         System.out.println("Jordy");
-        Vangeel is voe den nol 
+       
         
     }
     
