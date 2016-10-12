@@ -5,6 +5,9 @@
  */
 package geometrywars;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Laurens
@@ -13,4 +16,15 @@ public class Player {
     private String naam;
     private int y;
     private int x;
+    private Image image;
+    public Player(){
+        this.x = 170;
+        this.y = 560;
+        loadImage();
+    }
+
+    private void loadImage() {
+        ImageIcon ii =  new ImageIcon("warship.png");
+        image = ii.getImage();
+    }
 }
