@@ -20,11 +20,7 @@ public class GeometryWars {
         // TODO code application logic here
         GameBoard test = new GameBoard();
         System.out.println("laurens");
-<<<<<<< HEAD
-        System.out.println("laurens1");
-=======
         System.out.println("Jens");
->>>>>>> origin/master
         
     }
     
