@@ -21,17 +21,8 @@ public class GeometryWars {
         GameBoard test = new GameBoard();
         System.out.println("laurens");
         System.out.println("Jens");
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< Updated upstream
->>>>>>> origin/master
-=======
         System.out.println("Jorre");
->>>>>>> Stashed changes
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
+
         
     }
     
