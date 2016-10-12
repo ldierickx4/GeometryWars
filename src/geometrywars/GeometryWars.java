@@ -19,17 +19,6 @@ public class GeometryWars {
     public static void main(String[] args) {
         // TODO code application logic here
         GameBoard test = new GameBoard();
-        System.out.println("Laurens");
-        System.out.println("Jens");
-        System.out.println("Jorre");
-        System.out.println("Jordy");
-<<<<<<< HEAD
-       
-        Theben is voe den nol
-=======
-        String zin = "Jorre fag";
-        
->>>>>>> origin/master
     }
     
 }
