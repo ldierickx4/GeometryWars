@@ -24,7 +24,7 @@ public class GeometryWars {
         System.out.println("Jorre");
         System.out.println("Jordy");
        
-        
+        Theben is voe den nol
     }
     
 }
