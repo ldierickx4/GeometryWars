@@ -5,7 +5,6 @@
  */
 package geometrywars;
 
-import PresentationLayer.GameBoard;
 
 /**
  *
@@ -18,7 +17,6 @@ public class GeometryWars {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        GameBoard test = new GameBoard();
     }
     
 }
