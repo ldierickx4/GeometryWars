@@ -5,7 +5,10 @@
  */
 package geometrywars;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,15 +20,26 @@ public class Player {
     private int y;
     private int x;
     private Image image;
+    private AffineTransform trans;
+    private Graphics g;
+    
+    
     public Player(){
         this.x = 170;
         this.y = 560;
+        trans = new AffineTransform();
+        trans.translate(x, y);
         loadImage();
     }
 
     private void loadImage() {
-        ImageIcon ii =  new ImageIcon("warship.png");
+        ImageIcon ii =  new ImageIcon("/warship.png");
         image = ii.getImage();
+    }
+    public void Draw(){
+        g = (Graphics) image.getGraphics();
+        Graphics gd = (Graphics) g;
+        gd.drawImage(image, 100, 100, null);
     }
     public void moveUp()
     {
@@ -42,6 +56,18 @@ public class Player {
     public void moveRight()
     {
         this.x--;
+    }
+    public Image giveImage()
+    {
+        return image;
+    }
+    public int getx()
+    {
+        return x;
+    }
+        public int gety()
+    {
+        return y;
     }
     
     

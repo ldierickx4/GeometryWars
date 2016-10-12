@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import java.awt.Dimension;
 import javax.swing.*;
+import geometrywars.*;
 
 /**
  *
@@ -26,5 +27,7 @@ public class GameFrame extends JFrame{
     
     public static void main(String[] args){
         GameFrame window = new GameFrame();
+        Player p = new Player();
+        p.Draw(p.giveImage(),p.getx(),p.gety(),null);
     }
 }
