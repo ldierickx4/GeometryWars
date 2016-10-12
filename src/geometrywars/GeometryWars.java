@@ -23,8 +23,13 @@ public class GeometryWars {
         System.out.println("Jens");
         System.out.println("Jorre");
         System.out.println("Jordy");
+<<<<<<< HEAD
        
         Theben is voe den nol
+=======
+        String zin = "Jorre fag";
+        
+>>>>>>> origin/master
     }
     
 }
