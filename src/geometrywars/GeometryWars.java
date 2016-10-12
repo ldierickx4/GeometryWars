@@ -22,6 +22,7 @@ public class GeometryWars {
         System.out.println("laurens");
         System.out.println("Jens");
         System.out.println("Jorre");
+        System.out.println("Jordy");
 
         
     }
