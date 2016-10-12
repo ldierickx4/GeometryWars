@@ -20,6 +20,7 @@ public class GeometryWars {
         // TODO code application logic here
         GameBoard test = new GameBoard();
         System.out.println("laurens");
+        System.out.println("laurens1");
         
     }
     
