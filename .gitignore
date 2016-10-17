@@ -73,3 +73,6 @@ nbactions.xml
 nb-configuration.xml
 build.xml
 
+*.xml
+*.iml
+.idea/.name
