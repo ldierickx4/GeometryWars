@@ -28,8 +28,6 @@ public class GamePanel extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(player.giveImage(),50, 50, this);
+        g.drawImage(player.giveImage(),5, 5, this);
     }
-   
-    
 }
