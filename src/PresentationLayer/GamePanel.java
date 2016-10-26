@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements KeyListener{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(player.giveImage(),5, 5, this);
+        g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
     }
 
     @Override

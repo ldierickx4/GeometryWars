@@ -21,20 +21,21 @@ public class Player {
     private Image image;
     private AffineTransform trans;
     private Graphics g;
+    private int width;
+    private int height;
     
     
     public Player(){
         this.x = 170;
-        this.y = 560;
+        this.y = 150;
+        this.width=30;
+        this.height=30;
         loadImage();
     }
 
     private void loadImage() {
         ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
         image = ii.getImage();
-    }
-    public void Draw(Graphics g) {
-        g.drawImage(image,x,y,null);
     }
     public void moveUp()
     {
@@ -60,10 +61,15 @@ public class Player {
     {
         return x;
     }
-        public int gety()
+    public int gety()
     {
         return y;
     }
-    
-    
+    public int getHeight()
+    {
+        return height;
+    }
+    public int getWidth(){
+        return width;
+    }
 }
