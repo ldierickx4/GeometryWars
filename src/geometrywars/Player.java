@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
  * @author Laurens
  */
 public class Player {
+    private static final int SPEED = 10;
     private String naam;
     private int y;
     private int x;
@@ -39,19 +40,19 @@ public class Player {
     }
     public void moveUp()
     {
-        this.y++;
+        this.y-=SPEED;
     }
     public void moveDown()
     {
-        this.y--;
+        this.y+=SPEED;
     }
     public void moveLeft()
     {
-        this.x++;
+        this.x-=SPEED;
     }
     public void moveRight()
     {
-        this.x--;
+        this.x+=SPEED;
     }
     public Image giveImage()
     {

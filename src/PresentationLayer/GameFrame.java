@@ -5,30 +5,25 @@
  */
 package PresentationLayer;
 
-import java.awt.Dimension;
 import javax.swing.*;
-import geometrywars.*;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  *
  * @author Gebruiker
  */
-public class GameFrame extends JFrame{
+public class GameFrame extends JFrame implements ActionListener,KeyListener {
     private GamePanel gamePanel;
-<<<<<<< HEAD
-    private static final int HEIGHT = 1400;
-    private static final int WIDTH = 1400;
+
+    private static final int HEIGHT = 900;
+    private static final int WIDTH = 900;
     
-=======
-    private static final int HEIGHT = 1000;
-    private static final int WIDTH = 1000;
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
 
->>>>>>> origin/master
+
     public static void main(String[] args){
         GameFrame window = new GameFrame();
         //window.initUi(); // dit wordt al opgeroepen in je constructor waar 'HIER' staat, overbodig en zal voor bugs zorgen
@@ -39,22 +34,36 @@ public class GameFrame extends JFrame{
     }
 
     private void initUi() {
+        addKeyListener(this);
         setTitle("Geometry Wars");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-<<<<<<< HEAD
-        //setSize(new Dimension(800, 600));
-        // layout manager werkt niet met setsize, enkel prefererd size, dan probeert hij die size te respecteren als hij kan
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        //setLocationRelativeTo(null); //afgezet wegens irritant :D
-=======
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        this.setLocation(y,x);
->>>>>>> origin/master
-        setVisible(true);
+        setLocation(y, x);
         gamePanel = new GamePanel();
         setContentPane(gamePanel); // met deze method zet je uw main content panel van uw jframe (dit kan maar 1 panel zijn max, als je meerdere dingen wilt moet je panels nesten)
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
+        setVisible(true);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        gamePanel.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
