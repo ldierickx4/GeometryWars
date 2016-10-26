@@ -7,17 +7,20 @@ package PresentationLayer;
 
 import geometrywars.Player;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.*;
 
 /**
  *
  * @author Laurens
  */
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel implements KeyListener{
     private Player player;
     
     public GamePanel(){ 
         createPlayer();
+        
     }
     private void createPlayer()
     {
@@ -29,5 +32,24 @@ public class GamePanel extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(player.giveImage(),5, 5, this);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int typed = e.getKeyCode();
+        if(typed == e.VK_DOWN){
+            player.moveDown();
+            repaint();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

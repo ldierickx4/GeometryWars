@@ -5,18 +5,21 @@
  */
 package geometrywars;
 
+import PresentationLayer.GameFrame;
+
 
 /**
  *
  * @author Laurens
  */
-public class GeometryWars {
+public class Game {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        GameFrame window = new GameFrame();
     }
     
 }

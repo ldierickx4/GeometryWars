@@ -16,7 +16,9 @@ import java.awt.Graphics;
  */
 public class GameFrame extends JFrame{
     private GamePanel gamePanel;
-
+    private static final int HEIGHT = 1400;
+    private static final int WIDTH = 1400;
+    
     public static void main(String[] args){
         GameFrame window = new GameFrame();
         //window.initUi(); // dit wordt al opgeroepen in je constructor waar 'HIER' staat, overbodig en zal voor bugs zorgen
@@ -32,7 +34,7 @@ public class GameFrame extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setSize(new Dimension(800, 600));
         // layout manager werkt niet met setsize, enkel prefererd size, dan probeert hij die size te respecteren als hij kan
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         //setLocationRelativeTo(null); //afgezet wegens irritant :D
         setVisible(true);
         gamePanel = new GamePanel();
