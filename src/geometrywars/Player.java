@@ -8,6 +8,12 @@ package geometrywars;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,7 +25,7 @@ public class Player {
     private String naam;
     private int y;
     private int x;
-    private Image image;
+    private BufferedImage image;
     private AffineTransform trans;
     private Graphics g;
     private int width;
@@ -35,8 +41,14 @@ public class Player {
     }
 
     private void loadImage() {
-        ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
-        image = ii.getImage();
+        BufferedImage i = null;
+        try {
+            //ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
+            i = ImageIO.read(new File("resources/gameSprites/warship.png"));
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+        image = i;
     }
     public void moveUp()
     {

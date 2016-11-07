@@ -13,7 +13,7 @@ import java.awt.event.*;
  *
  * @author Gebruiker
  */
-public class GameFrame extends JFrame implements ActionListener,KeyListener {
+public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener {
     private GamePanel gamePanel;
 
     private static final int HEIGHT = 900;
@@ -35,6 +35,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener {
 
     private void initUi() {
         addKeyListener(this);
+        addMouseMotionListener(this);
         setTitle("Geometry Wars");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -64,6 +65,16 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        gamePanel.mouseDragged(e);
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        gamePanel.mouseMoved(e);
     }
 
 

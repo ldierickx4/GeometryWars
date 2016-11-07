@@ -7,30 +7,35 @@ package PresentationLayer;
 
 import geometrywars.Player;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 import javax.swing.*;
 
 /**
  *
  * @author Laurens
  */
-public class GamePanel extends JPanel implements KeyListener,Runnable{
+public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener{
     private Player player;
     private boolean running= true;
     private Thread thread ;
-    private int FPS = 60;
-    private long targetTime = 1000 / FPS;
     private boolean down = false;
     private boolean up = false;
     private boolean left = false;
     private boolean right = false;
+    private double imageAngleRad = 0;
     
    
     
     public GamePanel(){ 
         createPlayer();
         addKeyListener(this);
+        addMouseMotionListener(this);
         thread = new Thread(this);
         thread.start();
         
@@ -56,9 +61,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
     }
     
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paintComponent(Graphics gr) {
+        super.paintComponent(gr);
+        Graphics2D g = (Graphics2D)gr;
+        g.rotate(imageAngleRad);
+        g.translate(player.getWidth(),player.getWidth());
         g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
+        
+       
     }
 
     @Override
@@ -124,4 +134,21 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
             repaint();
         }
     }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        e.getX();
+        e.getY();
+        double dx = e.getX() - player.getx();
+        double dy = e.getY() - player.gety();
+        System.out.println(dx+"  "+dy);
+        imageAngleRad = Math.atan2(dy, dx);
+    }
+
+   
 }
