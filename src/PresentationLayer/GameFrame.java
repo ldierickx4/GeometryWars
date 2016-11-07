@@ -58,7 +58,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-    
+        gamePanel.keyReleased(e);
     }
 
     @Override

@@ -21,10 +21,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
     private Thread thread ;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
-    private boolean down;
-    private boolean up;
-    private boolean left;
-    private boolean right;
+    private boolean down = false;
+    private boolean up = false;
+    private boolean left = false;
+    private boolean right = false;
     
    
     
@@ -40,6 +40,21 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
         player = new Player();
         //repaint();
     }
+    public void checkInput(){
+        if(down){
+            player.moveDown();
+        }
+        if(up){
+            player.moveUp();
+        }
+        if(left){
+            player.moveLeft();
+        }
+        if(right){
+            player.moveRight();
+        }
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -54,23 +69,20 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
     @Override
     public void keyPressed(KeyEvent e) {
         int typed = e.getKeyCode();
-        if(typed== e.VK_S){
-            player.moveDown();
+        if(typed== e.VK_S)
+        {
             down = true;
         }
         if(typed== e.VK_Z)
         {
-            player.moveUp();
             up = true;
         }
         if(typed== e.VK_Q)
         {
-            player.moveLeft();
             left = true;
         }
         if(typed== e.VK_D)
         {
-            player.moveRight();
             right = true;            
         }        
     }
@@ -101,16 +113,15 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
         Thread current = Thread.currentThread();
         while(current == thread)
         {            
+            checkInput();
             //System.out.println(elapsed);
-            
             try {
-		Thread.sleep(0);
+		Thread.sleep(4);
 		}
             catch(Exception e) {
 		e.printStackTrace();
 		}
             repaint();
-        
         }
     }
 }
