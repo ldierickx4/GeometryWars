@@ -21,8 +21,12 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
     private Thread thread ;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
+    private boolean down;
+    private boolean up;
+    private boolean left;
+    private boolean right;
     
-    
+   
     
     public GamePanel(){ 
         createPlayer();
@@ -52,33 +56,48 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
         int typed = e.getKeyCode();
         if(typed== e.VK_S){
             player.moveDown();
+            down = true;
         }
         if(typed== e.VK_Z)
         {
             player.moveUp();
+            up = true;
         }
         if(typed== e.VK_Q)
         {
             player.moveLeft();
+            left = true;
         }
         if(typed== e.VK_D)
         {
             player.moveRight();
-        }
-        //repaint();
+            right = true;            
+        }        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+        int typed = e.getKeyCode();
+        if(typed== e.VK_S){
+            down = false;
+        }
+        if(typed== e.VK_Z)
+        {            
+            up = false;
+        }
+        if(typed== e.VK_Q)
+        {            
+            left = false;
+        }
+        if(typed== e.VK_D)
+        {            
+            right = false;            
+        }
     }
 
     @Override
     public void run() {
         
-        long start;
-	long elapsed;
-	long wait;
         Thread current = Thread.currentThread();
         while(current == thread)
         {            
