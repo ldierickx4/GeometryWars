@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import javax.swing.*;
 
 /**
@@ -66,8 +67,12 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         Graphics2D g = (Graphics2D)gr;
         g.rotate(imageAngleRad);
         g.translate(player.getWidth(),player.getWidth());
-        g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
-        
+        double locationX = player.getWidth() / 2;
+        double locationY = player.getHeight() / 2;
+        AffineTransform tx = AffineTransform.getRotateInstance(imageAngleRad, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        g.drawImage(player.giveImage(),tx,this);
+        //g.drawImage(player.giveImage(),tx,player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
        
     }
 
