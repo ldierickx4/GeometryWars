@@ -18,7 +18,7 @@ import javax.swing.*;
 public class GamePanel extends JPanel implements KeyListener,Runnable{
     private Player player;
     private boolean running= true;
-    private Thread thread;
+    private Thread thread ;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
     
@@ -27,12 +27,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
     public GamePanel(){ 
         createPlayer();
         addKeyListener(this);
+        thread = new Thread(this);
+        thread.start();
         
     }
     private void createPlayer()
     {
         player = new Player();
-        repaint();
+        //repaint();
     }
     @Override
     public void paintComponent(Graphics g) {
@@ -50,24 +52,20 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
         int typed = e.getKeyCode();
         if(typed== e.VK_S){
             player.moveDown();
-            System.out.println(player.gety());
         }
         if(typed== e.VK_Z)
         {
-            System.out.println(player.gety());
             player.moveUp();
         }
         if(typed== e.VK_Q)
         {
-            System.out.println(player.getx());
             player.moveLeft();
         }
         if(typed== e.VK_D)
         {
-            System.out.println(player.getx());
             player.moveRight();
         }
-        repaint();
+        //repaint();
     }
 
     @Override
@@ -81,26 +79,18 @@ public class GamePanel extends JPanel implements KeyListener,Runnable{
         long start;
 	long elapsed;
 	long wait;
-        
-        while(running)
-        {
-            start = System.nanoTime();
-            
-            repaint();
-            
-            elapsed = System.nanoTime() - start;
-            System.out.println(elapsed);
-            
-            wait = targetTime - elapsed / 1000000;
-            if(wait < 0) wait = 5;
+        Thread current = Thread.currentThread();
+        while(current == thread)
+        {            
+            //System.out.println(elapsed);
             
             try {
-		Thread.sleep(wait);
+		Thread.sleep(0);
 		}
             catch(Exception e) {
 		e.printStackTrace();
 		}
-        
+            repaint();
         
         }
     }
