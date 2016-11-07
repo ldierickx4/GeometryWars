@@ -30,6 +30,7 @@ public class Player {
     private Graphics g;
     private int width;
     private int height;
+    private float angle;
     
     
     public Player(){
@@ -84,5 +85,13 @@ public class Player {
     }
     public int getWidth(){
         return width;
+    }
+    public void setPlayerAngle(float angle)
+    {
+        this.angle=angle;
+    }
+    public float getPlayerAngle()
+    {
+        return this.angle;
     }
 }

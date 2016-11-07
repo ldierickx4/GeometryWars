@@ -65,14 +65,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         Graphics2D g = (Graphics2D)gr;
-        g.rotate(imageAngleRad);
-        g.translate(player.getWidth(),player.getWidth());
-        double locationX = player.getWidth() / 2;
-        double locationY = player.getHeight() / 2;
-        AffineTransform tx = AffineTransform.getRotateInstance(imageAngleRad, locationX, locationY);
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-        g.drawImage(player.giveImage(),tx,this);
-        //g.drawImage(player.giveImage(),tx,player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
+        AffineTransform reset = new AffineTransform();
+        reset.rotate(0, 0, 0);
+        Graphics2D g2 = (Graphics2D)g;
+        g2.rotate(player.getPlayerAngle(),player.getx(), player.gety());
+        //draw the image here
+        g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
+        g2.setTransform(reset);
+        
        
     }
 
@@ -147,12 +147,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        e.getX();
-        e.getY();
-        double dx = e.getX() - player.getx();
-        double dy = e.getY() - player.gety();
-        System.out.println(dx+"  "+dy);
-        imageAngleRad = Math.atan2(dy, dx);
+        float angle = (float)(Math.atan2(player.gety() - e.getY(), player.getx() - e.getX()));
+        player.setPlayerAngle(angle);
     }
 
    
