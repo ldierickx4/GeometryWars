@@ -13,7 +13,7 @@ import java.awt.event.*;
  *
  * @author Gebruiker
  */
-public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener {
+public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener,MouseListener {
     private GamePanel gamePanel;
 
     private static final int HEIGHT = 900;
@@ -36,6 +36,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private void initUi() {
         addKeyListener(this);
         addMouseMotionListener(this);
+        addMouseListener(this);
         setTitle("Geometry Wars");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -75,6 +76,27 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     @Override
     public void mouseMoved(MouseEvent e) {
         gamePanel.mouseMoved(e);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        gamePanel.mouseClicked(e);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
 

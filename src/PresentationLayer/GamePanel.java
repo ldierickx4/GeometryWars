@@ -5,6 +5,8 @@
  */
 package PresentationLayer;
 
+import geometrywars.Bullet;
+import geometrywars.Controller;
 import geometrywars.Player;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,7 +23,7 @@ import javax.swing.*;
  *
  * @author Laurens
  */
-public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener{
+public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
     private Player player;
     private boolean running= true;
     private Thread thread ;
@@ -30,6 +32,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean left = false;
     private boolean right = false;
     private double imageAngleRad = 0;
+    private Controller controller;
     
    
     
@@ -37,6 +40,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         createPlayer();
         addKeyListener(this);
         addMouseMotionListener(this);
+        addMouseListener(this);
+        this.controller = new Controller();
         thread = new Thread(this);
         thread.start();
         
@@ -69,9 +74,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         reset.rotate(0, 0, 0);
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(player.getPlayerAngle(),player.getx(), player.gety());
-        //draw the image here
         g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
         g2.setTransform(reset);
+        controller.render(gr);
         
        
     }
@@ -136,8 +141,13 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             catch(Exception e) {
 		e.printStackTrace();
 		}
+            controller.update();
             repaint();
         }
+    }
+    public void shootBullet(double destX,double destY){
+        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY);
+        controller.addBullet(b);
     }
 
     @Override
@@ -149,6 +159,32 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public void mouseMoved(MouseEvent e) {
         float angle = (float)(Math.atan2(player.gety() - e.getY(), player.getx() - e.getX()));
         player.setPlayerAngle(angle);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getButton()==e.BUTTON1)
+        {
+            shootBullet(e.getX(),e.getY());
+        }
+        
+    }
+    
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
    
