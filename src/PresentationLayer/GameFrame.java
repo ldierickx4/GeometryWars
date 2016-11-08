@@ -36,8 +36,12 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private void initUi() {
         addKeyListener(this);
         addMouseMotionListener(this);
+<<<<<<< HEAD
         addMouseListener(this);
         setTitle("Geometry Wars");
+=======
+        setTitle("Astral Strifes");
+>>>>>>> origin/master
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
