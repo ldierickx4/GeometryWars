@@ -65,7 +65,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

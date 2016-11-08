@@ -146,7 +146,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         }
     }
     public void shootBullet(double destX,double destY){
-        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY);
+        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY,this);
         controller.addBullet(b);
     }
 
@@ -166,6 +166,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         if(e.getButton()==e.BUTTON1)
         {
             shootBullet(e.getX(),e.getY());
+            System.out.println(e.getY()+" dit is de Y");
+            System.out.println(e.getX());
         }
         
     }

@@ -5,6 +5,7 @@
  */
 package geometrywars;
 
+import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -27,18 +28,19 @@ public class Bullet{
     private double destY;
     private double angle;
     private int originX;
-    private int originY;
+    private int originY; 
+    private GamePanel gp;
     
     
-    public Bullet(int originX , int originY , double destX  , double destY){
-        bulletVelocity = 1.0;
+    public Bullet(int originX , int originY , double destX  , double destY,GamePanel gp){
+        bulletVelocity = 7.0;
         this.originX=originX;
         this.originY=originY;
         this.destX = destX;
         this.destY = destY;
         calculateAngle();
         loadImage();
-        
+        this.gp=gp;
     }
     
     private void loadImage() {
@@ -52,20 +54,33 @@ public class Bullet{
     }
     
     public void calculateXvelo()
-    {
-        double xVelocity = (bulletVelocity) * Math.cos(angle);
-        double yVelocity = (bulletVelocity) * Math.sin(angle);
+    {      
+                
+        double tempx = originX - destX;
+        double tempy = originY - destX;
+        double xVelocity = (bulletVelocity) * Math.sin(angle);
+        double yVelocity = (bulletVelocity) * Math.cos(angle);
+
+        //double mag = (double) java.lang.Math.hypot(tempx, tempy);
+        //tempy/=mag;
+        //tempx/=mag;
+        //tempy*=1.0;
+        //tempx*=1.0;
+        //System.out.println(xVelocity);
+        //System.out.println(yVelocity);
+        //this.originY += tempy;
+        //this.originX += tempx;
         this.originX += xVelocity;
         this.originY += yVelocity;
     }
     private void calculateAngle()
     {
-        double angle = Math.atan2(destX - originX, destY - originY);
+        double angle = Math.atan2(originX - destX, originY - destY);
     }
     
     public void draw(Graphics g)
     {        
-        g.drawImage(image,originX,originY,40,40,null);
+        g.drawImage(image,originX,originY,40,40,gp);
     }
     
     
