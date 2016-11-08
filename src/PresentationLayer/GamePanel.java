@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        this.controller = new Controller();
+        this.controller = new Controller(player);
         thread = new Thread(this);
         thread.start();
         
@@ -81,13 +81,12 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
+        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(player.getPlayerAngle(),player.getx()+player.getWidth()/2, player.gety()+player.getHeight()/2);
         //draw the image here
-        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this);
         g2.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
         g2.setTransform(reset);
         controller.render(gr);
@@ -147,7 +146,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         while(current == thread)
         {            
             checkInput();
-            //System.out.println(elapsed);
             try {
 		Thread.sleep(4);
 		}
@@ -158,8 +156,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             repaint();
         }
     }
-    public void shootBullet(double destX,double destY){
-        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY,this);
+    public void shootBullet(double destX,double destY,double shootAngle){
+        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY,shootAngle,this);
         controller.addBullet(b);
     }
 
@@ -177,10 +175,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getButton()==e.BUTTON1)
-        {
-            shootBullet(e.getX(),e.getY());
-            System.out.println(e.getY()+" dit is de Y");
-            System.out.println(e.getX());
+        {   double shootAngle = Math.atan2(player.gety() - e.getY() , player.getx() - e.getX());
+            System.out.println(shootAngle);
+            shootBullet(e.getX(),e.getY(),shootAngle);
         }
         
     }

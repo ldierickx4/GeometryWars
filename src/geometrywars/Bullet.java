@@ -8,6 +8,7 @@ package geometrywars;
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,19 +27,19 @@ public class Bullet{
     private double yVelocity;
     private double destX;
     private double destY;
-    private double angle;
     private double originX;
     private double originY; 
     private GamePanel gp;
+    private double angle;
     
     
-    public Bullet(double originX , double originY , double destX  , double destY,GamePanel gp){
-        bulletVelocity = 1.0;
+    public Bullet(double originX , double originY , double destX  , double destY,double angel,GamePanel gp){
+        bulletVelocity = 3.0;
         this.originX=originX;
         this.originY=originY;
         this.destX = destX;
         this.destY = destY;
-        calculateAngle();
+        this.angle =angle;
         loadImage();
         this.gp=gp;
     }
@@ -55,33 +56,29 @@ public class Bullet{
     
     public void calculateXvelo()
     {      
-        double angle1 = Math.atan2(originX - destX, originY - destY);
-        double tempx = originX - destX;
-        double tempy = originY - destX;
-        double xVelocity = (bulletVelocity) * Math.sin(angle1);
-        double yVelocity = (bulletVelocity) * Math.cos(angle1);
-
-        //double mag = (double) java.lang.Math.hypot(tempx, tempy);
-        //tempy/=mag;
-        //tempx/=mag;
-        //tempy*=1.0;
-        //tempx*=1.0;
-        System.out.println(xVelocity);
-        System.out.println(yVelocity);
-        //this.originY += tempy;
-        //this.originX += tempx;
-        this.originX += xVelocity;
-        this.originY += yVelocity;
-    }
-    private void calculateAngle()
-    {
-        double angle = Math.atan2(originX - destX, originY - destY);
-        System.out.println(angle+"dit is de angle");
-    }
-    
-    public void draw(Graphics g)
-    {        
+        double angle1 = Math.atan2(originY - destY, originX - destX);
+        double xVelocity = (bulletVelocity) * Math.cos(angle1);
+        double yVelocity = (bulletVelocity) * Math.sin(angle1);
+        
+        this.originX -= xVelocity;
+        this.originY -= yVelocity;
+    }    
+    public void draw(Graphics g){
+        Graphics2D g2 = (Graphics2D)g;
+        AffineTransform reset = new AffineTransform();
+        g2.rotate(angle,originX+20, originY+20);
         g.drawImage(image,(int)originX,(int)originY,40,40,gp);
+        g2.setTransform(reset);
+
+    }
+    public double giveAngle(){
+        return this.angle;
+    }
+    public double getX(){
+        return originX;
+    }
+    public double getY(){
+    return originY;
     }
     
     

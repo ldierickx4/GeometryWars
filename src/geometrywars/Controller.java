@@ -6,6 +6,8 @@
 package geometrywars;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 
 /**
@@ -14,10 +16,12 @@ import java.util.LinkedList;
  */
 public class Controller {
     private LinkedList<Bullet> bullets;
+    private Player player;
     
-    public Controller()
+    public Controller(Player player)
     {
         this.bullets = new LinkedList<Bullet>();
+        this.player = player;
     }
     public void addBullet(Bullet b){
         bullets.add(b);
@@ -32,7 +36,9 @@ public class Controller {
     public void render(Graphics g){
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
-            tempBullet = bullets.get(i);
+            tempBullet = bullets.get(i);     
+            
+            
             tempBullet.draw(g);
         }
     }
