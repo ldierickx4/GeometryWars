@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  *
  * @author Gebruiker
  */
-public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener {
+public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener,MouseListener {
     private GamePanel gamePanel;
 
     private static final int HEIGHT = 900;
@@ -41,7 +41,12 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private void initUi() {
         addKeyListener(this);
         addMouseMotionListener(this);
+<<<<<<< HEAD
+        addMouseListener(this);
+        setTitle("Geometry Wars");
+=======
         setTitle("Astral Strifes");
+>>>>>>> origin/master
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
@@ -71,7 +76,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -84,5 +88,30 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         gamePanel.mouseMoved(e);
     }
 
+<<<<<<< HEAD
     
+=======
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        gamePanel.mouseClicked(e);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+
+>>>>>>> origin/master
 }
