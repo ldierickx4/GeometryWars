@@ -5,12 +5,12 @@
  */
 package PresentationLayer;
 
-<<<<<<< HEAD
+
 import geometrywars.Background;
-=======
+
 import geometrywars.Bullet;
 import geometrywars.Controller;
->>>>>>> origin/master
+
 import geometrywars.Player;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -81,18 +81,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
+        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         AffineTransform reset = new AffineTransform();
-        reset.rotate(0, 0, 0);
         Graphics2D g2 = (Graphics2D)g;
-        g2.rotate(player.getPlayerAngle(),player.getx(), player.gety());
-<<<<<<< HEAD
+        g2.rotate(player.getPlayerAngle(),player.getx()+player.getWidth()/2, player.gety()+player.getHeight()/2);
         //draw the image here
         //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this);
-=======
->>>>>>> origin/master
-        g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
+        g2.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
         g2.setTransform(reset);
         controller.render(gr);
         
