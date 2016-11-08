@@ -8,6 +8,10 @@ package PresentationLayer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -22,6 +26,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
+   
 
 
     public static void main(String[] args){
@@ -46,7 +51,9 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
     }
-
+    
+    
+   
     @Override
     public void keyTyped(KeyEvent e) {
         
@@ -77,5 +84,5 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         gamePanel.mouseMoved(e);
     }
 
-
+    
 }

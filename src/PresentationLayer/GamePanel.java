@@ -5,9 +5,11 @@
  */
 package PresentationLayer;
 
+import geometrywars.Background;
 import geometrywars.Player;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +17,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -23,8 +28,9 @@ import javax.swing.*;
  */
 public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener{
     private Player player;
-    private boolean running= true;
-    private Thread thread ;
+    private Background background;
+    private boolean running = true;
+    private Thread thread;
     private boolean down = false;
     private boolean up = false;
     private boolean left = false;
@@ -34,16 +40,17 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
    
     
     public GamePanel(){ 
-        createPlayer();
+        createComponents();
         addKeyListener(this);
         addMouseMotionListener(this);
         thread = new Thread(this);
         thread.start();
         
     }
-    private void createPlayer()
+    private void createComponents()
     {
         player = new Player();
+        background = new Background();
         //repaint();
     }
     public void checkInput(){
@@ -61,19 +68,22 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         }
     }
     
+   
+    
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
+        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         AffineTransform reset = new AffineTransform();
         reset.rotate(0, 0, 0);
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(player.getPlayerAngle(),player.getx(), player.gety());
         //draw the image here
+        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this);
         g.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
         g2.setTransform(reset);
         
-       
     }
 
     @Override
