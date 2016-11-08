@@ -5,21 +5,41 @@
  */
 package geometrywars;
 
+import LoginScreen.*;
 import PresentationLayer.GameFrame;
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 /**
  *
  * @author Laurens
  */
-public class Game {
+public class Game extends Application{
 
     /**
+     * @param primaryStage
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        GameFrame window = new GameFrame();
-    }
     
+    public static void main(String[] args) throws IOException {
+        // TODO code application logic here
+        //GameFrame window = new GameFrame();
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {   
+        Parent mainPane = FXMLLoader.load(getClass().getResource("/LoginScreen/Loginfxml.fxml"));
+        primaryStage.setTitle("AstralStrifes");
+        primaryStage.setScene(new Scene(mainPane, 900,900));
+        primaryStage.show();
+        //Game t = new Game();
+        //t.loadScreen(primaryStage);
+    } 
 }
