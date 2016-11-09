@@ -25,6 +25,7 @@ public class Game extends Application{
     /**
      * @param primaryStage
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     
     public static void main(String[] args) throws IOException {
@@ -35,7 +36,7 @@ public class Game extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {   
-        Parent mainPane = FXMLLoader.load(getClass().getResource("/LoginScreen/Loginfxml.fxml"));
+        Parent mainPane = FXMLLoader.load(getClass().getResource("/LoginScreen/Login.fxml"));
         primaryStage.setTitle("AstralStrifes");
         primaryStage.setScene(new Scene(mainPane, 900,900));
         primaryStage.show();

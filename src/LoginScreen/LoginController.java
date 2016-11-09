@@ -7,33 +7,21 @@ package LoginScreen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
  *
  * @author JorreVynckier
  */
-public class LoginfxmlController {
+public class LoginController implements Initializable {
 
-    
-    
-
-@FXML
-public void initialize() throws Exception{
-    //test();
-            
-}
-            
-    
-            
-public void test(){
-    System.out.println("jeeeeep");
-}
-    
-    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
     
 }
