@@ -46,7 +46,7 @@ public class Player {
     private void loadImage() {
         BufferedImage i = null;
         try {
-            i = ImageIO.read(new File("resources/gameSprites/warship.png"));
+            i = ImageIO.read(new File("resources/gameSprites/ship.png"));
         } catch (IOException ex) {
             ex.getMessage();
         }
