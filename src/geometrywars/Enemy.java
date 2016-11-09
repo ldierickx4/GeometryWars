@@ -7,7 +7,9 @@ package geometrywars;
 
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +50,7 @@ public class Enemy {
         BufferedImage i = null;
         try {
             //ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
-            i = ImageIO.read(new File("resources/gameSprites/enemy_4.png"));
+            i = ImageIO.read(new File("resources/gameSprites/enemy_3.png"));
         } catch (IOException ex) {
             ex.getMessage();
         }
@@ -72,7 +74,7 @@ public class Enemy {
     public void draw(Graphics g){
         g.drawImage(image, x, y, width, height, gp);
     }
-
+     
     public int getX() {
         return x;
     }

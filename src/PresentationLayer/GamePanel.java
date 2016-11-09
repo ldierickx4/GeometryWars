@@ -10,6 +10,8 @@ import geometrywars.Background;
 
 import geometrywars.Bullet;
 import geometrywars.Controller;
+import geometrywars.Enemy;
+import geometrywars.EnemyController;
 
 import geometrywars.Player;
 import java.awt.Graphics;
@@ -42,7 +44,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean right = false;
     private double imageAngleRad = 0;
     private Controller controller;
-    
+    private EnemyController ec;
+    private Enemy enemy;
    
     
     public GamePanel(){ 
@@ -51,6 +54,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         addMouseMotionListener(this);
         addMouseListener(this);
         this.controller = new Controller(player);
+        this.enemy = new Enemy();
+        this.ec = new EnemyController(enemy);
+        addEnemy(enemy);
         thread = new Thread(this);
         thread.start();
         
@@ -90,7 +96,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         g2.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
         g2.setTransform(reset);
         controller.render(gr);
-        
+        ec.render(gr);
     }
 
     @Override
@@ -153,12 +159,17 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 		e.printStackTrace();
 		}
             controller.update();
+            ec.update();
             repaint();
         }
     }
     public void shootBullet(double destX,double destY,double shootAngle){
         Bullet b = new Bullet(player.getx(),player.gety(),destX,destY,shootAngle,this);
         controller.addBullet(b);
+    }
+    
+    public void addEnemy(Enemy e){
+        ec.addEnemy(e);
     }
 
     @Override
