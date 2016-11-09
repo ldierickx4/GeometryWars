@@ -45,14 +45,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean shoot = false;
     private double imageAngleRad = 0;
     private Controller controller;
-<<<<<<< HEAD
+
     private EnemyController ec;
     private Enemy enemy;
-=======
+
     private double mouseX;
     private double mouseY;
     
->>>>>>> origin/master
+
    
     
     public GamePanel(){ 
@@ -108,10 +108,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
         controller.render(gr);
-<<<<<<< HEAD
+
         ec.render(gr);
-=======
->>>>>>> origin/master
+
     }
 
     @Override
