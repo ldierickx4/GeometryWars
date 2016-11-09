@@ -40,8 +40,11 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean up = false;
     private boolean left = false;
     private boolean right = false;
+    private boolean shoot = false;
     private double imageAngleRad = 0;
     private Controller controller;
+    private double mouseX;
+    private double mouseY;
     
    
     
@@ -65,15 +68,25 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         if(down){
             player.moveDown();
         }
-        if(up){
+        else if(up){
             player.moveUp();
         }
-        if(left){
+        else if(left){
             player.moveLeft();
         }
-        if(right){
+        else if(right){
             player.moveRight();
         }
+
+
+    }
+    public void checkShoot()
+    {
+        if(shoot)
+        {
+            shootBullet(mouseX, mouseY);
+        }
+    
     }
     
    
@@ -83,14 +96,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         super.paintComponent(gr);
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
-        AffineTransform reset = new AffineTransform();
-        Graphics2D g2 = (Graphics2D)g;
-        g2.rotate(player.getPlayerAngle(),player.getx()+player.getWidth()/2, player.gety()+player.getHeight()/2);
-        //draw the image here
-        g2.drawImage(player.giveImage(),player.getx(), player.gety(),player.getWidth(),player.getHeight(), this);
-        g2.setTransform(reset);
+        player.draw(gr,this);
         controller.render(gr);
-        
     }
 
     @Override
@@ -105,15 +112,15 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         {
             down = true;
         }
-        if(typed== e.VK_Z)
+        else if(typed== e.VK_Z)
         {
             up = true;
         }
-        if(typed== e.VK_Q)
+        else if(typed== e.VK_Q)
         {
             left = true;
         }
-        if(typed== e.VK_D)
+        else if(typed== e.VK_D)
         {
             right = true;            
         }        
@@ -125,15 +132,15 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         if(typed== e.VK_S){
             down = false;
         }
-        if(typed== e.VK_Z)
+        else if(typed== e.VK_Z)
         {            
             up = false;
         }
-        if(typed== e.VK_Q)
+        else if(typed== e.VK_Q)
         {            
             left = false;
         }
-        if(typed== e.VK_D)
+        else if(typed== e.VK_D)
         {            
             right = false;            
         }
@@ -152,12 +159,13 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             catch(Exception e) {
 		e.printStackTrace();
 		}
+            checkShoot();
             controller.update();
             repaint();
         }
     }
-    public void shootBullet(double destX,double destY,double shootAngle){
-        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY,shootAngle,this);
+    public void shootBullet(double destX,double destY){
+        Bullet b = new Bullet(player.getx(),player.gety(),destX,destY,this);
         controller.addBullet(b);
     }
 
@@ -168,27 +176,34 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        float angle = (float)(Math.atan2(player.gety() - e.getY(), player.getx() - e.getX()));
+        double angle = Math.atan2(player.gety() - e.getY(), player.getx() - e.getX());
         player.setPlayerAngle(angle);
+        mouseX=e.getX();
+        mouseY=e.getY();
+                
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {   double shootAngle = Math.atan2(player.gety() - e.getY() , player.getx() - e.getX());
-            System.out.println(shootAngle);
-            shootBullet(e.getX(),e.getY(),shootAngle);
-        }
+        
         
     }
     
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if(e.getButton()==e.BUTTON1)
+        {
+            shoot=true;
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(e.getButton()==e.BUTTON1)
+        {
+            shoot=false;
+        }
     }
 
     @Override

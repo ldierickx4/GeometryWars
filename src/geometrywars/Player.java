@@ -5,7 +5,9 @@
  */
 package geometrywars;
 
+import PresentationLayer.GamePanel;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -30,7 +32,7 @@ public class Player {
     private Graphics g;
     private int width;
     private int height;
-    private float angle;
+    private double angle;
     
     
     public Player(){
@@ -86,12 +88,21 @@ public class Player {
     public int getWidth(){
         return width;
     }
-    public void setPlayerAngle(float angle)
+    public void setPlayerAngle(double angle)
     {
         this.angle=angle;
     }
-    public float getPlayerAngle()
+    public double getPlayerAngle()
     {
         return this.angle;
+    }
+    public void draw(Graphics g,GamePanel gp)
+    {
+        AffineTransform reset = new AffineTransform();
+        Graphics2D g2 = (Graphics2D)g;
+        g2.rotate(getPlayerAngle(),getx()+getWidth()/2,gety()+getHeight()/2);
+        g2.drawImage(giveImage(),getx(), gety(),getWidth(),getHeight(),gp);
+        g2.setTransform(reset);
+        
     }
 }

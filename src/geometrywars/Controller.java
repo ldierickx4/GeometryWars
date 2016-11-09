@@ -37,8 +37,6 @@ public class Controller {
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);     
-            
-            
             tempBullet.draw(g);
         }
     }

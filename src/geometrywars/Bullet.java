@@ -31,15 +31,18 @@ public class Bullet{
     private double originY; 
     private GamePanel gp;
     private double angle;
+    private double Yvelocity;
+    private double Xvelocity;
     
-    
-    public Bullet(double originX , double originY , double destX  , double destY,double angel,GamePanel gp){
-        bulletVelocity = 3.0;
+    public Bullet(double originX , double originY , double destX  , double destY,GamePanel gp){
+        bulletVelocity = 2.0;
         this.originX=originX;
         this.originY=originY;
         this.destX = destX;
         this.destY = destY;
-        this.angle =angle;
+        this.angle =Math.atan2(originY - destY, originX - destX);
+        this.Yvelocity = (bulletVelocity) * Math.sin(angle);
+        this.Xvelocity = (bulletVelocity) * Math.cos(angle);
         loadImage();
         this.gp=gp;
     }
@@ -47,7 +50,7 @@ public class Bullet{
     private void loadImage() {
         BufferedImage i = null;
         try {
-           i = ImageIO.read(new File("resources/gameSprites/beam.png"));
+           i = ImageIO.read(new File("resources/gameSprites/bullet.png"));
         } catch (IOException ex) {
             ex.getMessage();
         }
@@ -56,17 +59,13 @@ public class Bullet{
     
     public void calculateXvelo()
     {      
-        double angle1 = Math.atan2(originY - destY, originX - destX);
-        double xVelocity = (bulletVelocity) * Math.cos(angle1);
-        double yVelocity = (bulletVelocity) * Math.sin(angle1);
-        
-        this.originX -= xVelocity;
-        this.originY -= yVelocity;
+        this.originX -= Xvelocity;
+        this.originY -= Yvelocity;
     }    
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
-        AffineTransform reset = new AffineTransform();
-        g2.rotate(angle,originX+20, originY+20);
+        AffineTransform reset = new AffineTransform();        
+        g2.rotate(angle,originX,originY);
         g.drawImage(image,(int)originX,(int)originY,40,40,gp);
         g2.setTransform(reset);
 
@@ -78,7 +77,7 @@ public class Bullet{
         return originX;
     }
     public double getY(){
-    return originY;
+        return originY;
     }
     
     
