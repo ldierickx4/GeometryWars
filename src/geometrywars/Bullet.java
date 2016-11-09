@@ -33,6 +33,7 @@ public class Bullet{
     private double angle;
     private double Yvelocity;
     private double Xvelocity;
+    private boolean alive;
     
     public Bullet(double originX , double originY , double destX  , double destY,GamePanel gp){
         bulletVelocity = 2.0;
@@ -45,6 +46,7 @@ public class Bullet{
         this.Xvelocity = (bulletVelocity) * Math.cos(angle);
         loadImage();
         this.gp=gp;
+        this.alive = true;
     }
     
     private void loadImage() {
@@ -55,12 +57,15 @@ public class Bullet{
             ex.getMessage();
         }
            image = i;
+           System.out.println(image.getWidth());
     }
     
-    public void calculateXvelo()
-    {      
+    public void calculatePos()
+    {   
+        
         this.originX -= Xvelocity;
         this.originY -= Yvelocity;
+        
     }    
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
@@ -77,6 +82,19 @@ public class Bullet{
     }
     public double getY(){
         return originY;
+    }
+    public boolean alive()
+    {
+        return this.alive;
+    }
+    public boolean checkAlive()
+    {
+        int x = (int)(originX);
+        int y = (int)(originY);
+            if(x<0||x>900||y<0||y>900){
+                this.alive = false;
+            } 
+        return this.alive;
     }
     
     

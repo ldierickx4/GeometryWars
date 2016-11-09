@@ -5,23 +5,31 @@
  */
 package geometrywars;
 
+import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author laurensdierickx
  */
-public class Controller {
+public class Controller implements Runnable{
+    private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
+    private Thread thread;
+    private boolean shooting= false;
     
-    public Controller(Player player)
-    {
+    public Controller(Player player, GamePanel gp)
+    {   
+        
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
+        this.gp = gp;
     }
     public void addBullet(Bullet b){
         bullets.add(b);
@@ -30,7 +38,11 @@ public class Controller {
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);
-            tempBullet.calculateXvelo();
+            tempBullet.calculatePos();
+            if(!(tempBullet.checkAlive()))
+            {
+                bullets.remove(tempBullet);
+            }            
         }
     }
     public void render(Graphics g){
@@ -40,5 +52,33 @@ public class Controller {
             tempBullet.draw(g);
         }
     }
-    
+    public void setShooting()
+    {    
+        this.shooting=true;
+        this.thread = new Thread(this);        
+        thread.start();
+    }
+    public void setNotShooting()
+    {
+        this.shooting=false;
+    }
+
+    @Override
+    public void run() {
+        while(this.shooting)
+        {            
+            try {
+		Thread.sleep(100);
+		}
+            catch(Exception e) {
+		e.printStackTrace();
+		}
+            Bullet b = new Bullet(player.getx()-14,player.gety()-15,gp.getMouseX(),gp.getMouseY(),gp);
+            addBullet(b);
+        }
+        thread=null;
+    }
+    public boolean getStatus(){
+        return this.shooting;
+    }
 }

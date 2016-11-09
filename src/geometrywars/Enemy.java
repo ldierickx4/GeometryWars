@@ -9,6 +9,7 @@ import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.File;
@@ -34,6 +35,7 @@ public class Enemy {
     //private int multiplier;
     //private Player player;
     private GamePanel gp;
+    private Rectangle playerBounds;
     
 
     public Enemy() {
@@ -43,6 +45,7 @@ public class Enemy {
         this.width = 30;
         this.height = 30;
         loadImage();
+        playerBounds = new Rectangle();
     }
     
     
@@ -66,9 +69,12 @@ public class Enemy {
        
         double Yvelocity = (SPEED) * Math.cos(angle);
         double Xvelocity = (SPEED) * Math.sin(angle);
-
+        
         this.x += Yvelocity;
         this.y += Xvelocity;
+        
+        playerBounds.setBounds((int)(this.x),(int)(this.y), this.width, this.height);
+        //System.out.println(playerBounds.getBounds2D());
     }
     
     public void draw(Graphics g){
@@ -93,9 +99,5 @@ public class Enemy {
 
     public int getHeight() {
         return height;
-    }
-
-   
-    
-    
+    }  
 }

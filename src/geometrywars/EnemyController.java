@@ -34,7 +34,7 @@ public class EnemyController implements Runnable{
         Enemy tempEnemy;
         for(int i=0; i<enemies.size();i++){
             tempEnemy = enemies.get(i);
-            tempEnemy.moveTo(p.getx(),p.gety());
+            tempEnemy.moveTo(p.getx()-14,p.gety()-15);
         }
     }
     public void render(Graphics g){
