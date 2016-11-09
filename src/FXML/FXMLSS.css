@@ -1,0 +1,13 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+#AnchorPane{
+    -fx-background-image: url("../resources/Wallpaper-2.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size:cover;
+}

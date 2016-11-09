@@ -5,13 +5,13 @@
  */
 package geometrywars;
 
-import LoginScreen.*;
 import PresentationLayer.GameFrame;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,12 +21,16 @@ import javafx.stage.Stage;
  * @author Laurens
  */
 public class Game extends Application{
+    
+    
 
     /**
      * @param primaryStage
      * @param args the command line arguments
      * @throws java.io.IOException
      */
+    public static Stage stage;
+    public static BorderPane borderPane = new BorderPane();
     
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
@@ -35,12 +39,17 @@ public class Game extends Application{
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {   
-        Parent mainPane = FXMLLoader.load(getClass().getResource("/LoginScreen/Login.fxml"));
+    public void start(Stage primaryStage) throws Exception { 
+        this.stage = primaryStage;
         primaryStage.setTitle("AstralStrifes");
-        primaryStage.setScene(new Scene(mainPane, 900,900));
+        primaryStage.setResizable(false);
+        Scene scene = new Scene(borderPane,900,900);
+        Parent mainPane = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
+        this.borderPane.setCenter(mainPane);
+        scene.getStylesheets().add("@../../FXML/FXMLSS.css");
+        primaryStage.setScene(scene);
         primaryStage.show();
         //Game t = new Game();
         //t.loadScreen(primaryStage);
-    } 
+    }   
 }
