@@ -68,7 +68,6 @@ public class Bullet{
         g2.rotate(angle,originX,originY);
         g.drawImage(image,(int)originX,(int)originY,40,40,gp);
         g2.setTransform(reset);
-
     }
     public double giveAngle(){
         return this.angle;

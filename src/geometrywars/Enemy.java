@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
  * @author Jens
  */
 public class Enemy {
-    private static final int SPEED = 1;
+    private static final double SPEED = 0.4;
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -38,8 +38,8 @@ public class Enemy {
 
     public Enemy() {
         Random r = new Random(); 
-        this.x = 400; //rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
-        this.y = 400; //rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
+        this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
+        this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.width = 30;
         this.height = 30;
         loadImage();
@@ -62,14 +62,10 @@ public class Enemy {
         double MoveToX = x;
         double MoveToY = y;
 
-        double angle = Math.atan2(y - MoveToY, x - MoveToX);
-        System.out.println(MoveToX);
-        System.out.println(MoveToY);
-        System.out.println(y+"enemy y");
-        System.out.println(x+"enemy X");
-        
-        double Yvelocity = (SPEED) * Math.sin(angle);
-        double Xvelocity = (SPEED) * Math.cos(angle);
+        double angle = Math.atan2(y - this.y, x - this.x);
+       
+        double Yvelocity = (SPEED) * Math.cos(angle);
+        double Xvelocity = (SPEED) * Math.sin(angle);
 
         this.x += Yvelocity;
         this.y += Xvelocity;

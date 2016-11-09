@@ -56,7 +56,7 @@ public class EnemyController implements Runnable{
         while(current == thread)
         {            
             try {
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		}
             catch(Exception e) {
 		e.printStackTrace();
