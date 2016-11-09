@@ -69,9 +69,11 @@ public class Bullet{
     }    
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
-        AffineTransform reset = new AffineTransform();        
+        AffineTransform reset = new AffineTransform();
+        System.out.println(image.getWidth());
+        System.out.println(image.getHeight());
         g2.rotate(angle,originX,originY);
-        g.drawImage(image,(int)originX,(int)originY,40,40,gp);
+        g.drawImage(image,(int)originX,(int)originY,gp);
         g2.setTransform(reset);
     }
     public double giveAngle(){

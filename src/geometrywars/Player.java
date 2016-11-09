@@ -110,8 +110,8 @@ public class Player {
         g2.rotate(getPlayerAngle(),getx(),gety());
         g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),(int)(width),(int)(height),gp);
         g2.setTransform(reset);
-        System.out.println(image.getHeight());
-        System.out.println(image.getWidth());
+        //System.out.println(image.getHeight());
+        //System.out.println(image.getWidth());
         
     }
 

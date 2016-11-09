@@ -73,7 +73,7 @@ public class Controller implements Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            Bullet b = new Bullet(player.getx()-14,player.gety()-15,gp.getMouseX(),gp.getMouseY(),gp);
+            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),gp);
             addBullet(b);
         }
         thread=null;
