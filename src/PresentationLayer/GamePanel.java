@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
+        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
         controller.render(gr);

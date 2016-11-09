@@ -42,8 +42,8 @@ public class Enemy {
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
-        this.width = 30;
-        this.height = 30;
+        this.width = 40;
+        this.height = 40;
         loadImage();
         playerBounds = new Rectangle();
     }
@@ -51,9 +51,12 @@ public class Enemy {
     
     public void loadImage(){
         BufferedImage i = null;
+        Random r = new Random();
+        int randomEnemy = 1 + r.nextInt(9 - 1 + 1);
+        String path = "resources/gameSprites/enemy_" + randomEnemy + ".png";
         try {
             //ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
-            i = ImageIO.read(new File("resources/gameSprites/enemy_3.png"));
+            i = ImageIO.read(new File(path));
         } catch (IOException ex) {
             ex.getMessage();
         }
