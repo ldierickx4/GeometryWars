@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author JorreVynckier
  */
-public class LoginController implements Initializable {
+public class RegisterController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -28,7 +28,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }  
+    } 
     
     @FXML
     private void handleBackButton() throws IOException{

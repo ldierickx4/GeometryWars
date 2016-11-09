@@ -46,6 +46,16 @@ public class MenuController implements Initializable {
         //appStage.setScene(loginScene);
     }
     
+    @FXML
+    private void handleRegisterButton() throws IOException{
+        Stage appStage = Game.stage;
+        //System.out.println("handleLoginButton");
+        Parent loginParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Game.borderPane.setCenter(loginParent);
+        //Scene loginScene = new Scene(loginParent, 900, 900);  
+        //appStage.setScene(loginScene);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
