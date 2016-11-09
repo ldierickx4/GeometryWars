@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
  * @author Laurens
  */
 public class Player {
-    private static final int SPEED = 1;
+    private static final int SPEED = 2;
     private String naam;
     private int y;
     private int x;
