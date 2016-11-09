@@ -25,8 +25,8 @@ import javax.swing.ImageIcon;
 public class Player {
     private static final int SPEED = 2;
     private String naam;
-    private int y;
-    private int x;
+    private double y;
+    private double x;
     private BufferedImage image;
     private AffineTransform trans;
     private Graphics g;
@@ -36,8 +36,8 @@ public class Player {
     
     
     public Player(){
-        this.x = 170;
-        this.y = 150;
+        this.x = 170.0;
+        this.y = 150.0;
         this.width=30;
         this.height=30;
         loadImage();
@@ -73,11 +73,11 @@ public class Player {
     {
         return image;
     }
-    public int getx()
+    public double getx()
     {
         return x;
     }
-    public int gety()
+    public double gety()
     {
         return y;
     }
@@ -101,7 +101,7 @@ public class Player {
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(getPlayerAngle(),getx()+getWidth()/2,gety()+getHeight()/2);
-        g2.drawImage(giveImage(),getx(), gety(),getWidth(),getHeight(),gp);
+        g2.drawImage(giveImage(),(int)(getx()), (int) (gety()),getWidth(),getHeight(),gp);
         g2.setTransform(reset);
         
     }

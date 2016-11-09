@@ -8,18 +8,23 @@ package geometrywars;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+
 /**
  *
  * @author Jens
  */
-public class EnemyController {
+public class EnemyController implements Runnable{
     
     private LinkedList<Enemy> enemies;
     private Enemy enemy;
-
-    public EnemyController(Enemy e) {
+    private Thread thread;
+    private Player p;
+        
+    public EnemyController(Player p) {
         this.enemies = new LinkedList<Enemy>();
-        this.enemy = e;
+        thread = new Thread(this);
+        thread.start();
+        this.p = p;
     }
     
     public void addEnemy(Enemy e){
@@ -29,7 +34,7 @@ public class EnemyController {
         Enemy tempEnemy;
         for(int i=0; i<enemies.size();i++){
             tempEnemy = enemies.get(i);
-            tempEnemy.moveTo(123,150);
+            tempEnemy.moveTo(p.getx(),p.gety());
         }
     }
     public void render(Graphics g){
@@ -39,6 +44,27 @@ public class EnemyController {
             tempEnemy.draw(g);
         }
     }
-    
+    public void makeNewEnemy()
+    {
+        Enemy toAddenemy = new Enemy();
+        addEnemy(toAddenemy);
+    }
+
+    @Override
+    public void run() {
+        Thread current = Thread.currentThread();
+        while(current == thread)
+        {            
+            try {
+		Thread.sleep(1000);
+		}
+            catch(Exception e) {
+		e.printStackTrace();
+		}
+            makeNewEnemy();
+        }
+    }
+
+
     
 }

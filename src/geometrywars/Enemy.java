@@ -24,8 +24,8 @@ public class Enemy {
     private static final int SPEED = 1;
     private BufferedImage image;
     private Graphics g;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private int width;
     private int height;
     private int rangeMin = 0;
@@ -38,8 +38,8 @@ public class Enemy {
 
     public Enemy() {
         Random r = new Random(); 
-        this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
-        this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
+        this.x = 400; //rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
+        this.y = 400; //rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.width = 30;
         this.height = 30;
         loadImage();
@@ -58,28 +58,32 @@ public class Enemy {
         
     }
     
-    public void moveTo(int x, int y){
-        int MoveToX = x;
-        int MoveToY = y;
+    public void moveTo(double x, double y){
+        double MoveToX = x;
+        double MoveToY = y;
 
-        float distance = (float) Math.sqrt(Math.pow(MoveToX - x, 2) + Math.pow(MoveToY - y, 2));
+        double angle = Math.atan2(y - MoveToY, x - MoveToX);
+        System.out.println(MoveToX);
+        System.out.println(MoveToY);
+        System.out.println(y+"enemy y");
+        System.out.println(x+"enemy X");
+        
+        double Yvelocity = (SPEED) * Math.sin(angle);
+        double Xvelocity = (SPEED) * Math.cos(angle);
 
-        float amountToMoveX = (((MoveToX - x) / distance) * SPEED);
-        float amountToMoveY = (((MoveToY - y) / distance) * SPEED);
-
-        this.x += amountToMoveX;
-        this.y += amountToMoveY;
+        this.x += Yvelocity;
+        this.y += Xvelocity;
     }
     
     public void draw(Graphics g){
-        g.drawImage(image, x, y, width, height, gp);
+        g.drawImage(image, (int)(x), (int)(y), width, height, gp);
     }
      
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 

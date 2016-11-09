@@ -62,8 +62,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         addMouseListener(this);
         this.controller = new Controller(player);
         this.enemy = new Enemy();
-        this.ec = new EnemyController(enemy);
-        addEnemy(enemy);
+        this.ec = new EnemyController(player);
         thread = new Thread(this);
         thread.start();
         
@@ -104,7 +103,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
+        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
         controller.render(gr);
@@ -183,10 +182,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         controller.addBullet(b);
     }
     
-    public void addEnemy(Enemy e){
-        ec.addEnemy(e);
-    }
-
     @Override
     public void mouseDragged(MouseEvent e) {
 
@@ -194,7 +189,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        double angle = Math.atan2(player.gety() - e.getY(), player.getx() - e.getX());
+        double angle = Math.atan2((int)(player.gety()) - e.getY(), (int)(player.getx()) - e.getX());
         player.setPlayerAngle(angle);
         mouseX=e.getX();
         mouseY=e.getY();
