@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="FXML.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.LoginController">
     <stylesheets>
         <URL value="@FXMLSS.css" />
     </stylesheets>
    <children>
-      <Label layoutX="237.0" layoutY="350.0" text="E-mailadres:" textFill="WHITE">
+      <Label layoutX="259.0" layoutY="350.0" text="Username:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -25,14 +25,14 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="490.0" layoutY="354.0" />
-      <TextField layoutX="490.0" layoutY="424.0" />
+      <TextField id="usernameLogin" fx:id="usernameLogin" layoutX="490.0" layoutY="354.0" />
+      <TextField id="passwordLogin" fx:id="passwordLogin" layoutX="490.0" layoutY="424.0" />
       <Label layoutX="170.0" layoutY="261.0" prefHeight="83.0" prefWidth="490.0" text="INLOGGEN" textFill="WHITE">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button layoutX="374.0" layoutY="519.0" mnemonicParsing="false" text="Inloggen">
+      <Button id="inloggenButton" fx:id="inloggenButton" layoutX="374.0" layoutY="519.0" mnemonicParsing="false" onAction="#handleLoginButton" text="Inloggen">
          <font>
             <Font size="24.0" />
          </font>
@@ -44,5 +44,15 @@
             <Image url="@../resources/AstralStrifesTransparent1.png" />
          </image>
       </ImageView>
+      <AnchorPane id="notLoggedIn" fx:id="notLoggedIn" layoutX="283.0" layoutY="351.0" prefHeight="278.0" prefWidth="305.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="34.0" layoutY="17.0" text="Inloggen niet gelukt!">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="89.0" layoutY="125.0" mnemonicParsing="false" onAction="#handleNotLoggedInButton" text="Opnieuw Proberen" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

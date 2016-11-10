@@ -25,6 +25,7 @@ public class Database {
     private static Connection con;
     private List<User> users;
     private boolean userExist;
+    private boolean userAdded;
     private String username;
     
     public Database() {
@@ -44,7 +45,7 @@ public class Database {
         }
     }
     
-    public boolean addUser(String username,String pwd, String email){
+    public void addUser(String username, String pwd, String email){
         try{
             String sql = "INSERT INTO users(username,password,email) VALUES(?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -53,15 +54,12 @@ public class Database {
             pstmt.setString(3, email);
             pstmt.executeUpdate();
             pstmt.close();
-<<<<<<< HEAD
-            User u = new User(username,pwd,email);
-            users.add(u);
-=======
-            return true;
->>>>>>> origin/master
+            //User u = new User(username,pwd,email);
+            //users.add(u);
+            this.userAdded = true;
         } catch(SQLException ex){
             ex.printStackTrace();
-            return false;
+            this.userAdded = false;
         }
     }
     
@@ -77,52 +75,36 @@ public class Database {
         }
     }
     
-    public void checkUserDB(String username,String pw){
+    public void checkUserDB(String name,String pw){
         try{
-            String sql = "SELECT username,password FROM users WHERE username = (?) & password = (?)";
+            String sql = "SELECT username,password FROM users WHERE username = (?) AND password = (?)";
             PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, username);
+            pstmt.setString(1, name);
             pstmt.setString(2, pw);
             ResultSet rs =  pstmt.executeQuery();
-            while(rs.next()){
-                //String user = rs.getString("username") + " @ " + rs.getString("password");
-                //System.out.println("Jups bestoat");
-                //this.username = rs.getString("username") + " @ " + rs.getString("password");
-                if(username == rs.getString("username") && pw == rs.getString("password")){
-                    userExist = true;
-                } else {
-                    userExist = false;
-                }
-                
+            if(rs.next()){
+                this.userExist = true;               
             }
-            //userExist = true;
-            
-            rs.close();
             pstmt.close();
-            System.out.println("Jups bestoat");
+            rs.close();          
         }catch(SQLException ex){
             ex.printStackTrace();
-            //userExist = false; 
-        }
-        
+        }       
     }
     
-    public void checkUserExist(String username,String pw){
-        if(userExist){
-            System.out.println("User bestaat");
-        }else{
-            System.out.println("User bestaat niet");
-        }
-        
+    public boolean getUserExist(){
+        System.out.println(this.userExist);
+        return this.userExist;      
     }
     
-    
-    
+    public boolean getUserAdded(){
+        return this.userAdded;
+    }
+  
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-        db.checkUserExist("AstralKing", "astral123");
-        
+        db.checkUserDB("test","testjes"); 
     }
     
     

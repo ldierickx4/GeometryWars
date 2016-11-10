@@ -40,13 +40,8 @@ public class RegisterController  {
     @FXML
     private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
-        //System.out.println("handleLoginButton");
         Parent loginParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Game.borderPane.setCenter(loginParent);
-        //registrerenGelukt.setVisible(false);
-        //registrerenNietGelukt.setVisible(false);
-        //Scene loginScene = new Scene(loginParent, 900, 900);  
-        //appStage.setScene(loginScene);
     }
     
     @FXML
@@ -54,10 +49,15 @@ public class RegisterController  {
        System.out.println(registerUsername.getText());
        System.out.println(registerEmail.getText());
        System.out.println(passwordRegister.getText());
-       if ( !(registerEmail.getText().isEmpty()) & !(passwordRegister.getText().isEmpty()) & !(registerUsername.getText().isEmpty())){
-           if((db.addUser(registerUsername.getText(), passwordRegister.getText(), registerEmail.getText()))){
-              registrerenGelukt.setVisible(true); 
-           }
+       if (!(registerEmail.getText().isEmpty()) & !(passwordRegister.getText().isEmpty()) & !(registerUsername.getText().isEmpty())){
+            System.out.println("Dit lukt wel");
+            this.db.addUser(registerUsername.getText(), passwordRegister.getText(), registerEmail.getText());
+            if(this.db.getUserAdded()){  
+                System.out.println("Dit lukt ook wel");
+            registrerenGelukt.setVisible(true); 
+            } else{
+                System.out.println("Dit lukt niet");
+            }
        } else{
            registrerenNietGelukt.setVisible(true);
        }  
