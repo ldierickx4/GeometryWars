@@ -18,8 +18,8 @@ import java.util.List;
 public class Database {
     
     private static final String URL = "jdbc:mysql://localhost/astralstrifes";
-    private static final String USER = "Jens";
-    private static final String PWD = "jens";
+    private static final String USER = "root";
+    private static final String PWD = "root";
     private static Connection con;
     private List<String> users;
     
@@ -40,7 +40,7 @@ public class Database {
         }
     }
     
-    public void addUser(String username,String pwd, String email){
+    public boolean addUser(String username,String pwd, String email){
         try{
             String sql = "INSERT INTO users(username,password,email) VALUES(?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -49,8 +49,10 @@ public class Database {
             pstmt.setString(3, email);
             pstmt.executeUpdate();
             pstmt.close();
+            return true;
         } catch(SQLException ex){
             ex.printStackTrace();
+            return false;
         }
     }
     
