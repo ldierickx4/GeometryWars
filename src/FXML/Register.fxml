@@ -54,5 +54,25 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <AnchorPane id="registrerenGelukt" fx:id="registrerenGelukt" layoutX="273.0" layoutY="341.0" prefHeight="278.0" prefWidth="305.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="34.0" layoutY="17.0" text="Registreren is gelukt">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="119.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleBackButton" text="Ga verder" />
+         </children>
+      </AnchorPane>
+      <AnchorPane id="registrerenNietGelukt" fx:id="registrerenNietGelukt" layoutX="290.0" layoutY="348.0" prefHeight="278.0" prefWidth="305.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="20.0" layoutY="20.0" text="Registreren niet gelukt!">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button id="tryAgainRegister" fx:id="tryAgainRegister" layoutX="89.0" layoutY="124.0" mnemonicParsing="false" onAction="#tryAgainRegister" text="Probeer opnieuw" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

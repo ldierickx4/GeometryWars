@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +34,8 @@ public class RegisterController  {
     public TextField registerEmail;
     public TextField passwordRegister;
     public TextField repeatPasswordRegister;
+    public AnchorPane registrerenGelukt;
+    public AnchorPane registrerenNietGelukt;
    
     @FXML
     private void handleBackButton() throws IOException{
@@ -40,6 +43,8 @@ public class RegisterController  {
         //System.out.println("handleLoginButton");
         Parent loginParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Game.borderPane.setCenter(loginParent);
+        //registrerenGelukt.setVisible(false);
+        //registrerenNietGelukt.setVisible(false);
         //Scene loginScene = new Scene(loginParent, 900, 900);  
         //appStage.setScene(loginScene);
     }
@@ -49,8 +54,20 @@ public class RegisterController  {
        System.out.println(registerUsername.getText());
        System.out.println(registerEmail.getText());
        System.out.println(passwordRegister.getText());
-       db.addUser(registerUsername.getText(), passwordRegister.getText(), registerEmail.getText());
-       
+       if ( !(registerEmail.getText().isEmpty()) & !(passwordRegister.getText().isEmpty()) & !(registerUsername.getText().isEmpty())){
+           if((db.addUser(registerUsername.getText(), passwordRegister.getText(), registerEmail.getText()))){
+              registrerenGelukt.setVisible(true); 
+           }
+       } else{
+           registrerenNietGelukt.setVisible(true);
+       }  
     }
+    
+    @FXML
+    private void tryAgainRegister(){
+        registrerenNietGelukt.setVisible(false);
+    }
+    
+    
     
 }
