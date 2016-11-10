@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -20,16 +21,16 @@ import javafx.stage.Stage;
  *
  * @author JorreVynckier
  */
-public class RegisterController implements Initializable {
+public class RegisterController  {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    } 
+   
     
+    @FXML
+    public TextField registerUsername;
+    public TextField registerEmail;
+    public TextField passwordRegister;
+    public TextField repeatPasswordRegister;
+   
     @FXML
     private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
@@ -38,6 +39,14 @@ public class RegisterController implements Initializable {
         Game.borderPane.setCenter(loginParent);
         //Scene loginScene = new Scene(loginParent, 900, 900);  
         //appStage.setScene(loginScene);
+    }
+    
+    @FXML
+    private void registerButton(){
+       System.out.println(registerUsername.getText());
+       System.out.println(registerEmail.getText());
+       System.out.println(passwordRegister.getText());
+       
     }
     
 }
