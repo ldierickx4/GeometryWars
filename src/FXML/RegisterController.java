@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package FXML;
-
+import Data.*;
 import geometrywars.Game;
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +23,10 @@ import javafx.stage.Stage;
  */
 public class RegisterController  {
 
-   
+    private Database db = new Database();
+
+
+    
     
     @FXML
     public TextField registerUsername;
@@ -46,6 +49,7 @@ public class RegisterController  {
        System.out.println(registerUsername.getText());
        System.out.println(registerEmail.getText());
        System.out.println(passwordRegister.getText());
+       db.addUser(registerUsername.getText(), passwordRegister.getText(), registerEmail.getText());
        
     }
     

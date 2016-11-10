@@ -48,6 +48,7 @@ public class Database {
             pstmt.setString(2, pwd);
             pstmt.setString(3, email);
             pstmt.executeUpdate();
+            pstmt.close();
         } catch(SQLException ex){
             ex.printStackTrace();
         }
