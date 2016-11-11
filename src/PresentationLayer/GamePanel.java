@@ -6,14 +6,12 @@
 package PresentationLayer;
 
 
-import geometrywars.Background;
-
-import geometrywars.Bullet;
-import geometrywars.Controller;
-import geometrywars.Enemy;
-import geometrywars.EnemyController;
-
-import geometrywars.Player;
+import AstralStrifes.Background;
+import AstralStrifes.Bullet;
+import AstralStrifes.Controller;
+import AstralStrifes.Enemy;
+import AstralStrifes.EnemyController;
+import AstralStrifes.Player;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
