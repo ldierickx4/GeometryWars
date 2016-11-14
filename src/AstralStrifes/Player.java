@@ -82,10 +82,10 @@ public class Player {
     }
     public double getHeight()
     {
-        return height;
+        return image.getHeight();
     }
     public double getWidth(){
-        return width;
+        return image.getWidth();
     }
     public void setPlayerAngle(double angle)
     {
@@ -97,18 +97,18 @@ public class Player {
     }
     public int getPlayerCenterX()
     {
-        return (int)(x)-16;
+        return (int)(x)-image.getHeight()/2;
     }
     public int getPlayerCenterY()
     { 
-        return (int)(y)-16;
+        return (int)(y)-image.getWidth()/2;
     }
     public void draw(Graphics g,GamePanel gp)
     {
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(getPlayerAngle(),getx(),gety());
-        g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),(int)(width),(int)(height),gp);
+        g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),gp);
         g2.setTransform(reset);
         //System.out.println(image.getHeight());
         //System.out.println(image.getWidth());

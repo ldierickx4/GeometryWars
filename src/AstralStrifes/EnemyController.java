@@ -32,9 +32,9 @@ public class EnemyController implements Runnable{
     }
      public void update(){
         Enemy tempEnemy;
-        for(int i=0; i<enemies.size();i++){
+        for(int i=0; i<enemies.size();i++){           
             tempEnemy = enemies.get(i);
-            tempEnemy.moveTo(p.getx()-14,p.gety()-15);
+            tempEnemy.moveTo(p.getPlayerCenterX(),p.getPlayerCenterY());
         }
     }
     public void render(Graphics g){
@@ -63,6 +63,13 @@ public class EnemyController implements Runnable{
 		}
             makeNewEnemy();
         }
+    }
+    public LinkedList<Enemy> giveEnemies(){
+        return this.enemies;
+    }
+    public void removeEnemy(Object enemy)
+    {
+        enemies.remove(enemy);
     }
 
 

@@ -6,12 +6,24 @@
 package PresentationLayer;
 
 
+<<<<<<< Updated upstream
 import AstralStrifes.Background;
 import AstralStrifes.Bullet;
 import AstralStrifes.Controller;
 import AstralStrifes.Enemy;
 import AstralStrifes.EnemyController;
 import AstralStrifes.Player;
+=======
+import geometrywars.Background;
+
+import geometrywars.Bullet;
+import geometrywars.ColissionController;
+import geometrywars.Controller;
+import geometrywars.Enemy;
+import geometrywars.EnemyController;
+
+import geometrywars.Player;
+>>>>>>> Stashed changes
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -43,12 +55,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean shoot = false;
     private double imageAngleRad = 0;
     private Controller controller;
-
+    private ColissionController cc;
     private EnemyController ec;
     private Enemy enemy;
 
     private double mouseX;
     private double mouseY;
+    
+    
     
 
    
@@ -63,7 +77,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.ec = new EnemyController(player);
         thread = new Thread(this);
         thread.start();
-        
+        this.cc = new ColissionController(player, controller.giveBullets(), ec);
     }
     private void createComponents()
     {
@@ -102,7 +116,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
+        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
         controller.render(gr);
@@ -172,6 +186,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             checkInput();
             controller.update();
             ec.update();
+            cc.CheckEnemyBulletCoulission();
             repaint();
         }
     }    
