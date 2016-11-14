@@ -6,24 +6,8 @@
 package PresentationLayer;
 
 
-<<<<<<< Updated upstream
-import AstralStrifes.Background;
-import AstralStrifes.Bullet;
-import AstralStrifes.Controller;
-import AstralStrifes.Enemy;
-import AstralStrifes.EnemyController;
-import AstralStrifes.Player;
-=======
-import geometrywars.Background;
 
-import geometrywars.Bullet;
-import geometrywars.ColissionController;
-import geometrywars.Controller;
-import geometrywars.Enemy;
-import geometrywars.EnemyController;
-
-import geometrywars.Player;
->>>>>>> Stashed changes
+import AstralStrifes.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -83,7 +67,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     {
         player = new Player();
         background = new Background();
-        //repaint();
+        repaint();
     }
     public void checkInput(){
         if(down){
@@ -116,7 +100,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        //gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
+        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
         controller.render(gr);
