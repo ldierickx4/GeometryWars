@@ -18,28 +18,29 @@ public class ColissionController {
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private EnemyController ec;
-    public ColissionController(Player p,LinkedList<Bullet> bullets,EnemyController ec)
+    private Controller c; 
+    public ColissionController(Player p,Controller c,EnemyController ec)
     {
         this.p = p;
         this.bullets = bullets;
-        this.enemy = enemy;
         this.ec = ec;
+        this.c = c;
     }
     public void CheckEnemyBulletCoulission()
     {
         this.enemy = ec.giveEnemies();
+        this.bullets = c.giveBullets();
         for(int i=0;i<enemy.size();i++){
             Enemy tempe = enemy.get(i);
             Rectangle enemyR = tempe.getBounds();
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
-                    System.out.println("coullision");
                     tempe.die();
                     ec.removeEnemy(tempe);
+                    bullets.get(index).setDead();
                 }
             }
-        }
-    
+        }    
     }
 }

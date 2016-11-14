@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.ec = new EnemyController(player);
         thread = new Thread(this);
         thread.start();
-        this.cc = new ColissionController(player, controller.giveBullets(), ec);
+        this.cc = new ColissionController(player,controller, ec);
     }
     private void createComponents()
     {
@@ -188,7 +188,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        
+
         mouseX=e.getX();
         mouseY=e.getY();       
         player.calculatePlayerAngle(mouseX,mouseY);

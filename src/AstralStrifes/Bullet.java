@@ -105,4 +105,8 @@ public class Bullet{
     {
         return this.borders;
     }
+    public void setDead()
+    {
+     this.alive = false;   
+    }
 }
