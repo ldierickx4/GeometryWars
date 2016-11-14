@@ -38,7 +38,7 @@ public class Controller implements Runnable{
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);
-            tempBullet.calculatePos();
+            tempBullet.calcBulletPos();
             if(!(tempBullet.checkAlive()))
             {
                 bullets.remove(tempBullet);
@@ -80,5 +80,8 @@ public class Controller implements Runnable{
     }
     public boolean getStatus(){
         return this.shooting;
+    }
+    public LinkedList<Bullet> giveBullets(){
+        return this.bullets;    
     }
 }

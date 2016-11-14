@@ -6,12 +6,8 @@
 package PresentationLayer;
 
 
-import AstralStrifes.Background;
-import AstralStrifes.Bullet;
-import AstralStrifes.Controller;
-import AstralStrifes.Enemy;
-import AstralStrifes.EnemyController;
-import AstralStrifes.Player;
+
+import AstralStrifes.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -43,12 +39,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean shoot = false;
     private double imageAngleRad = 0;
     private Controller controller;
-
+    private ColissionController cc;
     private EnemyController ec;
     private Enemy enemy;
 
     private double mouseX;
     private double mouseY;
+    
+    
     
 
    
@@ -63,13 +61,13 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.ec = new EnemyController(player);
         thread = new Thread(this);
         thread.start();
-        
+        this.cc = new ColissionController(player,controller, ec);
     }
     private void createComponents()
     {
         player = new Player();
         background = new Background();
-        //repaint();
+        repaint();
     }
     public void checkInput(){
         if(down){
@@ -172,6 +170,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             checkInput();
             controller.update();
             ec.update();
+            cc.CheckEnemyBulletCoulission();
             repaint();
         }
     }    
@@ -189,7 +188,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        
+
         mouseX=e.getX();
         mouseY=e.getY();       
         player.calculatePlayerAngle(mouseX,mouseY);

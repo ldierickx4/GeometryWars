@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
  * @author Jens
  */
 public class Enemy {
-    private static final double SPEED = 0.4;
+    private static final double SPEED = 0.2;
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -35,25 +35,28 @@ public class Enemy {
     //private int multiplier;
     //private Player player;
     private GamePanel gp;
-    private Rectangle playerBounds;
+    private Rectangle enemyBounds;
+    private boolean alive;
     
 
     public Enemy() {
+        this.alive = true;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
-        this.width = 40;
-        this.height = 40;
         loadImage();
-        playerBounds = new Rectangle();
+        createBoundries();
+        
     }
-    
-    
+    public void createBoundries()
+    {
+        enemyBounds = new Rectangle((int)(this.x),(int)(this.y), width, height);
+    }
     public void loadImage(){
         BufferedImage i = null;
-        Random r = new Random();
-        int randomEnemy = 1 + r.nextInt(9 - 1 + 1);
-        String path = "resources/gameSprites/enemy_" + randomEnemy + ".png";
+        //Random r = new Random();
+        //int randomEnemy = 1 + r.nextInt(9 - 1 + 1);
+        String path = "resources/gameSprites/planet1.png";
         try {
             //ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
             i = ImageIO.read(new File(path));
@@ -75,13 +78,12 @@ public class Enemy {
         
         this.x += Yvelocity;
         this.y += Xvelocity;
-        
-        playerBounds.setBounds((int)(this.x),(int)(this.y), this.width, this.height);
-        //System.out.println(playerBounds.getBounds2D());
+
+        enemyBounds.setBounds((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
     }
     
     public void draw(Graphics g){
-        g.drawImage(image, (int)(x), (int)(y), width, height, gp);
+        g.drawImage(image, (int)(x), (int)(y), gp);
     }
      
     public double getX() {
@@ -97,10 +99,20 @@ public class Enemy {
     }
 
     public int getWidth() {
-        return width;
+        return image.getWidth();
     }
 
     public int getHeight() {
-        return height;
-    }  
+        return image.getHeight();
+    }
+    public Rectangle getBounds()
+    {
+        return this.enemyBounds;
+    }
+    public boolean getStatus(){
+        return this.getStatus();
+    }
+    public void die(){
+        this.alive = false;
+    }
 }
