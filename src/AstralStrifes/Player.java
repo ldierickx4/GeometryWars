@@ -110,9 +110,6 @@ public class Player {
         g2.rotate(getPlayerAngle(),getx(),gety());
         g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),gp);
         g2.setTransform(reset);
-        //System.out.println(image.getHeight());
-        //System.out.println(image.getWidth());
-        
     }
 
     public void calculatePlayerAngle(double mouseX, double mouseY) {

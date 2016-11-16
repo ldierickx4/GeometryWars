@@ -18,11 +18,10 @@ public class ColissionController {
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private EnemyController ec;
-    private Controller c; 
-    public ColissionController(Player p,Controller c,EnemyController ec)
+    private BulletController c; 
+    public ColissionController(Player p,BulletController c,EnemyController ec)
     {
         this.p = p;
-        this.bullets = bullets;
         this.ec = ec;
         this.c = c;
     }

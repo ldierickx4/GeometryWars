@@ -17,16 +17,15 @@ import java.util.logging.Logger;
  *
  * @author laurensdierickx
  */
-public class Controller implements Runnable{
+public class BulletController implements Runnable{
     private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
     private Thread thread;
     private boolean shooting= false;
     
-    public Controller(Player player, GamePanel gp)
+    public BulletController(Player player, GamePanel gp)
     {   
-        
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
         this.gp = gp;
@@ -73,7 +72,7 @@ public class Controller implements Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),gp);
+            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),gp,"player");
             addBullet(b);
         }
         thread=null;

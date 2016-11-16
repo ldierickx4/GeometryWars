@@ -7,6 +7,7 @@ package PresentationLayer;
 
 
 
+import AstralStrifes.NormalEnemy;
 import AstralStrifes.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -38,27 +39,22 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean right = false;
     private boolean shoot = false;
     private double imageAngleRad = 0;
-    private Controller controller;
+    private BulletController controller;
     private ColissionController cc;
     private EnemyController ec;
-    private Enemy enemy;
+    private NormalEnemy enemy;
 
     private double mouseX;
     private double mouseY;
-    
-    
-    
-
-   
     
     public GamePanel(){ 
         createComponents();
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        this.controller = new Controller(player,this);
-        this.enemy = new Enemy();
-        this.ec = new EnemyController(player);
+        this.controller = new BulletController(player,this);
+        this.enemy = new NormalEnemy();
+        this.ec = new EnemyController(player,this);
         thread = new Thread(this);
         thread.start();
         this.cc = new ColissionController(player,controller, ec);
@@ -105,7 +101,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         player.draw(gr,this);
         controller.render(gr);
         ec.render(gr);
-
     }
 
     @Override
@@ -180,6 +175,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public double getMouseY(){
         return this.mouseY;
     }
+    public Player getPlayer(){
+        return this.player;
+    }
     
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -224,6 +222,18 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+    public BulletController getBulletControler()
+    {
+        return this.controller;
+    }
+    public ColissionController getCC()
+    {
+        return this.cc;
+    }
+    public EnemyController getEc()
+    {
+        return this.ec;
     }
 
    

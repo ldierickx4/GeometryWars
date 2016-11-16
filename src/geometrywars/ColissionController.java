@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package geometrywars;
+import AstralStrifes.NormalEnemy;
 import AstralStrifes.*;
 import java.awt.Rectangle;
 import java.util.LinkedList;
@@ -33,12 +34,10 @@ public class ColissionController {
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
-                    System.out.println("coullision");
                     tempe.die();
                     ec.removeEnemy(tempe);
                 }
             }
-        }
-    
+        }   
     }
 }

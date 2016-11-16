@@ -40,29 +40,43 @@ public class Bullet{
     private double Xvelocity;
     private boolean alive;
     private Rectangle borders;
+    private String type;
     
             
-    public Bullet(double originX , double originY , double destX  , double destY,GamePanel gp){
-        bulletVelocity = 1.0;
+    public Bullet(double originX , double originY , double destX  , double destY,GamePanel gp,String types){
         this.originX=originX;
         this.originY=originY;
         this.destX = destX;
         this.destY = destY;
-        this.angle =Math.atan2(destY - originY, destX - originX);
-        this.Yvelocity = (bulletVelocity) * Math.sin(angle);
-        this.Xvelocity = (bulletVelocity) * Math.cos(angle);
+        this.type = types;
+        calculateVeloAndAngle();
         loadImage();
         this.gp=gp;
         this.alive = true;
         borders = new Rectangle((int)(originX) ,(int)(originY), (int)(image.getWidth()),(int)(image.getHeight()));
-
         calcBulletPos();
+    }
+    private void calculateVeloAndAngle()
+    {   
+        bulletVelocity = 1.0;
+        if(type.equals("enemy")){
+                    bulletVelocity = 2.0;
+        }
+        this.angle =Math.atan2(destY - originY, destX - originX);
+        this.Yvelocity = (bulletVelocity) * Math.sin(angle);
+        this.Xvelocity = (bulletVelocity) * Math.cos(angle);
+
     }
     
     private void loadImage() {
         BufferedImage i = null;
+        File pic = new File("resources/gameSprites/bullet2.png");
+        //System.out.println(type);
+        if(type.equals("enemy")){
+            pic = new File("resources/gameSprites/bullet1.png");
+        }
         try {
-           i = ImageIO.read(new File("resources/gameSprites/bullet2.png"));
+           i = ImageIO.read(pic);
         } catch (IOException ex) {
             ex.getMessage();
         }

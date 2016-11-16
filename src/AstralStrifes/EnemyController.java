@@ -5,6 +5,7 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -19,12 +20,15 @@ public class EnemyController implements Runnable{
     private Enemy enemy;
     private Thread thread;
     private Player p;
+    private int count;
+    private GamePanel gp;
         
-    public EnemyController(Player p) {
+    public EnemyController(Player p , GamePanel gp) {
         this.enemies = new LinkedList<Enemy>();
         thread = new Thread(this);
         thread.start();
         this.p = p;
+        this.gp = gp;
     }
     
     public void addEnemy(Enemy e){
@@ -34,7 +38,12 @@ public class EnemyController implements Runnable{
         Enemy tempEnemy;
         for(int i=0; i<enemies.size();i++){           
             tempEnemy = enemies.get(i);
-            tempEnemy.moveTo(p.getPlayerCenterX(),p.getPlayerCenterY());
+            try{
+                NormalEnemy ne = (NormalEnemy) tempEnemy;
+                ne.moveTo(p.getPlayerCenterX(),p.getPlayerCenterY());
+            }
+            catch(ClassCastException e)
+            {}
         }
     }
     public void render(Graphics g){
@@ -46,8 +55,13 @@ public class EnemyController implements Runnable{
     }
     public void makeNewEnemy()
     {
-        Enemy toAddenemy = new Enemy();
+        
+        Enemy toAddenemy = new NormalEnemy();
+        if(count%5==0&&count!=0){
+            toAddenemy = new ShootingEnemy(p, gp);
+        }
         addEnemy(toAddenemy);
+        this.count++;
     }
 
     @Override
