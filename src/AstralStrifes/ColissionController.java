@@ -43,4 +43,17 @@ public class ColissionController {
             }
         }    
     }
+    public void checkEnemyPlayercollision(){
+        this.enemy = ec.giveEnemies();
+        for(int i=0;i<enemy.size();i++)
+        {
+            Enemy tempE = enemy.get(i);
+            Rectangle enemyR = tempE.getBounds();
+            if(enemyR.intersects(p.getBounds()))
+            {
+                System.out.println("coulission");
+            }
+        }
+    
+    }
 }

@@ -40,6 +40,7 @@ public class Player {
     private double height;
     private double angle;
     private int score;
+    private Rectangle playerBounds;
     
     public Player(){
         this.width=28;
@@ -48,6 +49,11 @@ public class Player {
         this.y = 150.0;
         this.score = 0;
         loadImage();
+        createBounds();
+    }
+    private void createBounds()
+    {
+        this.playerBounds = new Rectangle((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
     }
 
     private void loadImage() {
@@ -138,6 +144,13 @@ public class Player {
     
     public void raiseScore(int points){
         this.score += points;
+    }
+    public Rectangle getBounds(){
+        return this.playerBounds;
+    }
+
+    public void updateBounds() {
+        playerBounds.setBounds((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
     }
     
    

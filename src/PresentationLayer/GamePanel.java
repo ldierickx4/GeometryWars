@@ -168,11 +168,13 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             catch(Exception e) {
 		e.printStackTrace();
 		}
+            player.updateBounds();
             checkShoot();
             checkInput();
             controller.update();
             ec.update();
             cc.CheckEnemyBulletCoulission();
+            cc.checkEnemyPlayercollision();
             gf.updateScore(player.getScore()+"");
             
             repaint();
@@ -242,15 +244,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public EnemyController getEc()
     {
         return this.ec;
-    }
-    
-    public JLabel showScore(String text){
-        
-        score.setText("test");
-        score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        score.setForeground(Color.WHITE);
-        
-        return score;
     }
 
     public JLabel getScore() {
