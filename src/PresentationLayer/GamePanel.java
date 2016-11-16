@@ -105,7 +105,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
-        player.drawHealthBar(gr, this);
+        //player.drawHealthBar(gr, this);
+        player.drawHealth(gr, this);
         controller.render(gr);
         ec.render(gr);
     }
@@ -174,7 +175,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             ec.update();
             cc.CheckEnemyBulletCoulission();
             gf.updateScore(player.getScore()+"");
-            
+            player.updateHealth();
             repaint();
         }
     }    
