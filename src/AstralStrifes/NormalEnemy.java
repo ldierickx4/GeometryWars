@@ -24,7 +24,11 @@ import AstralStrifes.Enemy;
  */
 public class NormalEnemy implements Enemy{
     private static final double SPEED = 0.2;
+<<<<<<< Updated upstream
     private static final int VALUE = 150;
+=======
+    private final String type ="normal";
+>>>>>>> Stashed changes
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -73,9 +77,8 @@ public class NormalEnemy implements Enemy{
         double Xvelocity = (SPEED) * Math.sin(angle);
         this.x += Yvelocity;
         this.y += Xvelocity;
-        enemyBounds.setBounds((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
+        enemyBounds.setBounds((int)(this.x),(int)(this.y),image.getWidth(),image.getHeight());
     }
-    
     public void draw(Graphics g){
         g.drawImage(image, (int)(x), (int)(y), gp);
     }
@@ -109,6 +112,7 @@ public class NormalEnemy implements Enemy{
     public void die(){
         this.alive = false;
     }
+<<<<<<< Updated upstream
     public int getValue() {
         System.out.println(this.VALUE+"in enemy");
         return this.VALUE;
@@ -116,4 +120,11 @@ public class NormalEnemy implements Enemy{
 
     
     
+=======
+    @Override
+    public String getType()
+    {
+        return this.type;
+    }
+>>>>>>> Stashed changes
 }

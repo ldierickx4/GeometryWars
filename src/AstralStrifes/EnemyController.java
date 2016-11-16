@@ -43,7 +43,9 @@ public class EnemyController implements Runnable{
                 ne.moveTo(p.getPlayerCenterX(),p.getPlayerCenterY());
             }
             catch(ClassCastException e)
-            {}
+            {      
+                
+            }
         }
     }
     public void render(Graphics g){
@@ -58,7 +60,7 @@ public class EnemyController implements Runnable{
         
         Enemy toAddenemy = new NormalEnemy();
         if(count%5==0&&count!=0){
-            toAddenemy = new ShootingEnemy(p, gp);
+            toAddenemy = new ShootingEnemy(p, gp.getBulletControler());
         }
         addEnemy(toAddenemy);
         this.count++;
@@ -85,7 +87,4 @@ public class EnemyController implements Runnable{
     {
         enemies.remove(enemy);
     }
-
-
-    
 }

@@ -34,7 +34,6 @@ public class Bullet{
     private double destY;
     private double originX;
     private double originY; 
-    private GamePanel gp;
     private double angle;
     private double Yvelocity;
     private double Xvelocity;
@@ -43,7 +42,7 @@ public class Bullet{
     private String type;
     
             
-    public Bullet(double originX , double originY , double destX  , double destY,GamePanel gp,String types){
+    public Bullet(double originX , double originY , double destX  , double destY,String types){
         this.originX=originX;
         this.originY=originY;
         this.destX = destX;
@@ -51,7 +50,6 @@ public class Bullet{
         this.type = types;
         calculateVeloAndAngle();
         loadImage();
-        this.gp=gp;
         this.alive = true;
         borders = new Rectangle((int)(originX) ,(int)(originY), (int)(image.getWidth()),(int)(image.getHeight()));
         calcBulletPos();
@@ -60,7 +58,8 @@ public class Bullet{
     {   
         bulletVelocity = 1.0;
         if(type.equals("enemy")){
-                    bulletVelocity = 2.0;
+                    bulletVelocity = 0.2;
+                    System.out.println(bulletVelocity);
         }
         this.angle =Math.atan2(destY - originY, destX - originX);
         this.Yvelocity = (bulletVelocity) * Math.sin(angle);
@@ -85,7 +84,7 @@ public class Bullet{
     public void draw(Graphics g){
         calcBulletPos();
         Graphics2D g2 = (Graphics2D)g;
-        g.drawImage(image,(int)originX,(int)originY,gp);        
+        g.drawImage(image,(int)originX,(int)originY,null);        
     }
     public double giveAngle(){
         return this.angle;

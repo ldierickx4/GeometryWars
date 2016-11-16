@@ -16,7 +16,7 @@ import java.awt.Rectangle;
 public interface Enemy{
     public void createBoundries();
     public void loadImage();   
-
+    public String getType();
     public void draw(Graphics g);
     public double getX();
     public double getY();

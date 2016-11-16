@@ -72,7 +72,7 @@ public class BulletController implements Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),gp,"player");
+            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
             addBullet(b);
         }
         thread=null;
@@ -82,5 +82,20 @@ public class BulletController implements Runnable{
     }
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
+    }
+    public void updateEnemyBullets()
+    {
+        LinkedList<Enemy> enemy = gp.getEc().giveEnemies();
+        for(Enemy e: enemy)
+        {
+            if(e.getType().equals("shooting"))
+            {
+                ShootingEnemy sE = (ShootingEnemy) e;
+                LinkedList<Bullet> b = sE.getBullets();
+                for(Bullet bu: b ){
+                    bullets.add(bu);
+                }
+            }
+        }
     }
 }

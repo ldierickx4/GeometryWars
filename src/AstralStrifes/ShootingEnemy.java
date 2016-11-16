@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
  * @author laurensdierickx
  */
 public class ShootingEnemy implements Enemy,Runnable{
+    private final String type ="shooting";
     private static final double SPEED = 0.2;
     private int VALUE = 200;
     private BufferedImage image;
@@ -29,12 +30,12 @@ public class ShootingEnemy implements Enemy,Runnable{
     private double y;
     private int width;
     private int height;
-    private int rangeMin = 0;
-    private int rangeMax = 900;
+    private int rangeMin =50;
+    private int rangeMax = 850;
     //private int reward;
     //private int multiplier;
     //private Player player;
-    private GamePanel gp;
+    private BulletController bC;
     private Rectangle enemyBounds;
     private boolean alive;
     private Thread thread;
@@ -42,7 +43,7 @@ public class ShootingEnemy implements Enemy,Runnable{
     private Player p;
     
     
-    public ShootingEnemy(Player p,GamePanel gp)
+    public ShootingEnemy(Player p,BulletController bC)
     {
         this.alive = true;
         Random r = new Random(); 
@@ -54,18 +55,17 @@ public class ShootingEnemy implements Enemy,Runnable{
         thread = new Thread(this);
         thread.start();
         this.p = p ;
-        this.gp = gp;
+        this.bC = bC;
     }
     public void newBullet()
     {
-        Bullet b = new Bullet(this.x,this.y,p.getx(),p.gety(),gp,"enemy");
-        bullets.add(b);
+        Bullet b = new Bullet(this.x,this.y,p.getx(),p.gety(),"enemy");
+        bC.addBullet(b);
     }
     @Override
     public void createBoundries() {
         enemyBounds = new Rectangle((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
     }
-
     @Override
     public void loadImage() {
         BufferedImage i = null;
@@ -77,55 +77,44 @@ public class ShootingEnemy implements Enemy,Runnable{
         }
         image = i;
     }
-    @Override
-    public void draw(Graphics g) {
-        g.drawImage(image, (int)(x), (int)(y), gp);
+    public void draw(Graphics g){
+        g.drawImage(image, (int)(this.x), (int)(this.y), null);
     }
 
-    @Override
     public double getX() {
         return this.x;
     }
 
-    @Override
     public double getY() {
         return this.y;
     }
 
-    @Override
     public Image getImage() {
         return image;
     }
 
-    @Override
     public int getWidth() {
         return image.getWidth();
     }
 
-    @Override
     public int getHeight() {
         return image.getHeight();
     }
 
-    @Override
     public Rectangle getBounds() {
         return this.enemyBounds;
     }
 
-    @Override
     public boolean getStatus() {
         return this.alive;
     }
 
-    @Override
     public void die() {
         this.alive = false;
     }
-
     @Override
     public void run() {
-        Thread current = Thread.currentThread();
-        while(current == thread)
+        while(alive)
         {            
             try {
 		Thread.sleep(4000);
@@ -133,7 +122,10 @@ public class ShootingEnemy implements Enemy,Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            newBullet();
+            Bullet b = new Bullet(this.x,this.y,p.getx(),p.gety(),"enemy");
+            bC.addBullet(b);
+            
+            System.out.println("net outofsleep");
         }   
     }
     public LinkedList<Bullet> getBullets()
@@ -141,11 +133,18 @@ public class ShootingEnemy implements Enemy,Runnable{
         return this.bullets;
     }
 
+<<<<<<< Updated upstream
     @Override
     public int getValue() {
         return this.VALUE;
     }
 
   
+=======
+    public String getType()
+    {
+        return this.type;
+    }
+>>>>>>> Stashed changes
     
 }
