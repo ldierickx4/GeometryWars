@@ -18,6 +18,8 @@ public class ColissionController {
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private EnemyController ec;
+    
+    
     public ColissionController(Player p,LinkedList<Bullet> bullets,EnemyController ec)
     {
         this.p = p;
@@ -34,10 +36,13 @@ public class ColissionController {
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
+                    p.raiseScore(tempe.getValue());
                     tempe.die();
                     ec.removeEnemy(tempe);
                 }
             }
         }   
     }
+    
+  
 }

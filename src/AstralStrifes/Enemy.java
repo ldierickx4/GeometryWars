@@ -26,5 +26,6 @@ public interface Enemy{
     public Rectangle getBounds();
     public boolean getStatus();
     public void die();
+    public int getValue();
     
 }

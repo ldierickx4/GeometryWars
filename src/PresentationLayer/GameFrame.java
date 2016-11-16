@@ -26,7 +26,9 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
-   
+    
+    //private JLabel score;
+    
 
 
     public static void main(String[] args){
@@ -37,6 +39,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
 
     public GameFrame(){
         initUi(); // HIER
+       
     }
 
     private void initUi() {
@@ -49,12 +52,20 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
         gamePanel = new GamePanel();
-        setContentPane(gamePanel); // met deze method zet je uw main content panel van uw jframe (dit kan maar 1 panel zijn max, als je meerdere dingen wilt moet je panels nesten)
+        JLabel scoreTitle = new JLabel();
+        //scoreTitle.setLocation(500, 500);
+        scoreTitle.setText("Score: ");
+        scoreTitle.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
+        scoreTitle.setForeground(Color.WHITE);
+        //JLabel score = new JLabel();
+        //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
+        //score.setForeground(Color.WHITE);
+        gamePanel.add(scoreTitle);
+        //gamePanel.add(score);
+        setContentPane(gamePanel);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
     }
-    
-    
    
     @Override
     public void keyTyped(KeyEvent e) {
@@ -105,5 +116,5 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     @Override
     public void mouseExited(MouseEvent e) {
     }
-
+    
 }

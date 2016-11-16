@@ -9,6 +9,8 @@ package PresentationLayer;
 
 import AstralStrifes.NormalEnemy;
 import AstralStrifes.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -43,9 +45,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private ColissionController cc;
     private EnemyController ec;
     private NormalEnemy enemy;
-
+    private JLabel score;
     private double mouseX;
     private double mouseY;
+    
     
     public GamePanel(){ 
         createComponents();
@@ -58,6 +61,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread = new Thread(this);
         thread.start();
         this.cc = new ColissionController(player,controller, ec);
+        score = new JLabel();
+        printPlayerScore();
+        
     }
     private void createComponents()
     {
@@ -99,6 +105,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
+        player.drawHealthBar(gr, this);
         controller.render(gr);
         ec.render(gr);
     }
@@ -166,6 +173,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             controller.update();
             ec.update();
             cc.CheckEnemyBulletCoulission();
+            printPlayerScore();
             repaint();
         }
     }    
@@ -235,6 +243,24 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     {
         return this.ec;
     }
+    
+    public JLabel showScore(String text){
+        
+        score.setText(text);
+        score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
+        score.setForeground(Color.WHITE);
+        
+        return score;
+    }
 
+    public JLabel getScore() {
+        return score;
+    }
+    
+    public void printPlayerScore(){
+        //player.raiseScore(150);
+        System.out.println(player.getScore());
+    }
+            
    
 }

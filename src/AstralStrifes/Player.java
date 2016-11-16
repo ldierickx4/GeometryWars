@@ -6,9 +6,12 @@
 package AstralStrifes;
 
 import PresentationLayer.GamePanel;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,7 +19,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  *
@@ -24,6 +29,7 @@ import javax.swing.ImageIcon;
  */
 public class Player {
     private static final int SPEED = 2;
+    private static final int HEALTH = 100;
     private String naam;
     private double y;
     private double x;
@@ -33,13 +39,14 @@ public class Player {
     private double width;
     private double height;
     private double angle;
-    
+    private int score;
     
     public Player(){
         this.width=28;
         this.height=30;
         this.x = 170.0;
         this.y = 150.0;
+        this.score = 0;
         loadImage();
     }
 
@@ -115,4 +122,27 @@ public class Player {
     public void calculatePlayerAngle(double mouseX, double mouseY) {
         this.angle = Math.atan2(gety() - mouseY, getx() - mouseX);
     }
+    
+    public void drawHealthBar(Graphics g,GamePanel gp){
+        AffineTransform reset = new AffineTransform();
+        Graphics2D g2 = (Graphics2D)g;
+        g2.drawRect(20, 20, HEALTH, 40);
+        g2.setColor(Color.green);
+        g2.fillRect(20, 20, HEALTH, 40);
+        g2.setTransform(reset);
+    }
+
+    public int getScore() {
+        return score;
+    }
+    
+    public void raiseScore(int points){
+        this.score += points;
+        System.out.println(points);
+        System.out.println(score);
+    }
+    
+   
+    
+    
 }

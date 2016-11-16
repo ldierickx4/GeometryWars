@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
  */
 public class ShootingEnemy implements Enemy,Runnable{
     private static final double SPEED = 0.2;
+    private int VALUE = 200;
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -139,5 +140,12 @@ public class ShootingEnemy implements Enemy,Runnable{
     {
         return this.bullets;
     }
+
+    @Override
+    public int getValue() {
+        return this.VALUE;
+    }
+
+  
     
 }

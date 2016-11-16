@@ -24,6 +24,7 @@ import AstralStrifes.Enemy;
  */
 public class NormalEnemy implements Enemy{
     private static final double SPEED = 0.2;
+    private static final int VALUE = 150;
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -108,4 +109,11 @@ public class NormalEnemy implements Enemy{
     public void die(){
         this.alive = false;
     }
+    public int getValue() {
+        System.out.println(this.VALUE+"in enemy");
+        return this.VALUE;
+    }
+
+    
+    
 }
