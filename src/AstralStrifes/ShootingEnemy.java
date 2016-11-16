@@ -117,15 +117,13 @@ public class ShootingEnemy implements Enemy,Runnable{
         while(alive)
         {            
             try {
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		}
             catch(Exception e) {
 		e.printStackTrace();
 		}
             Bullet b = new Bullet(this.x,this.y,p.getx(),p.gety(),"enemy");
             bC.addBullet(b);
-            
-            System.out.println("net outofsleep");
         }   
     }
     public LinkedList<Bullet> getBullets()
@@ -133,18 +131,18 @@ public class ShootingEnemy implements Enemy,Runnable{
         return this.bullets;
     }
 
-<<<<<<< Updated upstream
+
     @Override
     public int getValue() {
         return this.VALUE;
     }
 
   
-=======
+
     public String getType()
     {
         return this.type;
     }
->>>>>>> Stashed changes
+
     
 }

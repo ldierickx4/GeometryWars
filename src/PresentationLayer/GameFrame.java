@@ -26,6 +26,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
+    private JLabel score;
     
     //private JLabel score;
     
@@ -51,20 +52,25 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-        gamePanel = new GamePanel();
-        JLabel scoreTitle = new JLabel();
+        gamePanel = new GamePanel(this);
+        score = new JLabel();
         //scoreTitle.setLocation(500, 500);
-        scoreTitle.setText("Score: ");
-        scoreTitle.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        scoreTitle.setForeground(Color.WHITE);
+        score.setText("Score: ");
+        score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
+        score.setForeground(Color.WHITE);
         //JLabel score = new JLabel();
         //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         //score.setForeground(Color.WHITE);
-        gamePanel.add(scoreTitle);
+        gamePanel.add(score);
         //gamePanel.add(score);
         setContentPane(gamePanel);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
+    }
+    public void updateScore(String score)
+    {
+        String add = "score :"+score;
+        this.score.setText(add);
     }
    
     @Override

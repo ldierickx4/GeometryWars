@@ -138,8 +138,6 @@ public class Player {
     
     public void raiseScore(int points){
         this.score += points;
-        System.out.println(points);
-        System.out.println(score);
     }
     
    

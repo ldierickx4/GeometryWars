@@ -48,9 +48,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private JLabel score;
     private double mouseX;
     private double mouseY;
+    private GameFrame gf;
     
     
-    public GamePanel(){ 
+    public GamePanel(GameFrame gf){ 
         createComponents();
         addKeyListener(this);
         addMouseMotionListener(this);
@@ -61,9 +62,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread = new Thread(this);
         thread.start();
         this.cc = new ColissionController(player,controller, ec);
-        score = new JLabel();
-        printPlayerScore();
-        
+        score = new JLabel();   
+        this.gf =gf;
     }
     private void createComponents()
     {
@@ -173,7 +173,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             controller.update();
             ec.update();
             cc.CheckEnemyBulletCoulission();
-            printPlayerScore();
+            gf.updateScore(player.getScore()+"");
+            
             repaint();
         }
     }    
@@ -245,7 +246,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     
     public JLabel showScore(String text){
         
-        score.setText(text);
+        score.setText("test");
         score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         score.setForeground(Color.WHITE);
         
@@ -254,12 +255,5 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     public JLabel getScore() {
         return score;
-    }
-    
-    public void printPlayerScore(){
-        //player.raiseScore(150);
-        System.out.println(player.getScore());
-    }
-            
-   
+    }                
 }
