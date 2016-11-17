@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean shoot = false;
     private double imageAngleRad = 0;
     private BulletController controller;
-    private ColissionController cc;
+    private CollisionController cc;
     private EnemyController ec;
     private NormalEnemy enemy;
     private JLabel score;
@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.ec = new EnemyController(player,this);
         thread = new Thread(this);
         thread.start();
-        this.cc = new ColissionController(player,controller, ec);
+        this.cc = new CollisionController(player,controller, ec);
         score = new JLabel();   
         this.gf =gf;
     }
@@ -237,7 +237,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     {
         return this.controller;
     }
-    public ColissionController getCC()
+    public CollisionController getCC()
     {
         return this.cc;
     }

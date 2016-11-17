@@ -13,13 +13,13 @@ import java.util.LinkedList;
  *
  * @author laurensdierickx
  */
-public class ColissionController {
+public class CollisionController {
     private Player p;
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private EnemyController ec;
     private BulletController c; 
-    public ColissionController(Player p,BulletController c,EnemyController ec)
+    public CollisionController(Player p,BulletController c,EnemyController ec)
     {
         this.p = p;
         this.ec = ec;
