@@ -29,7 +29,8 @@ import javax.swing.*;
  */
 public class Player {
     private static final int SPEED = 2;
-    private static final int HEALTH = 100;
+    private int health = 100;
+    private int maxHealth = 100;
     private String naam;
     private double y;
     private double x;
@@ -129,15 +130,21 @@ public class Player {
         this.angle = Math.atan2(gety() - mouseY, getx() - mouseX);
     }
     
-    public void drawHealthBar(Graphics g,GamePanel gp){
+    public void drawHealth(Graphics g,GamePanel gp){
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
-        g2.drawRect(20, 20, HEALTH, 40);
+        //Groene balk -> Health verminderen/ WIDTH
+        g2.drawRect(20, 20, health, 40);
+        g2.setColor(Color.red);
+        g2.fillRect(20, 20, health, 40);
+        //Rode balk achtergrond -> WIDTH verminderd
+        g2.drawRect(20, 20, maxHealth, 40);
         g2.setColor(Color.green);
-        g2.fillRect(20, 20, HEALTH, 40);
+        g2.fillRect(20, 20, maxHealth, 40);
         g2.setTransform(reset);
     }
-
+    
+  
     public int getScore() {
         return score;
     }
@@ -153,7 +160,13 @@ public class Player {
         playerBounds.setBounds((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
     }
     
-   
+   public void reduceHealth(int amount){
+       this.health -= amount;
+   }
+
+    public int updateHealth() {
+        return health;
+    }
     
     
 }

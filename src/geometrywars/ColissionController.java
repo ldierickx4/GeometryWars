@@ -37,6 +37,7 @@ public class ColissionController {
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
                     p.raiseScore(tempe.getValue());
+                    p.reduceHealth(10);
                     tempe.die();
                     ec.removeEnemy(tempe);
                 }
