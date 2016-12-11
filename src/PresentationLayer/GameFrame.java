@@ -122,5 +122,11 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     @Override
     public void mouseExited(MouseEvent e) {
     }
+    public int getHeight(){
+        return this.HEIGHT;
+    }
+        public int getWidth(){
+        return this.WIDTH;
+    }
     
 }

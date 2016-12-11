@@ -52,6 +52,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     
     
     public GamePanel(GameFrame gf){ 
+        this.gf =gf;
         createComponents();
         addKeyListener(this);
         addMouseMotionListener(this);
@@ -63,12 +64,12 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread.start();
         this.cc = new CollisionController(player,controller, ec);
         score = new JLabel();   
-        this.gf =gf;
+        
     }
     private void createComponents()
     {
         player = new Player();
-        background = new Background();
+        background = new Background(gf);
         repaint();
     }
     public void checkInput(){

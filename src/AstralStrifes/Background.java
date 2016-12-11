@@ -5,6 +5,7 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GameFrame;
 import java.awt.Image;
 import java.awt.image.*;
 import java.io.File;
@@ -19,10 +20,11 @@ public class Background {
     private BufferedImage background;
     private int width;
     private int height;
+    private GameFrame gf;
 
-    public Background() {
-        this.width = 900;
-        this.height = 900;
+    public Background(GameFrame gf) {
+        this.width = gf.getWidth();
+        this.height = gf.getHeight();
         loadImage();
     }
     
