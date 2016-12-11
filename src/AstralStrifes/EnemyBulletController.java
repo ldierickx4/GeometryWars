@@ -7,28 +7,25 @@ package AstralStrifes;
 
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author laurensdierickx
  */
-public class BulletController implements Runnable{
+public class EnemyBulletController implements Runnable {
     private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
-    private Thread thread;
-    private boolean shooting= false;
+    private Thread thread;    
     
-    public BulletController(Player player, GamePanel gp)
+    public EnemyBulletController(Player player, GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
         this.gp = gp;
+        this.thread = new Thread(this);        
+        thread.start();
     }
     public void addBullet(Bullet b){
         bullets.add(b);
@@ -51,34 +48,18 @@ public class BulletController implements Runnable{
             tempBullet.draw(g);
         }
     }
-    public void setShooting()
-    {    
-        this.shooting=true;
-        this.thread = new Thread(this);        
-        thread.start();
-    }
-    public void setNotShooting()
-    {
-        this.shooting=false;
-    }
-
     @Override
     public void run() {
-        while(this.shooting)
+        while(true)
         {            
             try {
-		Thread.sleep(100);
+		Thread.sleep(500);
 		}
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
-            addBullet(b);
+            updateEnemyBullets();
         }
-        thread=null;
-    }
-    public boolean getStatus(){
-        return this.shooting;
     }
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
@@ -91,11 +72,11 @@ public class BulletController implements Runnable{
             if(e.getType().equals("shooting"))
             {
                 ShootingEnemy sE = (ShootingEnemy) e;
-                LinkedList<Bullet> b = sE.getBullets();
-                for(Bullet bu: b ){
-                    bullets.add(bu);
-                }
+                Bullet b = new Bullet(sE.getX(),sE.getY(), player.getx(), player.gety(), "enemy");
+                System.out.println(bullets.size());
+                addBullet(b);
             }
         }
     }
+    
 }

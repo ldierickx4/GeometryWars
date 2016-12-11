@@ -69,10 +69,9 @@ public class Bullet{
     
     private void loadImage() {
         BufferedImage i = null;
-        File pic = new File("resources/gameSprites/bullet2.png");
-        //System.out.println(type);
+        File pic = new File("resources/gameSprites/bullet1.png");
         if(type.equals("enemy")){
-            pic = new File("resources/gameSprites/bullet1.png");
+            pic = new File("resources/gameSprites/bullet2.png");
         }
         try {
            i = ImageIO.read(pic);

@@ -20,8 +20,8 @@ import javax.imageio.ImageIO;
 public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener,MouseListener {
     private GamePanel gamePanel;
 
-    private static final int HEIGHT = 900;
-    private static final int WIDTH = 900;
+    private static final int HEIGHT = 800;
+    private static final int WIDTH = 1000;
     
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;

@@ -18,8 +18,8 @@ public class CollisionController {
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private EnemyController ec;
-    private BulletController c; 
-    public CollisionController(Player p,BulletController c,EnemyController ec)
+    private PlayerBulletController c; 
+    public CollisionController(Player p,PlayerBulletController c,EnemyController ec)
     {
         this.p = p;
         this.ec = ec;
@@ -51,7 +51,7 @@ public class CollisionController {
             Rectangle enemyR = tempE.getBounds();
             if(enemyR.intersects(p.getBounds()))
             {
-                System.out.println("coulission");
+                //System.out.println("coulission");
             }
         }
     

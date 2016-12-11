@@ -41,14 +41,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private boolean right = false;
     private boolean shoot = false;
     private double imageAngleRad = 0;
-    private BulletController controller;
+    private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
-    private NormalEnemy enemy;
     private JLabel score;
     private double mouseX;
     private double mouseY;
     private GameFrame gf;
+    private EnemyBulletController ebc;
     
     
     public GamePanel(GameFrame gf){ 
@@ -56,8 +56,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        this.controller = new BulletController(player,this);
-        this.enemy = new NormalEnemy();
+        this.controller = new PlayerBulletController(player,this);
+        this.ebc = new EnemyBulletController(player, this);
         this.ec = new EnemyController(player,this);
         thread = new Thread(this);
         thread.start();
@@ -107,6 +107,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         player.draw(gr,this);
         player.drawHealthBar(gr, this);
         controller.render(gr);
+        ebc.render(gr);
         ec.render(gr);
     }
 
@@ -174,6 +175,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             controller.update();
             ec.update();
             cc.CheckEnemyBulletCoulission();
+            ebc.update();
             cc.checkEnemyPlayercollision();
             gf.updateScore(player.getScore()+"");
             
@@ -233,7 +235,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    public BulletController getBulletControler()
+    public PlayerBulletController getBulletControler()
     {
         return this.controller;
     }

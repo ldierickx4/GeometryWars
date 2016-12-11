@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
  *
  * @author laurensdierickx
  */
-public class ShootingEnemy implements Enemy,Runnable{
+public class ShootingEnemy implements Enemy{
     private final String type ="shooting";
     private static final double SPEED = 0.2;
     private int VALUE = 200;
@@ -35,7 +35,7 @@ public class ShootingEnemy implements Enemy,Runnable{
     //private int reward;
     //private int multiplier;
     //private Player player;
-    private BulletController bC;
+    private PlayerBulletController bC;
     private Rectangle enemyBounds;
     private boolean alive;
     private Thread thread;
@@ -43,7 +43,7 @@ public class ShootingEnemy implements Enemy,Runnable{
     private Player p;
     
     
-    public ShootingEnemy(Player p,BulletController bC)
+    public ShootingEnemy(Player p,PlayerBulletController bC)
     {
         this.alive = true;
         Random r = new Random(); 
@@ -52,13 +52,13 @@ public class ShootingEnemy implements Enemy,Runnable{
         loadImage();
         createBoundries();
         this.bullets = new LinkedList<Bullet>();
-        thread = new Thread(this);
-        thread.start();
+        //thread = new Thread(this);
+        //thread.start();
         this.p = p ;
         this.bC = bC;
     }
     public void newBullet()
-    {
+    {    
         Bullet b = new Bullet(this.x,this.y,p.getx(),p.gety(),"enemy");
         bC.addBullet(b);
     }
@@ -112,6 +112,7 @@ public class ShootingEnemy implements Enemy,Runnable{
     public void die() {
         this.alive = false;
     }
+    /**
     @Override
     public void run() {
         while(alive)
@@ -126,6 +127,7 @@ public class ShootingEnemy implements Enemy,Runnable{
             bC.addBullet(b);
         }   
     }
+    * **/
     public LinkedList<Bullet> getBullets()
     {
         return this.bullets;
@@ -136,13 +138,8 @@ public class ShootingEnemy implements Enemy,Runnable{
     public int getValue() {
         return this.VALUE;
     }
-
-  
-
     public String getType()
     {
         return this.type;
     }
-
-    
 }

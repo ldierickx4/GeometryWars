@@ -59,11 +59,19 @@ public class EnemyController implements Runnable{
     {
         
         Enemy toAddenemy = new NormalEnemy();
-        if(count%5==0&&count!=0){
+        if(count%2==0&&count!=0){
             toAddenemy = new ShootingEnemy(p, gp.getBulletControler());
         }
         addEnemy(toAddenemy);
         this.count++;
+    }
+    public void letShoot(){
+        for(Enemy enemie: enemies){
+            if(enemie.getType().equals("shooting")){
+                ShootingEnemy se =(ShootingEnemy) enemie;
+                se.newBullet();
+            }
+        }
     }
 
     @Override
@@ -74,7 +82,7 @@ public class EnemyController implements Runnable{
             try {
 		Thread.sleep(2000);
 		}
-            catch(Exception e) {
+            catch(InterruptedException e) {
 		e.printStackTrace();
 		}
             makeNewEnemy();
