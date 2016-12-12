@@ -49,6 +49,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private double mouseY;
     private GameFrame gf;
     private EnemyBulletController ebc;
+    private int FPS = 60;
     
     
     public GamePanel(GameFrame gf){ 
@@ -163,6 +164,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public void run() {
         
         Thread current = Thread.currentThread();
+        long previous = System.currentTimeMillis();
         while(current == thread)
         {            
             try {
@@ -176,12 +178,17 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             checkInput();
             controller.update();
             ec.update();
+            cc.checkPlayerMannaPickup();
             cc.CheckEnemyBulletCoulission();
             ebc.update();
             cc.checkEnemyPlayercollision();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
             repaint();
+            if(System.currentTimeMillis()-previous >= 1000/FPS){
+                        System.out.println(System.currentTimeMillis()-previous);
+                        previous=System.currentTimeMillis();
+            }
         }
     }    
     public double getMouseX(){

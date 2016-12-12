@@ -17,6 +17,7 @@ import java.util.LinkedList;
 public class EnemyController implements Runnable{
     
     private LinkedList<Enemy> enemies;
+    private LinkedList<Manna> manna;
     private Enemy enemy;
     private Thread thread;
     private Player p;
@@ -25,6 +26,7 @@ public class EnemyController implements Runnable{
         
     public EnemyController(Player p , GamePanel gp) {
         this.enemies = new LinkedList<Enemy>();
+        this.manna = new LinkedList<Manna>();
         thread = new Thread(this);
         thread.start();
         this.p = p;
@@ -44,15 +46,22 @@ public class EnemyController implements Runnable{
             }
             catch(ClassCastException e)
             {      
-                
             }
+            try {
+                SaturnEnemy se = (SaturnEnemy) tempEnemy;
+                se.slide();
+            } catch (Exception e) {
+            }
+            
         }
     }
     public void render(Graphics g){
         Enemy tempEnemy;
-        for(int i=0; i < enemies.size(); i++){
-            tempEnemy = enemies.get(i);
-            tempEnemy.draw(g);
+        for(Enemy e: enemies){
+            e.draw(g);
+        }
+        for(Manna m:manna){
+            m.draw(g);
         }
     }
     public void makeNewEnemy()
@@ -60,20 +69,14 @@ public class EnemyController implements Runnable{
         
         Enemy toAddenemy = new NormalEnemy();
         if(count%2==0&&count!=0){
+             toAddenemy = new SaturnEnemy();
+        }
+        else if(count%5==0&&count!=0){
             toAddenemy = new ShootingEnemy(p, gp.getBulletControler());
         }
         addEnemy(toAddenemy);
         this.count++;
     }
-    public void letShoot(){
-        for(Enemy enemie: enemies){
-            if(enemie.getType().equals("shooting")){
-                ShootingEnemy se =(ShootingEnemy) enemie;
-                se.newBullet();
-            }
-        }
-    }
-
     @Override
     public void run() {
         Thread current = Thread.currentThread();
@@ -91,8 +94,20 @@ public class EnemyController implements Runnable{
     public LinkedList<Enemy> giveEnemies(){
         return this.enemies;
     }
-    public void removeEnemy(Object enemy)
+    public void addManna(Manna m)
+    {
+        manna.add(m);
+    }
+    public void removeEnemy(Enemy enemy)
     {
         enemies.remove(enemy);
+    }
+    public LinkedList<Manna> giveManna(){
+        return this.manna;
+    }
+
+    void removeManna(Manna m) {
+        p.addManna(m);
+        manna.remove(m);
     }
 }

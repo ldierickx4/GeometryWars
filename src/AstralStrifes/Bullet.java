@@ -59,12 +59,10 @@ public class Bullet{
         bulletVelocity = 1.0;
         if(type.equals("enemy")){
                     bulletVelocity = 0.2;
-                    System.out.println(bulletVelocity);
         }
         this.angle =Math.atan2(destY - originY, destX - originX);
         this.Yvelocity = (bulletVelocity) * Math.sin(angle);
         this.Xvelocity = (bulletVelocity) * Math.cos(angle);
-
     }
     
     private void loadImage() {

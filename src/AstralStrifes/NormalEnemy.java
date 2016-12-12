@@ -35,8 +35,8 @@ public class NormalEnemy implements Enemy{
     private double y;
     private int width;
     private int height;
-    private int rangeMin = 0;
-    private int rangeMax = 900;
+    private int rangeMin = 50;
+    private int rangeMax = 750;
     //private int reward;
     //private int multiplier;
     //private Player player;
@@ -68,7 +68,6 @@ public class NormalEnemy implements Enemy{
         }
         image = i;
     }
-    
     public void moveTo(double x, double y){
         double MoveToX = x;
         double MoveToY = y;
@@ -114,12 +113,15 @@ public class NormalEnemy implements Enemy{
     }
 
     public int getValue() {
-        //System.out.println(this.VALUE+"in enemy");
         return this.VALUE;
     }
     @Override
     public String getType()
     {
         return this.type;
+    }
+    @Override
+    public Manna getManna() {
+        return new Manna(150, 1, (int)this.x, (int)this.y);
     }
 }

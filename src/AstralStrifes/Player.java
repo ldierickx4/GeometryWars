@@ -7,7 +7,6 @@ package AstralStrifes;
 
 import PresentationLayer.GamePanel;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -16,13 +15,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.LinkedList;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.*;
-
 /**
  *
  * @author Laurens
@@ -42,6 +36,7 @@ public class Player {
     private double angle;
     private int score;
     private Rectangle playerBounds;
+    private LinkedList<Manna> manna;
     
     public Player(){
         this.width=28;
@@ -51,6 +46,7 @@ public class Player {
         this.score = 0;
         loadImage();
         createBounds();
+        manna= new LinkedList<Manna>();
     }
     private void createBounds()
     {
@@ -146,11 +142,11 @@ public class Player {
     
   
     public int getScore() {
+        int score = 0;
+        for(Manna m : manna){
+            score += m.getScore();
+        }
         return score;
-    }
-    
-    public void raiseScore(int points){
-        this.score += points;
     }
     public Rectangle getBounds(){
         return this.playerBounds;
@@ -167,6 +163,7 @@ public class Player {
     public int updateHealth() {
         return health;
     }
-    
-    
+    public void addManna(Manna m){
+        this.manna.add(m);
+    }
 }

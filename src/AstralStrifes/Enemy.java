@@ -27,5 +27,6 @@ public interface Enemy{
     public boolean getStatus();
     public void die();
     public int getValue();
+    public Manna getManna();
     
 }

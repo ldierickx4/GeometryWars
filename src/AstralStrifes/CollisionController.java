@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package AstralStrifes;
-import geometrywars.*;
-import AstralStrifes.*;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
@@ -17,6 +15,7 @@ public class CollisionController {
     private Player p;
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
+    private LinkedList<Manna> manna;
     private EnemyController ec;
     private PlayerBulletController c; 
     public CollisionController(Player p,PlayerBulletController c,EnemyController ec)
@@ -35,8 +34,8 @@ public class CollisionController {
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
-                    p.raiseScore(tempe.getValue());
-                    tempe.die();                   
+                    tempe.die();
+                    ec.addManna(tempe.getManna());
                     ec.removeEnemy(tempe);
                     bullets.get(index).setDead();
                 }
@@ -55,5 +54,17 @@ public class CollisionController {
             }
         }
     
+    }
+    public void checkPlayerMannaPickup()
+    {
+        this.manna = ec.giveManna();
+        Rectangle playerR = p.getBounds();
+        for(int i=0;i<manna.size();i++){
+            Manna m = manna.get(i);
+            Rectangle mannaR =m.getBounds();
+            if(playerR.intersects(mannaR)){
+                ec.removeManna(m);
+            }
+        }
     }
 }

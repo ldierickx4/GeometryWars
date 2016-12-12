@@ -67,13 +67,13 @@ public class EnemyBulletController implements Runnable {
     public void updateEnemyBullets()
     {
         LinkedList<Enemy> enemy = gp.getEc().giveEnemies();
-        for(Enemy e: enemy)
+        for(int i=0; i<enemy.size();i++)
         {
+            Enemy e = enemy.get(i);
             if(e.getType().equals("shooting"))
             {
                 ShootingEnemy sE = (ShootingEnemy) e;
-                Bullet b = new Bullet(sE.getX(),sE.getY(), player.getx(), player.gety(), "enemy");
-                System.out.println(bullets.size());
+                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), player.getx(), player.gety(), "enemy");
                 addBullet(b);
             }
         }
