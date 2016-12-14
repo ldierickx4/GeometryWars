@@ -29,14 +29,15 @@ public class SaturnEnemy implements Enemy{
     private Rectangle bounds;
     private boolean right;
     private boolean alive;
+    private Random r;
     
     public SaturnEnemy(){
         alive=true;
         right=true;
         this.type="saturn";
-        Random r = new Random(); 
-        this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
-        this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
+        this.r = new Random(); 
+        this.x = randomInt();
+        this.y = randomInt();
         loadImage();
         createBoundries();
     }
@@ -44,6 +45,9 @@ public class SaturnEnemy implements Enemy{
     @Override
     public void createBoundries(){
         this.bounds = new Rectangle((int)x, (int)y, image.getWidth(), image.getHeight());
+    }
+    public int randomInt(){
+        return rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
     }
     public void slide(){
         if(right&&x<1000){
@@ -130,5 +134,11 @@ public class SaturnEnemy implements Enemy{
     public Manna getManna() {
         return new Manna(300,2,(int)this.x,(int)this.y);
     }
-    
+    public double getCenterX(){
+        return x+image.getHeight()/2;
+    }
+
+    public double getCenterY() {
+        return y+image.getWidth()/2;
+    }
 }

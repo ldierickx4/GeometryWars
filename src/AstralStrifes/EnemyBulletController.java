@@ -76,7 +76,13 @@ public class EnemyBulletController implements Runnable {
                 Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), player.getx(), player.gety(), "enemy");
                 addBullet(b);
             }
+            else if(e.getType().equals("saturn")){
+                SaturnEnemy sE = (SaturnEnemy) e;
+                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), sE.randomInt(), sE.randomInt(), "senemy");
+                addBullet(b);
+            }
         }
+        
     }
     
 }

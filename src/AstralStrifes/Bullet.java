@@ -71,6 +71,9 @@ public class Bullet{
         if(type.equals("enemy")){
             pic = new File("resources/gameSprites/bullet2.png");
         }
+        else if(type.equals("senemy")){
+            pic = new File("resources/gameSprites/bullet3.png");
+        }
         try {
            i = ImageIO.read(pic);
         } catch (IOException ex) {
