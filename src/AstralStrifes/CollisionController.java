@@ -56,10 +56,6 @@ public class CollisionController {
                     p.reduceHealth(10);
                     ec.removeEnemy(tempE);
                 }
-                //System.out.println("Leven kwijt");
-            } else {
-                //hitEnemies = new LinkedList<Enemy>();
-                //System.out.println(intersect);
             }
         }
     

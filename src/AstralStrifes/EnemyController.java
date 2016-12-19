@@ -8,6 +8,7 @@ package AstralStrifes;
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java.util.Random;
 
 
 /**
@@ -94,6 +95,18 @@ public class EnemyController implements Runnable{
     public LinkedList<Enemy> giveEnemies(){
         return this.enemies;
     }
+    public void killRandomEnemy(){
+        Random r = new Random();
+        int rE = r.nextInt(enemies.size());
+        System.out.println(rE);
+        Enemy e = enemies.get(rE);
+        if(e!=null){
+            removeEnemy(e);
+        }
+        else{
+            System.out.println("enemy is nulll");
+        }
+    }
     public void addManna(Manna m)
     {
         manna.add(m);
@@ -114,6 +127,6 @@ public class EnemyController implements Runnable{
         for(int i = 0;i<manna.size();i++){
             Manna m = manna.remove(i);
             p.addManna(m);
-    }
+        }
     }
 }
