@@ -19,13 +19,15 @@ public class CollisionController {
     private LinkedList<Enemy> hitEnemies = new LinkedList<Enemy>();
     private EnemyController ec;
     private PlayerBulletController c; 
-    public CollisionController(Player p,PlayerBulletController c,EnemyController ec)
+    private EnemyBulletController ebc;
+    public CollisionController(Player p,PlayerBulletController c,EnemyController ec, EnemyBulletController ebc)
     {
         this.p = p;
         this.ec = ec;
         this.c = c;
+        this.ebc = ebc;
     }
-    public void CheckEnemyBulletCoulission()
+    public void checkEnemyBulletCoulission()
     {
         this.enemy = ec.giveEnemies();
         this.bullets = c.giveBullets();
@@ -42,13 +44,26 @@ public class CollisionController {
             }
         }    
     }
+    
+    public void checkIfPlayerGetsHitByEnemyBullet(){
+        this.bullets = ebc.giveBullets();
+        for(int i = 0; i<bullets.size(); i++){
+            Bullet temp = bullets.get(i);
+            Rectangle bulletBounds = temp.getBorders();
+            if(bulletBounds.intersects(p.getBounds())){
+                bullets.get(i).setDead();
+                p.reduceHealth(5);
+                System.out.println("Hit!"); 
+            }
+        }
+    }
+    
     public void checkEnemyPlayercollision(){
         this.enemy = ec.giveEnemies();
         for(int i=0;i<enemy.size();i++)
         {
             Enemy tempE = enemy.get(i);
             Rectangle enemyR = tempE.getBounds();
-            //System.out.println(enemyR.intersects(p.getBounds()));
             if(enemyR.intersects(p.getBounds()))
             {
                 if(!hitEnemies.contains(tempE)){
@@ -56,10 +71,6 @@ public class CollisionController {
                     p.reduceHealth(10);
                     ec.removeEnemy(tempE);
                 }
-                //System.out.println("Leven kwijt");
-            } else {
-                //hitEnemies = new LinkedList<Enemy>();
-                //System.out.println(intersect);
             }
         }
     
@@ -69,11 +80,16 @@ public class CollisionController {
         this.manna = ec.giveManna();
         Rectangle playerR = p.getBounds();
         for(int i=0;i<manna.size();i++){
-            Manna m = manna.get(i);
-            Rectangle mannaR =m.getBounds();
-            if(playerR.intersects(mannaR)){
+            try {
+                Manna m = manna.get(i);
+                Rectangle mannaR =m.getBounds();
+                if(playerR.intersects(mannaR)){
                 ec.removeManna(m);
+                }
+            } catch(Exception ex) {
+                System.out.println(ex.getMessage());
             }
+            
         }
     }
 }

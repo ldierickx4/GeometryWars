@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
+    private powerupController pc;
     private JLabel score;
     private double mouseX;
     private double mouseY;
@@ -61,9 +62,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.controller = new PlayerBulletController(player,this);
         this.ebc = new EnemyBulletController(player, this);
         this.ec = new EnemyController(player,this);
+        this.pc = new powerupController(player, this);
         thread = new Thread(this);
         thread.start();
-        this.cc = new CollisionController(player,controller, ec);
+        this.cc = new CollisionController(player,controller, ec, ebc);
         score = new JLabel();
         
     }
@@ -108,6 +110,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         controller.render(gr);
         ebc.render(gr);
         ec.render(gr);
+        pc.draw(gr);
     }
 
     @Override
@@ -173,12 +176,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             checkInput();
             controller.update();
             ec.update();
-            cc.checkPlayerMannaPickup();
-            cc.CheckEnemyBulletCoulission();
             ebc.update();
+            cc.checkPlayerMannaPickup();
+            cc.checkEnemyBulletCoulission();
             cc.checkEnemyPlayercollision();
+            cc.checkIfPlayerGetsHitByEnemyBullet();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
+            pc.updatePowerups();
             repaint();
         }
     }    

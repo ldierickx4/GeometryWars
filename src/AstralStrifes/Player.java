@@ -137,15 +137,13 @@ public class Player {
         this.angle = Math.atan2(gety() - mouseY, getx() - mouseX);
     }
     
-    public void drawHealth(Graphics g){
-                
+    public void drawHealth(Graphics g){     
         g.drawRect(20, 20, maxHealth, 40);
         g.setColor(Color.red);
         g.fillRect(20, 20, maxHealth, 40);  
         g.drawRect(20, 20, health, 40);
         g.setColor(Color.green);
         g.fillRect(20, 20, health, 40);
-      
     }
 
     
