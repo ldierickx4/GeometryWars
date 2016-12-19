@@ -72,6 +72,8 @@ public class ShootingEnemy implements Enemy{
     }
     public void draw(Graphics g){
         g.drawImage(image, (int)(this.x), (int)(this.y), null);
+        //g.fillRect((int)(this.x), (int)(this.y), image.getWidth(), image.getHeight());
+
     }
 
     public double getX() {
