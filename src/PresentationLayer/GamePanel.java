@@ -96,11 +96,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         else{
             if(controller.getStatus()==true)controller.setNotShooting();
         }
-    
     }
-    
-   
-    
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
@@ -199,6 +195,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     
     @Override
     public void mouseDragged(MouseEvent e) {
+        mouseX=e.getX();
+        mouseY=e.getY();
+        player.calculatePlayerAngle(mouseX,mouseY);
 
     }
 

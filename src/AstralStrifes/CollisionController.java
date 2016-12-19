@@ -35,7 +35,6 @@ public class CollisionController {
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
-                    tempe.die();
                     ec.addManna(tempe.getManna());
                     ec.removeEnemy(tempe);
                     bullets.get(index).setDead();
