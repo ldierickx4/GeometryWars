@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
-    private powerupController pc;
+    private PowerupController pc;
     private JLabel score;
     private double mouseX;
     private double mouseY;
@@ -62,11 +62,12 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.controller = new PlayerBulletController(player,this);
         this.ebc = new EnemyBulletController(player, this);
         this.ec = new EnemyController(player,this);
-        this.pc = new powerupController(player, this);
+        this.pc = new PowerupController(player, this);
         thread = new Thread(this);
         thread.start();
         this.cc = new CollisionController(player,controller, ec, ebc);
         score = new JLabel();
+        player.makeDrone();
         
     }
     private void createComponents()
@@ -105,7 +106,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
-        player.getSupportDrone().draw(gr);
+        player.getDrone().draw(gr);
         player.drawHealth(gr);
         controller.render(gr);
         ebc.render(gr);

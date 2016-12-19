@@ -10,11 +10,16 @@ package AstralStrifes;
  * @author laurensdierickx
  */
 public class AttackDrone extends Drone implements Runnable{
-    
+    public Thread thread;
     public AttackDrone(Player p) {
         super(p);
+        this.thread = new Thread(this);
         String link= "resources/gameSprites/attack2.png";
         super.loadImage(link);
+        thread.start();
+    }
+    public void power(){
+    
     }
 
     @Override

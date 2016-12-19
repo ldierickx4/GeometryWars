@@ -13,28 +13,26 @@ import java.util.LinkedList;
  *
  * @author Jordy
  */
-public class powerupController implements Runnable{
+public class PowerupController implements Runnable{
     private int score;
     private Player player;
-    private powerup powerup;
-    private LinkedList<powerup> powerups= new LinkedList<powerup>();
+    private LinkedList<Powerup> powerups= new LinkedList<Powerup>();
     private GamePanel gp;
 
-    public powerupController(Player player, GamePanel gp) {
+    public PowerupController(Player player, GamePanel gp) {
         this.player = player;
         this.gp = gp;
     }
     
     public void updatePowerups(){
         score = player.getScore();
-        if(score%1 == 0 && score!=0){
-            System.out.println("Swifty");
-            powerup = new swiftyPowerup(500,500);
+        if(score%150 == 0 && score!=0 &&powerups.size()==0){
+            Powerup powerup = new SwiftyPowerup(500,500);
             powerups.add(powerup);
             
         }
-        if(score%20000 == 0 && score!=0){
-            powerup = new adhdPowerup(500,500);
+        if(score%20000 == 0 && score!=0&&powerups.size()==0){
+            Powerup powerup = new AdhdPowerup(500,500);
             powerups.add(powerup);
             System.out.println("ADHD");
         }
@@ -42,7 +40,7 @@ public class powerupController implements Runnable{
     
     public void draw(Graphics g){
         if(powerups.size() > 0){
-            for(powerup p : powerups){
+            for(Powerup p : powerups){
             p.draw(g);
             }
         } 

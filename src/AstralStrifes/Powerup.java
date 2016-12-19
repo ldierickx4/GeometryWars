@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  *
  * @author Jordy
  */
-public class powerup {
+public class Powerup {
     public BufferedImage image;
     private int x;
     private int y;
@@ -26,7 +26,7 @@ public class powerup {
     private int rangeMin = 50;
     private int rangeMax = 750;
 
-    public powerup(int x, int y) {
+    public Powerup() {
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
@@ -41,8 +41,7 @@ public class powerup {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        image = i;
-        
+        image = i; 
         this.bounds = new Rectangle(x, y, image.getWidth(), image.getHeight());
     }
     

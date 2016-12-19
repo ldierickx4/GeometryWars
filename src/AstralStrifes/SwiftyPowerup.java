@@ -5,19 +5,25 @@
  */
 package AstralStrifes;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author Jordy
  */
-public class adhdPowerup extends powerup{
+public class SwiftyPowerup extends Powerup {
     
-    public adhdPowerup(int x, int y) {
-        super(x, y);
-        String link = "resources/gameSprites/adhd.png";
+    public SwiftyPowerup(int x, int y) {
+        super();
+        String link = "resources/gameSprites/swifty.png";
         super.loadImage(link);
     }
+    
+    
     
 }
