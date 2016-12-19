@@ -10,7 +10,7 @@ package AstralStrifes;
  * @author laurensdierickx
  */
 public class AttackDrone extends Drone implements Runnable{
-    public Thread thread;
+    public Thread thread; 
     public AttackDrone(Player p) {
         super(p);
         this.thread = new Thread(this);
@@ -21,7 +21,6 @@ public class AttackDrone extends Drone implements Runnable{
     public void power(){
     
     }
-
     @Override
     public void run() {
         while(true){
