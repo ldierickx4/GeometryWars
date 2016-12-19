@@ -69,7 +69,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     }
     public void updateScore(String score)
     {
-        String add = "score :"+score;
+        String add = "Score : "+score;
         this.score.setText(add);
     }
    

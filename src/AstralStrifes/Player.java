@@ -172,6 +172,7 @@ public class Player {
     public int updateHealth() {
         return health;
     }
+    
     public void addManna(Manna m){
         this.manna.add(m);
     }

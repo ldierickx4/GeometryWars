@@ -16,6 +16,7 @@ public class CollisionController {
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private LinkedList<Manna> manna;
+    private LinkedList<Enemy> hitEnemies = new LinkedList<Enemy>();
     private EnemyController ec;
     private PlayerBulletController c; 
     public CollisionController(Player p,PlayerBulletController c,EnemyController ec)
@@ -48,9 +49,18 @@ public class CollisionController {
         {
             Enemy tempE = enemy.get(i);
             Rectangle enemyR = tempE.getBounds();
+            //System.out.println(enemyR.intersects(p.getBounds()));
             if(enemyR.intersects(p.getBounds()))
             {
-                //System.out.println("coulission");
+                if(!hitEnemies.contains(tempE)){
+                    hitEnemies.add(tempE);
+                    p.reduceHealth(10);
+                    System.out.println(p.updateHealth());
+                }
+                //System.out.println("Leven kwijt");
+            } else {
+                //hitEnemies = new LinkedList<Enemy>();
+                //System.out.println(intersect);
             }
         }
     
