@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         player.draw(gr,this);
         player.getSupportDrone().draw(gr);
         //player.drawHealthBar(gr, this);
-        player.drawHealth(gr, this);
+        player.drawHealth(gr);
         controller.render(gr);
         ebc.render(gr);
         ec.render(gr);
@@ -234,8 +234,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseEntered(MouseEvent e) {
+    
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
     }

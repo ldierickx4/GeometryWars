@@ -55,7 +55,7 @@ public class CollisionController {
                 if(!hitEnemies.contains(tempE)){
                     hitEnemies.add(tempE);
                     p.reduceHealth(10);
-                    System.out.println(p.updateHealth());
+                    ec.removeEnemy(tempE);
                 }
                 //System.out.println("Leven kwijt");
             } else {

@@ -106,7 +106,7 @@ public class Bullet{
     {
         int x = (int)(originX);
         int y = (int)(originY);
-            if(x<0||x>900||y<0||y>900){
+            if(x<0||x>1200||y<0||y>800){
                 this.alive = false;
             } 
         return this.alive;

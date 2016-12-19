@@ -137,19 +137,17 @@ public class Player {
         this.angle = Math.atan2(gety() - mouseY, getx() - mouseX);
     }
     
-    public void drawHealth(Graphics g,GamePanel gp){
-        AffineTransform reset = new AffineTransform();
-        Graphics2D g2 = (Graphics2D)g;
-        //Groene balk -> Health verminderen/ WIDTH
-        g2.drawRect(20, 20, health, 40);
-        g2.setColor(Color.red);
-        g2.fillRect(20, 20, health, 40);
-        //Rode balk achtergrond -> WIDTH verminderd
-        g2.drawRect(20, 20, maxHealth, 40);
-        g2.setColor(Color.green);
-        g2.fillRect(20, 20, maxHealth, 40);
-        g2.setTransform(reset);
+    public void drawHealth(Graphics g){
+                
+        g.drawRect(20, 20, maxHealth, 40);
+        g.setColor(Color.red);
+        g.fillRect(20, 20, maxHealth, 40);  
+        g.drawRect(20, 20, health, 40);
+        g.setColor(Color.green);
+        g.fillRect(20, 20, health, 40);
+      
     }
+
     
   
     public int getScore() {
@@ -172,6 +170,7 @@ public class Player {
    }
 
     public int updateHealth() {
+        
         return health;
     }
     

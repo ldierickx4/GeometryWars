@@ -59,7 +59,7 @@ public class SupportDrone implements Runnable{
     public void run() {
         while(alive){
             try {
-                thread.sleep(50000);
+                thread.sleep(10000);
                 p.getgp().getEc().removeAllManne();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();
