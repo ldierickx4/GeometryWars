@@ -32,9 +32,9 @@ public class Background {
         BufferedImage i = null;
         try {
             //ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
-            i = ImageIO.read(new File("resources/gameSprites/backgroundspace.gif"));
+            i = ImageIO.read(new File("resources/gameSprites/spacegood.jpg"));
         } catch (IOException ex) {
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         }
         background = i;
         

@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread = new Thread(this);
         thread.start();
         this.cc = new CollisionController(player,controller, ec);
-        score = new JLabel();   
+        score = new JLabel();
         
     }
     private void createComponents()
@@ -104,7 +104,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         Graphics2D g = (Graphics2D)gr;
         player.draw(gr,this);
         player.getSupportDrone().draw(gr);
-        //player.drawHealthBar(gr, this);
         player.drawHealth(gr);
         controller.render(gr);
         ebc.render(gr);
@@ -198,7 +197,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         mouseX=e.getX();
         mouseY=e.getY();
         player.calculatePlayerAngle(mouseX,mouseY);
-
     }
 
     @Override

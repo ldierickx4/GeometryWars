@@ -110,9 +110,10 @@ public class EnemyController implements Runnable{
         p.addManna(m);
         manna.remove(m);
     }
-    public void removeAllManne(){
-    for(int i = 0;i<manna.size();i++){
-        p.addManna(manna.remove(i));
+    public void removeAllManna(){
+        for(int i = 0;i<manna.size();i++){
+            Manna m = manna.remove(i);
+            p.addManna(m);
     }
     }
 }
