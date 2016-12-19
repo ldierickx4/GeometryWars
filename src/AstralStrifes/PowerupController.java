@@ -27,12 +27,12 @@ public class PowerupController implements Runnable{
     public void updatePowerups(){
         score = player.getScore();
         if(score%150 == 0 && score!=0 &&powerups.size()==0){
-            Powerup powerup = new SwiftyPowerup(500,500);
+            Powerup powerup = new SwiftyPowerup();
             powerups.add(powerup);
             
         }
         if(score%20000 == 0 && score!=0&&powerups.size()==0){
-            Powerup powerup = new AdhdPowerup(500,500);
+            Powerup powerup = new AdhdPowerup();
             powerups.add(powerup);
             System.out.println("ADHD");
         }

@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  */
 public class SwiftyPowerup extends Powerup {
     
-    public SwiftyPowerup(int x, int y) {
+    public SwiftyPowerup() {
         super();
         String link = "resources/gameSprites/swifty.png";
         super.loadImage(link);

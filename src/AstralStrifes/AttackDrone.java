@@ -5,27 +5,46 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GamePanel;
+import java.awt.Graphics;
+import java.util.LinkedList;
+
 /**
  *
  * @author laurensdierickx
  */
 public class AttackDrone extends Drone implements Runnable{
-    public Thread thread; 
-    public AttackDrone(Player p) {
+    private Thread thread;
+    private LinkedList<Bullet> bullets;
+    private GamePanel gp;
+    public AttackDrone(Player p ,GamePanel gp) {
         super(p);
+        this.gp=gp;
         this.thread = new Thread(this);
-        String link= "resources/gameSprites/attack2.png";
+        String link= "resources/gameSprites/attack1.png";
         super.loadImage(link);
         thread.start();
+        bullets = new LinkedList<Bullet>();
     }
     public void power(){
-    
+        Enemy e = gp.getEc().getRandomEnemy();
+        if(e!=null){
+            Bullet b = new Bullet(super.getX(), super.getY(), e.getX(), e.getY(), "drone");
+            bullets.add(b);
+        }
+    }
+    public void renderBullets(Graphics g){
+        if(bullets.size()>0){
+            for(Bullet b: bullets){
+                b.draw(g);
+            }
+        }
     }
     @Override
     public void run() {
         while(true){
             try {
-                thread.sleep(10000);
+                thread.sleep(1000);
                 power();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();

@@ -112,6 +112,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
+        AttackDrone ad = (AttackDrone)(player.getDrone());
+        ad.renderBullets(gr);
     }
 
     @Override

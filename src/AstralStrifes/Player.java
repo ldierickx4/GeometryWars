@@ -52,7 +52,7 @@ public class Player {
         manna= new LinkedList<Manna>();
     }
     public void makeDrone(){
-        sd = new KillDrone(this,gp.getEc());
+        sd = new AttackDrone(this,gp);
     }
     public Drone getDrone(){
         return this.sd;

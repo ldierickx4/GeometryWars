@@ -54,4 +54,10 @@ public class Drone{
         this.x = (int)(p.getx() + orbitRadius * Math.cos(radian));
         this.y =(int)(p.gety() + orbitRadius * Math.sin(radian));
     } 
+    public int getY(){
+        return this.y;
+    }
+    public int getX(){
+        return this.x;
+    }
 }
