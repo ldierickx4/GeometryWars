@@ -53,6 +53,7 @@ public class Player {
     }
     public void makeDrone(){
         sd = new AttackDrone(this,gp);
+        gp.setAttackdrone();
     }
     public Drone getDrone(){
         return this.sd;

@@ -20,6 +20,7 @@ public class AttackDrone extends Drone implements Runnable{
     public AttackDrone(Player p ,GamePanel gp) {
         super(p);
         this.gp=gp;
+        gp.setAttackdrone();
         this.thread = new Thread(this);
         String link= "resources/gameSprites/attack1.png";
         super.loadImage(link);

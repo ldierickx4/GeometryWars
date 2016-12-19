@@ -51,6 +51,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private GameFrame gf;
     private EnemyBulletController ebc;
     private int FPS = 60;
+    private Boolean attackDrone = false;
     
     
     public GamePanel(GameFrame gf){ 
@@ -69,6 +70,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         score = new JLabel();
         player.makeDrone();
         
+    }
+    public void setAttackdrone(){
+        this.attackDrone = true;
     }
     private void createComponents()
     {
@@ -112,8 +116,11 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
-        AttackDrone ad = (AttackDrone)(player.getDrone());
-        ad.renderBullets(gr);
+        if(attackDrone){
+            AttackDrone ad = (AttackDrone)(player.getDrone());
+            ad.renderBullets(gr);        
+        }
+
     }
 
     @Override
@@ -199,8 +206,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public void coullisionDetects(){
         cc.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
-        AttackDrone ad = (AttackDrone)(player.getDrone());
-        cc.checkEnemyBulletCoulission(ad.getBullets());
+        if(attackDrone){
+            AttackDrone ad = (AttackDrone)(player.getDrone());
+            cc.checkEnemyBulletCoulission(ad.getBullets());
+        }
         cc.checkEnemyPlayercollision();
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
