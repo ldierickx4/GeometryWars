@@ -49,7 +49,5 @@ public class Game extends Application{
         scene.getStylesheets().add("@../../FXML/FXMLSS.css");
         primaryStage.setScene(scene);
         primaryStage.show();
-        //Game t = new Game();
-        //t.loadScreen(primaryStage);
     }   
 }

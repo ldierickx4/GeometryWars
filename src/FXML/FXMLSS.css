@@ -7,7 +7,7 @@
 }
 
 #AnchorPane{
-    -fx-background-image: url("../resources/Wallpaper-2.jpg");
+    -fx-background-image: url("../resources/Background.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size:cover;
 }
