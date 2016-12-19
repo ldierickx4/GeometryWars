@@ -68,17 +68,10 @@ public class SupportDrone implements Runnable{
         }
     }
     public void letOrbit(){
-<<<<<<< HEAD
-        double radian = ORBITSPEED * timeInterval;
-        //System.out.println(radian);
-        double drawX = p.getx() + orbitRadius * Math.cos(radian);
-        double drawY = p.gety() + orbitRadius * Math.sin(radian);
-=======
         this.timeInterval+=1;
         this.radian = ORBITSPEED * timeInterval;
         this.x = (int)(p.getx() + orbitRadius * Math.cos(radian));
         this.y =(int)(p.gety() + orbitRadius * Math.sin(radian));
->>>>>>> origin/master
     }
     
 }
