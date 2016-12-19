@@ -177,15 +177,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             player.getDrone().letOrbit();
             checkShoot();
             checkInput();
+            coullisionDetects();
             controller.update();
             ec.update();
             ebc.update();
-            cc.checkPlayerMannaPickup();
-            cc.checkEnemyBulletCoulission(controller.giveBullets());
-            AttackDrone ad = (AttackDrone)(player.getDrone());
-            cc.checkEnemyBulletCoulission(ad.getBullets());
-            cc.checkEnemyPlayercollision();
-            cc.checkIfPlayerGetsHitByEnemyBullet();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
             pc.updatePowerups();
@@ -200,6 +195,14 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     }
     public Player getPlayer(){
         return this.player;
+    }
+    public void coullisionDetects(){
+        cc.checkPlayerMannaPickup();
+        cc.checkEnemyBulletCoulission(controller.giveBullets());
+        AttackDrone ad = (AttackDrone)(player.getDrone());
+        cc.checkEnemyBulletCoulission(ad.getBullets());
+        cc.checkEnemyPlayercollision();
+        cc.checkIfPlayerGetsHitByEnemyBullet();
     }
     
     @Override
