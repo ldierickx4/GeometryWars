@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     }
     private void createComponents()
     {
-        player = new Player();
+        player = new Player(this);
         background = new Background(gf);
         repaint();
     }
@@ -204,7 +204,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
         mouseX=e.getX();
         mouseY=e.getY();       
         player.calculatePlayerAngle(mouseX,mouseY);
@@ -252,7 +251,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     {
         return this.ec;
     }
-
     public JLabel getScore() {
         return score;
     }                

@@ -83,6 +83,7 @@ public class SaturnEnemy implements Enemy{
     @Override
     public void draw(Graphics g){
         g.drawImage(image,(int)(this.x),(int)(this.y),null);
+        //g.fillRect((int)(this.x), (int)(this.y), image.getWidth(), image.getHeight());
     }
 
     @Override

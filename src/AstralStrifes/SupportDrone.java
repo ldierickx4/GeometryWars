@@ -23,14 +23,16 @@ public class SupportDrone implements Runnable{
     private double orbitX;
     private double orbitY; 
     private double timeInterval=1;
+    private int powerTime=10000;
     private final double orbitRadius = 50;
-    private final double ORBITSPEED = Math.PI / 16;
+    private final double ORBITSPEED = Math.PI / 150;
     private final double SPHERERADIUS = 10;
     private int x;
     private int y;
     private BufferedImage image;
     private boolean alive;
     private Thread thread;
+    private double radian= ORBITSPEED * timeInterval;
     
     public SupportDrone(Player p){
         this.p=p;
@@ -38,6 +40,7 @@ public class SupportDrone implements Runnable{
         this.alive = true;
         this.thread = new Thread(this);
         this.thread.start();
+        System.out.println(thread);
     }
     public void loadImage(){
         BufferedImage i = null;
@@ -56,18 +59,19 @@ public class SupportDrone implements Runnable{
     public void run() {
         while(alive){
             try {
-                thread.sleep(40);
+                thread.sleep(50000);
+                p.getgp().getEc().removeAllManne();
             } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
+                ex.getStackTrace();
             }
         
         }
     }
     public void letOrbit(){
-        double radian = ORBITSPEED * timeInterval;
-        System.out.println(radian);
-        double drawX = p.getx() + orbitRadius * Math.cos(radian);
-        double drawY = p.gety() + orbitRadius * Math.sin(radian);
+        this.timeInterval+=1;
+        this.radian = ORBITSPEED * timeInterval;
+        this.x = (int)(p.getx() + orbitRadius * Math.cos(radian));
+        this.y =(int)(p.gety() + orbitRadius * Math.sin(radian));
     }
     
 }

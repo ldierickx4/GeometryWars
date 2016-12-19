@@ -38,8 +38,10 @@ public class Player {
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
     private SupportDrone sd;
+    private GamePanel gp;
     
-    public Player(){
+    public Player(GamePanel gp){
+        this.gp = gp;
         this.width=28;
         this.height=30;
         this.x = 170.0;
@@ -174,5 +176,8 @@ public class Player {
     }
     public void addManna(Manna m){
         this.manna.add(m);
+    }
+    public GamePanel getgp(){
+        return this.gp;
     }
 }

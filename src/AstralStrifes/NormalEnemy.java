@@ -80,6 +80,7 @@ public class NormalEnemy implements Enemy{
     }
     public void draw(Graphics g){
         g.drawImage(image, (int)(x), (int)(y), gp);
+        //g.fillRect((int)(this.x), (int)(this.y), image.getWidth(), image.getHeight());
     }
      
     public double getX() {
