@@ -51,5 +51,9 @@ public class AttackDrone extends Drone implements Runnable{
             }
         }
     }
+    public LinkedList<Bullet> getBullets(){
+        return this.bullets;
+    }
+    
     
 }

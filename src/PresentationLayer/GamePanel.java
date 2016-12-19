@@ -181,7 +181,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             ec.update();
             ebc.update();
             cc.checkPlayerMannaPickup();
-            cc.checkEnemyBulletCoulission();
+            cc.checkEnemyBulletCoulission(controller.giveBullets());
+            AttackDrone ad = (AttackDrone)(player.getDrone());
+            cc.checkEnemyBulletCoulission(ad.getBullets());
             cc.checkEnemyPlayercollision();
             cc.checkIfPlayerGetsHitByEnemyBullet();
             gf.updateScore(player.getScore()+"");

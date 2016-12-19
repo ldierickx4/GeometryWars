@@ -27,10 +27,9 @@ public class CollisionController {
         this.c = c;
         this.ebc = ebc;
     }
-    public void checkEnemyBulletCoulission()
+    public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
     {
         this.enemy = ec.giveEnemies();
-        this.bullets = c.giveBullets();
         for(int i=0;i<enemy.size();i++){
             Enemy tempe = enemy.get(i);
             Rectangle enemyR = tempe.getBounds();
@@ -91,5 +90,8 @@ public class CollisionController {
             }
             
         }
+    }
+    public void checkDroneEnemy(){
+        
     }
 }
