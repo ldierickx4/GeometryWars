@@ -53,7 +53,7 @@ public class EnemyBulletController implements Runnable {
         while(true)
         {            
             try {
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		}
             catch(Exception e) {
 		e.printStackTrace();

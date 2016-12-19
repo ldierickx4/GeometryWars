@@ -58,10 +58,10 @@ public class Bullet{
     {   
         bulletVelocity = 1.0;
         if(type.equals("enemy")){
-                    bulletVelocity = 0.2;
+            bulletVelocity = 0.2;
         }
         else if (type.equals("senemy")){
-            bulletVelocity = 0.1;
+            bulletVelocity = 0.2;
         }
         this.angle =Math.atan2(destY - originY, destX - originX);
         this.Yvelocity = (bulletVelocity) * Math.sin(angle);

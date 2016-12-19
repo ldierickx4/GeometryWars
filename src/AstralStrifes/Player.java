@@ -37,6 +37,7 @@ public class Player {
     private int score;
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
+    private SupportDrone sd;
     
     public Player(){
         this.width=28;
@@ -47,10 +48,18 @@ public class Player {
         loadImage();
         createBounds();
         manna= new LinkedList<Manna>();
+        sd= new SupportDrone(this);
+        
+    }
+    public SupportDrone getDrone(){
+        return this.sd;
     }
     private void createBounds()
     {
-        this.playerBounds = new Rectangle((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
+        this.playerBounds = new Rectangle(getPlayerCenterX(),getPlayerCenterY(), image.getWidth(), image.getHeight());
+    }
+    public SupportDrone getSupportDrone(){
+        return this.sd;
     }
 
     private void loadImage() {
@@ -153,7 +162,7 @@ public class Player {
     }
 
     public void updateBounds() {
-        playerBounds.setBounds((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
+        playerBounds.setBounds(getPlayerCenterX(),getPlayerCenterY(), image.getWidth(), image.getHeight());
     }
     
    public void reduceHealth(int amount){
