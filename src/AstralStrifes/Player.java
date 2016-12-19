@@ -37,7 +37,7 @@ public class Player {
     private int score;
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
-    private SupportDrone sd;
+    private Drone sd;
     private GamePanel gp;
     
     public Player(GamePanel gp){
@@ -50,20 +50,17 @@ public class Player {
         loadImage();
         createBounds();
         manna= new LinkedList<Manna>();
-        sd= new SupportDrone(this);
-        
     }
-    public SupportDrone getDrone(){
+    public void makeDrone(){
+        sd = new KillDrone(this,gp.getEc());
+    }
+    public Drone getDrone(){
         return this.sd;
     }
     private void createBounds()
     {
         this.playerBounds = new Rectangle(getPlayerCenterX(),getPlayerCenterY(), image.getWidth(), image.getHeight());
     }
-    public SupportDrone getSupportDrone(){
-        return this.sd;
-    }
-
     private void loadImage() {
         BufferedImage i = null;
         try {
@@ -177,5 +174,8 @@ public class Player {
     }
     public GamePanel getgp(){
         return this.gp;
+    }
+    public void heal(int heal){
+        this.health+=heal;
     }
 }
