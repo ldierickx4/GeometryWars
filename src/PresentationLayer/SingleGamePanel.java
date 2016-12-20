@@ -153,7 +153,10 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         else if(typed== e.VK_D)
         {
             right = true;            
-        }        
+        } 
+        else if(typed== e.VK_SPACE){
+            pc.useADHD();
+        }
     }
 
     @Override
@@ -178,7 +181,6 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
 
     @Override
     public void run() {
-        
         while(true)
         {            
             try {
@@ -198,6 +200,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             pc.updatePowerups();
             pc.checkForPOwerUp();
             gf.updateScore(player.getScore()+"");
+            gf.updateAdhdPowerups(player.getAmountOfAdhdPowerups()+"");
             player.updateHealth();
             repaint();
         }

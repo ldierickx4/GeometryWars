@@ -26,6 +26,7 @@ public class PlayerBulletController implements Runnable{
     private Player player;
     private Thread thread;
     private boolean shooting= false;
+    private int FIRING_RATE = 100;
     
     public PlayerBulletController(Player player,GamePanel gp)
     {   
@@ -70,7 +71,7 @@ public class PlayerBulletController implements Runnable{
         while(this.shooting)
         {            
             try {
-		Thread.sleep(100);
+		Thread.sleep(FIRING_RATE);
 		}
             catch(Exception e) {
 		e.printStackTrace();
@@ -86,5 +87,17 @@ public class PlayerBulletController implements Runnable{
     }
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
+    }
+    
+    public int getFiringRate(){
+        return this.FIRING_RATE;
+    }
+    
+    public void boostFiringRate(){
+        this.FIRING_RATE = 40;
+    }
+    
+    public void resetFiringRate(){
+        this.FIRING_RATE = 100;
     }
 }

@@ -50,13 +50,13 @@ public class SwiftyPowerup extends Powerup implements Runnable{
     public void run() {
         super.used = true;
         while(super.pickedUp){
-        long time = System.currentTimeMillis();
-        long end = time +3000;
-        while(System.currentTimeMillis()<= end) {
+            long time = System.currentTimeMillis();
+            long end = time +3000;
+            while(System.currentTimeMillis()<= end) {
                 Boost();                  
             }
-            endBoost();
-            super.pickedUp=false;
+        endBoost();
+        super.pickedUp=false;
         }
     }
 }

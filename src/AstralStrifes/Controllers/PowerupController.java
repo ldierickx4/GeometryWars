@@ -25,6 +25,7 @@ public class PowerupController{
     private LinkedList<Powerup> usedPowers;
     private GamePanel gp;
     private Thread t;
+    private boolean spacebar = false;
 
     public PowerupController(Player player, GamePanel gp) {
         this.powerups = new LinkedList<Powerup>();
@@ -51,9 +52,10 @@ public class PowerupController{
         if(player.getAmountOfAdhdPowerups() != 0){
             AdhdPowerup powerup = new AdhdPowerup("ADHD" , gp);
             powerups.add(powerup);
-            powerup.run();
+            powerup.start();
             player.reduceAdhd();
-            System.out.println("Using ADHD");
+            powerups.clear();
+            //System.out.println("Using ADHD");
         }    
     }
     
@@ -66,6 +68,7 @@ public class PowerupController{
                     sp.start();
                 }
                 catch(Exception ex){
+                    System.out.println(ex);
                 }
             }
         }
