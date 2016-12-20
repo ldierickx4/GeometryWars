@@ -51,6 +51,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private GameFrame gf;
     private EnemyBulletController ebc;
     private int FPS = 60;
+    private Boolean attackDrone = false;
     
     
     public GamePanel(GameFrame gf){ 
@@ -69,6 +70,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         score = new JLabel();
         player.makeDrone();
         
+    }
+    public void setAttackdrone(){
+        this.attackDrone = true;
     }
     private void createComponents()
     {
@@ -113,6 +117,11 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
+        if(attackDrone){
+            AttackDrone ad = (AttackDrone)(player.getDrone());
+            ad.renderBullets(gr);        
+        }
+
     }
 
     @Override
@@ -176,15 +185,19 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             player.getDrone().letOrbit();
             checkShoot();
             checkInput();
+            coullisionDetects();
             controller.update();
             ec.update();
             ebc.update();
+<<<<<<< HEAD
             pc.updatePowerups();
             cc.checkPlayerMannaPickup();
             cc.checkIfBulletHitsEnemy();
             cc.checkEnemyPlayerCollision();
             cc.checkIfPlayerGetsHitByEnemyBullet();
             cc.checkIfPowerupGetsPickedUp();
+=======
+>>>>>>> origin/master
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
             
@@ -199,6 +212,16 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     }
     public Player getPlayer(){
         return this.player;
+    }
+    public void coullisionDetects(){
+        cc.checkPlayerMannaPickup();
+        cc.checkEnemyBulletCoulission(controller.giveBullets());
+        if(attackDrone){
+            AttackDrone ad = (AttackDrone)(player.getDrone());
+            cc.checkEnemyBulletCoulission(ad.getBullets());
+        }
+        cc.checkEnemyPlayercollision();
+        cc.checkIfPlayerGetsHitByEnemyBullet();
     }
     
     @Override

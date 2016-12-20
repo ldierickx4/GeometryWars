@@ -18,7 +18,11 @@ import javax.imageio.ImageIO;
  */
 public class SwiftyPowerup extends Powerup {
     
+<<<<<<< HEAD
     public SwiftyPowerup(String name) {
+=======
+    public SwiftyPowerup() {
+>>>>>>> origin/master
         super();
         this.name = name;
         String link = "resources/gameSprites/swifty.png";

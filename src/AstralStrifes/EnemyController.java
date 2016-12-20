@@ -96,17 +96,26 @@ public class EnemyController implements Runnable{
         return this.enemies;
     }
     public void killRandomEnemy(){
-        Random r = new Random();
-        int rE = r.nextInt(enemies.size());
-        System.out.println(rE);
-        Enemy e = enemies.get(rE);
-        if(e!=null){
-            removeEnemy(e);
-        }
-        else{
-            System.out.println("enemy is nulll");
+        int bounds = enemies.size();
+            if(bounds > 0){
+            Random r = new Random();    
+            int rE = r.nextInt(enemies.size());
+            Enemy e = enemies.get(rE);
+            if(e!=null){
+                removeEnemy(e);
+            }
         }
     }
+    public Enemy getRandomEnemy(){
+        Enemy e = null;
+        if(enemies.size()>0){
+            Random r = new Random();
+            int rE = r.nextInt(enemies.size());
+            e = enemies.get(rE);   
+        }  
+        return e; 
+    }
+    
     public void addManna(Manna m)
     {
         manna.add(m);

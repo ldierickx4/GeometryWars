@@ -14,7 +14,11 @@ import java.awt.image.BufferedImage;
  */
 public class AdhdPowerup extends Powerup{
     
+<<<<<<< HEAD
     public AdhdPowerup(String name) {
+=======
+    public AdhdPowerup() {
+>>>>>>> origin/master
         super();
         this.name = name;
         String link = "resources/gameSprites/adhd.png";

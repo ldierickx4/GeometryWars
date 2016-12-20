@@ -45,11 +45,14 @@ public class CollisionController {
             }
         }    
     }
+<<<<<<< HEAD
     
     public void checkIfBulletHitsEnemy()
+=======
+    public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
+>>>>>>> origin/master
     {
         this.enemy = ec.giveEnemies();
-        this.bullets = c.giveBullets();
         for(int i=0;i<enemy.size();i++){
             Enemy tempe = enemy.get(i);
             Rectangle enemyR = tempe.getBounds();
@@ -108,5 +111,8 @@ public class CollisionController {
                 System.out.println(ex.getMessage());
             } 
         }
+    }
+    public void checkDroneEnemy(){
+        
     }
 }
