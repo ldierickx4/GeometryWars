@@ -31,6 +31,9 @@ public class Database {
     private boolean userExist;
     private boolean userAdded;
     private String username;
+    private int amountEnemies;
+    private int highScorePlayer;
+    private String imgPath;
     
     public Database() {
         //Server registreren
@@ -96,8 +99,8 @@ public class Database {
         }       
     }
     
-    public void getEnemyImage(String enemyName){
-        String imgPath = null;
+    public String getEnemyImage(String enemyName){
+        //String imgPath = null;
         try {
             
             String sql = "select image from enemies where enemy_name = (?)";
@@ -106,16 +109,65 @@ public class Database {
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
                 String img = rs.getString("image");
+                this.imgPath = img.toString();
             }  
             pstmt.close();
             rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+        return imgPath;
     }
     
+    public void setPlayerHighscore(int userid, int score){
+        try{
+           String sql = "UPDATE users SET highscore = (?) WHERE userid = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setInt(1, score);
+           pstmt.setInt(2,userid);
+           pstmt.executeUpdate();
+           pstmt.close();
+           
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
     
+    public int getPlayerHighScore(String username){
+        try{
+           String sql = "SELECT highscore from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int highScore = rs.getInt("highscore");
+               this.highScorePlayer = highScore;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return highScorePlayer;
+    }
+    
+    public int getAmountOfTypeInWave(int enemyid){
+        try{
+           String sql = "SELECT amount FROM wave_enemies WHERE enemy_id = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setInt(1, enemyid);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int amount = rs.getInt("amount");
+               this.amountEnemies = amount;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return amountEnemies;
+    }
     public boolean getUserExist(){
         System.out.println(this.userExist);
         return this.userExist;      
@@ -128,8 +180,11 @@ public class Database {
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-        db.checkUserDB("AstralKing","astral123");
-        db.getUserExist();
+        //db.checkUserDB("AstralKing","astral123");
+        //db.getUserExist();
+        //db.setPlayerHighscore(5, 10000);
+        //db.getPlayerHighScore("VangeelJ");
+        System.out.println(db.getEnemyImage("normalenemy"));
         
     }
     
