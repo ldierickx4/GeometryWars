@@ -5,13 +5,17 @@
  */
 package Data;
 
+import AstralStrifes.Enemy;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +24,8 @@ import java.util.List;
 public class Database {
     
     private static final String URL = "jdbc:mysql://localhost/astralstrifes";
-    private static final String USER = "root";
-    private static final String PWD = "root";
+    private static final String USER = "Jens";
+    private static final String PWD = "jens";
     private static Connection con;
     private List<User> users;
     private boolean userExist;
@@ -92,6 +96,26 @@ public class Database {
         }       
     }
     
+    public void getEnemyImage(String enemyName){
+        String imgPath = null;
+        try {
+            
+            String sql = "select image from enemies where enemy_name = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, enemyName);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                String img = rs.getString("image");
+            }  
+            pstmt.close();
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    
     public boolean getUserExist(){
         System.out.println(this.userExist);
         return this.userExist;      
@@ -104,7 +128,9 @@ public class Database {
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-        db.checkUserDB("test","testjes"); 
+        db.checkUserDB("AstralKing","astral123");
+        db.getUserExist();
+        
     }
     
     

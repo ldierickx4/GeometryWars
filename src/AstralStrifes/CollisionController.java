@@ -5,7 +5,9 @@
  */
 package AstralStrifes;
 import java.awt.Rectangle;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
@@ -36,11 +38,16 @@ public void checkIfPowerupGetsPickedUp(){
         if(!(pc.getPowerups()).isEmpty()){
             this.powerups = pc.getPowerups();
             for(int i = 0; i< powerups.size(); i++){
+                Powerup powerup = powerups.get(i);
                 Rectangle powerupBounds = powerups.get(i).getBounds();
                 if(powerupBounds.intersects(player.getBounds())){
                     pc.clearPowerups();
                     Manna m = new Manna(150,1,10,10);
                     player.addManna(m);
+                    System.out.println(powerup.getPickedUp());
+                    powerup.setPickedUp();   
+                    System.out.println(powerup.getPickedUp());
+                    //powerup.run(powerup);
                 }
             }
         }    
