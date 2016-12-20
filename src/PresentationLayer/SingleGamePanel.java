@@ -136,29 +136,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     @Override
     public void keyPressed(KeyEvent e){
         int typed = e.getKeyCode();
-<<<<<<< HEAD
-        if(typed== e.VK_S)
-        {
-            down = true;
-        }
-        else if(typed== e.VK_Z)
-        {
-            up = true;
-        }
-        else if(typed== e.VK_Q)
-        {
-            left = true;
-        }
-        else if(typed== e.VK_D)
-        {
-            right = true;            
-        } 
-        else if(typed== e.VK_SPACE){
-            pc.useADHD();
-        }
-=======
         processKey(typed, true);
->>>>>>> origin/master
+
     }
     @Override
     public void keyReleased(KeyEvent e){
@@ -178,6 +157,9 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
                 break;
             case KeyEvent.VK_D:
                 right = keystate;
+                break;
+            case KeyEvent.VK_SPACE:
+                pc.useADHD();
                 break;
         }    
     }

@@ -178,6 +178,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             case KeyEvent.VK_D:
                 right = keystate;
                 break;
+            case KeyEvent.VK_SPACE:
+                pc.useADHD();
+                break;
         }    
     }
     @Override
