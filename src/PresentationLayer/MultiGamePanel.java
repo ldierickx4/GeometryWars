@@ -33,6 +33,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import net.java.games.input.Component;
+import net.java.games.input.Controller;
 
 /**
  *
@@ -51,23 +53,31 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private boolean right = false;
     private boolean shoot = false;
     private double imageAngleRad = 0;
-    PlayerBulletController controller;
+    //player 1
+    private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
     private PowerupController pc;
+    private EnemyBulletController ebc;
+    //player 2
+    private PlayerBulletController controller2;
+    private Controller Pscon;
+    
     private JLabel score;
     private double mouseX;
     private double mouseY;
     private GameFrame gf;
-    private EnemyBulletController ebc;
+    
     private Boolean attackDrone = false;
     public MultiGamePanel(GameFrame gf){
         this.gf =gf;
+        controllerConnection();
         createComponents();
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
         this.controller = new PlayerBulletController(player,this);
+        this.controller2 = new PlayerBulletController(player2, this);
         this.ebc = new EnemyBulletController(player, this);
         this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, this);
@@ -76,6 +86,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread.start();
         score = new JLabel();
         player.makeDrone("attack");
+        player2.makeDrone("heal");
     }
     public void setAttackdrone(){
         this.attackDrone = true;
@@ -84,7 +95,11 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     {
         background = new Background(gf);
         player = new Player(this,1);
+        player2 = new Player(this,2);
         repaint();
+    }
+    public void controllerConnection(){
+    
     }
     public void checkInput(){
         if(down){
@@ -114,22 +129,24 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         Graphics2D g = (Graphics2D)gr;
-        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
+        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this);
         playerDraw(player , gr);
+        playerDraw(player2 , gr);
         controller.render(gr);
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
+        player.drawHealth(gr);
         if(attackDrone){
             AttackDrone ad = (AttackDrone)(player.getDrone());
             ad.renderBullets(gr);        
         }
     }
     public void playerDraw(Player p , Graphics gr){
-        player.draw(gr,this);
-        player.getDrone().draw(gr);
-        player.drawHealth(gr);
-        player.checkIfPlayerIsStillAlive();
+        p.draw(gr,this);
+        p.getDrone().draw(gr);
+
+        p.checkIfPlayerIsStillAlive();
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -139,49 +156,34 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     @Override
     public void keyPressed(KeyEvent e) {
         int typed = e.getKeyCode();
-        if(typed== e.VK_S)
-        {
-            down = true;
-        }
-        else if(typed== e.VK_Z)
-        {
-            up = true;
-        }
-        else if(typed== e.VK_Q)
-        {
-            left = true;
-        }
-        else if(typed== e.VK_D)
-        {
-            right = true;            
-        }        
+        processKey(typed, true);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int typed = e.getKeyCode();
-        if(typed== e.VK_S){
-            down = false;
-        }
-        else if(typed== e.VK_Z)
-        {            
-            up = false;
-        }
-        else if(typed== e.VK_Q)
-        {            
-            left = false;
-        }
-        else if(typed== e.VK_D)
-        {            
-            right = false;            
-        }
+        processKey(typed, false);   
     }
-
+    private void processKey(int key,boolean keystate){
+        switch(key){
+            case KeyEvent.VK_S:
+                down = keystate;
+                break;
+            case KeyEvent.VK_Z:
+                up = keystate;
+                break;
+            case  KeyEvent.VK_Q:
+                left = keystate;
+                break;
+            case KeyEvent.VK_D:
+                right = keystate;
+                break;
+        }    
+    }
     @Override
-    public void run() {
-        
+    public void run() {   
         while(true)
-        {            
+        {           
             try {
 		Thread.sleep(4);
             }
@@ -190,6 +192,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             }
             player.updateBounds();
             player.getDrone().letOrbit();
+            player.updateBounds();
+            player2.getDrone().letOrbit();
             checkShoot();
             checkInput();
             coullisionDetects();
