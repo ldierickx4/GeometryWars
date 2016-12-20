@@ -21,9 +21,9 @@ public class Background {
     private int width;
     private int height;
     private GameFrame gf;
-
     public Background(GameFrame gf) {
         this.width = gf.getWidth();
+        System.out.println(width);
         this.height = gf.getHeight();
         loadImage();
     }
@@ -31,7 +31,6 @@ public class Background {
     public void loadImage(){
         BufferedImage i = null;
         try {
-            //ImageIcon ii =  new ImageIcon("resources/gameSprites/warship.png"); // change the path & folder
             i = ImageIO.read(new File("resources/gameSprites/spacegood.jpg"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

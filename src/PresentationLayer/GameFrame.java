@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import AstralStrifes.Background;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,21 +23,17 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
 
     private static final int HEIGHT = 800;
     private static final int WIDTH = 1000;
-    
+    private Background bg;
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
     private JLabel score;
-    
+    public static void main(String[] args){
+     GameFrame gf = new GameFrame();   
+    }
     //private JLabel score;
-    
-
-
-    
-
     public GameFrame(){
         initUi(); // HIER
-       
     }
 
     private void initUi() {
@@ -68,7 +65,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         String add = "Score : "+score;
         this.score.setText(add);
     }
-   
     @Override
     public void keyTyped(KeyEvent e) {
         
@@ -124,5 +120,4 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         public int getWidth(){
         return this.WIDTH;
     }
-    
 }

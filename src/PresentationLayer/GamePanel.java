@@ -76,8 +76,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     }
     private void createComponents()
     {
-        player = new Player(this);
         background = new Background(gf);
+        player = new Player(this);
         repaint();
     }
     public void checkInput(){
@@ -107,8 +107,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond mee
         Graphics2D g = (Graphics2D)gr;
+        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
         player.draw(gr,this);
         player.getDrone().draw(gr);
         player.drawHealth(gr);
@@ -121,9 +121,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             AttackDrone ad = (AttackDrone)(player.getDrone());
             ad.renderBullets(gr);        
         }
-
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -192,7 +190,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             pc.updatePowerups();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
-            
             repaint();
         }
     }    
@@ -275,5 +272,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     }
     public JLabel getScore() {
         return score;
-    }                
+    }            
+    public Background getBackGround(){
+        return this.background;
+    }
 }

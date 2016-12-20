@@ -39,6 +39,8 @@ public class Player {
     private LinkedList<Manna> manna;
     private Drone sd;
     private GamePanel gp;
+    private int bgheight;
+    private int bgwidth;
     
     public Player(GamePanel gp){
         this.gp = gp;
@@ -49,6 +51,8 @@ public class Player {
         this.score = 0;
         loadImage();
         createBounds();
+        this.bgheight = gp.getBackGround().getHeight()-40;
+        this.bgwidth = gp.getBackGround().getWidth()-25;
         manna= new LinkedList<Manna>();
     }
     public void makeDrone(){
@@ -73,19 +77,27 @@ public class Player {
     }
     public void moveUp()
     {
-        this.y-=SPEED;
+        if(y>25){
+            this.y-=SPEED;
+        }
     }
     public void moveDown()
     {
-        this.y+=SPEED;
+        if(y<bgheight){
+           this.y+=SPEED;
+        }
     }
     public void moveLeft()
     {
-        this.x-=SPEED;
+        if(x>25){
+            this.x-=SPEED;
+        }
     }
     public void moveRight()
     {
-        this.x+=SPEED;
+        if(x<bgwidth){
+            this.x+=SPEED;
+        }
     }
     public Image giveImage()
     {
