@@ -27,9 +27,8 @@ public class PowerupController implements Runnable{
     
     public void updatePowerups(){
         score = player.getScore();
-
-        if(score%1650 == 0 && score!=0 && powerups.size() == 0){
-            Powerup powerup = new SwiftyPowerup("Swifty");
+        if(score%150 == 0 && score!=0 && powerups.size() == 0){
+            SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp);
             powerups.add(powerup);
         }
     }

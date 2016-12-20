@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
  * @author Laurens
  */
 public class Player {
-    private static int SPEED = 2;
+    private int SPEED = 2;
     private int health = 100;
     private int maxHealth = 100;
     private String naam;
@@ -189,7 +189,7 @@ public class Player {
         this.health+=heal;
     }
     
-    public void boostSpeed(){
-        this.SPEED += 2;
+    public void boostSpeed(int speed){
+        this.SPEED = speed;
     }
 }
