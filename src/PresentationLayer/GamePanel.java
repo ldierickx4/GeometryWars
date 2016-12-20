@@ -63,9 +63,9 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         this.ebc = new EnemyBulletController(player, this);
         this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, this);
+        this.cc = new CollisionController(player,controller, ec, ebc, pc);
         thread = new Thread(this);
         thread.start();
-        this.cc = new CollisionController(player,controller, ec, ebc);
         score = new JLabel();
         player.makeDrone();
         
@@ -108,6 +108,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         player.draw(gr,this);
         player.getDrone().draw(gr);
         player.drawHealth(gr);
+        player.checkIfPlayerIsStillAlive();
         controller.render(gr);
         ebc.render(gr);
         ec.render(gr);
@@ -167,10 +168,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         {            
             try {
 		Thread.sleep(4);
-		}
+            }
             catch(Exception e) {
 		e.printStackTrace();
-		}
+            }
             player.updateBounds();
             player.getDrone().letOrbit();
             checkShoot();
@@ -178,13 +179,15 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             controller.update();
             ec.update();
             ebc.update();
+            pc.updatePowerups();
             cc.checkPlayerMannaPickup();
-            cc.checkEnemyBulletCoulission();
-            cc.checkEnemyPlayercollision();
+            cc.checkIfBulletHitsEnemy();
+            cc.checkEnemyPlayerCollision();
             cc.checkIfPlayerGetsHitByEnemyBullet();
+            cc.checkIfPowerupGetsPickedUp();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
-            pc.updatePowerups();
+            
             repaint();
         }
     }    

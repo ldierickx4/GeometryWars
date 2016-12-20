@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * @author laurensdierickx
  */
 public class CollisionController {
-    private Player p;
+    private Player player;
     private LinkedList<Bullet> bullets;
     private LinkedList<Enemy> enemy;
     private LinkedList<Manna> manna;
@@ -20,14 +20,33 @@ public class CollisionController {
     private EnemyController ec;
     private PlayerBulletController c; 
     private EnemyBulletController ebc;
-    public CollisionController(Player p,PlayerBulletController c,EnemyController ec, EnemyBulletController ebc)
+    private PowerupController pc;
+    private LinkedList<Powerup> powerups;
+    
+    public CollisionController(Player p,PlayerBulletController c,EnemyController ec, EnemyBulletController ebc, PowerupController pc)
     {
-        this.p = p;
+        this.player = p;
         this.ec = ec;
         this.c = c;
         this.ebc = ebc;
+        this.pc = pc;
     }
-    public void checkEnemyBulletCoulission()
+    
+    public void checkIfPowerupGetsPickedUp(){
+        if(!(pc.getPowerups()).isEmpty()){
+            this.powerups = pc.getPowerups();
+            for(int i = 0; i< powerups.size(); i++){
+                Rectangle powerupBounds = powerups.get(i).getBounds();
+                if(powerupBounds.intersects(player.getBounds())){
+                    pc.clearPowerups();
+                    Manna m = new Manna(150,1,10,10);
+                    player.addManna(m);
+                }
+            }
+        }    
+    }
+    
+    public void checkIfBulletHitsEnemy()
     {
         this.enemy = ec.giveEnemies();
         this.bullets = c.giveBullets();
@@ -50,35 +69,34 @@ public class CollisionController {
         for(int i = 0; i<bullets.size(); i++){
             Bullet temp = bullets.get(i);
             Rectangle bulletBounds = temp.getBorders();
-            if(bulletBounds.intersects(p.getBounds())){
+            if(bulletBounds.intersects(player.getBounds())){
                 bullets.get(i).setDead();
-                p.reduceHealth(5);
-                System.out.println("Hit!"); 
+                player.reduceHealth(5);
             }
         }
     }
     
-    public void checkEnemyPlayercollision(){
+    public void checkEnemyPlayerCollision(){
         this.enemy = ec.giveEnemies();
         for(int i=0;i<enemy.size();i++)
         {
             Enemy tempE = enemy.get(i);
             Rectangle enemyR = tempE.getBounds();
-            if(enemyR.intersects(p.getBounds()))
+            if(enemyR.intersects(player.getBounds()))
             {
                 if(!hitEnemies.contains(tempE)){
                     hitEnemies.add(tempE);
-                    p.reduceHealth(10);
+                    player.reduceHealth(10);
                     ec.removeEnemy(tempE);
                 }
             }
         }
-    
     }
+    
     public void checkPlayerMannaPickup()
     {
         this.manna = ec.giveManna();
-        Rectangle playerR = p.getBounds();
+        Rectangle playerR = player.getBounds();
         for(int i=0;i<manna.size();i++){
             try {
                 Manna m = manna.get(i);
@@ -88,8 +106,7 @@ public class CollisionController {
                 }
             } catch(Exception ex) {
                 System.out.println(ex.getMessage());
-            }
-            
+            } 
         }
     }
 }

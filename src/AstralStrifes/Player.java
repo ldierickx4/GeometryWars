@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
  * @author Laurens
  */
 public class Player {
-    private static final int SPEED = 2;
+    private static int SPEED = 2;
     private int health = 100;
     private int maxHealth = 100;
     private String naam;
@@ -142,8 +142,12 @@ public class Player {
         g.setColor(Color.green);
         g.fillRect(20, 20, health, 40);
     }
-
     
+    public void checkIfPlayerIsStillAlive(){ //TODO CONTINUE HIHI
+        if(health <= 0){
+            System.out.println("Player iz dead");
+        }
+    }
   
     public int getScore() {
         int score = 0;
@@ -152,6 +156,11 @@ public class Player {
         }
         return score;
     }
+    
+    public void addScore(int score){
+        this.score += score;
+    }
+    
     public Rectangle getBounds(){
         return this.playerBounds;
     }
@@ -177,5 +186,9 @@ public class Player {
     }
     public void heal(int heal){
         this.health+=heal;
+    }
+    
+    public void boostSpeed(){
+        this.SPEED += 2;
     }
 }

@@ -25,6 +25,7 @@ public class Powerup {
     private Rectangle bounds;
     private int rangeMin = 50;
     private int rangeMax = 750;
+    public String name;
 
     public Powerup() {
         Random r = new Random(); 
@@ -52,4 +53,9 @@ public class Powerup {
     public Rectangle getBounds(){
         return this.bounds;
     }
+
+    public String getName() {
+        return name;
+    }
+    
 }
