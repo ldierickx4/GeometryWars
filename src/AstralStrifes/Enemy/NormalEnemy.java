@@ -5,7 +5,7 @@
  */
 package AstralStrifes.Enemy;
 
-import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -40,7 +40,7 @@ public class NormalEnemy implements Enemy{
     //private int reward;
     //private int multiplier;
     //private Player player;
-    private GamePanel gp;
+    private SingleGamePanel gp;
     private Rectangle enemyBounds;
     private boolean alive;
     

@@ -9,6 +9,7 @@ import AstralStrifes.Bullet;
 import AstralStrifes.Enemy.Enemy;
 import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 

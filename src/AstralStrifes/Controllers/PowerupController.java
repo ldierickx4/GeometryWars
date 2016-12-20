@@ -10,6 +10,7 @@ import AstralStrifes.Player;
 import AstralStrifes.Powerup;
 import AstralStrifes.SwiftyPowerup;
 import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 

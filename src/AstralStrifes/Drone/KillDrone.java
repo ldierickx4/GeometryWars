@@ -8,6 +8,7 @@ package AstralStrifes.Drone;
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 
 /**
  *

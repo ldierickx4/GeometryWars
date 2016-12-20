@@ -4,35 +4,36 @@
  * and open the template in the editor.
  */
 package PresentationLayer;
+<<<<<<< HEAD
 import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Controllers.PowerupController;
+=======
+
+import AstralStrifes.Background;
+>>>>>>> origin/master
 import AstralStrifes.Controllers.CollisionController;
-import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
-import AstralStrifes.Enemy.NormalEnemy;
-import AstralStrifes.*;
-import java.awt.Color;
-import java.awt.Font;
+import AstralStrifes.Controllers.EnemyController;
+import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Controllers.PowerupController;
+import AstralStrifes.Drone.AttackDrone;
+import AstralStrifes.Player;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Laurens
+ * @author laurensdierickx
  */
+<<<<<<< HEAD
 public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
     private Player player;
     private Background background;
@@ -284,4 +285,33 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     public Background getBackGround(){
         return this.background;
     }  
+=======
+public interface GamePanel{
+    public void setAttackdrone();
+    public void createComponents();
+    public void checkInput();
+    public void checkShoot();
+    public void paintComponent(Graphics gr);
+    public void playerDraw(Player p , Graphics gr);
+    public void keyTyped(KeyEvent e);
+    public void keyPressed(KeyEvent e);
+    public void keyReleased(KeyEvent e);
+    public void run();
+    public double getMouseX();
+    public double getMouseY();
+    public Player getPlayer();
+    public void coullisionDetects();
+    public void mouseDragged(MouseEvent e);
+    public void mouseMoved(MouseEvent e);
+    public void mouseClicked(MouseEvent e);
+    public void mousePressed(MouseEvent e);
+    public void mouseReleased(MouseEvent e);   
+    public void mouseEntered(MouseEvent e);
+    public void mouseExited(MouseEvent e);
+    public PlayerBulletController getBulletControler();
+    public CollisionController getCC();
+    public EnemyController getEc();
+    public JLabel getScore();
+    public Background getBackGround();
+>>>>>>> origin/master
 }

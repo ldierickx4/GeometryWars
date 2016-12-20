@@ -11,6 +11,7 @@ import AstralStrifes.Player;
 import AstralStrifes.Enemy.SaturnEnemy;
 import AstralStrifes.Enemy.ShootingEnemy;
 import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 

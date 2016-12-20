@@ -8,6 +8,7 @@ package AstralStrifes.Controllers;
 import AstralStrifes.Bullet;
 import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -74,6 +75,7 @@ public class PlayerBulletController implements Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
+            
             Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
             addBullet(b);
         }
