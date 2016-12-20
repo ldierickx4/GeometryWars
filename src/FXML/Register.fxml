@@ -41,7 +41,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="143.0" layoutY="543.0" text="Repeat password:" textFill="WHITE">
+      <Label layoutX="143.0" layoutY="543.0" text="Repeat Password:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

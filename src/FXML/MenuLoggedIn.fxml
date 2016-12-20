@@ -18,7 +18,7 @@
             <Image url="@../resources/AstralStrifesTransparent1.png" />
          </image>
       </ImageView>
-      <Button fx:id="play" layoutX="390.0" layoutY="386.0" mnemonicParsing="false" text="Play">
+      <Button fx:id="play" layoutX="390.0" layoutY="386.0" mnemonicParsing="false" text="Play" onAction="#handlePlayButton">
          <font>
             <Font size="36.0" />
          </font>

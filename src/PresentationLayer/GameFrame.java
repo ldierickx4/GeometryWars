@@ -32,11 +32,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     
 
 
-    public static void main(String[] args){
-        GameFrame window = new GameFrame();
-        
-        //window.initUi(); // dit wordt al opgeroepen in je constructor waar 'HIER' staat, overbodig en zal voor bugs zorgen
-    }
+    
 
     public GameFrame(){
         initUi(); // HIER
