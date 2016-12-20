@@ -27,7 +27,7 @@ public class PlayerBulletController implements Runnable{
     private Thread thread;
     private boolean shooting= false;
     
-    public PlayerBulletController(Player player, GamePanel gp)
+    public PlayerBulletController(Player player,GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;

@@ -47,11 +47,11 @@ public class Player {
     private GamePanel gp;
     private int bgheight;
     private int bgwidth;
-<<<<<<< HEAD
+
     private int amountOfAdhdPowerups;
-=======
+
     private int playerstatus;
->>>>>>> origin/master
+
     
     public Player(GamePanel gp,int playerstatus){
         this.gp = gp;
