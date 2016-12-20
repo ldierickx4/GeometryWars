@@ -26,7 +26,8 @@ public class Powerup{
     private int rangeMax = 750;
     private Thread t;
     private GamePanel gp;
-    
+
+    public boolean used = false;
     public boolean pickedUp = false;
     public BufferedImage image;
     public String link;
@@ -38,8 +39,6 @@ public class Powerup{
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.gp = gp;
-        //t = new Thread(this);
-        //t.start();
     } 
     
     

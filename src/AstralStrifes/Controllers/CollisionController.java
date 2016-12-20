@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Controllers;
+import AstralStrifes.Bullet;
+import AstralStrifes.Enemy.Enemy;
+import AstralStrifes.Enemy.Manna;
+import AstralStrifes.Player;
+import AstralStrifes.Powerup;
 import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -40,14 +45,12 @@ public void checkIfPowerupGetsPickedUp(){
             for(int i = 0; i< powerups.size(); i++){
                 Powerup powerup = powerups.get(i);
                 Rectangle powerupBounds = powerups.get(i).getBounds();
-                if(powerupBounds.intersects(player.getBounds())){
-                    pc.clearPowerups();
+                if(powerupBounds.intersects(player.getBounds())){       
                     Manna m = new Manna(150,1,10,10);
                     player.addManna(m);
-                    System.out.println(powerup.getPickedUp());
-                    powerup.setPickedUp();   
-                    System.out.println(powerup.getPickedUp());
-                    //powerup.run(powerup);
+                    powerup.setPickedUp();
+                    pc.addUsed(powerup);
+                    pc.clear();
                 }
             }
         }    
@@ -113,8 +116,5 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
                 System.out.println(ex.getMessage());
             } 
         }
-    }
-    public void checkDroneEnemy(){
-        
     }
 }

@@ -31,37 +31,31 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         this.name = name;
         String link = "resources/gameSprites/swifty.png";
         super.loadImage(link); 
-        t = new Thread(this);
-        t.start();      
+        t = new Thread(this);    
     }
     
     public void Boost(){
         Player p = gp.getPlayer();
-        p.boostSpeed(40);
+        p.boostSpeed(4);
     }
     public void endBoost(){
         Player p = gp.getPlayer();
         p.boostSpeed(2);
     }
+    public void start(){
+        t.start();
+    }
     @Override
     public void run() {
-            boolean pickedUp = super.getPickedUp();
-            System.out.println(pickedUp);
-            if(pickedUp){  
-            //Boost(4);
-                try {
-                    long time = System.currentTimeMillis();
-                    long end = time +1500;
-                    while(time <= end) {
-                      Boost();
-                      System.out.println("Swifty Active");
-                    }
-                    System.out.println("swifty inactive");
-                pickedUp = false;
-                endBoost();
-                } catch (Exception ex) {
-                    Logger.getLogger(SwiftyPowerup.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        super.used = true;
+        while(super.pickedUp){
+        long time = System.currentTimeMillis();
+        long end = time +3000;
+        while(System.currentTimeMillis()<= end) {
+                Boost();                  
+            }
+            endBoost();
+            super.pickedUp=false;
         }
-    }  
+    }
 }

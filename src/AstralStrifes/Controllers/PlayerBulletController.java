@@ -3,29 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Controllers;
 
+import AstralStrifes.Bullet;
+import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author laurensdierickx
  */
-public class EnemyBulletController implements Runnable {
+public class PlayerBulletController implements Runnable{
     private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
-    private Thread thread;    
+    private Thread thread;
+    private boolean shooting= false;
     
-    public EnemyBulletController(Player player, GamePanel gp)
+    public PlayerBulletController(Player player, GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
         this.gp = gp;
-        this.thread = new Thread(this);        
-        thread.start();
     }
     public void addBullet(Bullet b){
         bullets.add(b);
@@ -48,41 +53,36 @@ public class EnemyBulletController implements Runnable {
             tempBullet.draw(g);
         }
     }
+    public void setShooting()
+    {    
+        this.shooting=true;
+        this.thread = new Thread(this);        
+        thread.start();
+    }
+    public void setNotShooting()
+    {
+        this.shooting=false;
+    }
+
     @Override
     public void run() {
-        while(true)
+        while(this.shooting)
         {            
             try {
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		}
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            updateEnemyBullets();
+            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
+            addBullet(b);
         }
+        thread=null;
+    }
+    public boolean getStatus(){
+        return this.shooting;
     }
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
     }
-    public void updateEnemyBullets()
-    {
-        LinkedList<Enemy> enemy = gp.getEc().giveEnemies();
-        for(int i=0; i<enemy.size();i++)
-        {
-            Enemy e = enemy.get(i);
-            if(e.getType().equals("shooting"))
-            {
-                ShootingEnemy sE = (ShootingEnemy) e;
-                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), player.getx(), player.gety(), "enemy");
-                addBullet(b);
-            }
-            else if(e.getType().equals("saturn")){
-                SaturnEnemy sE = (SaturnEnemy) e;
-                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), sE.randomInt(), sE.randomInt(), "senemy");
-                addBullet(b);
-            }
-        }
-        
-    }
-   
 }

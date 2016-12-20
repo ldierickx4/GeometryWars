@@ -3,26 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Drone;
+
+import AstralStrifes.Controllers.EnemyController;
+import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 
 /**
  *
  * @author laurensdierickx
  */
-public class HealDrone extends Drone implements Runnable{
-    
+public class KillDrone extends Drone implements Runnable{
     private Thread thread;
-    public HealDrone(Player p) {
+    private EnemyController ec;
+    public KillDrone(Player p,GamePanel gp) {
         super(p);
-        String link= "resources/gameSprites/healdrone.png";
+        this.ec = gp.getEc();
+        String link="resources/gameSprites/attack2.png";
         super.loadImage(link);
-        thread = new Thread(this);
+        this.thread = new Thread(this);
         thread.start();
     }
     public void power(){
-       super.p.heal(10);
+        System.out.println(ec);
+        ec.killRandomEnemy();
     }
-
     @Override
     public void run() {
         while(true){

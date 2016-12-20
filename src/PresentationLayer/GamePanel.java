@@ -7,7 +7,13 @@ package PresentationLayer;
 
 
 
-import AstralStrifes.NormalEnemy;
+import AstralStrifes.Drone.AttackDrone;
+import AstralStrifes.Controllers.EnemyController;
+import AstralStrifes.Controllers.PowerupController;
+import AstralStrifes.Controllers.CollisionController;
+import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Controllers.EnemyBulletController;
+import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -188,6 +194,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             ec.update();
             ebc.update();
             pc.updatePowerups();
+            pc.checkForPOwerUp();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
             repaint();

@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Controllers;
 
+import AstralStrifes.Enemy.Enemy;
+import AstralStrifes.Enemy.Manna;
+import AstralStrifes.Enemy.NormalEnemy;
+import AstralStrifes.Player;
+import AstralStrifes.Enemy.SaturnEnemy;
+import AstralStrifes.Enemy.ShootingEnemy;
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;

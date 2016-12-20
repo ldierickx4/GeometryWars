@@ -3,32 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Enemy;
 
+import AstralStrifes.Bullet;
+import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import AstralStrifes.Enemy;
 
 /**
  *
- * @author Jens
+ * @author laurensdierickx
  */
-public class NormalEnemy implements Enemy{
+public class ShootingEnemy implements Enemy{
+    private final String type ="shooting";
     private static final double SPEED = 0.2;
-
-    private static final int VALUE = 150;
-
-    private final String type ="normal";
-
+    private int VALUE = 200;
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -40,27 +38,34 @@ public class NormalEnemy implements Enemy{
     //private int reward;
     //private int multiplier;
     //private Player player;
-    private GamePanel gp;
+    private PlayerBulletController bC;
     private Rectangle enemyBounds;
     private boolean alive;
+    private Thread thread;
+    private LinkedList<Bullet> bullets;
+    private Player p;
     
-
-    public NormalEnemy() {
+    
+    public ShootingEnemy(Player p,PlayerBulletController bC)
+    {
         this.alive = true;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         loadImage();
         createBoundries();
-        
+        this.bullets = new LinkedList<Bullet>();
+        this.p = p ;
+        this.bC = bC;
     }
-    public void createBoundries()
-    {
-        enemyBounds = new Rectangle((int)(this.x),(int)(this.y), width, height);
+    @Override
+    public void createBoundries() {
+        enemyBounds = new Rectangle((int)(this.x),(int)(this.y), image.getWidth(), image.getHeight());
     }
-    public void loadImage(){
+    @Override
+    public void loadImage() {
         BufferedImage i = null;
-        String path = "resources/gameSprites/planet1.png";
+        String path = "resources/gameSprites/planet4.png";
         try {
             i = ImageIO.read(new File(path));
         } catch (IOException ex) {
@@ -68,27 +73,24 @@ public class NormalEnemy implements Enemy{
         }
         image = i;
     }
-    public void moveTo(double x, double y){
-        double MoveToX = x;
-        double MoveToY = y;
-        double angle = Math.atan2(y - this.y, x - this.x);
-        double Yvelocity = (SPEED) * Math.cos(angle);
-        double Xvelocity = (SPEED) * Math.sin(angle);
-        this.x += Yvelocity;
-        this.y += Xvelocity;
-        enemyBounds.setBounds((int)(this.x),(int)(this.y),image.getWidth(),image.getHeight());
-    }
     public void draw(Graphics g){
-        g.drawImage(image, (int)(x), (int)(y), gp);
+        g.drawImage(image, (int)(this.x), (int)(this.y), null);
         //g.fillRect((int)(this.x), (int)(this.y), image.getWidth(), image.getHeight());
-    }
-     
-    public double getX() {
-        return x;
+
     }
 
+    public double getX() {
+        return this.x;
+    }
     public double getY() {
-        return y;
+        return this.y;
+    }
+    public double getCenterX(){
+        return x+image.getHeight()/2;
+    }
+
+    public double getCenterY() {
+        return y+image.getWidth()/2;
     }
 
     public Image getImage() {
@@ -102,27 +104,30 @@ public class NormalEnemy implements Enemy{
     public int getHeight() {
         return image.getHeight();
     }
-    public Rectangle getBounds()
-    {
+
+    public Rectangle getBounds() {
         return this.enemyBounds;
     }
-    public boolean getStatus(){
-        return this.getStatus();
-    }
-    public void die(){
-        this.alive = false;
+
+    public boolean getStatus() {
+        return this.alive;
     }
 
+    public void die() {
+        this.alive = false;
+    }
+    @Override
     public int getValue() {
         return this.VALUE;
     }
-    @Override
     public String getType()
     {
         return this.type;
     }
+    
     @Override
     public Manna getManna() {
-        return new Manna(150, 1, (int)this.x, (int)this.y);
+        return new Manna(150, 1, (int)getCenterX(), (int)getCenterY());
     }
+
 }

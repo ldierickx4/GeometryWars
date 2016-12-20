@@ -5,6 +5,9 @@
  */
 package AstralStrifes;
 
+import AstralStrifes.Drone.Drone;
+import AstralStrifes.Drone.KillDrone;
+import AstralStrifes.Enemy.Manna;
 import PresentationLayer.GamePanel;
 import java.awt.Color;
 import java.awt.Graphics;
