@@ -36,7 +36,7 @@ import javax.swing.*;
  *
  * @author Laurens
  */
-public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
+public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener,GamePanel{
     private Player player;
     private Background background;
     private boolean running = true;
@@ -47,7 +47,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private boolean right = false;
     private boolean shoot = false;
     private double imageAngleRad = 0;
-    private PlayerBulletController controller;
+    PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
     private PowerupController pc;
@@ -56,7 +56,6 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private double mouseY;
     private GameFrame gf;
     private EnemyBulletController ebc;
-    private int FPS = 60;
     private Boolean attackDrone = false;
     
     
@@ -75,14 +74,15 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         thread.start();
         score = new JLabel();
         player.makeDrone("attack");
+        
     }
     public void setAttackdrone(){
         this.attackDrone = true;
     }
-    private void createComponents()
+    public void createComponents()
     {
         background = new Background(gf);
-        player = new Player(this);
+        player = new Player(this,1);
         repaint();
     }
     public void checkInput(){
@@ -114,10 +114,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         super.paintComponent(gr);
         Graphics2D g = (Graphics2D)gr;
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
-        player.draw(gr,this);
-        player.getDrone().draw(gr);
-        player.drawHealth(gr);
-        player.checkIfPlayerIsStillAlive();
+        playerDraw(player , gr);
         controller.render(gr);
         ebc.render(gr);
         ec.render(gr);
@@ -126,6 +123,12 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             AttackDrone ad = (AttackDrone)(player.getDrone());
             ad.renderBullets(gr);        
         }
+    }
+    public void playerDraw(Player p , Graphics gr){
+        player.draw(gr,this);
+        player.getDrone().draw(gr);
+        player.drawHealth(gr);
+        player.checkIfPlayerIsStillAlive();
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -256,7 +259,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             shoot=false;
         }
     }
-
+    
     @Override
     public void mouseEntered(MouseEvent e) {
     
@@ -281,5 +284,5 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     } 
     public Background getBackGround(){
         return this.background;
-    }  
+    }
 }

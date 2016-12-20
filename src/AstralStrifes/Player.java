@@ -10,6 +10,7 @@ import AstralStrifes.Drone.Drone;
 import AstralStrifes.Drone.HealDrone;
 import AstralStrifes.Drone.KillDrone;
 import AstralStrifes.Enemy.Manna;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -43,12 +44,14 @@ public class Player {
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
     private Drone sd;
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private int bgheight;
     private int bgwidth;
+    private int playerstatus;
     
-    public Player(SingleGamePanel gp){
+    public Player(GamePanel gp,int playerstatus){
         this.gp = gp;
+        this.playerstatus = playerstatus;
         this.width=28;
         this.height=30;
         this.x = 170.0;
@@ -80,9 +83,13 @@ public class Player {
         this.playerBounds = new Rectangle(getPlayerCenterX(),getPlayerCenterY(), image.getWidth(), image.getHeight());
     }
     private void loadImage() {
+        String link = "resources/gameSprites/ship2.png";
+        if(playerstatus==1){
+            link = "resources/gameSprites/ship.png";
+        }
         BufferedImage i = null;
         try {
-            i = ImageIO.read(new File("resources/gameSprites/ship.png"));
+            i = ImageIO.read(new File(link));
         } catch (IOException ex) {
             ex.getMessage();
         }
@@ -147,12 +154,12 @@ public class Player {
     { 
         return (int)(y)-image.getWidth()/2;
     }
-    public void draw(Graphics g,SingleGamePanel gp)
+    public void draw(Graphics g,GamePanel gp)
     {
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(getPlayerAngle(),getx(),gety());
-        g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),gp);
+        g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),null);
         g2.setTransform(reset);
     }
 
@@ -207,7 +214,7 @@ public class Player {
     public void addManna(Manna m){
         this.manna.add(m);
     }
-    public SingleGamePanel getgp(){
+    public GamePanel getgp(){
         return this.gp;
     }
     public void heal(int heal){

@@ -7,6 +7,7 @@ package AstralStrifes.Controllers;
 
 import AstralStrifes.Bullet;
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,13 +21,13 @@ import java.util.logging.Logger;
  * @author laurensdierickx
  */
 public class PlayerBulletController implements Runnable{
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
     private Thread thread;
     private boolean shooting= false;
     
-    public PlayerBulletController(Player player, SingleGamePanel gp)
+    public PlayerBulletController(Player player, GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;

@@ -5,6 +5,7 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -22,10 +23,10 @@ import javax.imageio.ImageIO;
 public class SwiftyPowerup extends Powerup implements Runnable{
     
     private Thread t;
-    private SingleGamePanel gp;
+    private GamePanel gp;
     //private boolean pickedUp = false;
     
-    public SwiftyPowerup(String name,SingleGamePanel gp) {
+    public SwiftyPowerup(String name,GamePanel gp) {
         super(gp);
         this.gp = gp;
         this.name = name;

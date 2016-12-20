@@ -8,6 +8,7 @@ package AstralStrifes.Controllers;
 import AstralStrifes.Player;
 import AstralStrifes.Powerup;
 import AstralStrifes.SwiftyPowerup;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -21,10 +22,10 @@ public class PowerupController{
     private Player player;
     private LinkedList<Powerup> powerups;
     private LinkedList<Powerup> usedPowers;
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private Thread t;
 
-    public PowerupController(Player player, SingleGamePanel gp) {
+    public PowerupController(Player player, GamePanel gp) {
         this.powerups = new LinkedList<Powerup>();
         this.usedPowers = new LinkedList<Powerup>();
         this.player = player;
