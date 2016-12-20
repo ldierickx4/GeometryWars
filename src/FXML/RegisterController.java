@@ -85,8 +85,8 @@ public class RegisterController  {
     
     @FXML
     private boolean checkPasswords(){
-        if(passwordRegister.getText() == repeatPasswordRegister.getText()){
-            return true;
+        if(passwordRegister.getText().equals(repeatPasswordRegister.getText())){
+            return true;    
         } else{
             return false;
         }

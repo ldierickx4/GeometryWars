@@ -61,10 +61,8 @@ public class FirstPlayController implements Initializable {
     private void changeSelectedRadio(){
         if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
            PlayerOne.setVisible(false);
-           System.out.println("fixTwee");
         }else{
            PlayerOne.setVisible(true);
-           System.out.println("fixEen");
         }
         //System.out.println(players.getSelectedToggle().toString());
     }
