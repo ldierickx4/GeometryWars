@@ -39,27 +39,29 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         Player p = gp.getPlayer();
         p.boostSpeed(40);
     }
-
+    public void endBoost(){
+        Player p = gp.getPlayer();
+        p.boostSpeed(2);
+    }
     @Override
     public void run() {
-        while(true){
             boolean pickedUp = super.getPickedUp();
-            //System.out.println(pickedUp + " swifty ");
-            //System.out.println("Swifty picked up");
+            System.out.println(pickedUp);
             if(pickedUp){  
             //Boost(4);
                 try {
                     long time = System.currentTimeMillis();
-                    long end = time +15000;
-                    while(System.currentTimeMillis() < end) {
+                    long end = time +1500;
+                    while(time <= end) {
                       Boost();
                       System.out.println("Swifty Active");
-                    }  
+                    }
+                    System.out.println("swifty inactive");
+                pickedUp = false;
+                endBoost();
                 } catch (Exception ex) {
                     Logger.getLogger(SwiftyPowerup.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        pickedUp = false;
         }
     }  
 }

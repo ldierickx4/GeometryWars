@@ -272,12 +272,8 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     }
     public JLabel getScore() {
         return score;
-<<<<<<< HEAD
-    }            
+    } 
     public Background getBackGround(){
         return this.background;
-    }
-=======
-    }   
->>>>>>> origin/master
+    }  
 }

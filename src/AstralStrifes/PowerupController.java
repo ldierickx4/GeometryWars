@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  * @author Jordy
  */
-public class PowerupController implements Runnable{
+public class PowerupController{
     private int score;
     private Player player;
     private LinkedList<Powerup> powerups;
@@ -47,15 +47,6 @@ public class PowerupController implements Runnable{
     
     public void clearPowerups(){
         powerups.clear();
-    }
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
-    
+    }   
     
 }
