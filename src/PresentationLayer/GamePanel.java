@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-        player.makeDrone();
+        player.makeDrone("attack");
         
     }
     public void setAttackdrone(){

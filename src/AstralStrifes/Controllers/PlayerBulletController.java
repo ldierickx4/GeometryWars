@@ -75,6 +75,7 @@ public class PlayerBulletController implements Runnable{
 		e.printStackTrace();
 		}
             Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
+            
             addBullet(b);
         }
         thread=null;

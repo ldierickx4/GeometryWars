@@ -5,7 +5,9 @@
  */
 package AstralStrifes;
 
+import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Drone.Drone;
+import AstralStrifes.Drone.HealDrone;
 import AstralStrifes.Drone.KillDrone;
 import AstralStrifes.Enemy.Manna;
 import PresentationLayer.GamePanel;
@@ -58,9 +60,17 @@ public class Player {
         this.bgwidth = gp.getBackGround().getWidth()-25;
         manna= new LinkedList<Manna>();
     }
-    public void makeDrone(){
-        sd = new KillDrone(this,gp);
-        //gp.setAttackdrone();
+    public void makeDrone(String drone){
+        if(drone.equals("heal")){
+            this.sd = new HealDrone(this);
+        }
+        else if(drone.equals("attack")){
+            this.sd = new AttackDrone(this, gp);
+            gp.setAttackdrone();
+        }
+        else{
+            this.sd = new KillDrone(this, gp);
+        }
     }
     public Drone getDrone(){
         return this.sd;
