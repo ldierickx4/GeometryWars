@@ -5,6 +5,8 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GamePanel;
+
 /**
  *
  * @author laurensdierickx
@@ -12,9 +14,9 @@ package AstralStrifes;
 public class KillDrone extends Drone implements Runnable{
     private Thread thread;
     private EnemyController ec;
-    public KillDrone(Player p,EnemyController ec) {
+    public KillDrone(Player p,GamePanel gp) {
         super(p);
-        this.ec = ec;
+        this.ec = gp.getEc();
         String link="resources/gameSprites/attack2.png";
         super.loadImage(link);
         this.thread = new Thread(this);
