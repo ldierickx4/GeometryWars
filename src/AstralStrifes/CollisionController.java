@@ -32,7 +32,7 @@ public class CollisionController {
         this.pc = pc;
     }
     
-    public void checkIfPowerupGetsPickedUp(){
+public void checkIfPowerupGetsPickedUp(){
         if(!(pc.getPowerups()).isEmpty()){
             this.powerups = pc.getPowerups();
             for(int i = 0; i< powerups.size(); i++){
@@ -45,12 +45,8 @@ public class CollisionController {
             }
         }    
     }
-<<<<<<< HEAD
-    
-    public void checkIfBulletHitsEnemy()
-=======
-    public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
->>>>>>> origin/master
+
+public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
     {
         this.enemy = ec.giveEnemies();
         for(int i=0;i<enemy.size();i++){
@@ -78,7 +74,6 @@ public class CollisionController {
             }
         }
     }
-    
     public void checkEnemyPlayerCollision(){
         this.enemy = ec.giveEnemies();
         for(int i=0;i<enemy.size();i++)

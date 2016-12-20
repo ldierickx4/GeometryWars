@@ -13,12 +13,7 @@ import java.awt.image.BufferedImage;
  * @author Jordy
  */
 public class AdhdPowerup extends Powerup{
-    
-<<<<<<< HEAD
-    public AdhdPowerup(String name) {
-=======
-    public AdhdPowerup() {
->>>>>>> origin/master
+        public AdhdPowerup(String name) {
         super();
         this.name = name;
         String link = "resources/gameSprites/adhd.png";
