@@ -96,7 +96,7 @@ public class Player {
         try {
             i = ImageIO.read(new File(link));
         } catch (IOException ex) {
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         }
         image = i;
     }
@@ -186,6 +186,10 @@ public class Player {
             System.out.println("Player iz dead");
         }
     }
+    public int getHealth()
+    {
+        return this.health;
+    }
   
     public int getScore() {
         int score = 0;
@@ -211,7 +215,7 @@ public class Player {
        this.health -= amount;
    }
 
-    public int updateHealth() {
+    public int updateHealth(){
         
         return health;
     }
