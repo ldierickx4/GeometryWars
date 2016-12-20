@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package PresentationLayer;
-
-
-
 import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Controllers.PowerupController;
@@ -151,7 +148,10 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         else if(typed== e.VK_D)
         {
             right = true;            
-        }        
+        }   
+        else if(typed== e.VK_SPACE){
+            pc.useADHD();      
+        }
     }
 
     @Override
@@ -196,6 +196,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             pc.updatePowerups();
             pc.checkForPOwerUp();
             gf.updateScore(player.getScore()+"");
+            gf.updateAdhdPowerups(player.getAmountOfAdhdPowerups()+"");
             player.updateHealth();
             repaint();
         }

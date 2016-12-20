@@ -28,6 +28,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
     private JLabel score;
+    private JLabel adhdPowerup;
     public static void main(String[] args){
      GameFrame gf = new GameFrame();   
     }
@@ -47,14 +48,19 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         setLocation(y, x);
         gamePanel = new GamePanel(this);
         score = new JLabel();
+        adhdPowerup = new JLabel();
         //scoreTitle.setLocation(500, 500);
         score.setText("Score: ");
         score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         score.setForeground(Color.WHITE);
+        adhdPowerup.setText("ADHD Powerups: ");
+        adhdPowerup.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
+        adhdPowerup.setForeground(Color.WHITE);
         //JLabel score = new JLabel();
         //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         //score.setForeground(Color.WHITE);
         gamePanel.add(score);
+        gamePanel.add(adhdPowerup);
         //gamePanel.add(score);
         setContentPane(gamePanel);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
@@ -65,6 +71,12 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         String add = "Score : "+score;
         this.score.setText(add);
     }
+    
+    public void updateAdhdPowerups(String amount){
+        String add = "ADHD Powerups: " + amount;
+        this.adhdPowerup.setText(add);
+    }
+    
     @Override
     public void keyTyped(KeyEvent e) {
         

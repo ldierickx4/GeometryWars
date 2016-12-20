@@ -44,6 +44,7 @@ public class Player {
     private GamePanel gp;
     private int bgheight;
     private int bgwidth;
+    private int amountOfAdhdPowerups;
     
     public Player(GamePanel gp){
         this.gp = gp;
@@ -57,6 +58,7 @@ public class Player {
         this.bgheight = gp.getBackGround().getHeight()-40;
         this.bgwidth = gp.getBackGround().getWidth()-25;
         manna= new LinkedList<Manna>();
+        amountOfAdhdPowerups = 1;
     }
     public void makeDrone(){
         sd = new KillDrone(this,gp);
@@ -206,5 +208,21 @@ public class Player {
     
     public void boostSpeed(int speed){
         this.SPEED = speed;
+    }
+    
+    public int getAmountOfAdhdPowerups(){
+        return this.amountOfAdhdPowerups;
+    }
+    
+    public void setAmoundOfAdhdPowerups(int amount){
+        this.amountOfAdhdPowerups = amount;
+    }
+    
+    public void addOneAdhdPowerup(){
+        this.amountOfAdhdPowerups += 1;
+    }
+    
+    public void reduceAdhd(){
+        this.amountOfAdhdPowerups-= 1;
     }
 }

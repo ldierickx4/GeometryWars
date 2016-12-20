@@ -50,9 +50,9 @@ public class PlayerBulletController implements Runnable{
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);     
-            tempBullet.draw(g);
+            tempBullet.draw(g);                
         }
-    }
+    } 
     public void setShooting()
     {    
         this.shooting=true;

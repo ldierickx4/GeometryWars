@@ -5,6 +5,7 @@
  */
 package AstralStrifes.Controllers;
 
+import AstralStrifes.AdhdPowerup;
 import AstralStrifes.Player;
 import AstralStrifes.Powerup;
 import AstralStrifes.SwiftyPowerup;
@@ -42,8 +43,19 @@ public class PowerupController{
         if(score%3000 == 0 && score!=0 && powerups.size() == 0){
             SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp);
             powerups.add(powerup);
-        }
+        }   
     }
+    
+    public void useADHD(){
+        if(player.getAmountOfAdhdPowerups() != 0){
+            AdhdPowerup powerup = new AdhdPowerup("ADHD" , gp);
+            powerups.add(powerup);
+            powerup.run();
+            player.reduceAdhd();
+            System.out.println("Using ADHD");
+        }    
+    }
+    
     public void checkForPOwerUp(){
         for(int i=0;i<usedPowers.size();i++){
             Powerup pu = usedPowers.get(i);
