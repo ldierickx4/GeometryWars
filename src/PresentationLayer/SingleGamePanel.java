@@ -36,7 +36,7 @@ import javax.swing.*;
  *
  * @author Laurens
  */
-public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
+public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
     private Player player;
     private Background background;
     private boolean running = true;
@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private Boolean attackDrone = false;
     
     
-    public GamePanel(GameFrame gf){ 
+    public SingleGamePanel(GameFrame gf){ 
         this.gf =gf;
         createComponents();
         addKeyListener(this);
@@ -75,7 +75,6 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread.start();
         score = new JLabel();
         player.makeDrone("attack");
-        
     }
     public void setAttackdrone(){
         this.attackDrone = true;

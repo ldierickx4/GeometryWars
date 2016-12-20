@@ -5,7 +5,7 @@
  */
 package AstralStrifes;
 
-import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  * @author Jordy
  */
 public class AdhdPowerup extends Powerup{
-        public AdhdPowerup(String name, GamePanel gp) {
+        public AdhdPowerup(String name, SingleGamePanel gp) {
         super(gp);
         this.name = name;
         String link = "resources/gameSprites/adhd.png";

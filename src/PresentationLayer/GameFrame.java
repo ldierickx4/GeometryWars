@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  * @author Gebruiker
  */
 public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener,MouseListener {
-    private GamePanel gamePanel;
+    private SingleGamePanel gamePanel;
 
     private static final int HEIGHT = 800;
     private static final int WIDTH = 1000;
@@ -45,7 +45,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-        gamePanel = new GamePanel(this);
+        gamePanel = new SingleGamePanel(this);
         score = new JLabel();
         //scoreTitle.setLocation(500, 500);
         score.setText("Score: ");

@@ -10,7 +10,7 @@ import AstralStrifes.Drone.Drone;
 import AstralStrifes.Drone.HealDrone;
 import AstralStrifes.Drone.KillDrone;
 import AstralStrifes.Enemy.Manna;
-import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -43,11 +43,11 @@ public class Player {
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
     private Drone sd;
-    private GamePanel gp;
+    private SingleGamePanel gp;
     private int bgheight;
     private int bgwidth;
     
-    public Player(GamePanel gp){
+    public Player(SingleGamePanel gp){
         this.gp = gp;
         this.width=28;
         this.height=30;
@@ -147,7 +147,7 @@ public class Player {
     { 
         return (int)(y)-image.getWidth()/2;
     }
-    public void draw(Graphics g,GamePanel gp)
+    public void draw(Graphics g,SingleGamePanel gp)
     {
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
@@ -207,7 +207,7 @@ public class Player {
     public void addManna(Manna m){
         this.manna.add(m);
     }
-    public GamePanel getgp(){
+    public SingleGamePanel getgp(){
         return this.gp;
     }
     public void heal(int heal){

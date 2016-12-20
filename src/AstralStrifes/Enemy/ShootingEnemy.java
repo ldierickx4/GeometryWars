@@ -8,7 +8,7 @@ package AstralStrifes.Enemy;
 import AstralStrifes.Bullet;
 import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Player;
-import PresentationLayer.GamePanel;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
