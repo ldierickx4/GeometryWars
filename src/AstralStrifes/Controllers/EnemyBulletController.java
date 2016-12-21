@@ -73,7 +73,7 @@ public class EnemyBulletController implements Runnable {
         return this.bullets;    
     }
     public Player getRandomPlayer(){
-        int ran = 1;
+        int ran = 0;
         int aantal = players.size();
         if(aantal>1){
             ran = r.nextInt(aantal);

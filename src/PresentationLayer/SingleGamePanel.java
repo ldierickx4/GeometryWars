@@ -59,6 +59,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private EnemyBulletController ebc;
     private Boolean attackDrone = false;
     private LinkedList<Player> players;
+    private String type = "Single";
     
     
     public SingleGamePanel(GameFrame gf){ 
@@ -188,8 +189,13 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             ebc.update();
             pc.updatePowerups();
             pc.checkForPOwerUp();
+<<<<<<< HEAD
             gf.updateScore(player.getScore()+"");
             gf.updateAdhdPowerups(player.getAmountOfAdhdPowerups()+"");
+=======
+            gf.updateScoreP1(player.getScore()+"");
+            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
+>>>>>>> origin/master
             player.updateHealth();
             repaint();
         }
@@ -276,5 +282,10 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     } 
     public Background getBackGround(){
         return this.background;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
     }
 }

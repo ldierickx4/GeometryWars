@@ -94,10 +94,10 @@ public class Player {
     private void loadImage() {
         String link = "resources/gameSprites/ship2.png";
         healthX=880;
-        healthY=20;
+        healthY=25;
         if(playerstatus==1){
             healthX=20;
-            healthY=20;
+            healthY=25;
             link = "resources/gameSprites/ship.png";
         }
         BufferedImage i = null;

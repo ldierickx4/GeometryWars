@@ -54,18 +54,20 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private boolean right1 = false;
     private boolean shoot1 = false;
     private double imageAngleRad = 0;
+    private EnemyBulletController ebc;
     private LinkedList<Player> players;
     //player 1
     private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
     private PowerupController pc;
-    private EnemyBulletController ebc;
     private double mouseX;
     private double mouseY;
     //player 2
     private PlayerBulletController controller2;
+    private PowerupController pc2;
     private Controller pscon;
+    private CollisionController cc2;
     private boolean shoot2 = false;
     private boolean down2 = false;
     private boolean up2 = false;
@@ -78,6 +80,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private GameFrame gf;
     
     private Boolean attackDrone = false;
+    private String type = "Multi";
+    
     public MultiGamePanel(GameFrame gf){
         this.gf =gf;
         controllerConnection();
@@ -91,7 +95,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, this);
+        this.pc2 = new PowerupController(player2,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
+        this.cc2 = new CollisionController(player2,controller2, ec, ebc, pc2);
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
@@ -118,7 +124,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-        pscon = Controllers.getController(8);
+        pscon = Controllers.getController(0);
         Controllers.poll();
     }
     public void checkInput1(){
@@ -172,6 +178,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
+        pc2.draw(gr);
         if(attackDrone){
             AttackDrone ad = (AttackDrone)(player.getDrone());
             ad.renderBullets(gr);        
@@ -239,11 +246,22 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             ec.update();
             ebc.update();
             pc.updatePowerups();
+            pc2.updatePowerups();
             pc.checkForPOwerUp();
-            //player2.getDrone().letOrbit();
+            pc2.checkForPOwerUp();
             updatePlayer(player);
             updatePlayer(player2);
+<<<<<<< HEAD
             gf.updateScore(player.getScore()+"");
+=======
+
+            gf.updateScoreP1(player.getScore()+"");
+
+            gf.updateScoreP2(player2.getScore()+"");
+
+            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
+            gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups()+"");
+>>>>>>> origin/master
             repaint();
         }
     }    
@@ -263,6 +281,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
     public void coullisionDetects(){
         cc.checkPlayerMannaPickup();
+        cc2.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
         cc.checkEnemyBulletCoulission(controller2.giveBullets());
         if(attackDrone){
@@ -270,7 +289,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             cc.checkEnemyBulletCoulission(ad.getBullets());
         }
         cc.checkEnemyPlayerCollision();
+        cc2.checkEnemyPlayerCollision();
+        
+        cc2.checkIfPowerupGetsPickedUp();
         cc.checkIfPowerupGetsPickedUp();
+        
+        cc2.checkIfPlayerGetsHitByEnemyBullet();
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
     
@@ -341,6 +365,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         checkConMove();
         checkConAim();
         checkConShoot();
+        checkUseAdhd();
        //System.out.println(pscon.isButtonPressed(3)+"driehoek");
        //System.out.println(pscon.isButtonPressed(0)+"vierkant");
        //System.out.println(pscon.isButtonPressed(1)+"kruis");
@@ -356,6 +381,11 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
        //System.out.println(pscon.isButtonPressed(12)+"ps4knop");
        //System.out.println(pscon.isButtonPressed(13)+"touchpad");
     }
+    private void checkUseAdhd(){
+        if(pscon.isButtonPressed(1)){
+            pc2.useADHD();
+        }
+    }
     private void checkConShoot(){
         if(pscon.isButtonPressed(7)){
             shoot2 = true;
@@ -365,36 +395,41 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
     }
     private void checkConAim(){
-        this.aimX = pscon.getAxisValue(1)*1000;
-        this.aimY = pscon.getAxisValue(0)*1000;
+        this.aimX = pscon.getAxisValue(2)*1000;
+        this.aimY = pscon.getAxisValue(3)*1000;
         player2.calculatePlayerAngle(aimX,aimY) ;
     }
 
     private void checkConMove() {
-        if(pscon.getAxisValue(3)>0.5)
+        if(pscon.getAxisValue(0)>0.5)
         {
             right2 = true;
         }
         else{
             right2 = false;
         }
-        if(pscon.getAxisValue(3)<-0.5){
+        if(pscon.getAxisValue(0)<-0.5){
             left2 = true;
         }
         else{
             left2 = false;
         }
-        if(pscon.getAxisValue(2)>0.5){
+        if(pscon.getAxisValue(1)>0.5){
             down2 = true;
         }
         else{
             down2 = false;
         }
-        if(pscon.getAxisValue(2)<-0.5){
+        if(pscon.getAxisValue(1)<-0.5){
             up2 = true;
         }
         else{
             up2 = false;
         }
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
     }
 }
