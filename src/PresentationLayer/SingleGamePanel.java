@@ -62,7 +62,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private String type = "Single";
     
     
-    public SingleGamePanel(GameFrame gf){ 
+    public SingleGamePanel(GameFrame gf,String drone){ 
         this.gf =gf;
         createComponents();
         addKeyListener(this);
@@ -76,7 +76,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-        player.makeDrone("attack");
+        player.makeDrone(drone);
         
     }
     public void setAttackdrone(){

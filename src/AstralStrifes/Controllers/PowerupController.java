@@ -10,6 +10,7 @@ import AstralStrifes.Player;
 import AstralStrifes.Powerup;
 import AstralStrifes.SwiftyPowerup;
 import PresentationLayer.GamePanel;
+import PresentationLayer.MultiGamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -23,6 +24,7 @@ public class PowerupController{
     private Player player;
     private LinkedList<Powerup> powerups;
     private LinkedList<Powerup> usedPowers;
+    private PlayerBulletController pbc;
     private GamePanel gp;
     private Thread t;
     private boolean spacebar = false;
@@ -47,10 +49,16 @@ public class PowerupController{
             powerups.add(powerup);
         }   
     }
-    
+    public void getPbc(){
+        this.pbc = gp.getBulletControler();
+        if(player.getPlayerStatus()==2){
+            MultiGamePanel mg = (MultiGamePanel)(gp);
+            this.pbc = mg.getBulletControler2();
+        }
+    }
     public void useADHD(){
         if(player.getAmountOfAdhdPowerups() != 0){
-            AdhdPowerup powerup = new AdhdPowerup("ADHD" , gp);
+            AdhdPowerup powerup = new AdhdPowerup("ADHD" ,gp,pbc);
             powerups.add(powerup);
             powerup.start();
             player.reduceAdhd();
