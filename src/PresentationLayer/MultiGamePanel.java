@@ -67,6 +67,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private PlayerBulletController controller2;
     private PowerupController pc2;
     private Controller pscon;
+    private CollisionController cc2;
     private boolean shoot2 = false;
     private boolean down2 = false;
     private boolean up2 = false;
@@ -96,6 +97,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.pc = new PowerupController(player, this);
         this.pc2 = new PowerupController(player2,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
+        this.cc2 = new CollisionController(player2,controller2, ec, ebc, pc2);
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
@@ -244,15 +246,18 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             ec.update();
             ebc.update();
             pc.updatePowerups();
+            pc2.updatePowerups();
             pc.checkForPOwerUp();
             pc2.checkForPOwerUp();
-            //player2.getDrone().letOrbit();
             updatePlayer(player);
             updatePlayer(player2);
+
             gf.updateScoreP1(player.getScore()+"");
+
             gf.updateScoreP2(player2.getScore()+"");
+
             gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
-            gf.updateAdhdPowerupsP2(player.getAmountOfAdhdPowerups()+"");
+            gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups()+"");
             repaint();
         }
     }    
@@ -272,6 +277,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
     public void coullisionDetects(){
         cc.checkPlayerMannaPickup();
+        cc2.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
         cc.checkEnemyBulletCoulission(controller2.giveBullets());
         if(attackDrone){
@@ -279,7 +285,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             cc.checkEnemyBulletCoulission(ad.getBullets());
         }
         cc.checkEnemyPlayerCollision();
+        cc2.checkEnemyPlayerCollision();
+        
+        cc2.checkIfPowerupGetsPickedUp();
         cc.checkIfPowerupGetsPickedUp();
+        
+        cc2.checkIfPlayerGetsHitByEnemyBullet();
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
     
