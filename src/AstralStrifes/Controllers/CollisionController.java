@@ -58,7 +58,7 @@ public void checkIfPowerupGetsPickedUp(){
 
 public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
     {
-        this.enemy = ec.giveEnemies();
+        this.enemy = ec.giveEnemies();  
         for(int i=0;i<enemy.size();i++){
             Enemy tempe = enemy.get(i);
             Rectangle enemyR = tempe.getBounds();

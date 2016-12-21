@@ -6,6 +6,10 @@
 package AstralStrifes;
 
 import PresentationLayer.GamePanel;
+<<<<<<< HEAD
+=======
+import PresentationLayer.SingleGamePanel;
+>>>>>>> origin/master
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -26,7 +30,12 @@ public class Powerup{
     private int rangeMax = 750;
     private Thread t;
     private GamePanel gp;
+<<<<<<< HEAD
     
+=======
+
+    public boolean used = false;
+>>>>>>> origin/master
     public boolean pickedUp = false;
     public BufferedImage image;
     public String link;

@@ -5,9 +5,11 @@
  */
 package AstralStrifes.Controllers;
 
+import AstralStrifes.AdhdPowerup;
 import AstralStrifes.Player;
 import AstralStrifes.Powerup;
 import AstralStrifes.SwiftyPowerup;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -21,10 +23,11 @@ public class PowerupController{
     private Player player;
     private LinkedList<Powerup> powerups;
     private LinkedList<Powerup> usedPowers;
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private Thread t;
+    private boolean spacebar = false;
 
-    public PowerupController(Player player, SingleGamePanel gp) {
+    public PowerupController(Player player, GamePanel gp) {
         this.powerups = new LinkedList<Powerup>();
         this.usedPowers = new LinkedList<Powerup>();
         this.player = player;
@@ -42,8 +45,20 @@ public class PowerupController{
         if(score%3000 == 0 && score!=0 && powerups.size() == 0){
             SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp);
             powerups.add(powerup);
-        }
+        }   
     }
+    
+    public void useADHD(){
+        if(player.getAmountOfAdhdPowerups() != 0){
+            AdhdPowerup powerup = new AdhdPowerup("ADHD" , gp);
+            powerups.add(powerup);
+            powerup.start();
+            player.reduceAdhd();
+            powerups.clear();
+            //System.out.println("Using ADHD");
+        }    
+    }
+    
     public void checkForPOwerUp(){
         for(int i=0;i<usedPowers.size();i++){
             Powerup pu = usedPowers.get(i);
@@ -53,6 +68,7 @@ public class PowerupController{
                     sp.start();
                 }
                 catch(Exception ex){
+                    System.out.println(ex);
                 }
             }
         }

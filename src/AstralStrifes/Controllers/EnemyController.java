@@ -11,6 +11,7 @@ import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.Player;
 import AstralStrifes.Enemy.SaturnEnemy;
 import AstralStrifes.Enemy.ShootingEnemy;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -29,9 +30,9 @@ public class EnemyController implements Runnable{
     private Thread thread;
     private Player p;
     private int count;
-    private SingleGamePanel gp;
+    private GamePanel gp;
         
-    public EnemyController(Player p , SingleGamePanel gp) {
+    public EnemyController(Player p ,GamePanel gp) {
         this.enemies = new LinkedList<Enemy>();
         this.manna = new LinkedList<Manna>();
         thread = new Thread(this);

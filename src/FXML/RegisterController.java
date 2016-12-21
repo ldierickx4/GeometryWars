@@ -66,6 +66,28 @@ public class RegisterController  {
     @FXML
     private void tryAgainRegister(){
         registrerenNietGelukt.setVisible(false);
+<<<<<<< HEAD
+=======
+        registrerenNietGeluktBcsPass.setVisible(false);
+    }
+    
+    @FXML
+    private boolean checkFilledIn(){
+        if (!(registerEmail.getText().isEmpty()) & !(passwordRegister.getText().isEmpty()) & !(registerUsername.getText().isEmpty())){
+            return true;
+        } else{
+            return false;
+        }
+    }
+    
+    @FXML
+    private boolean checkPasswords(){
+        if(passwordRegister.getText().equals(repeatPasswordRegister.getText())){
+            return true;    
+        } else{
+            return false;
+        }
+>>>>>>> origin/master
     }
     
     

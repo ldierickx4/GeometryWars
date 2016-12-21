@@ -8,6 +8,7 @@ package AstralStrifes.Drone;
 import AstralStrifes.Bullet;
 import AstralStrifes.Enemy.Enemy;
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -19,8 +20,8 @@ import java.util.LinkedList;
 public class AttackDrone extends Drone implements Runnable{
     private Thread thread;
     private LinkedList<Bullet> bullets;
-    private SingleGamePanel gp;
-    public AttackDrone(Player p ,SingleGamePanel gp) {
+    private GamePanel gp;
+    public AttackDrone(Player p ,GamePanel gp) {
         super(p);
         this.gp=gp;
         gp.setAttackdrone();

@@ -22,7 +22,9 @@ public class HealDrone extends Drone implements Runnable{
         thread.start();
     }
     public void power(){
-       super.p.heal(10);
+        if(super.p.getHealth()<100){
+            super.p.heal(10);
+        }
     }
 
     @Override

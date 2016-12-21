@@ -7,6 +7,7 @@ package AstralStrifes.Controllers;
 
 import AstralStrifes.Bullet;
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,13 +21,14 @@ import java.util.logging.Logger;
  * @author laurensdierickx
  */
 public class PlayerBulletController implements Runnable{
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
     private Thread thread;
     private boolean shooting= false;
+    private int FIRING_RATE = 100;
     
-    public PlayerBulletController(Player player, SingleGamePanel gp)
+    public PlayerBulletController(Player player,GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
@@ -50,9 +52,9 @@ public class PlayerBulletController implements Runnable{
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);     
-            tempBullet.draw(g);
+            tempBullet.draw(g);                
         }
-    }
+    } 
     public void setShooting()
     {    
         this.shooting=true;
@@ -69,7 +71,7 @@ public class PlayerBulletController implements Runnable{
         while(this.shooting)
         {            
             try {
-		Thread.sleep(100);
+		Thread.sleep(FIRING_RATE);
 		}
             catch(Exception e) {
 		e.printStackTrace();
@@ -85,5 +87,17 @@ public class PlayerBulletController implements Runnable{
     }
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
+    }
+    
+    public int getFiringRate(){
+        return this.FIRING_RATE;
+    }
+    
+    public void boostFiringRate(){
+        this.FIRING_RATE = 40;
+    }
+    
+    public void resetFiringRate(){
+        this.FIRING_RATE = 100;
     }
 }
