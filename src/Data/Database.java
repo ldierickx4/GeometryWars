@@ -185,6 +185,22 @@ public class Database {
     public boolean getUserAdded(){
         return this.userAdded;
     }
+    
+    public String getUsername(String username){
+        try{
+           String sql = "SELECT username FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String usern = rs.getString("username");
+               this.username = usern;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return username;
+    }
 
   
     public static void main(String[] args) {
@@ -196,8 +212,8 @@ public class Database {
         //db.getPlayerHighScore("VangeelJ");
 
         System.out.println(db.getEnemyImage("normalenemy"));
-        System.out.println(db.getUsername("VangeelJ"));
-        System.out.println(db.getUsername("AstralKing"));
+        //System.out.println(db.getUsername("VangeelJ"));
+        //System.out.println(db.getUsername("AstralKing"));
     }
     
     
