@@ -5,7 +5,9 @@
  */
 package Data;
 
+import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Enemy.*;
+import AstralStrifes.Player;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,7 +46,8 @@ public class Database {
     private int amountEnemies;
     private int highScorePlayer;
     private String imgPath;
-    private List<Enemy> wave1;
+    private LinkedList<String> wave1 = new LinkedList<>();
+    private String enemyName;
     
     public Database() {
         //Server registreren
@@ -143,28 +146,21 @@ public class Database {
             ex.printStackTrace();
         }
     }
-    
-    public int getAmountOfTypeInWave(int enemyid){
-        //wave1 = new LinkedList<Enemy>();
+      
+    public String getEnemyName(int enemy_id){
         try{
-           String sql = "SELECT amount FROM wave_enemies WHERE enemy_id = (?)";
+           String sql = "SELECT enemy_name FROM enemies WHERE enemy_id = (?)";
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-           pstmt.setInt(1, enemyid);           
+           pstmt.setInt(1, enemy_id);           
            ResultSet rs = pstmt.executeQuery();
            if(rs.next()){
-               int amount = rs.getInt("amount");
-               String type = rs.getString("enemy_name");
-               if(type == "shootingenemy" ){
-                   //wave1.add(e);
-               }
-               this.amountEnemies = amount;
+               String enemy = rs.getString("enemy_name");
+               this.enemyName = enemy;
            }
-           pstmt.close();
-           rs.close();
         } catch(SQLException ex){
             ex.printStackTrace();
         }
-        return amountEnemies;
+        return enemyName;
     }
 
     public String getUsername(String username){
@@ -328,24 +324,55 @@ public class Database {
     }
     
    
-
+    public LinkedList getEnemiesInWave(int wave_id){
+        try{
+           String sql = "SELECT * FROM wave_enemies WHERE wave_id = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setInt(1, wave_id);           
+           ResultSet rs = pstmt.executeQuery();
+           while(rs.next()){
+               //System.out.println(rs.getArray("enemy_id"));
+               int enemy = rs.getInt("enemy_id");
+               int amount = rs.getInt("amount");
+               if(enemy == 1){
+                   for(int i = 0;i < amount; i++){
+                       wave1.add("shootingenemy");
+                   }
+               }
+               if(enemy == 2){
+                   for(int i = 0;i < amount; i++){
+                       wave1.add("saturnenemy");
+                   }
+               }
+               if(enemy == 3){
+                   for(int i = 0;i < amount; i++){
+                       wave1.add("normalenemy");
+                   }
+               }
+           }
+           pstmt.close();
+           rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        return wave1;
+    }
 
   
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-        //db.checkUserDB("AstralKing","astral123");
-        //db.getUserExist();
-        //db.setPlayerHighscore(5, 10000);
-        //db.getPlayerHighScore("VangeelJ");
-
-
-        //System.out.println(db.getEnemyImage("normalenemy"));
-        //System.out.println(db.getUsername("VangeelJ"));
-
-        System.out.println(db.getEnemyImage("normalenemy"));
-        //System.out.println(db.getUsername("VangeelJ"));
-        //System.out.println(db.getUsername("AstralKing"));
+        //LinkedList waveOne = new LinkedList<String>();
+        //int amount = db.getAmountInWave(2,1);
+        //db.putAmountEnemiesInWave(amount, db.getEnemyName(2));
+        //db.printLinkedList();
+        //String enemyNaam = db.getEnemyName(1);
+        //db.putAmountEnemiesInWave(amountNE,enemyNaam);
+        //db.printLinkedList();
+      
+        //p = new Player();
+        System.out.println(db.getEnemiesInWave(2));
     }
     
     
