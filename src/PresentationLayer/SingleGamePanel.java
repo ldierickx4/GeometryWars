@@ -29,6 +29,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -36,7 +37,7 @@ import javax.swing.*;
  *
  * @author Laurens
  */
-public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
+public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener,GamePanel{
     private Player player;
     private Background background;
     private boolean running = true;
@@ -47,7 +48,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private boolean right = false;
     private boolean shoot = false;
     private double imageAngleRad = 0;
-    private PlayerBulletController controller;
+    PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
     private PowerupController pc;
@@ -56,8 +57,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private double mouseY;
     private GameFrame gf;
     private EnemyBulletController ebc;
-    private int FPS = 60;
     private Boolean attackDrone = false;
+    private LinkedList<Player> players;
     
     
     public SingleGamePanel(GameFrame gf){ 
@@ -66,8 +67,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        this.controller = new PlayerBulletController(player,this);
-        this.ebc = new EnemyBulletController(player, this);
+        this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
+        this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
@@ -75,14 +76,17 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         thread.start();
         score = new JLabel();
         player.makeDrone("attack");
+        
     }
     public void setAttackdrone(){
         this.attackDrone = true;
     }
-    private void createComponents()
-    {
+    public void createComponents()
+    {   
+        players = new LinkedList<Player>();
         background = new Background(gf);
-        player = new Player(this);
+        player = new Player(this,1);
+        players.add(player);
         repaint();
     }
     public void checkInput(){
@@ -114,10 +118,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         super.paintComponent(gr);
         Graphics2D g = (Graphics2D)gr;
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
-        player.draw(gr,this);
-        player.getDrone().draw(gr);
-        player.drawHealth(gr);
-        player.checkIfPlayerIsStillAlive();
+        playerDraw(player , gr);
         controller.render(gr);
         ebc.render(gr);
         ec.render(gr);
@@ -127,55 +128,48 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             ad.renderBullets(gr);        
         }
     }
+    public void playerDraw(Player p , Graphics gr){
+        player.draw(gr,this);
+        player.getDrone().draw(gr);
+        player.drawHealth(gr);
+        player.checkIfPlayerIsStillAlive();
+    }
     @Override
     public void keyTyped(KeyEvent e) {
+    }
+    @Override
+    public void keyPressed(KeyEvent e){
+        int typed = e.getKeyCode();
+        processKey(typed, true);
 
     }
-
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyReleased(KeyEvent e){
         int typed = e.getKeyCode();
-        if(typed== e.VK_S)
-        {
-            down = true;
-        }
-        else if(typed== e.VK_Z)
-        {
-            up = true;
-        }
-        else if(typed== e.VK_Q)
-        {
-            left = true;
-        }
-        else if(typed== e.VK_D)
-        {
-            right = true;            
-        }        
+        processKey(typed, false);
     }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        int typed = e.getKeyCode();
-        if(typed== e.VK_S){
-            down = false;
-        }
-        else if(typed== e.VK_Z)
-        {            
-            up = false;
-        }
-        else if(typed== e.VK_Q)
-        {            
-            left = false;
-        }
-        else if(typed== e.VK_D)
-        {            
-            right = false;            
-        }
+     private void processKey(int key,boolean keystate){
+        switch(key){
+            case KeyEvent.VK_S:
+                down = keystate;
+                break;
+            case KeyEvent.VK_Z:
+                up = keystate;
+                break;
+            case  KeyEvent.VK_Q:
+                left = keystate;
+                break;
+            case KeyEvent.VK_D:
+                right = keystate;
+                break;
+            case KeyEvent.VK_SPACE:
+                pc.useADHD();
+                break;
+        }    
     }
 
     @Override
     public void run() {
-        
         while(true)
         {            
             try {
@@ -189,12 +183,13 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             checkShoot();
             checkInput();
             coullisionDetects();
-            controller.update();
+            controller.update(mouseX,mouseY);
             ec.update();
             ebc.update();
             pc.updatePowerups();
             pc.checkForPOwerUp();
-            gf.updateScore(player.getScore()+"");
+            gf.updateScoreP1(player.getScore()+"");
+            gf.updateAdhdPowerups(player.getAmountOfAdhdPowerups()+"");
             player.updateHealth();
             repaint();
         }
@@ -256,7 +251,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             shoot=false;
         }
     }
-
+    
     @Override
     public void mouseEntered(MouseEvent e) {
     
@@ -281,5 +276,5 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     } 
     public Background getBackGround(){
         return this.background;
-    }  
+    }
 }

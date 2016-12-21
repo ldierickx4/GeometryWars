@@ -33,8 +33,8 @@ public class Game extends Application{
     
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        //GameFrame window = new GameFrame();
-        launch(args);
+        GameFrame window = new GameFrame();
+        //launch(args);
     }
 
     @Override

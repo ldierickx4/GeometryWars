@@ -7,6 +7,7 @@ package AstralStrifes.Drone;
 
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 
 /**
@@ -16,10 +17,10 @@ import PresentationLayer.SingleGamePanel;
 public class KillDrone extends Drone implements Runnable{
     private Thread thread;
     private EnemyController ec;
-    public KillDrone(Player p,SingleGamePanel gp) {
+    public KillDrone(Player p,GamePanel gp) {
         super(p);
         this.ec = gp.getEc();
-        String link="resources/gameSprites/attack2.png";
+        String link = "resources/gameSprites/attack2.png";
         super.loadImage(link);
         this.thread = new Thread(this);
         thread.start();

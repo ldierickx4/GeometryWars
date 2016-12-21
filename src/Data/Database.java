@@ -5,7 +5,7 @@
  */
 package Data;
 
-import AstralStrifes.Enemy.Enemy;
+import AstralStrifes.Enemy.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +36,7 @@ public class Database {
     private int amountEnemies;
     private int highScorePlayer;
     private String imgPath;
+    private List<Enemy> wave1;
     
     public Database() {
         //Server registreren
@@ -153,6 +155,7 @@ public class Database {
     }
     
     public int getAmountOfTypeInWave(int enemyid){
+        //wave1 = new LinkedList<Enemy>();
         try{
            String sql = "SELECT amount FROM wave_enemies WHERE enemy_id = (?)";
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -160,6 +163,10 @@ public class Database {
            ResultSet rs = pstmt.executeQuery();
            if(rs.next()){
                int amount = rs.getInt("amount");
+               String type = rs.getString("enemy_name");
+               if(type == "shootingenemy" ){
+                   //wave1.add(e);
+               }
                this.amountEnemies = amount;
            }
            pstmt.close();
@@ -168,6 +175,22 @@ public class Database {
             ex.printStackTrace();
         }
         return amountEnemies;
+    }
+    
+    public String getUsername(String username){
+        try{
+           String sql = "SELECT username FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String usern = rs.getString("username");
+               this.username = usern;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return username;
     }
     public boolean getUserExist(){
         System.out.println(this.userExist);
@@ -201,8 +224,14 @@ public class Database {
         //db.getUserExist();
         //db.setPlayerHighscore(5, 10000);
         //db.getPlayerHighScore("VangeelJ");
+<<<<<<< HEAD
         System.out.println(db.getUsername("jorre"));
         
+=======
+        System.out.println(db.getEnemyImage("normalenemy"));
+        System.out.println(db.getUsername("VangeelJ"));
+        System.out.println(db.getUsername("AstralKing"));
+>>>>>>> origin/master
     }
     
     

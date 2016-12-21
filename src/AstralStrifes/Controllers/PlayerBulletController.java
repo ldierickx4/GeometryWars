@@ -7,6 +7,7 @@ package AstralStrifes.Controllers;
 
 import AstralStrifes.Bullet;
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,22 +21,29 @@ import java.util.logging.Logger;
  * @author laurensdierickx
  */
 public class PlayerBulletController implements Runnable{
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
     private Thread thread;
     private boolean shooting= false;
+    private int FIRING_RATE = 100;
+    private double aimX;
+    private double aimY;
     
-    public PlayerBulletController(Player player, SingleGamePanel gp)
+    public PlayerBulletController(Player player,GamePanel gp,double aimx,double aimy)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
         this.gp = gp;
+        this.aimX = aimX;
+        this.aimY = aimY;
     }
     public void addBullet(Bullet b){
         bullets.add(b);
     }
-    public void update(){
+    public void update(double aimX , double aimY){
+        this.aimX = aimX;
+        this.aimY = aimY;
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);
@@ -50,9 +58,9 @@ public class PlayerBulletController implements Runnable{
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);     
-            tempBullet.draw(g);
+            tempBullet.draw(g);                
         }
-    }
+    } 
     public void setShooting()
     {    
         this.shooting=true;
@@ -69,13 +77,12 @@ public class PlayerBulletController implements Runnable{
         while(this.shooting)
         {            
             try {
-		Thread.sleep(100);
+		Thread.sleep(FIRING_RATE);
 		}
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            
-            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
+            Bullet b = new Bullet(player.getx(),player.gety(),aimX,aimY,"player");
             addBullet(b);
         }
         thread=null;
@@ -85,5 +92,17 @@ public class PlayerBulletController implements Runnable{
     }
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
+    }
+    
+    public int getFiringRate(){
+        return this.FIRING_RATE;
+    }
+    
+    public void boostFiringRate(){
+        this.FIRING_RATE = 40;
+    }
+    
+    public void resetFiringRate(){
+        this.FIRING_RATE = 100;
     }
 }

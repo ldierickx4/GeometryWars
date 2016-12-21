@@ -5,11 +5,13 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GamePanel;
 import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Drone.Drone;
 import AstralStrifes.Drone.HealDrone;
 import AstralStrifes.Drone.KillDrone;
 import AstralStrifes.Enemy.Manna;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -43,12 +45,21 @@ public class Player {
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
     private Drone sd;
-    private SingleGamePanel gp;
+    private GamePanel gp;
     private int bgheight;
     private int bgwidth;
+    private int healthX;
+    private int healthY;
+
+    private int amountOfAdhdPowerups;
+
+    private int playerstatus;
+
     
-    public Player(SingleGamePanel gp){
+    public Player(GamePanel gp,int playerstatus){
+
         this.gp = gp;
+        this.playerstatus = playerstatus;
         this.width=28;
         this.height=30;
         this.x = 170.0;
@@ -59,6 +70,7 @@ public class Player {
         this.bgheight = gp.getBackGround().getHeight()-40;
         this.bgwidth = gp.getBackGround().getWidth()-25;
         manna= new LinkedList<Manna>();
+        amountOfAdhdPowerups = 1;
     }
     public void makeDrone(String drone){
         if(drone.equals("heal")){
@@ -80,11 +92,19 @@ public class Player {
         this.playerBounds = new Rectangle(getPlayerCenterX(),getPlayerCenterY(), image.getWidth(), image.getHeight());
     }
     private void loadImage() {
+        String link = "resources/gameSprites/ship2.png";
+        healthX=880;
+        healthY=20;
+        if(playerstatus==1){
+            healthX=20;
+            healthY=20;
+            link = "resources/gameSprites/ship.png";
+        }
         BufferedImage i = null;
         try {
-            i = ImageIO.read(new File("resources/gameSprites/ship.png"));
+            i = ImageIO.read(new File(link));
         } catch (IOException ex) {
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         }
         image = i;
     }
@@ -147,12 +167,12 @@ public class Player {
     { 
         return (int)(y)-image.getWidth()/2;
     }
-    public void draw(Graphics g,SingleGamePanel gp)
+    public void draw(Graphics g,GamePanel gp)
     {
         AffineTransform reset = new AffineTransform();
         Graphics2D g2 = (Graphics2D)g;
         g2.rotate(getPlayerAngle(),getx(),gety());
-        g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),gp);
+        g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),null);
         g2.setTransform(reset);
     }
 
@@ -161,18 +181,22 @@ public class Player {
     }
     
     public void drawHealth(Graphics g){     
-        g.drawRect(20, 20, maxHealth, 40);
+        g.drawRect(healthX, healthY, maxHealth, 40);
         g.setColor(Color.red);
-        g.fillRect(20, 20, maxHealth, 40);  
-        g.drawRect(20, 20, health, 40);
+        g.fillRect(healthX, healthY, maxHealth, 40);  
+        g.drawRect(healthX, healthY, health, 40);
         g.setColor(Color.green);
-        g.fillRect(20, 20, health, 40);
+        g.fillRect(healthX, healthY, health, 40);
     }
     
     public void checkIfPlayerIsStillAlive(){ //TODO CONTINUE HIHI
         if(health <= 0){
             System.out.println("Player iz dead");
         }
+    }
+    public int getHealth()
+    {
+        return this.health;
     }
   
     public int getScore() {
@@ -199,7 +223,7 @@ public class Player {
        this.health -= amount;
    }
 
-    public int updateHealth() {
+    public int updateHealth(){
         
         return health;
     }
@@ -207,7 +231,7 @@ public class Player {
     public void addManna(Manna m){
         this.manna.add(m);
     }
-    public SingleGamePanel getgp(){
+    public GamePanel getgp(){
         return this.gp;
     }
     public void heal(int heal){
@@ -216,5 +240,21 @@ public class Player {
     
     public void boostSpeed(int speed){
         this.SPEED = speed;
+    }
+    
+    public int getAmountOfAdhdPowerups(){
+        return this.amountOfAdhdPowerups;
+    }
+    
+    public void setAmoundOfAdhdPowerups(int amount){
+        this.amountOfAdhdPowerups = amount;
+    }
+    
+    public void addOneAdhdPowerup(){
+        this.amountOfAdhdPowerups += 1;
+    }
+    
+    public void reduceAdhd(){
+        this.amountOfAdhdPowerups-= 1;
     }
 }

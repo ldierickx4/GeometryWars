@@ -5,7 +5,7 @@
  */
 package AstralStrifes;
 
-import PresentationLayer.SingleGamePanel;
+import PresentationLayer.GamePanel;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

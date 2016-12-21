@@ -5,6 +5,7 @@
  */
 package AstralStrifes;
 
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -25,8 +26,7 @@ public class Powerup{
     private int rangeMin = 50;
     private int rangeMax = 750;
     private Thread t;
-    private SingleGamePanel gp;
-
+    private GamePanel gp;
     public boolean used = false;
     public boolean pickedUp = false;
     public BufferedImage image;
@@ -34,11 +34,13 @@ public class Powerup{
     public String name;
     
 
-    public Powerup(SingleGamePanel gp) {
+    public Powerup(GamePanel gp) {
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.gp = gp;
+        //t = new Thread(this);
+        //t.start();
     } 
     
     
