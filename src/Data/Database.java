@@ -166,8 +166,7 @@ public class Database {
         }
         return amountEnemies;
     }
-    
-<<<<<<< HEAD
+
     public String getUsername(String username){
         try{
            String sql = "SELECT username FROM users WHERE username = (?)";
@@ -198,11 +197,9 @@ public class Database {
             ex.printStackTrace();
         }
         return userid;
-=======
+    }
     public boolean getUserExist(){
-        System.out.println(this.userExist);
         return this.userExist;      
->>>>>>> origin/master
     }
     
     public String getPassword(String username){
@@ -223,11 +220,7 @@ public class Database {
     
     public String getEmail(String username){
         try{
-<<<<<<< HEAD
-           String sql = "SELECT email FROM users WHERE username = (?)";
-=======
            String sql = "SELECT username FROM users WHERE username = (?)";
->>>>>>> origin/master
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
            pstmt.setString(1, username);           
            ResultSet rs = pstmt.executeQuery();
@@ -292,7 +285,7 @@ public class Database {
         }
         return astrals;
     }
-<<<<<<< HEAD
+
     
     public int getGameid(String username){
         try{
@@ -330,19 +323,13 @@ public class Database {
         return rankId;
     }
     
-    public boolean getUserExist(){
-        System.out.println(this.userExist);
-        return this.userExist;      
-    }
-    
     public boolean getUserAdded(){
         return this.userAdded;
     }
     
    
-=======
 
->>>>>>> origin/master
+
   
     public static void main(String[] args) {
         // TODO code application logic here
@@ -352,14 +339,13 @@ public class Database {
         //db.setPlayerHighscore(5, 10000);
         //db.getPlayerHighScore("VangeelJ");
 
-<<<<<<< HEAD
+
         //System.out.println(db.getEnemyImage("normalenemy"));
         //System.out.println(db.getUsername("VangeelJ"));
-=======
+
         System.out.println(db.getEnemyImage("normalenemy"));
         //System.out.println(db.getUsername("VangeelJ"));
         //System.out.println(db.getUsername("AstralKing"));
->>>>>>> origin/master
     }
     
     

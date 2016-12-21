@@ -251,17 +251,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             pc2.checkForPOwerUp();
             updatePlayer(player);
             updatePlayer(player2);
-<<<<<<< HEAD
-            gf.updateScore(player.getScore()+"");
-=======
-
             gf.updateScoreP1(player.getScore()+"");
-
             gf.updateScoreP2(player2.getScore()+"");
-
             gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
             gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups()+"");
->>>>>>> origin/master
             repaint();
         }
     }    

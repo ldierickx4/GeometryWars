@@ -26,15 +26,10 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
-<<<<<<< HEAD
-    private JLabel score;
-    private JLabel adhdPowerup;
-=======
     private JLabel scoreP1;
     private JLabel scoreP2;
     private JLabel adhdPowerupP1;
     private JLabel adhdPowerupP2;
->>>>>>> origin/master
     public static void main(String[] args){
         GameFrame gf = new GameFrame();   
     }
@@ -52,38 +47,18 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-<<<<<<< HEAD
         gamePanel = new MultiGamePanel(this);
-        score = new JLabel();
-        adhdPowerup = new JLabel();
         //scoreTitle.setLocation(500, 500);
-        score.setText("Score: ");
-        score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        score.setForeground(Color.WHITE);
-        adhdPowerup.setText("ADHD Powerups: ");
-        adhdPowerup.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        adhdPowerup.setForeground(Color.WHITE);
         //JLabel score = new JLabel();
         //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        //score.setForeground(Color.WHITE);
-        gamePanel.add(score);
-        gamePanel.add(adhdPowerup);
         //gamePanel.add(score);
-=======
+
         gamePanel = new MultiGamePanel(this); 
         setScoresAndPowerups();
->>>>>>> origin/master
         setContentPane(gamePanel);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
     }
-<<<<<<< HEAD
-    public void updateScore(String score)
-    {
-        String add = "Score : " + score;
-        this.score.setText(add);
-=======
-    
     public void setScoresAndPowerups(){
         
         scoreP1 = new JLabel();
@@ -126,7 +101,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     public void updateAdhdPowerupsP1(String amount){
         String add = "ADHD Powerups Player 1: " + amount + "     ";
         this.adhdPowerupP1.setText(add);
->>>>>>> origin/master
     }
     
     public void updateAdhdPowerupsP2(String amount){
