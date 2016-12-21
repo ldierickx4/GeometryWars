@@ -5,6 +5,7 @@
  */
 package FXML;
 
+import Data.*;
 import AstralStrifes.Game;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -28,6 +30,8 @@ import javafx.stage.Stage;
  */
 public class MenuLoggedInController implements Initializable {
 
+    private Stage appStage = Game.stage;
+    
     @FXML
     private GridPane loginGrid;
     
@@ -54,13 +58,16 @@ public class MenuLoggedInController implements Initializable {
     
     @FXML
     private void handleRegisterButton() throws IOException{
-        Stage appStage = Game.stage;
+        Stage appStage = Game.stage;      
         Parent loginParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
         Game.borderPane.setCenter(loginParent);
     }
     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        naam.setText("jeeeeep");   
+        //System.out.println("hi");
+       String u = UserPlay.getinstance().getU().getUsername();
+       naam.setText(u);
     }   
 }

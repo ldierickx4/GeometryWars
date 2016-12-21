@@ -22,18 +22,24 @@ import javafx.stage.Stage;
  *
  * @author JorreVynckier
  */
-public class LoginController {
+public class LoginController{
+
+
+
+    public LoginController() {
+    }
 
     /**
      * Initializes the controller class.
      */
     private Database db = new Database();
+    //public static User ingelogdeUser;
     
     @FXML
     public TextField usernameLogin;
     public TextField passwordLogin;
     public AnchorPane notLoggedIn;
-    
+        
     @FXML
     private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
@@ -47,6 +53,8 @@ public class LoginController {
         System.out.println(usernameLogin.getText());
         this.db.checkUserDB(usernameLogin.getText(), passwordLogin.getText());
         if (this.db.getUserExist()){
+            User ingelogdeUser = new User(db.getUsername(usernameLogin.getText()), "jorre", "jorre@", 20, 20000, 7, 2, 1);  
+            UserPlay.getinstance().setU(ingelogdeUser);
             Stage appStage = Game.stage;
             Parent loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));
             Game.borderPane.setCenter(loginParent);
@@ -55,11 +63,10 @@ public class LoginController {
         }    
     }
     
+    
+    
     @FXML
     private void handleNotLoggedInButton(){
         notLoggedIn.setVisible(false);
     }
-    
-    
-    
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package AstralStrifes;
-
 import PresentationLayer.GameFrame;
 import java.io.IOException;
 import javafx.application.Application;
@@ -49,5 +48,5 @@ public class Game extends Application{
         scene.getStylesheets().add("@../../FXML/FXMLSS.css");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }   
+    }    
 }
