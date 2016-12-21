@@ -33,7 +33,8 @@ public class PowerupController{
         this.powerups = new LinkedList<Powerup>();
         this.usedPowers = new LinkedList<Powerup>();
         this.player = player;
-        this.gp = gp;
+        this.gp = gp;        
+        getPbc();
     }
     public void addUsed(Powerup p){
         usedPowers.add(p);
@@ -44,8 +45,8 @@ public class PowerupController{
     
     public void updatePowerups(){
         score = player.getScore();
-        if(score%3000 == 0 && score!=0 && powerups.size() == 0){
-            SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp);
+        if(score%150 == 0 && score!=0 && powerups.size() == 0){
+            SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp,player);
             powerups.add(powerup);
         }   
     }
@@ -63,10 +64,8 @@ public class PowerupController{
             powerup.start();
             player.reduceAdhd();
             powerups.clear();
-            //System.out.println("Using ADHD");
         }    
     }
-    
     public void checkForPOwerUp(){
         for(int i=0;i<usedPowers.size();i++){
             Powerup pu = usedPowers.get(i);
@@ -76,7 +75,7 @@ public class PowerupController{
                     sp.start();
                 }
                 catch(Exception ex){
-                    System.out.println(ex);
+                    //System.out.println(ex.getMessage());
                 }
             }
         }

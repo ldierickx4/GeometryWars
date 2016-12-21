@@ -422,7 +422,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             up2 = false;
         }
     }
-
     @Override
     public String getType() {
         return this.type;
