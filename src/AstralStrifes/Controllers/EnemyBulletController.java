@@ -14,6 +14,7 @@ import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  *
@@ -22,13 +23,14 @@ import java.util.LinkedList;
 public class EnemyBulletController implements Runnable {
     private GamePanel gp;
     private LinkedList<Bullet> bullets;
-    private Player player;
-    private Thread thread;    
+    private LinkedList<Player> players;
+    private Thread thread;
+    private Random r = new Random();
     
-    public EnemyBulletController(Player player, GamePanel gp)
+    public EnemyBulletController(LinkedList<Player> players, GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
-        this.player = player;
+        this.players = players;
         this.gp = gp;
         this.thread = new Thread(this);        
         thread.start();
@@ -70,8 +72,18 @@ public class EnemyBulletController implements Runnable {
     public LinkedList<Bullet> giveBullets(){
         return this.bullets;    
     }
+    public Player getRandomPlayer(){
+        int ran = 1;
+        int aantal = players.size();
+        if(aantal>1){
+            ran = r.nextInt(aantal);
+        }
+        Player p = players.get(ran);
+        return p;
+    }
     public void updateEnemyBullets()
-    {
+    {   
+        Player p = getRandomPlayer();
         LinkedList<Enemy> enemy = gp.getEc().giveEnemies();
         for(int i=0; i<enemy.size();i++)
         {
@@ -79,7 +91,7 @@ public class EnemyBulletController implements Runnable {
             if(e.getType().equals("shooting"))
             {
                 ShootingEnemy sE = (ShootingEnemy) e;
-                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), player.getx(), player.gety(), "enemy");
+                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), p.getx(), p.gety(), "enemy");
                 addBullet(b);
             }
             else if(e.getType().equals("saturn")){

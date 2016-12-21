@@ -29,13 +29,14 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import net.java.games.input.Component;
-import net.java.games.input.Controller;
-
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Controllers;
+import org.lwjgl.input.Controller;
 /**
  *
  * @author Laurens
@@ -47,25 +48,33 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private Background background;
     private boolean running = true;
     private Thread thread;
-    private boolean down = false;
-    private boolean up = false;
-    private boolean left = false;
-    private boolean right = false;
-    private boolean shoot = false;
+    private boolean down1 = false;
+    private boolean up1 = false;
+    private boolean left1 = false;
+    private boolean right1 = false;
+    private boolean shoot1 = false;
     private double imageAngleRad = 0;
+    private LinkedList<Player> players;
     //player 1
     private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
     private PowerupController pc;
     private EnemyBulletController ebc;
-    //player 2
-    private PlayerBulletController controller2;
-    private Controller Pscon;
-    
-    private JLabel score;
     private double mouseX;
     private double mouseY;
+    //player 2
+    private PlayerBulletController controller2;
+    private Controller pscon;
+    private boolean shoot2 = false;
+    private boolean down2 = false;
+    private boolean up2 = false;
+    private boolean left2 = false;
+    private boolean right2 = false;
+    private double aimX=0;
+    private double aimY=0;
+    
+    private JLabel score;
     private GameFrame gf;
     
     private Boolean attackDrone = false;
@@ -76,16 +85,17 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        this.controller = new PlayerBulletController(player,this);
-        this.controller2 = new PlayerBulletController(player2, this);
-        this.ebc = new EnemyBulletController(player, this);
+        
+        this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
+        this.controller2 = new PlayerBulletController(player2, this,aimX,aimY);
+        this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-        player.makeDrone("attack");
+        player.makeDrone("heal");
         player2.makeDrone("heal");
     }
     public void setAttackdrone(){
@@ -96,28 +106,53 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         background = new Background(gf);
         player = new Player(this,1);
         player2 = new Player(this,2);
+        players = new LinkedList<Player>();
+        players.add(player);
+        players.add(player2);
         repaint();
     }
     public void controllerConnection(){
-    
+        try{
+            Controllers.create();
+        }
+        catch(LWJGLException e){
+            e.printStackTrace();
+        }
+        pscon = Controllers.getController(0);
+        Controllers.poll();
     }
-    public void checkInput(){
-        if(down){
+    public void checkInput1(){
+        if(down1){
             player.moveDown();
         }
-        if(up){
+        if(up1){
             player.moveUp();
         }
-        if(left){
+        if(left1){
             player.moveLeft();
         }
-        if(right){
+        if(right1){
             player.moveRight();
         }
     }
-    public void checkShoot()
+    public void checkInput2(){
+        if(down2){
+            player2.moveDown();
+        }
+        if(up2){
+            player2.moveUp();
+        }
+        if(left2){
+            player2.moveLeft();
+        }
+        if(right2){
+            player2.moveRight();
+        }    
+    
+    }
+    public void checkShoot(boolean pshoot , PlayerBulletController controller)
     {
-        if(shoot)
+        if(pshoot)
         {
             if(controller.getStatus()==false)controller.setShooting();
         }
@@ -133,10 +168,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         playerDraw(player , gr);
         playerDraw(player2 , gr);
         controller.render(gr);
+        controller2.render(gr);
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
-        player.drawHealth(gr);
         if(attackDrone){
             AttackDrone ad = (AttackDrone)(player.getDrone());
             ad.renderBullets(gr);        
@@ -145,8 +180,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public void playerDraw(Player p , Graphics gr){
         p.draw(gr,this);
         p.getDrone().draw(gr);
-
         p.checkIfPlayerIsStillAlive();
+        p.drawHealth(gr);
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -167,16 +202,16 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private void processKey(int key,boolean keystate){
         switch(key){
             case KeyEvent.VK_S:
-                down = keystate;
+                down1 = keystate;
                 break;
             case KeyEvent.VK_Z:
-                up = keystate;
+                up1 = keystate;
                 break;
             case  KeyEvent.VK_Q:
-                left = keystate;
+                left1 = keystate;
                 break;
             case KeyEvent.VK_D:
-                right = keystate;
+                right1 = keystate;
                 break;
             case KeyEvent.VK_SPACE:
                 pc.useADHD();
@@ -193,23 +228,30 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             catch(Exception e) {
 		e.printStackTrace();
             }
-            player.updateBounds();
-            player.getDrone().letOrbit();
-            player.updateBounds();
-            player2.getDrone().letOrbit();
-            checkShoot();
-            checkInput();
+            checkShoot(shoot2,controller2);
+            checkShoot(shoot1,controller);
+            checkInput1();
+            checkInput2();
+            checkControllerInput();
             coullisionDetects();
-            controller.update();
+            controller.update(mouseX,mouseY);
+            controller2.update(aimX,aimY);
             ec.update();
             ebc.update();
             pc.updatePowerups();
             pc.checkForPOwerUp();
+            //player2.getDrone().letOrbit();
+            updatePlayer(player);
+            updatePlayer(player2);
             gf.updateScore(player.getScore()+"");
-            player.updateHealth();
             repaint();
         }
     }    
+    public void updatePlayer(Player p){
+        p.updateHealth();
+        p.updateBounds();
+        p.getDrone().letOrbit();
+    }
     public double getMouseX(){
         return this.mouseX;
     }
@@ -222,6 +264,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public void coullisionDetects(){
         cc.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
+        cc.checkEnemyBulletCoulission(controller2.giveBullets());
         if(attackDrone){
             AttackDrone ad = (AttackDrone)(player.getDrone());
             cc.checkEnemyBulletCoulission(ad.getBullets());
@@ -241,7 +284,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX=e.getX();
-        mouseY=e.getY();       
+        mouseY=e.getY();
         player.calculatePlayerAngle(mouseX,mouseY);
         
     }
@@ -256,7 +299,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public void mousePressed(MouseEvent e) {
         if(e.getButton()==e.BUTTON1)
         {
-            shoot=true;
+            shoot1=true;
         }
     }
 
@@ -264,7 +307,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public void mouseReleased(MouseEvent e) {
         if(e.getButton()==e.BUTTON1)
         {
-            shoot=false;
+            shoot1=false;
         }
     }
     
@@ -292,5 +335,66 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     } 
     public Background getBackGround(){
         return this.background;
+    }
+    public void checkControllerInput() {
+        pscon.poll();
+        checkConMove();
+        checkConAim();
+        checkConShoot();
+       //System.out.println(pscon.isButtonPressed(3)+"driehoek");
+       //System.out.println(pscon.isButtonPressed(0)+"vierkant");
+       //System.out.println(pscon.isButtonPressed(1)+"kruis");
+       //System.out.println(pscon.isButtonPressed(2)+"bol");
+       //System.out.println(pscon.isButtonPressed(4)+"l1");
+       //System.out.println(pscon.isButtonPressed(5)+"R1");
+       //System.out.println(pscon.isButtonPressed(6)+"l2");
+       //System.out.println(pscon.isButtonPressed(7)+"r2");
+       //System.out.println(pscon.isButtonPressed(8)+"share");
+       //System.out.println(pscon.isButtonPressed(9)+"options");
+       //System.out.println(pscon.isButtonPressed(10)+"links stick push");
+       //System.out.println(pscon.isButtonPressed(11)+"rechts stick push");
+       //System.out.println(pscon.isButtonPressed(12)+"ps4knop");
+       //System.out.println(pscon.isButtonPressed(13)+"touchpad");
+    }
+    private void checkConShoot(){
+        if(pscon.isButtonPressed(7)){
+            shoot2 = true;
+        }
+        else{
+            shoot2 = false;
+        }
+    }
+    private void checkConAim(){
+        this.aimX = pscon.getAxisValue(2)*1000;
+        this.aimY = pscon.getAxisValue(3)*1000;
+        player2.calculatePlayerAngle(aimX,aimY) ;
+    }
+
+    private void checkConMove() {
+        if(pscon.getAxisValue(0)>0.5)
+        {
+            right2 = true;
+        }
+        else{
+            right2 = false;
+        }
+        if(pscon.getAxisValue(0)<-0.5){
+            left2 = true;
+        }
+        else{
+            left2 = false;
+        }
+        if(pscon.getAxisValue(1)>0.5){
+            down2 = true;
+        }
+        else{
+            down2 = false;
+        }
+        if(pscon.getAxisValue(1)<-0.5){
+            up2 = true;
+        }
+        else{
+            up2 = false;
+        }
     }
 }

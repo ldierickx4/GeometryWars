@@ -27,17 +27,23 @@ public class PlayerBulletController implements Runnable{
     private Thread thread;
     private boolean shooting= false;
     private int FIRING_RATE = 100;
+    private double aimX;
+    private double aimY;
     
-    public PlayerBulletController(Player player,GamePanel gp)
+    public PlayerBulletController(Player player,GamePanel gp,double aimx,double aimy)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
         this.gp = gp;
+        this.aimX = aimX;
+        this.aimY = aimY;
     }
     public void addBullet(Bullet b){
         bullets.add(b);
     }
-    public void update(){
+    public void update(double aimX , double aimY){
+        this.aimX = aimX;
+        this.aimY = aimY;
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);
@@ -76,8 +82,7 @@ public class PlayerBulletController implements Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
-            
-            Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
+            Bullet b = new Bullet(player.getx(),player.gety(),aimX,aimY,"player");
             addBullet(b);
         }
         thread=null;

@@ -51,6 +51,8 @@ public class Player {
     private GamePanel gp;
     private int bgheight;
     private int bgwidth;
+    private int healthX;
+    private int healthY;
 
     private int amountOfAdhdPowerups;
 
@@ -89,7 +91,11 @@ public class Player {
     }
     private void loadImage() {
         String link = "resources/gameSprites/ship2.png";
+        healthX=880;
+        healthY=20;
         if(playerstatus==1){
+            healthX=20;
+            healthY=20;
             link = "resources/gameSprites/ship.png";
         }
         BufferedImage i = null;
@@ -173,12 +179,12 @@ public class Player {
     }
     
     public void drawHealth(Graphics g){     
-        g.drawRect(20, 20, maxHealth, 40);
+        g.drawRect(healthX, healthY, maxHealth, 40);
         g.setColor(Color.red);
-        g.fillRect(20, 20, maxHealth, 40);  
-        g.drawRect(20, 20, health, 40);
+        g.fillRect(healthX, healthY, maxHealth, 40);  
+        g.drawRect(healthX, healthY, health, 40);
         g.setColor(Color.green);
-        g.fillRect(20, 20, health, 40);
+        g.fillRect(healthX, healthY, health, 40);
     }
     
     public void checkIfPlayerIsStillAlive(){ //TODO CONTINUE HIHI

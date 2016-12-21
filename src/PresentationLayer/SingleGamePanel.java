@@ -29,6 +29,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -57,6 +58,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private GameFrame gf;
     private EnemyBulletController ebc;
     private Boolean attackDrone = false;
+    private LinkedList<Player> players;
     
     
     public SingleGamePanel(GameFrame gf){ 
@@ -65,8 +67,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        this.controller = new PlayerBulletController(player,this);
-        this.ebc = new EnemyBulletController(player, this);
+        this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
+        this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
@@ -80,9 +82,11 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         this.attackDrone = true;
     }
     public void createComponents()
-    {
+    {   
+        players = new LinkedList<Player>();
         background = new Background(gf);
         player = new Player(this,1);
+        players.add(player);
         repaint();
     }
     public void checkInput(){
@@ -179,7 +183,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             checkShoot();
             checkInput();
             coullisionDetects();
-            controller.update();
+            controller.update(mouseX,mouseY);
             ec.update();
             ebc.update();
             pc.updatePowerups();
