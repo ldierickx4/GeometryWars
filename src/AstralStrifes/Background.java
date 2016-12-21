@@ -23,7 +23,6 @@ public class Background {
     private GameFrame gf;
     public Background(GameFrame gf) {
         this.width = gf.getWidth();
-        System.out.println(width);
         this.height = gf.getHeight();
         loadImage();
     }

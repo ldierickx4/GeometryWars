@@ -36,7 +36,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-        GameFrame gf = new GameFrame(2,"attack","attack");   
+        GameFrame gf = new GameFrame(1,"attack");   
     }
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2){
@@ -45,7 +45,7 @@ public class GameFrame extends JFrame implements KeyListener {
         this.drone2 = drone2;
         initUi(); // HIER
     }
-    public GameFrame(int playerCount,String drone){
+    public GameFrame(int playerCount,String drone1){
         this.playerCount = playerCount;
         this.drone1 = drone1;
         initUi(); // HIER
@@ -76,6 +76,7 @@ public class GameFrame extends JFrame implements KeyListener {
             setContentPane(multiGamePanel);
             setScoresAndPowerups2();
     }   else{
+            System.out.println(drone1);
             this.singleGamePanel = new SingleGamePanel(this,drone1);
             setContentPane(singleGamePanel);
             setScoresAndPowerups1();
@@ -84,10 +85,14 @@ public class GameFrame extends JFrame implements KeyListener {
     }
     public void setScoresAndPowerups2(){ 
         scoreP1 = new JLabel();
+        scoreP1.setForeground(Color.WHITE);
         adhdPowerupP1 = new JLabel(); 
         //adhdPowerupP1.setText("ADHD Powerups Player 1: ");
         adhdPowerupP1.setForeground(Color.WHITE);
         multiGamePanel.add(adhdPowerupP1);
+        multiGamePanel.add(scoreP1);
+        
+        
         scoreP2 = new JLabel();
         //scoreP2.setText("Score Player 2: ");
         scoreP2.setForeground(Color.WHITE);
@@ -106,8 +111,6 @@ public class GameFrame extends JFrame implements KeyListener {
         //adhdPowerupP1.setText("ADHD Powerups Player 1: ");
         adhdPowerupP1.setForeground(Color.WHITE);
         singleGamePanel.add(adhdPowerupP1);    
-
-
     }
   
     public void updateScoreP1(String score)
