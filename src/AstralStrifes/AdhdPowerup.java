@@ -5,13 +5,10 @@
  */
 package AstralStrifes;
 
-<<<<<<< HEAD
 import PresentationLayer.GamePanel;
-=======
 import AstralStrifes.Controllers.PlayerBulletController;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
->>>>>>> origin/master
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -19,15 +16,6 @@ import java.awt.image.BufferedImage;
  *
  * @author Jordy
  */
-<<<<<<< HEAD
-public class AdhdPowerup extends Powerup{
-        public AdhdPowerup(String name, GamePanel gp) {
-        super(gp);
-        this.name = name;
-        String link = "resources/gameSprites/adhd.png";
-        super.loadImage(link);
-=======
-
 public class AdhdPowerup extends Powerup implements Runnable{
     
     private Thread t;
@@ -67,7 +55,6 @@ public class AdhdPowerup extends Powerup implements Runnable{
     public void endBoost(){
         pbc = gp.getBulletControler();
         pbc.resetFiringRate();
->>>>>>> origin/master
     }
     
 }

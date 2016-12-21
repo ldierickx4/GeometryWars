@@ -5,8 +5,7 @@
  */
 package Data;
 
-import AstralStrifes.Enemy;
-import AstralStrifes.ShootingEnemy;
+import AstralStrifes.Enemy.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

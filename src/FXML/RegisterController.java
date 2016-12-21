@@ -66,9 +66,7 @@ public class RegisterController  {
     @FXML
     private void tryAgainRegister(){
         registrerenNietGelukt.setVisible(false);
-<<<<<<< HEAD
-=======
-        registrerenNietGeluktBcsPass.setVisible(false);
+        //registrerenNietGeluktBcsPass.setVisible(false);
     }
     
     @FXML
@@ -87,7 +85,6 @@ public class RegisterController  {
         } else{
             return false;
         }
->>>>>>> origin/master
     }
     
     

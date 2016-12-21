@@ -40,9 +40,8 @@ public class FirstPlayController implements Initializable {
         Stage appStage = Game.stage;        
         GameFrame gameframe = new GameFrame();
     } 
-<<<<<<< HEAD
-=======
-    
+
+    /**
     @FXML
     private void changeSelectedRadio(){
         if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
@@ -52,7 +51,7 @@ public class FirstPlayController implements Initializable {
         }
         //System.out.println(players.getSelectedToggle().toString());
     }
->>>>>>> origin/master
+    **/
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {

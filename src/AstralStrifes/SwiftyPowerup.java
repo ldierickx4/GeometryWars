@@ -6,10 +6,7 @@
 package AstralStrifes;
 
 import PresentationLayer.GamePanel;
-<<<<<<< HEAD
-=======
 import PresentationLayer.SingleGamePanel;
->>>>>>> origin/master
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -49,25 +46,6 @@ public class SwiftyPowerup extends Powerup implements Runnable{
     }
     @Override
     public void run() {
-<<<<<<< HEAD
-            boolean pickedUp = super.getPickedUp();
-            System.out.println(pickedUp);
-            if(pickedUp){  
-            //Boost(4);
-                try {
-                    long time = System.currentTimeMillis();
-                    long end = time +1500;
-                    while(time <= end) {
-                      Boost();
-                      System.out.println("Swifty Active");
-                    }
-                    System.out.println("swifty inactive");
-                pickedUp = false;
-                endBoost();
-                } catch (Exception ex) {
-                    Logger.getLogger(SwiftyPowerup.class.getName()).log(Level.SEVERE, null, ex);
-                }
-=======
         super.used = true;
         while(super.pickedUp){
             long time = System.currentTimeMillis();
@@ -77,7 +55,9 @@ public class SwiftyPowerup extends Powerup implements Runnable{
             }
         endBoost();
         super.pickedUp=false;
->>>>>>> origin/master
         }
     }  
+    public void start(){
+        t.start();
+    }
 }

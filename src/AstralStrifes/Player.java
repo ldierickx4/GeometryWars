@@ -5,9 +5,7 @@
  */
 package AstralStrifes;
 
-<<<<<<< HEAD
 import PresentationLayer.GamePanel;
-=======
 import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Drone.Drone;
 import AstralStrifes.Drone.HealDrone;
@@ -15,7 +13,6 @@ import AstralStrifes.Drone.KillDrone;
 import AstralStrifes.Enemy.Manna;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
->>>>>>> origin/master
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -59,11 +56,8 @@ public class Player {
     private int playerstatus;
 
     
-<<<<<<< HEAD
-    public Player(GamePanel gp){
-=======
     public Player(GamePanel gp,int playerstatus){
->>>>>>> origin/master
+
         this.gp = gp;
         this.playerstatus = playerstatus;
         this.width=28;
@@ -78,9 +72,17 @@ public class Player {
         manna= new LinkedList<Manna>();
         amountOfAdhdPowerups = 1;
     }
-    public void makeDrone(){
-        sd = new KillDrone(this,gp);
-        //gp.setAttackdrone();
+    public void makeDrone(String drone){
+        if(drone.equals("heal")){
+            this.sd = new HealDrone(this);
+        }
+        else if(drone.equals("attack")){
+            this.sd = new AttackDrone(this, gp);
+            gp.setAttackdrone();
+        }
+        else{
+            this.sd = new KillDrone(this, gp);
+        }
     }
     public Drone getDrone(){
         return this.sd;
