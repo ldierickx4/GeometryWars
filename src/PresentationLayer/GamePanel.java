@@ -52,4 +52,5 @@ public interface GamePanel{
     public EnemyController getEc();
     public JLabel getScore();
     public Background getBackGround();
+    public String getType();
 }

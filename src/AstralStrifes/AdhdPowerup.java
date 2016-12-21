@@ -36,7 +36,7 @@ public class AdhdPowerup extends Powerup implements Runnable{
         long time = System.currentTimeMillis();
         long end = time +3000;
         while(System.currentTimeMillis()<= end) {
-            boostGun();              
+            //boostGun();              
         }
         endBoost();
     }

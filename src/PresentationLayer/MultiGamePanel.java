@@ -78,6 +78,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private GameFrame gf;
     
     private Boolean attackDrone = false;
+    private String type = "Multi";
+    
     public MultiGamePanel(GameFrame gf){
         this.gf =gf;
         controllerConnection();
@@ -244,7 +246,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             updatePlayer(player);
             updatePlayer(player2);
             gf.updateScoreP1(player.getScore()+"");
-            gf.updateScoreP1(player2.getScore()+"");
+            gf.updateScoreP2(player2.getScore()+"");
+            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
+            gf.updateAdhdPowerupsP2(player.getAmountOfAdhdPowerups()+"");
             repaint();
         }
     }    
@@ -397,5 +401,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         else{
             up2 = false;
         }
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
     }
 }
