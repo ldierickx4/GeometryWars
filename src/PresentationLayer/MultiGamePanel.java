@@ -54,17 +54,18 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private boolean right1 = false;
     private boolean shoot1 = false;
     private double imageAngleRad = 0;
+    private EnemyBulletController ebc;
     private LinkedList<Player> players;
     //player 1
     private PlayerBulletController controller;
     private CollisionController cc;
     private EnemyController ec;
     private PowerupController pc;
-    private EnemyBulletController ebc;
     private double mouseX;
     private double mouseY;
     //player 2
     private PlayerBulletController controller2;
+    private PowerupController pc2;
     private Controller pscon;
     private boolean shoot2 = false;
     private boolean down2 = false;
@@ -92,8 +93,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.controller2 = new PlayerBulletController(player2, this,aimX,aimY);
         this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
-        
         this.pc = new PowerupController(player, this);
+        this.pc2 = new PowerupController(player2,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
         thread = new Thread(this);
         thread.start();
@@ -175,6 +176,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         ebc.render(gr);
         ec.render(gr);
         pc.draw(gr);
+        pc2.draw(gr);
         if(attackDrone){
             AttackDrone ad = (AttackDrone)(player.getDrone());
             ad.renderBullets(gr);        
@@ -243,6 +245,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             ebc.update();
             pc.updatePowerups();
             pc.checkForPOwerUp();
+            pc2.checkForPOwerUp();
             //player2.getDrone().letOrbit();
             updatePlayer(player);
             updatePlayer(player2);
@@ -347,6 +350,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         checkConMove();
         checkConAim();
         checkConShoot();
+        checkUseAdhd();
        //System.out.println(pscon.isButtonPressed(3)+"driehoek");
        //System.out.println(pscon.isButtonPressed(0)+"vierkant");
        //System.out.println(pscon.isButtonPressed(1)+"kruis");
@@ -361,6 +365,11 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
        //System.out.println(pscon.isButtonPressed(11)+"rechts stick push");
        //System.out.println(pscon.isButtonPressed(12)+"ps4knop");
        //System.out.println(pscon.isButtonPressed(13)+"touchpad");
+    }
+    private void checkUseAdhd(){
+        if(pscon.isButtonPressed(1)){
+            pc2.useADHD();
+        }
     }
     private void checkConShoot(){
         if(pscon.isButtonPressed(7)){
