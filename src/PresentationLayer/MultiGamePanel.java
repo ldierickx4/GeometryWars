@@ -124,7 +124,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-        pscon = Controllers.getController(0);
+        pscon = Controllers.getController(8);
         Controllers.poll();
     }
     public void checkInput1(){
@@ -388,32 +388,32 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
     }
     private void checkConAim(){
-        this.aimX = pscon.getAxisValue(2)*1000;
-        this.aimY = pscon.getAxisValue(3)*1000;
+        this.aimX = pscon.getAxisValue(1)*1000;
+        this.aimY = pscon.getAxisValue(0)*1000;
         player2.calculatePlayerAngle(aimX,aimY) ;
     }
 
     private void checkConMove() {
-        if(pscon.getAxisValue(0)>0.5)
+        if(pscon.getAxisValue(3)>0.5)
         {
             right2 = true;
         }
         else{
             right2 = false;
         }
-        if(pscon.getAxisValue(0)<-0.5){
+        if(pscon.getAxisValue(3)<-0.5){
             left2 = true;
         }
         else{
             left2 = false;
         }
-        if(pscon.getAxisValue(1)>0.5){
+        if(pscon.getAxisValue(2)>0.5){
             down2 = true;
         }
         else{
             down2 = false;
         }
-        if(pscon.getAxisValue(1)<-0.5){
+        if(pscon.getAxisValue(2)<-0.5){
             up2 = true;
         }
         else{

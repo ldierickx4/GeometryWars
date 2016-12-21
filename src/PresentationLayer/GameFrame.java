@@ -53,7 +53,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         //gamePanel.add(score);
 
-        gamePanel = new MultiGamePanel(this); 
+        //gamePanel = new MultiGamePanel(this); 
         setScoresAndPowerups();
         setContentPane(gamePanel);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
@@ -62,25 +62,17 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     public void setScoresAndPowerups(){
         
         scoreP1 = new JLabel();
-        scoreP1.setText("Score Player 1: ");
-        scoreP1.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         scoreP1.setForeground(Color.WHITE);
         gamePanel.add(scoreP1);
         adhdPowerupP1 = new JLabel();   
-        adhdPowerupP1.setText("ADHD Powerups Player 1: ");
-        adhdPowerupP1.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         adhdPowerupP1.setForeground(Color.WHITE);
         gamePanel.add(adhdPowerupP1);
         
         if(gamePanel.getType() == "Multi"){
             scoreP2 = new JLabel();
-            scoreP2.setText("Score Player 2: ");
-            scoreP2.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
             scoreP2.setForeground(Color.WHITE);
             gamePanel.add(scoreP2);
             adhdPowerupP2 = new JLabel();   
-            adhdPowerupP2.setText("ADHD Powerups Player 2: ");
-            adhdPowerupP2.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
             adhdPowerupP2.setForeground(Color.WHITE);
             gamePanel.add(adhdPowerupP2);
         } 
