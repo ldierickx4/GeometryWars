@@ -36,7 +36,6 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         super.loadImage(link); 
         t = new Thread(this);
     }
-    
     public void Boost(){
         p.boostSpeed(4);
     }
