@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  */
 public class Database {
     
+    
     private static final String URL = "jdbc:mysql://localhost/astralstrifes";
     private static final String USER = "Jens";
     private static final String PWD = "jens";
@@ -326,6 +327,8 @@ public class Database {
     public boolean getUserAdded(){
         return this.userAdded;
     }
+    
+   
   
     public static void main(String[] args) {
         // TODO code application logic here
@@ -334,17 +337,9 @@ public class Database {
         //db.getUserExist();
         //db.setPlayerHighscore(5, 10000);
         //db.getPlayerHighScore("VangeelJ");
+
         //System.out.println(db.getEnemyImage("normalenemy"));
         //System.out.println(db.getUsername("VangeelJ"));
-        System.out.println(db.getUserid("VangeelJ"));
-        System.out.println(db.getUsername("VangeelJ"));
-        System.out.println(db.getPassword("VangeelJ"));
-        System.out.println(db.getEmail("VangeelJ"));
-        System.out.println(db.getXP("VangeelJ"));
-        System.out.println(db.getPlayerHighScore("VangeelJ"));
-        System.out.println(db.getAstrals("VangeelJ"));
-        System.out.println(db.getGameid("VangeelJ"));
-        System.out.println(db.getRankid("VangeelJ"));
     }
     
     
