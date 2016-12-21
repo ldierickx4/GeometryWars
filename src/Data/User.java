@@ -16,20 +16,16 @@ public class User {
     private String email;
     private int xp;
     private int Highscore;
-    private int astrals;
-    private int game_id;
     private int rank_id;
 
     
 
-    public User(String username, String pw, String email, int xp, int Highscore, int astrals, int game_id, int rank_id) {
+    public User(String username, String pw, String email, int xp, int Highscore, int rank_id) {
         this.username = username;
         this.pw = pw;
         this.email = email;
         this.xp = xp;
         this.Highscore = Highscore;
-        this.astrals = astrals;
-        this.game_id = game_id;
         this.rank_id = rank_id;
     }
     
@@ -73,22 +69,6 @@ public class User {
 
     public void setHighscore(int Highscore) {
         this.Highscore = Highscore;
-    }
-
-    public int getAstrals() {
-        return astrals;
-    }
-
-    public void setAstrals(int astrals) {
-        this.astrals = astrals;
-    }
-
-    public int getGame_id() {
-        return game_id;
-    }
-
-    public void setGame_id(int game_id) {
-        this.game_id = game_id;
     }
 
     public int getRank_id() {

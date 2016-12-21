@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -36,7 +37,7 @@ public class MenuLoggedInController implements Initializable {
     private GridPane loginGrid;
     
     @FXML
-    private Label naam;
+    private Hyperlink naam;
         
     @FXML
     private Label label;
@@ -54,12 +55,20 @@ public class MenuLoggedInController implements Initializable {
         System.out.println("handleLoginButton");
         Parent loginParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Game.borderPane.setCenter(loginParent);
+        UserPlay.getinstance().setU(null);
     }
     
     @FXML
     private void handleRegisterButton() throws IOException{
         Stage appStage = Game.stage;      
         Parent loginParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Game.borderPane.setCenter(loginParent);
+    }
+    
+    @FXML
+    private void handlePlayerInfoButton() throws IOException{
+        Stage appStage = Game.stage;      
+        Parent loginParent = FXMLLoader.load(getClass().getResource("PlayerInfo.fxml"));
         Game.borderPane.setCenter(loginParent);
     }
     

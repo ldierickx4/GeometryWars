@@ -49,11 +49,10 @@ public class LoginController{
     
     @FXML
     private void handleLoginButton() throws IOException{
-        System.out.println(passwordLogin.isVisible());
-        System.out.println(usernameLogin.getText());
         this.db.checkUserDB(usernameLogin.getText(), passwordLogin.getText());
         if (this.db.getUserExist()){
-            User ingelogdeUser = new User(db.getUsername(usernameLogin.getText()), "jorre", "jorre@", 20, 20000, 7, 2, 1);  
+            String userName = usernameLogin.getText();
+            User ingelogdeUser = new User(db.getUsername(userName), "jorre", "jorre@", 20,  2000, 1);  
             UserPlay.getinstance().setU(ingelogdeUser);
             Stage appStage = Game.stage;
             Parent loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));

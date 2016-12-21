@@ -6,6 +6,7 @@
 package FXML;
 
 import AstralStrifes.Game;
+import Data.UserPlay;
 import PresentationLayer.GameFrame;
 import java.awt.Button;
 import java.awt.Label;
@@ -40,13 +41,21 @@ public class FirstPlayController implements Initializable {
     private ToggleGroup players;
     
     @FXML 
-    private Pane PlayerOne;
+    private Pane PlayerOneDrone;
+    
+    @FXML
+    private Pane PlayerTwoDrone;
     
     @FXML
     private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
-        Parent loginParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        Game.borderPane.setCenter(loginParent);
+        if (UserPlay.getinstance().getU() != null){
+            Parent loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));
+            Game.borderPane.setCenter(loginParent);
+        } else{
+            Parent loginParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+            Game.borderPane.setCenter(loginParent);
+        }     
     }
     
     @FXML 
@@ -57,14 +66,12 @@ public class FirstPlayController implements Initializable {
     
     @FXML
     private void changeSelectedRadio(){
+        System.out.println(players.getSelectedToggle());
         if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
-           PlayerOne.setVisible(false);
-           System.out.println("fixTwee");
+           PlayerOneDrone.setVisible(true);
         }else{
-           PlayerOne.setVisible(true);
-           System.out.println("fixEen");
+           PlayerOneDrone.setVisible(false);
         }
-        //System.out.println(players.getSelectedToggle().toString());
     }
 
         

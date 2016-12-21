@@ -42,7 +42,7 @@ public class Game extends Application{
         this.stage = primaryStage;
         primaryStage.setTitle("AstralStrifes");
         primaryStage.setResizable(false);
-        Scene scene = new Scene(borderPane,900,900);
+        Scene scene = new Scene(borderPane,1000,800);
         Parent mainPane = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
         this.borderPane.setCenter(mainPane);
         scene.getStylesheets().add("@../../FXML/FXMLSS.css");

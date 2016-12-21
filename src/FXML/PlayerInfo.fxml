@@ -3,14 +3,12 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="registerPage" prefHeight="800.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.RegisterController">
+<AnchorPane id="AnchorPane" fx:id="registerPage" prefHeight="800.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.PlayerInfoController">
     <stylesheets>
         <URL value="@FXMLSS.css" />
     </stylesheets>
@@ -20,41 +18,32 @@
             <Image url="@../resources/AstralStrifesTransparent1.png" />
          </image>
       </ImageView>
-      <Button layoutX="62.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
-      <Label layoutX="180.0" layoutY="270.0" prefHeight="83.0" prefWidth="490.0" text="REGISTREREN" textFill="WHITE">
+      <Button fx:id="back" layoutX="62.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleBackController" text="Back" />
+      <Label layoutX="180.0" layoutY="270.0" prefHeight="83.0" prefWidth="400.0" text="PLAYER INFO OF" textFill="WHITE">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Label layoutX="229.0" layoutY="360.0" text="Username:" textFill="WHITE">
+      <Label layoutX="210.0" layoutY="360.0" text="Email:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="207.0" layoutY="419.0" text="E-mailadres:" textFill="WHITE">
+      <Label layoutX="239.0" layoutY="419.0" text="XP:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="230.0" layoutY="481.0" text="Password:" textFill="WHITE">
+      <Label layoutX="159.0" layoutY="548.0" text="Highscore:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="143.0" layoutY="543.0" text="Repeat Password:" textFill="WHITE">
+      <Label layoutX="214.0" layoutY="486.0" text="Rank:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="registerUsername" layoutX="477.0" layoutY="364.0" />
-      <TextField id="registerEmail" fx:id="registerEmail" layoutX="476.0" layoutY="423.0" />
-      <PasswordField id="passwordRegister" fx:id="passwordRegister" layoutX="475.0" layoutY="481.0" />
-      <PasswordField id="repeatPasswordRegister" fx:id="repeatPasswordRegister" layoutX="474.0" layoutY="544.0" />
-      <Button id="registerButton" fx:id="registerButton" layoutX="413.0" layoutY="635.0" mnemonicParsing="false" onAction="#registerButton" text="Register">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
       <AnchorPane id="registrerenGelukt" fx:id="registrerenGelukt" layoutX="273.0" layoutY="341.0" prefHeight="278.0" prefWidth="305.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Label layoutX="34.0" layoutY="17.0" text="Registreren is gelukt">
@@ -62,7 +51,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="119.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleBackButton" text="Ga verder" />
+            <Button layoutX="119.0" layoutY="126.0" mnemonicParsing="false" text="Ga verder" />
          </children>
       </AnchorPane>
       <AnchorPane id="registrerenNietGelukt" fx:id="registrerenNietGelukt" layoutX="290.0" layoutY="348.0" prefHeight="278.0" prefWidth="305.0" style="-fx-background-color: white;" visible="false">
@@ -72,7 +61,6 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button id="tryAgainRegister" fx:id="tryAgainRegister" layoutX="89.0" layoutY="124.0" mnemonicParsing="false" onAction="#tryAgainRegister" text="Probeer opnieuw" />
          </children>
       </AnchorPane>
       <AnchorPane id="registrerenNietGeluktBcsPass" fx:id="registrerenNietGeluktBcsPass" layoutX="311.0" layoutY="359.0" prefHeight="167.0" prefWidth="330.0" style="-fx-background-color: white;" visible="false">
@@ -82,9 +70,34 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button id="tryAgainRegister" fx:id="tryAgainRegister1" layoutX="95.0" layoutY="120.0" mnemonicParsing="false" onAction="#tryAgainRegister" text="Probeer opnieuw" />
+            <Button id="tryAgainRegister" fx:id="tryAgainRegister1" layoutX="95.0" layoutY="120.0" mnemonicParsing="false" text="Probeer opnieuw" />
             <Label layoutX="9.0" layoutY="61.0" text="Uw opgegeven wachtwoorden komen niet overeen." />
          </children>
       </AnchorPane>
+      <Label id="username" fx:id="username" layoutX="580.0" layoutY="271.0" prefHeight="83.0" prefWidth="332.0" text="Jorre" textFill="WHITE">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label id="email" fx:id="email" layoutX="319.0" layoutY="358.0" text="Email:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="xp" layoutX="320.0" layoutY="421.0" text="Email:" textFill="WHITE" fx:id="xp">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="rank" fx:id="rank" layoutX="321.0" layoutY="487.0" text="Email:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="highscore" fx:id="highscore" layoutX="322.0" layoutY="549.0" text="Email:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
