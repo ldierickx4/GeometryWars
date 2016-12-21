@@ -82,14 +82,13 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private Boolean attackDrone = false;
     private String type = "Multi";
     
-    public MultiGamePanel(GameFrame gf){
+    public MultiGamePanel(GameFrame gf,String drone1,String drone2){
         this.gf =gf;
         controllerConnection();
         createComponents();
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
-        
         this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
         this.controller2 = new PlayerBulletController(player2, this,aimX,aimY);
         this.ebc = new EnemyBulletController(players, this);
@@ -101,8 +100,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-        player.makeDrone("heal");
-        player2.makeDrone("heal");
+        player.makeDrone(drone1);
+        player2.makeDrone(drone2);
     }
     public void setAttackdrone(){
         this.attackDrone = true;
@@ -179,9 +178,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         ec.render(gr);
         pc.draw(gr);
         pc2.draw(gr);
-        if(attackDrone){
-            AttackDrone ad = (AttackDrone)(player.getDrone());
-            ad.renderBullets(gr);        
+    }
+    public void renderAttackDrone(Player p,Graphics gr){
+        if(p.getAttackDroneStatus()){
+            AttackDrone ad = (AttackDrone)(p.getDrone());
+            ad.renderBullets(gr);
+            cc.checkEnemyBulletCoulission(ad.getBullets());
         }
     }
     public void playerDraw(Player p , Graphics gr){
@@ -189,6 +191,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         p.getDrone().draw(gr);
         p.checkIfPlayerIsStillAlive();
         p.drawHealth(gr);
+        renderAttackDrone(p, gr);
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -251,10 +254,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             pc2.checkForPOwerUp();
             updatePlayer(player);
             updatePlayer(player2);
-            gf.updateScoreP1(player.getScore()+"");
-            gf.updateScoreP2(player2.getScore()+"");
             gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
             gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups()+"");
+            gf.updateScoreP1(player.getScore()+"");
+            gf.updateScoreP2(player2.getScore()+"");
             repaint();
         }
     }    
@@ -277,13 +280,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         cc2.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
         cc.checkEnemyBulletCoulission(controller2.giveBullets());
-        if(attackDrone){
-            AttackDrone ad = (AttackDrone)(player.getDrone());
-            cc.checkEnemyBulletCoulission(ad.getBullets());
-        }
         cc.checkEnemyPlayerCollision();
         cc2.checkEnemyPlayerCollision();
-        
         cc2.checkIfPowerupGetsPickedUp();
         cc.checkIfPowerupGetsPickedUp();
         
@@ -338,6 +336,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public PlayerBulletController getBulletControler()
     {
         return this.controller;
+    }
+    public PlayerBulletController getBulletControler2()
+    {
+        return this.controller2;
     }
     public CollisionController getCC()
     {

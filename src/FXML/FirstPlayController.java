@@ -52,7 +52,7 @@ public class FirstPlayController implements Initializable {
     @FXML 
     private void handleStartButton() throws IOException{
         Stage appStage = Game.stage;        
-        GameFrame gameframe = new GameFrame();
+        //GameFrame gameframe = new GameFrame();
     } 
     
     @FXML

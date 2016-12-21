@@ -50,7 +50,7 @@ public class Player {
     private int bgwidth;
     private int healthX;
     private int healthY;
-
+    private boolean attackDroneStatus;
     private int amountOfAdhdPowerups;
 
     private int playerstatus;
@@ -78,7 +78,7 @@ public class Player {
         }
         else if(drone.equals("attack")){
             this.sd = new AttackDrone(this, gp);
-            gp.setAttackdrone();
+            this.attackDroneStatus = true;
         }
         else{
             this.sd = new KillDrone(this, gp);
@@ -256,5 +256,11 @@ public class Player {
     
     public void reduceAdhd(){
         this.amountOfAdhdPowerups-= 1;
+    }
+    public boolean getAttackDroneStatus(){
+        return this.attackDroneStatus;
+    }
+    public int getPlayerStatus(){
+        return this.playerstatus;
     }
 }
