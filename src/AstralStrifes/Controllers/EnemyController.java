@@ -3,9 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Controllers;
 
-import PresentationLayer.GamePanel;
+import AstralStrifes.Enemy.Enemy;
+import AstralStrifes.Enemy.Manna;
+import AstralStrifes.Enemy.NormalEnemy;
+import AstralStrifes.Player;
+import AstralStrifes.Enemy.SaturnEnemy;
+import AstralStrifes.Enemy.ShootingEnemy;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.Random;
@@ -23,9 +29,9 @@ public class EnemyController implements Runnable{
     private Thread thread;
     private Player p;
     private int count;
-    private GamePanel gp;
+    private SingleGamePanel gp;
         
-    public EnemyController(Player p , GamePanel gp) {
+    public EnemyController(Player p , SingleGamePanel gp) {
         this.enemies = new LinkedList<Enemy>();
         this.manna = new LinkedList<Manna>();
         thread = new Thread(this);

@@ -7,7 +7,13 @@ package PresentationLayer;
 
 
 
-import AstralStrifes.NormalEnemy;
+import AstralStrifes.Drone.AttackDrone;
+import AstralStrifes.Controllers.EnemyController;
+import AstralStrifes.Controllers.PowerupController;
+import AstralStrifes.Controllers.CollisionController;
+import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Controllers.EnemyBulletController;
+import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -30,7 +36,7 @@ import javax.swing.*;
  *
  * @author Laurens
  */
-public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
+public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener{
     private Player player;
     private Background background;
     private boolean running = true;
@@ -54,7 +60,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
     private Boolean attackDrone = false;
     
     
-    public GamePanel(GameFrame gf){ 
+    public SingleGamePanel(GameFrame gf){ 
         this.gf =gf;
         createComponents();
         addKeyListener(this);
@@ -68,8 +74,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-        player.makeDrone();
-        
+        player.makeDrone("attack");
     }
     public void setAttackdrone(){
         this.attackDrone = true;
@@ -188,6 +193,7 @@ public class GamePanel extends JPanel implements KeyListener,Runnable,MouseMotio
             ec.update();
             ebc.update();
             pc.updatePowerups();
+            pc.checkForPOwerUp();
             gf.updateScore(player.getScore()+"");
             player.updateHealth();
             repaint();

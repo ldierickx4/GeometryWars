@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Drone;
+import AstralStrifes.Player;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;

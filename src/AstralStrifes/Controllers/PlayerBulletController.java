@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Controllers;
 
-import PresentationLayer.GamePanel;
+import AstralStrifes.Bullet;
+import AstralStrifes.Player;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -18,13 +20,13 @@ import java.util.logging.Logger;
  * @author laurensdierickx
  */
 public class PlayerBulletController implements Runnable{
-    private GamePanel gp;
+    private SingleGamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
     private Thread thread;
     private boolean shooting= false;
     
-    public PlayerBulletController(Player player, GamePanel gp)
+    public PlayerBulletController(Player player, SingleGamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
@@ -72,6 +74,7 @@ public class PlayerBulletController implements Runnable{
             catch(Exception e) {
 		e.printStackTrace();
 		}
+            
             Bullet b = new Bullet(player.getx(),player.gety(),gp.getMouseX(),gp.getMouseY(),"player");
             addBullet(b);
         }

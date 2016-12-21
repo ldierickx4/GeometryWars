@@ -3,9 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Controllers;
 
-import PresentationLayer.GamePanel;
+import AstralStrifes.Bullet;
+import AstralStrifes.Enemy.Enemy;
+import AstralStrifes.Player;
+import AstralStrifes.Enemy.SaturnEnemy;
+import AstralStrifes.Enemy.ShootingEnemy;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -14,12 +19,12 @@ import java.util.LinkedList;
  * @author laurensdierickx
  */
 public class EnemyBulletController implements Runnable {
-    private GamePanel gp;
+    private SingleGamePanel gp;
     private LinkedList<Bullet> bullets;
     private Player player;
     private Thread thread;    
     
-    public EnemyBulletController(Player player, GamePanel gp)
+    public EnemyBulletController(Player player, SingleGamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;

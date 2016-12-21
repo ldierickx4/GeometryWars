@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Drone;
 
-import PresentationLayer.GamePanel;
+import AstralStrifes.Bullet;
+import AstralStrifes.Enemy.Enemy;
+import AstralStrifes.Player;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -16,8 +19,8 @@ import java.util.LinkedList;
 public class AttackDrone extends Drone implements Runnable{
     private Thread thread;
     private LinkedList<Bullet> bullets;
-    private GamePanel gp;
-    public AttackDrone(Player p ,GamePanel gp) {
+    private SingleGamePanel gp;
+    public AttackDrone(Player p ,SingleGamePanel gp) {
         super(p);
         this.gp=gp;
         gp.setAttackdrone();

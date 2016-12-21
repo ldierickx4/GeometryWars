@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Drone;
 
-import PresentationLayer.GamePanel;
+import AstralStrifes.Controllers.EnemyController;
+import AstralStrifes.Player;
+import PresentationLayer.SingleGamePanel;
 
 /**
  *
@@ -14,10 +16,10 @@ import PresentationLayer.GamePanel;
 public class KillDrone extends Drone implements Runnable{
     private Thread thread;
     private EnemyController ec;
-    public KillDrone(Player p,GamePanel gp) {
+    public KillDrone(Player p,SingleGamePanel gp) {
         super(p);
         this.ec = gp.getEc();
-        String link="resources/gameSprites/attack2.png";
+        String link = "resources/gameSprites/attack2.png";
         super.loadImage(link);
         this.thread = new Thread(this);
         thread.start();

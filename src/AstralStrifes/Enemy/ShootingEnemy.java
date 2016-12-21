@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.Enemy;
 
-import PresentationLayer.GamePanel;
+import AstralStrifes.Bullet;
+import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Player;
+import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
