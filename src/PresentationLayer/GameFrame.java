@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  * @author Gebruiker
  */
 public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener,MouseListener {
-    private SingleGamePanel gamePanel;
+    private MultiGamePanel gamePanel;
     private static final int HEIGHT = 800;
     private static final int WIDTH = 1000;
     private Background bg;
@@ -47,7 +47,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-        gamePanel = new SingleGamePanel(this); 
+        gamePanel = new MultiGamePanel(this); 
         setScoresAndPowerups();
         setContentPane(gamePanel);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
