@@ -36,9 +36,10 @@ public class AdhdPowerup extends Powerup implements Runnable{
         long time = System.currentTimeMillis();
         long end = time +3000;
         while(System.currentTimeMillis()<= end) {
-            boostGun();              
+            //boostGun();
+            endBoost();
+
         }
-        endBoost();
     }
     
     public void start(){
@@ -47,6 +48,7 @@ public class AdhdPowerup extends Powerup implements Runnable{
     
     public void boostGun(){
         //System.out.println("Test");
+        System.out.println(gp.getBulletControler());
         pbc = gp.getBulletControler();
         System.out.println("PBC: " + pbc);
         pbc.boostFiringRate();
