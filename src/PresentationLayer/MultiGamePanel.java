@@ -243,7 +243,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             //player2.getDrone().letOrbit();
             updatePlayer(player);
             updatePlayer(player2);
-            gf.updateScore(player.getScore()+"");
+            gf.updateScoreP1(player.getScore()+"");
+            gf.updateScoreP1(player2.getScore()+"");
             repaint();
         }
     }    

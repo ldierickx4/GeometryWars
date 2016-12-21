@@ -188,7 +188,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             ebc.update();
             pc.updatePowerups();
             pc.checkForPOwerUp();
-            gf.updateScore(player.getScore()+"");
+            gf.updateScoreP1(player.getScore()+"");
             gf.updateAdhdPowerups(player.getAmountOfAdhdPowerups()+"");
             player.updateHealth();
             repaint();
