@@ -16,6 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +31,17 @@ public class FirstPlayController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private RadioButton onePlayer;
+    
+    @FXML
+    private RadioButton twoPlayer;
+    
+    @FXML 
+    private ToggleGroup players;
+    
+    @FXML 
+    private Pane PlayerOne;
+    
     @FXML
     private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
@@ -40,18 +54,19 @@ public class FirstPlayController implements Initializable {
         Stage appStage = Game.stage;        
         GameFrame gameframe = new GameFrame();
     } 
-
-    /**
+    
     @FXML
     private void changeSelectedRadio(){
         if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
            PlayerOne.setVisible(false);
+           System.out.println("fixTwee");
         }else{
            PlayerOne.setVisible(true);
+           System.out.println("fixEen");
         }
         //System.out.println(players.getSelectedToggle().toString());
     }
-    **/
+
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
