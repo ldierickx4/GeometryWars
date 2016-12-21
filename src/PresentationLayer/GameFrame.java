@@ -61,19 +61,12 @@ public class GameFrame extends JFrame implements KeyListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-<<<<<<< HEAD
-        gamePanel = new MultiGamePanel(this);
         //scoreTitle.setLocation(500, 500);
         //JLabel score = new JLabel();
         //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         //gamePanel.add(score);
-
         //gamePanel = new MultiGamePanel(this); 
-        setScoresAndPowerups();
-        setContentPane(gamePanel);
-=======
         creatGame();
->>>>>>> origin/master
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
     }
@@ -91,26 +84,7 @@ public class GameFrame extends JFrame implements KeyListener {
     }
     public void setScoresAndPowerups2(){ 
         scoreP1 = new JLabel();
-<<<<<<< HEAD
-=======
-        //scoreP1.setText("Score Player 1: ");
->>>>>>> origin/master
-        scoreP1.setForeground(Color.WHITE);
-        multiGamePanel.add(scoreP1);
-        adhdPowerupP1 = new JLabel();   
-<<<<<<< HEAD
-        adhdPowerupP1.setForeground(Color.WHITE);
-        gamePanel.add(adhdPowerupP1);
-        
-        if(gamePanel.getType() == "Multi"){
-            scoreP2 = new JLabel();
-            scoreP2.setForeground(Color.WHITE);
-            gamePanel.add(scoreP2);
-            adhdPowerupP2 = new JLabel();   
-            adhdPowerupP2.setForeground(Color.WHITE);
-            gamePanel.add(adhdPowerupP2);
-        } 
-=======
+        adhdPowerupP1 = new JLabel(); 
         //adhdPowerupP1.setText("ADHD Powerups Player 1: ");
         adhdPowerupP1.setForeground(Color.WHITE);
         multiGamePanel.add(adhdPowerupP1);
@@ -133,7 +107,7 @@ public class GameFrame extends JFrame implements KeyListener {
         adhdPowerupP1.setForeground(Color.WHITE);
         singleGamePanel.add(adhdPowerupP1);    
 
->>>>>>> origin/master
+
     }
   
     public void updateScoreP1(String score)
