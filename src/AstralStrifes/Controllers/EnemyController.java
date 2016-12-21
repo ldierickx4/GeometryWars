@@ -73,6 +73,22 @@ public class EnemyController implements Runnable{
             m.draw(g);
         }
     }
+    public LinkedList<Enemy> generateEnemies(int wave){
+        LinkedList<String> enemies = db.getEnemiesInWave(wave);
+        LinkedList<Enemy> genEnemies= new LinkedList<Enemy>();
+        for(String e:enemies){
+            if(e.equals("saturnenemy")){
+                genEnemies.add(new SaturnEnemy());
+            }
+            else if(e.equals("shootingenemy")){
+                genEnemies.add(new ShootingEnemy(p,gp.getBulletControler()));
+            }
+            else{
+                genEnemies.add(new NormalEnemy());
+            }
+        }
+        return genEnemies;
+    }
     public void makeNewEnemy()
     {
         Enemy toAddenemy = new NormalEnemy();
