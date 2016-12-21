@@ -25,13 +25,21 @@ import java.util.logging.Logger;
 public class Database {
     
     private static final String URL = "jdbc:mysql://localhost/astralstrifes";
-    private static final String USER = "root";
-    private static final String PWD = "root";
+    private static final String USER = "Jens";
+    private static final String PWD = "jens";
     private static Connection con;
     private List<User> users;
     private boolean userExist;
     private boolean userAdded;
     private String username;
+    private int userid;
+    private String pw;
+    private String email;
+    private int xp;
+    private int highScore;
+    private int astrals;
+    private int gameId;
+    private int rankId;
     private int amountEnemies;
     private int highScorePlayer;
     private String imgPath;
@@ -135,24 +143,6 @@ public class Database {
         }
     }
     
-    public int getPlayerHighScore(String username){
-        try{
-           String sql = "SELECT highscore from users where username = (?)";
-           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-           pstmt.setString(1, username);           
-           ResultSet rs = pstmt.executeQuery();
-           if(rs.next()){
-               int highScore = rs.getInt("highscore");
-               this.highScorePlayer = highScore;
-           }
-           pstmt.close();
-           rs.close();
-        } catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return highScorePlayer;
-    }
-    
     public int getAmountOfTypeInWave(int enemyid){
         //wave1 = new LinkedList<Enemy>();
         try{
@@ -191,6 +181,143 @@ public class Database {
         }
         return username;
     }
+    
+    public int getUserid(String username){
+        try{
+           String sql = "SELECT userid FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int userid = rs.getInt("userid");
+               this.userid = userid;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return userid;
+    }
+    
+    public String getPassword(String username){
+        try{
+           String sql = "SELECT password FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String userpw = rs.getString("password");
+               this.pw = userpw;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return pw;
+    }
+    
+    public String getEmail(String username){
+        try{
+           String sql = "SELECT email FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String usermail = rs.getString("email");
+               this.email = usermail;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return email;
+    }
+    
+    public int getXP(String username){
+        try{
+           String sql = "SELECT XP FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int intxp = rs.getInt("XP");
+               this.xp = intxp;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return xp;
+    }
+    
+    public int getPlayerHighScore(String username){
+        try{
+           String sql = "SELECT highscore from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int highScore = rs.getInt("highscore");
+               this.highScorePlayer = highScore;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return highScorePlayer;
+    }
+    
+    public int getAstrals(String username){
+        try{
+           String sql = "SELECT astrals from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int astr = rs.getInt("astrals");
+               this.astrals = astr;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return astrals;
+    }
+    
+    public int getGameid(String username){
+        try{
+           String sql = "SELECT game_id from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int game = rs.getInt("game_id");
+               this.gameId = game;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return gameId;
+    }
+    
+    public int getRankid(String username){
+        try{
+           String sql = "SELECT rank_id from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int rnk = rs.getInt("rank_id");
+               this.rankId = rnk;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return rankId;
+    }
+    
     public boolean getUserExist(){
         System.out.println(this.userExist);
         return this.userExist;      
@@ -207,9 +334,17 @@ public class Database {
         //db.getUserExist();
         //db.setPlayerHighscore(5, 10000);
         //db.getPlayerHighScore("VangeelJ");
-        System.out.println(db.getEnemyImage("normalenemy"));
+        //System.out.println(db.getEnemyImage("normalenemy"));
+        //System.out.println(db.getUsername("VangeelJ"));
+        System.out.println(db.getUserid("VangeelJ"));
         System.out.println(db.getUsername("VangeelJ"));
-        System.out.println(db.getUsername("AstralKing"));
+        System.out.println(db.getPassword("VangeelJ"));
+        System.out.println(db.getEmail("VangeelJ"));
+        System.out.println(db.getXP("VangeelJ"));
+        System.out.println(db.getPlayerHighScore("VangeelJ"));
+        System.out.println(db.getAstrals("VangeelJ"));
+        System.out.println(db.getGameid("VangeelJ"));
+        System.out.println(db.getRankid("VangeelJ"));
     }
     
     
