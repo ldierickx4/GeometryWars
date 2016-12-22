@@ -31,7 +31,7 @@ public class Background {
     public void loadImage(){
         BufferedImage i = null;
         try {
-            i = ImageIO.read(new File("resources/gameSprites/spacegood.jpg"));
+            i = ImageIO.read(new File("resources/gameSprites/test2.jpg"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
