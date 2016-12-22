@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,6 +49,23 @@ public class Database {
     private String imgPath;
     private LinkedList<String> wave1 = new LinkedList<>();
     private String enemyName;
+    private HashMap<String,Integer> difficultyParameters = new HashMap<>();
+    private String difName;
+    private int seScore;
+    private int neScore;
+    private int satEScore;
+    private float neSpeed;
+    private int seShoot;
+    private float satEMove;
+    private int seMulti;
+    private int neMulti;
+    private int satEMulti;
+    private int swiftyDuration;
+    private int adhdPower;
+    private int spawnSpeed;
+    private int playerShootSpeed;
+            
+    
     
     public Database() {
         //Server registreren
@@ -358,8 +376,259 @@ public class Database {
         
         return wave1;
     }
+    
+    public String getDifficultyName(int difficultyId){
+        try{
+            String sql = "SELECT difficulty_name FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                String name = rs.getString("difficulty_name");
+                this.difName = name;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return difName;
+    }
+    
+    public int getDifficultySEScore(int difficultyId){
+        try{
+            String sql = "SELECT shootingEnemyScore FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SEScore = rs.getInt("shootingEnemyScore");
+                this.seScore = SEScore;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return seScore;
+    }
+    
+    public int getDifficultyNEScore(int difficultyId){
+        try{
+            String sql = "SELECT normalEnemyScore FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int NEScore = rs.getInt("normalEnemyScore");
+                this.neScore = NEScore;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return neScore;
+    }
 
-  
+    public int getDifficultySATScore(int difficultyId){
+        try{
+            String sql = "SELECT saturnEnemyScore FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SATEScore = rs.getInt("saturnEnemyScore");
+                this.satEScore = SATEScore;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return satEScore;
+    }
+    
+    public float getDifficultyNESpeed(int difficultyId){
+        try{
+            String sql = "SELECT normalEnemySpeed FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                float NESpeed = rs.getFloat("normalEnemySpeed");
+                this.neSpeed = NESpeed;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return neSpeed;
+    }
+    
+    public int getDifficultySEShoot(int difficultyId){
+        try{
+            String sql = "SELECT shootingEnemyShoot FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SEShoot = rs.getInt("shootingEnemyShoot");
+                this.seShoot = SEShoot;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return seShoot;
+    }
+    
+    public float getDifficultySATEMove(int difficultyId){
+        try{
+            String sql = "SELECT saturnEnemyMove FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                float SATEMove = rs.getFloat("saturnEnemyMove");
+                this.satEMove = SATEMove;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return satEMove;
+    }
+    
+    public int getDifficultySEMulti(int difficultyId){
+        try{
+            String sql = "SELECT shootingEnemyMulti FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SEMulti = rs.getInt("shootingEnemyMulti");
+                this.seMulti = SEMulti;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return seMulti;
+    }
+    
+    public int getDifficultyNEMulti(int difficultyId){
+        try{
+            String sql = "SELECT notmalEnemyMulti FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int NEMulti = rs.getInt("notmalEnemyMulti");
+                this.neMulti = NEMulti;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return neMulti;
+    }
+    
+    public int getDifficultySATEMulti(int difficultyId){
+        try{
+            String sql = "SELECT saturnEnemyMulti FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SATEMulti = rs.getInt("saturnEnemyMulti");
+                this.satEMulti = SATEMulti;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return satEMulti;
+    }
+    
+    public int getDifficultySwiftyDuration(int difficultyId){
+        try{
+            String sql = "SELECT swiftyduration FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SwDur = rs.getInt("swiftyduration");
+                this.swiftyDuration = SwDur;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return swiftyDuration;
+    }
+    
+    public int getDifficultyAdhdPower(int difficultyId){
+        try{
+            String sql = "SELECT adhdPower FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int aPower = rs.getInt("adhdPower");
+                this.adhdPower = aPower;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return adhdPower;
+    }
+    
+    public int getDifficultySpawnSpeed(int difficultyId){
+        try{
+            String sql = "SELECT spawnSpeed FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int spSpeed = rs.getInt("spawnSpeed");
+                this.spawnSpeed = spSpeed;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return spawnSpeed;
+    }
+    
+    public int getDifficultyPlShootSpeed(int difficultyId){
+        try{
+            String sql = "SELECT playerShootSpeed FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int PlShSpeed = rs.getInt("playerShootSpeed");
+                this.playerShootSpeed = PlShSpeed;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return playerShootSpeed;
+    }
+    
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
@@ -372,7 +641,21 @@ public class Database {
         //db.printLinkedList();
       
         //p = new Player();
-        System.out.println(db.getEnemiesInWave(2));
+        //System.out.println(db.getEnemiesInWave(2));
+        System.out.println(db.getDifficultyName(1));
+        System.out.println(db.getDifficultyAdhdPower(1));
+        System.out.println(db.getDifficultyNEMulti(1));
+        System.out.println(db.getDifficultyNEScore(1));
+        System.out.println(db.getDifficultyNESpeed(1));
+        System.out.println(db.getDifficultyPlShootSpeed(1));
+        System.out.println(db.getDifficultySATEMove(1));
+        System.out.println(db.getDifficultySATEMulti(1));
+        System.out.println(db.getDifficultySATScore(1));
+        System.out.println(db.getDifficultySEMulti(1));
+        System.out.println(db.getDifficultySEScore(1));
+        System.out.println(db.getDifficultySEShoot(1));
+        System.out.println(db.getDifficultySpawnSpeed(1));
+        System.out.println(db.getDifficultySwiftyDuration(1));
     }
     
     
