@@ -95,7 +95,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             {
                 if(!hitEnemies.contains(tempE)){
                     hitEnemies.add(tempE);
-                    player.reduceHealth(10);
+                    player.reduceHealth(tempE.getDamage());
                     player.resetMultiplier();
                     ec.removeEnemy(tempE);
                 }

@@ -33,6 +33,7 @@ public class EnemyController implements Runnable{
     private int wave=1;
     private GamePanel gp;
     private Database db;
+    private int SpawnSpeed;
         
     public EnemyController(Player p ,GamePanel gp) {
         this.db = new Database();
@@ -42,6 +43,7 @@ public class EnemyController implements Runnable{
         thread.start();
         this.p = p;
         this.gp = gp;
+        SpawnSpeed = 2500;
         generateEnemies();
     }
     
@@ -114,7 +116,7 @@ public class EnemyController implements Runnable{
         while(current == thread)
         {            
             try {
-		Thread.sleep(2500);
+		Thread.sleep(SpawnSpeed);
 		}
             catch(InterruptedException e) {
 		e.printStackTrace();

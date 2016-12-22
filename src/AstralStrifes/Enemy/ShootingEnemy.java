@@ -36,9 +36,6 @@ public class ShootingEnemy implements Enemy{
     private int height;
     private int rangeMin = 50;
     private int rangeMax = 750;
-    //private int reward;
-    //private int multiplier;
-    //private Player player;
     private PlayerBulletController bC;
     private Rectangle enemyBounds;
     private boolean alive;
@@ -46,11 +43,13 @@ public class ShootingEnemy implements Enemy{
     private LinkedList<Bullet> bullets;
     private Player p;
     private GamePanel gp;
+    private int damage;
     
     
     public ShootingEnemy(Player p,PlayerBulletController bC,GamePanel gp)
     {
         this.gp=gp;
+        this.damage = 10;
         this.alive = true;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
@@ -131,6 +130,11 @@ public class ShootingEnemy implements Enemy{
     @Override
     public Manna getManna() {
         return new Manna(150, 1, (int)getCenterX(), (int)getCenterY());
+    }
+
+    @Override
+    public int getDamage() {
+        return this.damage;
     }
 
 }

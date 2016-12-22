@@ -17,13 +17,14 @@ import java.awt.image.BufferedImage;
  * @author Jordy
  */
 public class AdhdPowerup extends Powerup implements Runnable{
-    
+    private int boost;
     private Thread t;
     private PlayerBulletController pbc;
      
     public AdhdPowerup(String name, GamePanel gp, PlayerBulletController pbc) {
     super(gp);
     this.pbc = pbc;
+    this.boost=40;
     this.name = name;
     String link = "resources/gameSprites/adhd.png";
     super.loadImage(link);
@@ -48,7 +49,7 @@ public class AdhdPowerup extends Powerup implements Runnable{
     }
     
     public void boostGun(){
-        pbc.boostFiringRate();
+        pbc.boostFiringRate(this.boost);
     }
     
     public void endBoost(){

@@ -26,6 +26,7 @@ public class SwiftyPowerup extends Powerup implements Runnable{
     private Thread t;
     private GamePanel gp;
     private Player p;
+    private int duration;
     //private boolean pickedUp = false;
     
     public SwiftyPowerup(String name,GamePanel gp,Player p) {
@@ -33,9 +34,11 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         this.gp = gp;
         this.p = p;
         this.name = name;
+        this.duration=3000;
         String link = "resources/gameSprites/swifty.png";
         super.loadImage(link); 
         t = new Thread(this);
+        
     }
     public void Boost(){
         p.boostSpeed(4);
@@ -48,7 +51,7 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         super.used = true;
         while(super.pickedUp){
             long time = System.currentTimeMillis();
-            long end = time +3000;
+            long end = time +duration;
             while(System.currentTimeMillis()<= end) {
                 Boost();                  
             }

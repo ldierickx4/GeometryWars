@@ -32,8 +32,10 @@ public class SaturnEnemy implements Enemy{
     private boolean alive;
     private Random r;
     private GamePanel gp;
+    private int damage;
     
     public SaturnEnemy(GamePanel gp){
+        this.gp = gp;
         alive=true;
         right=true;
         this.type="saturn";
@@ -42,7 +44,7 @@ public class SaturnEnemy implements Enemy{
         this.y = randomInt();
         loadImage();
         createBoundries();
-        this.gp = gp;
+        this.damage=10;
     }
 
     @Override
@@ -144,5 +146,10 @@ public class SaturnEnemy implements Enemy{
 
     public double getCenterY() {
         return y+image.getWidth()/2;
+    }
+
+    @Override
+    public int getDamage() {
+        return this.damage;
     }
 }
