@@ -67,6 +67,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private PlayerBulletController controller2;
     private PowerupController pc2;
     private Controller pscon;
+    private CollisionController cc2;
     private boolean shoot2 = false;
     private boolean down2 = false;
     private boolean up2 = false;
@@ -81,7 +82,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private Boolean attackDrone = false;
     private String type = "Multi";
     
-    public MultiGamePanel(GameFrame gf){
+    public MultiGamePanel(GameFrame gf,String drone1,String drone2){
         this.gf =gf;
         controllerConnection();
         createComponents(drone1,drone2);
@@ -100,12 +101,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-<<<<<<< HEAD
-        player.makeDrone("heal");
-        player2.makeDrone("heal");
-=======
-
->>>>>>> origin/master
     }
     public void setAttackdrone(){
         this.attackDrone = true;
@@ -257,12 +252,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             //player2.getDrone().letOrbit();
             updatePlayer(player);
             updatePlayer(player2);
-<<<<<<< HEAD
-            gf.updateScoreP1(player.getScore()+"");
-            gf.updateScoreP2(player2.getScore()+"");
-            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
-            gf.updateAdhdPowerupsP2(player.getAmountOfAdhdPowerups()+"");
-=======
             gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
             gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups());
             gf.updateMultiplierP1(player.getMultiplier());
@@ -271,7 +260,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             gf.updateScoreP2(player2.getScore());
             gf.updateWaves(ec.getWave());
             gf.updateEnemiesLeft(ec.getEnemiesLeft());
->>>>>>> origin/master
             repaint();
         }
     }    
@@ -299,10 +287,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
         cc.checkEnemyPlayerCollision();
         cc.checkIfPowerupGetsPickedUp();
-<<<<<<< HEAD
-=======
         cc2.checkIfPlayerGetsHitByEnemyBullet();
->>>>>>> origin/master
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
     
@@ -407,12 +392,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         down2 = pscon.getAxisValue(1)>0.5;
         up2 = pscon.getAxisValue(1)<-0.5;
     }
-<<<<<<< HEAD
-
-    @Override
-    public String getType() {
-        return this.type;
-=======
     public void setStatus(String status){
         this.status = status;
     }
@@ -427,6 +406,5 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
                 System.out.println("gewonnen");
                 break;
         }
->>>>>>> origin/master
     }
 }

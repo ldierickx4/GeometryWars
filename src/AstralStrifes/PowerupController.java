@@ -5,6 +5,8 @@
  */
 package AstralStrifes;
 
+import AstralStrifes.PowerUp.Powerup;
+import AstralStrifes.PowerUp.SwiftyPowerup;
 import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
