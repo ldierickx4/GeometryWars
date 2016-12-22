@@ -47,7 +47,7 @@ public class SaturnEnemy implements Enemy{
         this.y = randomInt();
         loadImage();
         createBoundries();
-        this.damage=10;
+        this.damage= gp.getDiff().getsDamage();
         this.score = gp.getDiff().getSeScore();
         this.multiplier = gp.getDiff().getSeMultie();
         this.speed= gp.getDiff().getSeMove();

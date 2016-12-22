@@ -51,7 +51,7 @@ public class ShootingEnemy implements Enemy{
     public ShootingEnemy(Player p,PlayerBulletController bC,GamePanel gp)
     {
         this.gp=gp;
-        this.damage = 10;
+        this.damage = gp.getDiff().gethDamage();
         this.score = gp.getDiff().getShScore();
         this.multiplie = gp.getDiff().getShMultie();
         //this.SPEED = gp.getDiff().

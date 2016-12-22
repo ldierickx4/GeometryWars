@@ -44,7 +44,7 @@ public class NormalEnemy implements Enemy{
 
     public NormalEnemy(GamePanel gp) {
         this.alive = true;
-        this.damage=10;
+        this.damage= gp.getDiff().getnDamage();
         this.SPEED = gp.getDiff().getNeMove();
         this.VALUE = gp.getDiff().getNeScore();
         this.multiplier = gp.getDiff().getNeMultie();

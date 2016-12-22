@@ -27,7 +27,10 @@ public class Difficulty {
     private int shshoot;
     private int shScore;
     private int shMultie;
-    
+    private int nDamage;
+    private int sDamage;
+    private int hDamage;
+    private int eBdamage;
     
     public Difficulty(int difficulty){
         db = new Database();
@@ -126,6 +129,18 @@ public class Difficulty {
     public int getSwifty(){
         return swiftyPower;
     }
+    
+    public int getnDamage() {
+        return nDamage;
+    }
+
+    public int getsDamage() {
+        return sDamage;
+    }
+
+    public int gethDamage() {
+        return hDamage;
+    }
     public void setUp(){
         getEnemySpawnSpeed();
         getNormalEnemyMovement();
@@ -138,7 +153,7 @@ public class Difficulty {
         getSaturnEnemyscore();
         getSaturnEnemyMovement();
         getSaturnEnemyMultie();
-        //getShootingEnemyShootingSpeed();
+        getShootingEnemyShootingSpeed();
         getShootingEnemyScore();
         getShootingEnemyMultie();       
     }
