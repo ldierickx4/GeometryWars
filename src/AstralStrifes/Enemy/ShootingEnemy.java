@@ -26,7 +26,7 @@ import javax.imageio.ImageIO;
  */
 public class ShootingEnemy implements Enemy{
     private final String type ="shooting";
-    private static final double SPEED = 0.2;
+    private double SPEED = 0.2;
     private int VALUE = 200;
     private BufferedImage image;
     private Graphics g;
@@ -44,12 +44,17 @@ public class ShootingEnemy implements Enemy{
     private Player p;
     private GamePanel gp;
     private int damage;
+    private int score;
+    private int multiplie;
     
     
     public ShootingEnemy(Player p,PlayerBulletController bC,GamePanel gp)
     {
         this.gp=gp;
-        this.damage = 10;
+        this.damage = gp.getDiff().gethDamage();
+        this.score = gp.getDiff().getShScore();
+        this.multiplie = gp.getDiff().getShMultie();
+        //this.SPEED = gp.getDiff().
         this.alive = true;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );

@@ -22,6 +22,7 @@ import javax.sound.sampled.Clip;
  * @author Jordy
  */
 public class SoundLoader {
+<<<<<<< HEAD
     private String SPACESHIP_GUN_FIRE_PATH = "spaceship.wav";
     private String ENEMY_RAINBOW_FIRE_PATH = "rainbow.wav";
     private String ENEMY_SATURN_FIRE_PATH = "";
@@ -34,12 +35,28 @@ public class SoundLoader {
 
     public SoundLoader(String soundLoaderName) {
         makeSound(soundLoaderName);  
+=======
+    private String soundLoaderName;
+    private String SPACESHIP_GUN_FIRE_PATH = "file:C:/Users/Jordy/Documents/Howest/2TI/Semester 3/Project/GeometryWars/resources/gameSounds/shot.wav";
+    private String ENEMY_STEALTH_FIRE_PATH = "";
+    private String ENEMY_RAINBOW_FIRE_PATH = "";
+    private String ENEMY_SATURN_FIRE_PATH = "";
+    
+
+    public SoundLoader(String soundLoaderName) {
+        this.soundLoaderName = soundLoaderName;
+>>>>>>> origin/master
     }
       
     public void loadSound(String sound){
         try {
+<<<<<<< HEAD
             URL url = new URL("file:resources/gameSounds/" + sound);
             shot = Applet.newAudioClip(url);
+=======
+            URL url = new URL(sound);
+            AudioClip shot = Applet.newAudioClip(url);
+>>>>>>> origin/master
         } catch (MalformedURLException ex) {
             Logger.getLogger(SoundLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,6 +70,7 @@ public class SoundLoader {
                 return ENEMY_RAINBOW_FIRE_PATH;
             case "Saturn" :
                 return ENEMY_SATURN_FIRE_PATH;
+<<<<<<< HEAD
             case "Enemy" :
                 return STANDARD_ENEMY_FIRE_PATH;
             case "Killed" :
@@ -61,10 +79,13 @@ public class SoundLoader {
                 return POWERUP_ACTIVATED;
             case "Koekoek" :
                 return KOEKOEK_JONGUH;
+=======
+>>>>>>> origin/master
             default: 
                 return SPACESHIP_GUN_FIRE_PATH;
         }
     }
+<<<<<<< HEAD
     
     public void makeSound(String soundName){
         String path = getSoundPath(soundName);
@@ -74,4 +95,6 @@ public class SoundLoader {
     public AudioClip getSound(){
         return this.shot;
     }
+=======
+>>>>>>> origin/master
 }

@@ -11,6 +11,7 @@ import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.PowerupController;
+import AstralStrifes.Difficulty.Difficulty;
 import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Player;
 import java.awt.Graphics;
@@ -53,4 +54,5 @@ public interface GamePanel{
     public Background getBackGround();
     public void setStatus(String status);
     public void checkStatus();
+    public Difficulty getDiff();
 }

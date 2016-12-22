@@ -15,6 +15,7 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
+import AstralStrifes.Difficulty.Difficulty;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -78,15 +79,15 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private String status = "playing";
     private JLabel score;
     private GameFrame gf;
-    
+    private Difficulty diff;
     private Boolean attackDrone = false;
     private String type = "Multi";
     
-    public MultiGamePanel(GameFrame gf,String drone1,String drone2){
+    public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff){
         this.gf =gf;
+        this.diff=diff;
         controllerConnection();
         createComponents(drone1,drone2);
-
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -101,7 +102,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-
     }
     public void setAttackdrone(){
         this.attackDrone = true;
@@ -125,11 +125,16 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
+<<<<<<< HEAD
         //for(int i = 0; i < Controllers.getControllerCount(); i++){
         //   pscon = Controllers.getController(i);
         //   System.out.println(i + ": " + pscon.getName());
         //}
         pscon = Controllers.getController(7);
+=======
+
+        pscon = Controllers.getController(0);
+>>>>>>> origin/master
         Controllers.poll();
     }
     public void checkInput1(){
@@ -159,7 +164,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         if(right2){
             player2.moveRight();
         }    
-    
     }
     public void checkShoot(boolean pshoot , PlayerBulletController controller)
     {
@@ -322,10 +326,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {
-            shoot1=true;
-        }
+        shoot1=e.getButton()==e.BUTTON1;
+        
     }
 
     @Override
@@ -392,20 +394,16 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
     }
     private void checkConShoot(){
-        if(pscon.isButtonPressed(7)){
-            shoot2 = true;
-        }
-        else{
-            shoot2 = false;
-        }
+        shoot2 = pscon.isButtonPressed(7);
     }
     private void checkConAim(){
-        this.aimX = pscon.getAxisValue(1)*1000;
-        this.aimY = pscon.getAxisValue(0)*1000;
+        this.aimX = pscon.getAxisValue(2)*1000;
+        this.aimY = pscon.getAxisValue(3)*1000;
         player2.calculatePlayerAngle(aimX,aimY);
     }
 
     private void checkConMove() {
+<<<<<<< HEAD
         //right2 = (pscon.getAxisValue(3)>0.5);
         //System.out.println(pscon.getAxisCount());
         if(pscon.getAxisValue(3)>0.5)
@@ -433,6 +431,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         else{
             up2 = false;
         }
+=======
+        right2 = pscon.getAxisValue(0)>0.5;
+        left2 = pscon.getAxisValue(0)<-0.5;
+        down2 = pscon.getAxisValue(1)>0.5;
+        up2 = pscon.getAxisValue(1)<-0.5;
+>>>>>>> origin/master
     }
     public void setStatus(String status){
         this.status = status;
@@ -448,5 +452,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
                 System.out.println("gewonnen");
                 break;
         }
+    }
+
+    @Override
+    public Difficulty getDiff() {
+        return this.diff;
     }
 }

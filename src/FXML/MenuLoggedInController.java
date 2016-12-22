@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package FXML;
-
+import Data.*;
 import AstralStrifes.Game;
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,13 +30,7 @@ import javafx.stage.Stage;
 public class MenuLoggedInController implements Initializable {
 
     @FXML
-    private GridPane loginGrid;
-    
-    @FXML
-    private Label naam;
-        
-    @FXML
-    private Label label;
+    private Hyperlink naam;
    
     @FXML
     private void handlePlayButton() throws IOException{
@@ -47,8 +42,15 @@ public class MenuLoggedInController implements Initializable {
     @FXML
     private void handleLoginButton() throws IOException{
         Stage appStage = Game.stage;
-        System.out.println("handleLoginButton");
         Parent loginParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Game.borderPane.setCenter(loginParent);
+        UserPlay.getinstance().setU(null);
+    }
+    
+    @FXML
+    private void handleLeaderboardButton() throws IOException{
+        Stage appStage = Game.stage;
+        Parent loginParent = FXMLLoader.load(getClass().getResource("Leaderboard.fxml"));
         Game.borderPane.setCenter(loginParent);
     }
     
@@ -59,8 +61,15 @@ public class MenuLoggedInController implements Initializable {
         Game.borderPane.setCenter(loginParent);
     }
     
+    @FXML
+    private void handlePlayerInfoButton() throws IOException{
+        Stage appStage = Game.stage;      
+        Parent loginParent = FXMLLoader.load(getClass().getResource("PlayerInfo.fxml"));
+        Game.borderPane.setCenter(loginParent);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        naam.setText("jeeeeep");   
+        naam.setText(UserPlay.getinstance().getU().getUsername());   
     }   
 }

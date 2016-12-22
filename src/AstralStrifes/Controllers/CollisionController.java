@@ -86,7 +86,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             if(bulletBounds.intersects(player.getBounds())){
                 bullets.get(i).setDead();
                 player.resetMultiplier();
-                player.reduceHealth(5);
+                player.reduceHealth(ebc.getDamage());
             }
         }
     }
@@ -118,8 +118,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
                 Manna m = manna.get(i);
                 Rectangle mannaR =m.getBounds();
                 if(playerR.intersects(mannaR)){
-                Manna ma = ec.removeManna(m);
-                player.addManna(ma);
+                ec.removeManna(m);
                 }
             } catch(Exception ex) {
                 System.out.println(ex.getMessage());

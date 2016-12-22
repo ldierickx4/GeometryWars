@@ -4,30 +4,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.FirstPlayController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.FirstPlayController">
     <stylesheets>
         <URL value="@FXMLSS.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="150.0" fitWidth="400.0" layoutX="300.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="400.0" layoutX="350.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/AstralStrifesTransparent1.png" />
          </image>
       </ImageView>
       <Button layoutX="62.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
-      <Label layoutX="269.0" layoutY="360.0" text="Players:" textFill="WHITE">
+      <Label layoutX="325.0" layoutY="363.0" text="Players:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-        <RadioButton id="onePlayer" fx:id="onePlayer" layoutX="416.0" layoutY="363.0" mnemonicParsing="false" onAction="#changeSelectedRadio" selected="true" text="One" textFill="WHITE">
+        <RadioButton id="onePlayer" fx:id="onePlayer" layoutX="453.0" layoutY="366.0" mnemonicParsing="false" onAction="#changeSelectedRadio" selected="true" text="One" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -35,37 +35,96 @@
             <ToggleGroup fx:id="players" />
          </toggleGroup>
       </RadioButton>
-            <RadioButton id="twoPlayer" fx:id="twoPlayer" layoutX="517.0" layoutY="363.0" mnemonicParsing="false" onAction="#changeSelectedRadio" text="Two" textFill="WHITE" toggleGroup="$players">
+            <RadioButton id="twoPlayer" fx:id="twoPlayer" layoutX="549.0" layoutY="367.0" mnemonicParsing="false" onAction="#changeSelectedRadio" text="Two" textFill="WHITE" toggleGroup="$players">
          <font>
             <Font size="18.0" />
          </font>
       </RadioButton>
-            <Button id="inloggenButton" fx:id="inloggenButton" layoutX="388.0" layoutY="602.0" mnemonicParsing="false" text="START">
+            <Button id="inloggenButton" fx:id="inloggenButton" layoutX="459.0" layoutY="668.0" mnemonicParsing="false" onAction="#handleStartButton" text="START">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Pane id="PlayerOne" fx:id="PlayerOne" layoutX="170.0" layoutY="402.0" prefHeight="128.0" prefWidth="572.0">
+      <Pane id="PlayerOneDrone" fx:id="PlayerOneDrone" layoutX="149.0" layoutY="475.0" prefHeight="90.0" prefWidth="660.0" visible="false">
          <children>
-            <Label layoutX="14.0" layoutY="57.0" text="Support Drone:" textFill="WHITE">
+            <Label layoutY="58.0" text="Support Drone Player 2:" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <RadioButton layoutX="244.0" layoutY="59.0" mnemonicParsing="false" text="Heal" textFill="WHITE">
+            <RadioButton fx:id="healPl2" layoutX="302.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Heal" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
                <toggleGroup>
-                  <ToggleGroup fx:id="Drone" />
+                  <ToggleGroup fx:id="Drone2" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="348.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone">
+            <RadioButton fx:id="attackPl2" layoutX="402.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone2">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="468.0" layoutY="59.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone">
+            <RadioButton fx:id="killPl2" layoutX="520.0" layoutY="58.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </Pane>
+      <Pane id="PlayerTwoDrone" fx:id="PlayerTwoDrone" layoutX="142.0" layoutY="391.0" prefHeight="93.0" prefWidth="658.0">
+         <children>
+            <Label layoutX="7.0" layoutY="57.0" prefHeight="29.0" prefWidth="275.0" text="Support Drone Player 1:" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="healPl1" layoutX="310.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Heal" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Drone1" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="attackPl1" layoutX="408.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="killPl1" layoutX="525.0" layoutY="59.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </Pane>
+      <Label layoutX="190.0" layoutY="280.0" prefHeight="83.0" prefWidth="490.0" text="PLAY" textFill="WHITE">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Pane id="Difficulty" layoutX="140.0" layoutY="560.0" prefHeight="94.0" prefWidth="658.0">
+         <children>
+            <Label layoutX="171.0" layoutY="54.0" prefHeight="29.0" prefWidth="121.0" text="Difficulty:" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <RadioButton id="easy" fx:id="easy" layoutX="310.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Easy" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Difficulty" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton id="medium" fx:id="medium" layoutX="410.0" layoutY="59.0" mnemonicParsing="false" text="Medium" textFill="WHITE" toggleGroup="$Difficulty">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </RadioButton>
+            <RadioButton id="hard" fx:id="hard" layoutX="528.0" layoutY="59.0" mnemonicParsing="false" text="Hard" textFill="WHITE" toggleGroup="$Difficulty">
                <font>
                   <Font size="18.0" />
                </font>
