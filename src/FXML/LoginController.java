@@ -43,10 +43,11 @@ public class LoginController {
     
     @FXML
     private void handleLoginButton() throws IOException{
-        System.out.println(passwordLogin.isVisible());
-        System.out.println(usernameLogin.getText());
         this.db.checkUserDB(usernameLogin.getText(), passwordLogin.getText());
         if (this.db.getUserExist()){
+            String userName = usernameLogin.getText();
+            User ingelogdeUser = new User(db.getUsername(userName), db.getPassword(userName), db.getEmail(userName), db.getXP(userName),  db.getPlayerHighScore(userName));  
+            UserPlay.getinstance().setU(ingelogdeUser);
             Stage appStage = Game.stage;
             Parent loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));
             Game.borderPane.setCenter(loginParent);
@@ -58,8 +59,5 @@ public class LoginController {
     @FXML
     private void handleNotLoggedInButton(){
         notLoggedIn.setVisible(false);
-    }
-    
-    
-    
+    } 
 }

@@ -4,14 +4,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.LoginController">
     <stylesheets>
         <URL value="@FXMLSS.css" />
     </stylesheets>
@@ -28,19 +28,19 @@
       </Label>
       <TextField id="usernameLogin" fx:id="usernameLogin" layoutX="490.0" layoutY="354.0" />
       <PasswordField id="passwordLogin" fx:id="passwordLogin" layoutX="490.0" layoutY="424.0" />
-      <Label layoutX="170.0" layoutY="261.0" prefHeight="83.0" prefWidth="490.0" text="INLOGGEN" textFill="WHITE">
+      <Label layoutX="180.0" layoutY="270.0" prefHeight="83.0" prefWidth="490.0" text="INLOGGEN" textFill="WHITE">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button id="inloggenButton" fx:id="inloggenButton" layoutX="374.0" layoutY="519.0" mnemonicParsing="false" onAction="#handleLoginButton" text="Inloggen">
+      <Button id="inloggenButton" fx:id="inloggenButton" layoutX="421.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleLoginButton" text="Inloggen">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
       <Hyperlink layoutX="230.0" layoutY="454.0" text="Wachtwoord vergeten?" />
       <Button layoutX="52.0" layoutY="49.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
-      <ImageView fitHeight="150.0" fitWidth="400.0" layoutX="300.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="400.0" layoutX="350.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/AstralStrifesTransparent1.png" />
          </image>

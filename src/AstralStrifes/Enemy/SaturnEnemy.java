@@ -33,6 +33,9 @@ public class SaturnEnemy implements Enemy{
     private Random r;
     private GamePanel gp;
     private int damage;
+    private int multiplier;
+    private int score;
+    private double speed;
     
     public SaturnEnemy(GamePanel gp){
         this.gp = gp;
@@ -45,6 +48,9 @@ public class SaturnEnemy implements Enemy{
         loadImage();
         createBoundries();
         this.damage=10;
+        this.score = gp.getDiff().getSeScore();
+        this.multiplier = gp.getDiff().getSeMultie();
+        this.speed= gp.getDiff().getSeMove();
     }
 
     @Override
@@ -56,10 +62,10 @@ public class SaturnEnemy implements Enemy{
     }
     public void slide(){
         if(right&&x<1000){
-            x+=1;
+            x+=speed;
         }
         else{
-            x-=1;
+            x-=speed;
             right = false;
             if(x<=0){
                 right = true;
@@ -88,7 +94,6 @@ public class SaturnEnemy implements Enemy{
     @Override
     public void draw(Graphics g){
         g.drawImage(image,(int)(this.x),(int)(this.y),null);
-        //g.fillRect((int)(this.x), (int)(this.y), image.getWidth(), image.getHeight());
     }
 
     @Override
@@ -138,7 +143,7 @@ public class SaturnEnemy implements Enemy{
 
     @Override
     public Manna getManna() {
-        return new Manna(300,2,(int)this.x,(int)this.y);
+        return new Manna(score,multiplier,(int)this.x,(int)this.y);
     }
     public double getCenterX(){
         return x+image.getHeight()/2;

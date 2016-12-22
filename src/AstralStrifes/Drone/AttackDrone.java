@@ -8,7 +8,6 @@ package AstralStrifes.Drone;
 import AstralStrifes.Bullet;
 import AstralStrifes.Enemy.Enemy;
 import AstralStrifes.Player;
-import AstralStrifes.Sounds.SoundLoader;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
@@ -22,7 +21,6 @@ public class AttackDrone extends Drone implements Runnable{
     private Thread thread;
     private LinkedList<Bullet> bullets;
     private GamePanel gp;
-    private SoundLoader s = new SoundLoader("Spaceship");
     public AttackDrone(Player p ,GamePanel gp) {
         super(p);
         this.gp=gp;
@@ -38,7 +36,6 @@ public class AttackDrone extends Drone implements Runnable{
         System.out.println(e);
         if(e!=null){
             Bullet b = new Bullet(super.getX(), super.getY(), e.getX(), e.getY(), "drone");
-            (s.getSound()).play();
             bullets.add(b);
         }
     }

@@ -678,9 +678,13 @@ public class Database {
         System.out.println(db.getDifficultySEShoot(1));
         System.out.println(db.getDifficultySpawnSpeed(1));
         System.out.println(db.getDifficultySwiftyDuration(1));
+<<<<<<< HEAD
 */        
         System.out.println(db.getUsers());
         
+=======
+*/
+>>>>>>> origin/master
     }
     
     

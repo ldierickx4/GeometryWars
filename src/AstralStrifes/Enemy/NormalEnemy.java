@@ -24,8 +24,9 @@ import PresentationLayer.GamePanel;
  * @author Jens
  */
 public class NormalEnemy implements Enemy{
-    private static final double SPEED = 0.2;
-    private static final int VALUE = 150;
+    private double SPEED;
+    private int VALUE;
+    private int multiplier;
     private final String type ="normal";
     private BufferedImage image;
     private Graphics g;
@@ -44,6 +45,9 @@ public class NormalEnemy implements Enemy{
     public NormalEnemy(GamePanel gp) {
         this.alive = true;
         this.damage=10;
+        this.SPEED = gp.getDiff().getNeMove();
+        this.VALUE = gp.getDiff().getNeScore();
+        this.multiplier = gp.getDiff().getNeMultie();
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
@@ -120,7 +124,7 @@ public class NormalEnemy implements Enemy{
     }
     @Override
     public Manna getManna() {
-        return new Manna(150, 1, (int)this.x, (int)this.y);
+        return new Manna(VALUE, multiplier, (int)this.x, (int)this.y);
     }
 
     @Override
