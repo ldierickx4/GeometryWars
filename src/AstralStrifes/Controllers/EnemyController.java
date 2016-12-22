@@ -15,6 +15,7 @@ import Data.Database;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 /**
@@ -22,13 +23,14 @@ import java.util.Random;
  * @author Jens
  */
 public class EnemyController implements Runnable{
-    
+    private LinkedList<Enemy> toAddEnemies;
     private LinkedList<Enemy> enemies;
     private LinkedList<Manna> manna;
     private Enemy enemy;
     private Thread thread;
     private Player p;
     private int count;
+    private int wave=1;
     private GamePanel gp;
     private Database db;
         
@@ -40,6 +42,7 @@ public class EnemyController implements Runnable{
         thread.start();
         this.p = p;
         this.gp = gp;
+        generateEnemies();
     }
     
     public void addEnemy(Enemy e){
@@ -61,7 +64,6 @@ public class EnemyController implements Runnable{
                 se.slide();
             } catch (Exception e) {
             }
-            
         }
     }
     public void render(Graphics g){
@@ -73,33 +75,38 @@ public class EnemyController implements Runnable{
             m.draw(g);
         }
     }
-    public LinkedList<Enemy> generateEnemies(int wave){
+    public void generateEnemies(){
         LinkedList<String> enemies = db.getEnemiesInWave(wave);
-        LinkedList<Enemy> genEnemies= new LinkedList<Enemy>();
-        for(String e:enemies){
-            if(e.equals("saturnenemy")){
-                genEnemies.add(new SaturnEnemy());
+        if(enemies!=null){
+            LinkedList<Enemy> genEnemies= new LinkedList<Enemy>();
+            for(String e:enemies){
+                if(e.equals("saturnenemy")){
+                    genEnemies.add(new SaturnEnemy(gp));
+                }
+                else if(e.equals("shootingenemy")){
+                    genEnemies.add(new ShootingEnemy(p,gp.getBulletControler(),gp));
+                }
+                else{
+                    genEnemies.add(new NormalEnemy(gp));
+                }
             }
-            else if(e.equals("shootingenemy")){
-                genEnemies.add(new ShootingEnemy(p,gp.getBulletControler()));
-            }
-            else{
-                genEnemies.add(new NormalEnemy());
-            }
+            Collections.shuffle(genEnemies);
+            this.toAddEnemies = genEnemies;
         }
-        return genEnemies;
+        else{
+            gp.setAttackdrone();
+        }
     }
     public void makeNewEnemy()
-    {
-        Enemy toAddenemy = new NormalEnemy();
-        if(count%2==0&&count!=0){
-             toAddenemy = new SaturnEnemy();
+    {   
+        if(toAddEnemies.size()>0){
+            enemies.add(toAddEnemies.removeFirst());
+            count = toAddEnemies.size();
         }
-        else if(count%5==0&&count!=0){
-            toAddenemy = new ShootingEnemy(p, gp.getBulletControler());
+        else{
+            this.wave++;
+            generateEnemies();
         }
-        addEnemy(toAddenemy);
-        this.count++;
     }
     @Override
     public void run() {
@@ -114,6 +121,9 @@ public class EnemyController implements Runnable{
 		}
             makeNewEnemy();
         }
+    }
+    public int getEnemiesLeft(){
+        return this.count;
     }
     public LinkedList<Enemy> giveEnemies(){
         return this.enemies;
@@ -159,6 +169,9 @@ public class EnemyController implements Runnable{
             }
         }
         return ma;
+    }
+    public int getWave(){
+        return this.wave;
     }
     public void removeAllManna(){
         for(int i = 0;i<manna.size();i++){

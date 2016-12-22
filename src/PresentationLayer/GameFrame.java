@@ -28,15 +28,19 @@ public class GameFrame extends JFrame implements KeyListener {
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int y = (dim.width-WIDTH)/2;
     private int x = (dim.height-HEIGHT)/2;
+    private JLabel wave;
     private JLabel scoreP1;
     private JLabel scoreP2;
     private JLabel adhdPowerupP1;
     private JLabel adhdPowerupP2;
+    private JLabel enemiesleft;
+    private JLabel multiplierP1;
+    private JLabel multiplierP2;
     private int playerCount;
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-        GameFrame gf = new GameFrame(1,"attack");   
+        GameFrame gf = new GameFrame(2,"attack","heal");   
     }
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2){
@@ -76,7 +80,6 @@ public class GameFrame extends JFrame implements KeyListener {
             setContentPane(multiGamePanel);
             setScoresAndPowerups2();
     }   else{
-            System.out.println(drone1);
             this.singleGamePanel = new SingleGamePanel(this,drone1);
             setContentPane(singleGamePanel);
             setScoresAndPowerups1();
@@ -84,55 +87,89 @@ public class GameFrame extends JFrame implements KeyListener {
     
     }
     public void setScoresAndPowerups2(){ 
+        JPanel jp = new JPanel();
         scoreP1 = new JLabel();
-        scoreP1.setForeground(Color.WHITE);
-        adhdPowerupP1 = new JLabel(); 
-        //adhdPowerupP1.setText("ADHD Powerups Player 1: ");
-        adhdPowerupP1.setForeground(Color.WHITE);
-        multiGamePanel.add(adhdPowerupP1);
-        multiGamePanel.add(scoreP1);
-        
-        
+        adhdPowerupP1 = new JLabel();
         scoreP2 = new JLabel();
-        //scoreP2.setText("Score Player 2: ");
+        adhdPowerupP2 = new JLabel();
+        wave = new JLabel();
+        enemiesleft = new JLabel();
+        multiplierP1 = new JLabel();
+        multiplierP2 = new JLabel();
+        wave.setForeground(Color.WHITE);
+        enemiesleft.setForeground(Color.WHITE);
+        scoreP1.setForeground(Color.WHITE);
+        adhdPowerupP1.setForeground(Color.WHITE);
         scoreP2.setForeground(Color.WHITE);
-        multiGamePanel.add(scoreP2);
-        adhdPowerupP2 = new JLabel();   
-        //adhdPowerupP2.setText("ADHD Powerups Player 2: ");
         adhdPowerupP2.setForeground(Color.WHITE);
+        multiplierP1.setForeground(Color.WHITE);
+        multiplierP2.setForeground(Color.WHITE);
+        multiGamePanel.add(wave);
+        multiGamePanel.add(enemiesleft);
+        multiGamePanel.add(multiplierP1);
+        multiGamePanel.add(scoreP1);
+        multiGamePanel.add(adhdPowerupP1);
+        multiGamePanel.add(multiplierP2);
+        multiGamePanel.add(scoreP2);
         multiGamePanel.add(adhdPowerupP2);
+        
+        
     }
     public void setScoresAndPowerups1(){
         scoreP1 = new JLabel();
+        wave = new JLabel();
+        adhdPowerupP1 = new JLabel();
+        enemiesleft = new JLabel();
+        multiplierP1 = new JLabel();
         //scoreP1.setText("Score Player 1: ");
         scoreP1.setForeground(Color.WHITE);
-        singleGamePanel.add(scoreP1);
-        adhdPowerupP1 = new JLabel();   
-        //adhdPowerupP1.setText("ADHD Powerups Player 1: ");
+        wave.setForeground(Color.WHITE);
         adhdPowerupP1.setForeground(Color.WHITE);
-        singleGamePanel.add(adhdPowerupP1);    
+        enemiesleft.setForeground(Color.WHITE);
+        multiplierP1.setForeground(Color.WHITE);
+        singleGamePanel.add(wave);
+        singleGamePanel.add(enemiesleft);
+        multiGamePanel.add(multiplierP1);
+        singleGamePanel.add(scoreP1);
+        singleGamePanel.add(adhdPowerupP1);
+        
     }
   
-    public void updateScoreP1(String score)
+    public void updateScoreP1(int score)
     {
         String add = "Score Player 1: " + score + "|";
         this.scoreP1.setText(add);
     }
     
-    public void updateScoreP2(String score)
+    public void updateScoreP2(int score)
     {
         String add = "Score Player 2: " + score + "|";
         this.scoreP2.setText(add);   
     }
-    
-    public void updateAdhdPowerupsP1(String amount){
+    public void updateMultiplierP1(int multiplier){
+        String add = "multiplier Player 1: " + multiplier + "|";
+        this.multiplierP1.setText(add);
+    }
+    public void updateMultiplierP2(int multiplier){
+        String add = "multiplier Player 2: " + multiplier + "|";
+        this.multiplierP2.setText(add);
+    }
+    public void updateAdhdPowerupsP1(int amount){
         String add = "ADHD Powerups Player 1: " + amount + "     ";
         this.adhdPowerupP1.setText(add);
     }
     
-    public void updateAdhdPowerupsP2(String amount){
+    public void updateAdhdPowerupsP2(int amount){
         String add = "ADHD Powerups Player 2: " + amount;
         this.adhdPowerupP2.setText(add);
+    }
+    public void updateWaves(int amount){
+        String add = "Wave: " + amount;
+        this.wave.setText(add);
+    }
+    public void updateEnemiesLeft(int amount){
+        String add = "enemies left: "+amount;
+        this.enemiesleft.setText(add);
     }
 
     @Override

@@ -52,5 +52,6 @@ public interface GamePanel{
     public EnemyController getEc();
     public JLabel getScore();
     public Background getBackGround();
-    public String getType();
+    public void setStatus(String status);
+    public void checkStatus();
 }

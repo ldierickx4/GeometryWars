@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import AstralStrifes.Enemy.Enemy;
+import PresentationLayer.GamePanel;
 
 /**
  *
@@ -45,7 +46,7 @@ public class NormalEnemy implements Enemy{
     private boolean alive;
     
 
-    public NormalEnemy() {
+    public NormalEnemy(GamePanel gp) {
         this.alive = true;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );

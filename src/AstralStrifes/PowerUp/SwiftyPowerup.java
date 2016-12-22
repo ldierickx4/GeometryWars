@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.PowerUp;
 
+import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;

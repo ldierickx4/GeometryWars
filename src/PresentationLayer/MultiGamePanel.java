@@ -73,9 +73,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private boolean up2 = false;
     private boolean left2 = false;
     private boolean right2 = false;
-    private double aimX=0;
-    private double aimY=0;
-    
+    private double aimX;
+    private double aimY;
+    private String status = "playing";
     private JLabel score;
     private GameFrame gf;
     
@@ -238,6 +238,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             catch(Exception e) {
 		e.printStackTrace();
             }
+            checkStatus();
             checkShoot(shoot2,controller2);
             checkShoot(shoot1,controller);
             checkInput1();
@@ -254,10 +255,14 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             pc2.checkForPOwerUp();
             updatePlayer(player);
             updatePlayer(player2);
-            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
-            gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups()+"");
-            gf.updateScoreP1(player.getScore()+"");
-            gf.updateScoreP2(player2.getScore()+"");
+            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
+            gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups());
+            gf.updateMultiplierP1(player.getMultiplier());
+            gf.updateMultiplierP2(player2.getMultiplier());
+            gf.updateScoreP1(player.getScore());
+            gf.updateScoreP2(player2.getScore());
+            gf.updateWaves(ec.getWave());
+            gf.updateEnemiesLeft(ec.getEnemiesLeft());
             repaint();
         }
     }    
@@ -284,7 +289,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         cc2.checkEnemyPlayerCollision();
         cc2.checkIfPowerupGetsPickedUp();
         cc.checkIfPowerupGetsPickedUp();
-        
         cc2.checkIfPlayerGetsHitByEnemyBullet();
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
@@ -392,7 +396,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private void checkConAim(){
         this.aimX = pscon.getAxisValue(2)*1000;
         this.aimY = pscon.getAxisValue(3)*1000;
-        player2.calculatePlayerAngle(aimX,aimY) ;
+        player2.calculatePlayerAngle(aimX,aimY);
     }
 
     private void checkConMove() {
@@ -422,8 +426,19 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             up2 = false;
         }
     }
-    @Override
-    public String getType() {
-        return this.type;
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public void checkStatus(){
+        switch(status){
+            case "playing":
+                break;
+            case "gameover":
+                System.out.println("GameOver");
+                break;
+            case "finished":
+                System.out.println("gewonnen");
+                break;
+        }
     }
 }
