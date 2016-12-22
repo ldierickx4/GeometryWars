@@ -639,7 +639,9 @@ public class Database {
                 String pw = rs.getString("password");
                 String email = rs.getString("email");
                 int highScore = rs.getInt("highscore");
-                User u = new User(username,pw,email);
+                int xp = rs.getInt("XP");
+            
+                User u = new User(username,pw,email,xp,highScore);
                 this.usersHS.put(u, highScore);
                 
                         
@@ -682,9 +684,7 @@ public class Database {
 */        
         System.out.println(db.getUsers());
         
-=======
-*/
->>>>>>> origin/master
+
     }
     
     
