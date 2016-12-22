@@ -37,9 +37,6 @@ public class Database {
     private int amountEnemies;
     private int highScorePlayer;
     private String imgPath;
-<<<<<<< HEAD
-    private List<Enemy> wave1;
-=======
     private LinkedList<String> wave1 = new LinkedList<>();
     private String enemyName;
     private HashMap<String,Integer> difficultyParameters = new HashMap<>();
@@ -59,7 +56,6 @@ public class Database {
     private int playerShootSpeed;
             
     
->>>>>>> origin/master
     
     public Database() {
         //Server registreren
@@ -480,16 +476,13 @@ public class Database {
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-<<<<<<< HEAD
         //db.checkUserDB("AstralKing","astral123");
         //db.getUserExist();
         //db.setPlayerHighscore(5, 10000);
         //db.getPlayerHighScore("VangeelJ");
-
-        System.out.println(db.getEnemyImage("normalenemy"));
         //System.out.println(db.getUsername("VangeelJ"));
         //System.out.println(db.getUsername("AstralKing"));
-=======
+
         //LinkedList waveOne = new LinkedList<String>();
         //int amount = db.getAmountInWave(2,1);
         //db.putAmountEnemiesInWave(amount, db.getEnemyName(2));
@@ -514,7 +507,6 @@ public class Database {
         System.out.println(db.getDifficultySEShoot(1));
         System.out.println(db.getDifficultySpawnSpeed(1));
         System.out.println(db.getDifficultySwiftyDuration(1));
->>>>>>> origin/master
     }
     
     

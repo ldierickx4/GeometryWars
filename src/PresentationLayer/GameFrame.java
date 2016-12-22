@@ -18,8 +18,10 @@ import javax.imageio.ImageIO;
  *
  * @author Gebruiker
  */
-public class GameFrame extends JFrame implements ActionListener,KeyListener,MouseMotionListener,MouseListener {
-    private MultiGamePanel gamePanel;
+//implements ActionListener,KeyListener,MouseMotionListener,MouseListener
+public class GameFrame extends JFrame implements KeyListener {
+    private SingleGamePanel singleGamePanel;
+    private MultiGamePanel multiGamePanel;
     private static final int HEIGHT = 800;
     private static final int WIDTH = 1000;
     private Background bg;
@@ -31,10 +33,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private JLabel scoreP2;
     private JLabel adhdPowerupP1;
     private JLabel adhdPowerupP2;
-<<<<<<< HEAD
-    public static void main(String[] args){
-        GameFrame gf = new GameFrame();   
-=======
     private JLabel enemiesleft;
     private JLabel multiplierP1;
     private JLabel multiplierP2;
@@ -42,6 +40,7 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
     private String drone1;
     private String drone2;
     public static void main(String[] args){
+<<<<<<< HEAD
 <<<<<<< HEAD
         GameFrame gf = new GameFrame(2,"attack","heal");   
 =======
@@ -51,64 +50,53 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
 >>>>>>> origin/master
 =======
 >>>>>>> origin/master
+=======
+        GameFrame gf = new GameFrame(2,"attack","heal");   
+>>>>>>> origin/master
     }
     //private JLabel score;
-    public GameFrame(){
+    public GameFrame(int playerCount,String drone1, String drone2){
+        this.playerCount = playerCount;
+        this.drone1 = drone1;
+        this.drone2 = drone2;
         initUi(); // HIER
     }
-<<<<<<< HEAD
-
-=======
     public GameFrame(int playerCount,String drone1){
         this.playerCount = playerCount;
         this.drone1 = drone1;
         initUi(); // HIER
     }
         
->>>>>>> origin/master
     private void initUi() {
+        //this.gamePanel = new SingleGamePanel(this);
         addKeyListener(this);
-        addMouseMotionListener(this);
-        addMouseListener(this);
+        //addMouseMotionListener(this);
+        //addMouseListener(this);
         setTitle("Astral Strifes");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-        gamePanel = new MultiGamePanel(this); 
-        setScoresAndPowerups();
-        setContentPane(gamePanel);
+        //scoreTitle.setLocation(500, 500);
+        //JLabel score = new JLabel();
+        //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
+        //gamePanel.add(score);
+        //gamePanel = new MultiGamePanel(this); 
+        creatGame();
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
     }
+    public void creatGame(){
+        if(playerCount == 2){
+            this.multiGamePanel = new MultiGamePanel(this,drone1,drone2);
+            setContentPane(multiGamePanel);
+            setScoresAndPowerups2();
+    }   else{
+            this.singleGamePanel = new SingleGamePanel(this,drone1);
+            setContentPane(singleGamePanel);
+            setScoresAndPowerups1();
+    }
     
-<<<<<<< HEAD
-    public void setScoresAndPowerups(){
-        
-        scoreP1 = new JLabel();
-        scoreP1.setText("Score Player 1: ");
-        scoreP1.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        scoreP1.setForeground(Color.WHITE);
-        gamePanel.add(scoreP1);
-        adhdPowerupP1 = new JLabel();   
-        adhdPowerupP1.setText("ADHD Powerups Player 1: ");
-        adhdPowerupP1.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        adhdPowerupP1.setForeground(Color.WHITE);
-        gamePanel.add(adhdPowerupP1);
-        
-        if(gamePanel.getType() == "Multi"){
-            scoreP2 = new JLabel();
-            scoreP2.setText("Score Player 2: ");
-            scoreP2.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-            scoreP2.setForeground(Color.WHITE);
-            gamePanel.add(scoreP2);
-            adhdPowerupP2 = new JLabel();   
-            adhdPowerupP2.setText("ADHD Powerups Player 2: ");
-            adhdPowerupP2.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-            adhdPowerupP2.setForeground(Color.WHITE);
-            gamePanel.add(adhdPowerupP2);
-        } 
-=======
     }
     public void setScoresAndPowerups2(){ 
         JPanel jp = new JPanel();
@@ -157,7 +145,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         singleGamePanel.add(scoreP1);
         singleGamePanel.add(adhdPowerupP1);
         
->>>>>>> origin/master
     }
   
     public void updateScoreP1(int score)
@@ -188,9 +175,6 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         String add = "ADHD Powerups Player 2: " + amount;
         this.adhdPowerupP2.setText(add);
     }
-<<<<<<< HEAD
-    
-=======
     public void updateWaves(int amount){
         String add = "Wave: " + amount;
         this.wave.setText(add);
@@ -200,56 +184,31 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
         this.enemiesleft.setText(add);
     }
 
->>>>>>> origin/master
     @Override
     public void keyTyped(KeyEvent e) {
         
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
-        gamePanel.keyPressed(e);
+        if(multiGamePanel==null){
+            singleGamePanel.keyPressed(e);
+        }
+        else{
+            multiGamePanel.keyPressed(e);
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        gamePanel.keyReleased(e);
+        if(multiGamePanel==null){
+            singleGamePanel.keyReleased(e);
+        }
+        else{
+            multiGamePanel.keyReleased(e);
+        }
+        
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        gamePanel.mouseDragged(e);
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        gamePanel.mouseMoved(e);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        gamePanel.mouseClicked(e);
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
+    
     public int getHeight(){
         return this.HEIGHT;
     }

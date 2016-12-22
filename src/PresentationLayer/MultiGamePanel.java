@@ -101,7 +101,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     }
     public void setAttackdrone(){
         this.attackDrone = true;

@@ -78,7 +78,10 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
+<<<<<<< HEAD
            
+=======
+>>>>>>> origin/master
     }
     public void setAttackdrone(){
         this.attackDrone = true;
