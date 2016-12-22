@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author JorreVynckier
  */
-public class MenuController implements Initializable {
+public class LeaderboardController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -33,30 +33,9 @@ public class MenuController implements Initializable {
     
     
     @FXML
-    private Label label;
-   
-    
-    @FXML
-    private void handleLoginButton() throws IOException{
+    private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
-        //System.out.println("handleLoginButton");
-        Parent loginParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Game.borderPane.setCenter(loginParent);
-        //Scene loginScene = new Scene(loginParent, 900, 900);  
-        //appStage.setScene(loginScene);
-    }
-    
-    @FXML
-    private void handleRegisterButton() throws IOException{
-        Stage appStage = Game.stage;
-        Parent loginParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
-        Game.borderPane.setCenter(loginParent);
-    }
-    
-    @FXML
-    private void handlePlayButton() throws IOException{
-        Stage appStage = Game.stage;
-        Parent loginParent = FXMLLoader.load(getClass().getResource("FirstPlay.fxml"));
+        Parent loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));
         Game.borderPane.setCenter(loginParent);
     }
     

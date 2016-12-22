@@ -42,10 +42,16 @@ public class MenuLoggedInController implements Initializable {
     @FXML
     private void handleLoginButton() throws IOException{
         Stage appStage = Game.stage;
-        System.out.println("handleLoginButton");
         Parent loginParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Game.borderPane.setCenter(loginParent);
         UserPlay.getinstance().setU(null);
+    }
+    
+    @FXML
+    private void handleLeaderboardButton() throws IOException{
+        Stage appStage = Game.stage;
+        Parent loginParent = FXMLLoader.load(getClass().getResource("Leaderboard.fxml"));
+        Game.borderPane.setCenter(loginParent);
     }
     
     @FXML

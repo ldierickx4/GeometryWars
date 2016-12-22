@@ -23,11 +23,6 @@
             <Font size="36.0" />
          </font>
       </Button>
-      <Button fx:id="leaderboards" layoutX="349.0" layoutY="498.0" mnemonicParsing="false" onAction="#handlePlayButton" text="Leaderboards">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
       <Hyperlink fx:id="login" layoutX="879.0" layoutY="19.0" onAction="#handleLoginButton" text="Login">
          <font>
             <Font size="24.0" />
