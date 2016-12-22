@@ -34,12 +34,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="159.0" layoutY="548.0" text="Highscore:" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="214.0" layoutY="486.0" text="Rank:" textFill="WHITE">
+      <Label layoutX="158.0" layoutY="483.0" text="Highscore:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -89,12 +84,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label id="rank" fx:id="rank" layoutX="321.0" layoutY="487.0" text="Email:" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label id="highscore" fx:id="highscore" layoutX="322.0" layoutY="549.0" text="Email:" textFill="WHITE">
+      <Label id="highscore" fx:id="highscore" layoutX="319.0" layoutY="485.0" text="Email:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

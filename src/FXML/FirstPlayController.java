@@ -40,6 +40,12 @@ public class FirstPlayController implements Initializable {
     @FXML 
     private ToggleGroup players;
     
+    @FXML
+    private ToggleGroup Drone1;
+    
+    @FXML
+    private ToggleGroup Drone2;
+    
     @FXML 
     private Pane PlayerOneDrone;
     
@@ -60,8 +66,18 @@ public class FirstPlayController implements Initializable {
     
     @FXML 
     private void handleStartButton() throws IOException{
-        Stage appStage = Game.stage;        
-        GameFrame gameframe = new GameFrame();
+        //Stage appStage = Game.stage;        
+        //GameFrame gameframe = new GameFrame();
+        System.out.println(Drone1.getSelectedToggle());
+        System.out.println(Drone2.getSelectedToggle());
+        System.out.println(players.getSelectedToggle());
+        if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
+            GameFrame gf = new GameFrame(2,"kill","attack");
+        }else{
+            GameFrame gf = new GameFrame(1,"kill");
+        }
+        
+        
     } 
     
     @FXML

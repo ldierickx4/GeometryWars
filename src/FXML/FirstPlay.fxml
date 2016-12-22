@@ -40,7 +40,7 @@
             <Font size="18.0" />
          </font>
       </RadioButton>
-            <Button id="inloggenButton" fx:id="inloggenButton" layoutX="458.0" layoutY="600.0" mnemonicParsing="false" text="START">
+            <Button id="inloggenButton" fx:id="inloggenButton" layoutX="458.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleStartButton" text="START">
          <font>
             <Font size="24.0" />
          </font>
@@ -57,15 +57,15 @@
                   <Font size="18.0" />
                </font>
                <toggleGroup>
-                  <ToggleGroup fx:id="Drone1" />
+                  <ToggleGroup fx:id="Drone2" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="402.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone1">
+            <RadioButton layoutX="402.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone2">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="520.0" layoutY="58.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone1">
+            <RadioButton layoutX="520.0" layoutY="58.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone2">
                <font>
                   <Font size="18.0" />
                </font>
@@ -84,15 +84,15 @@
                   <Font size="18.0" />
                </font>
                <toggleGroup>
-                  <ToggleGroup fx:id="Drone" />
+                  <ToggleGroup fx:id="Drone1" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="408.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone">
+            <RadioButton layoutX="408.0" layoutY="59.0" mnemonicParsing="false" text="Attack" textFill="WHITE" toggleGroup="$Drone1">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="525.0" layoutY="59.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone">
+            <RadioButton layoutX="525.0" layoutY="59.0" mnemonicParsing="false" text="Kill" textFill="WHITE" toggleGroup="$Drone1">
                <font>
                   <Font size="18.0" />
                </font>

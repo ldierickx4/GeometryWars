@@ -58,7 +58,10 @@ public class PlayerInfoController implements Initializable{
         User u = UserPlay.getinstance().getU();
         username.setText(u.getUsername());
         email.setText(u.getEmail());
-        
+        String xpp = u.getXp()+"";
+        xp.setText(xpp);
+        String highscores = u.getHighscore()+"";
+        highscore.setText(highscores);     
     }
 }
 

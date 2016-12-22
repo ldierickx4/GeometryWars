@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package FXML;
-
 import Data.*;
 import AstralStrifes.Game;
 import java.io.IOException;
@@ -22,7 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -31,16 +29,8 @@ import javafx.stage.WindowEvent;
  */
 public class MenuLoggedInController implements Initializable {
 
-    private Stage appStage = Game.stage;
-    
-    @FXML
-    private GridPane loginGrid;
-    
     @FXML
     private Hyperlink naam;
-        
-    @FXML
-    private Label label;
    
     @FXML
     private void handlePlayButton() throws IOException{
@@ -60,7 +50,7 @@ public class MenuLoggedInController implements Initializable {
     
     @FXML
     private void handleRegisterButton() throws IOException{
-        Stage appStage = Game.stage;      
+        Stage appStage = Game.stage;
         Parent loginParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
         Game.borderPane.setCenter(loginParent);
     }
@@ -72,11 +62,8 @@ public class MenuLoggedInController implements Initializable {
         Game.borderPane.setCenter(loginParent);
     }
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //System.out.println("hi");
-       String u = UserPlay.getinstance().getU().getUsername();
-       naam.setText(u);
+        naam.setText(UserPlay.getinstance().getU().getUsername());   
     }   
 }
