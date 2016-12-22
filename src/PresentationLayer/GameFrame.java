@@ -129,7 +129,7 @@ public class GameFrame extends JFrame implements KeyListener {
         multiplierP1.setForeground(Color.WHITE);
         singleGamePanel.add(wave);
         singleGamePanel.add(enemiesleft);
-        multiGamePanel.add(multiplierP1);
+        singleGamePanel.add(multiplierP1);
         singleGamePanel.add(scoreP1);
         singleGamePanel.add(adhdPowerupP1);
         

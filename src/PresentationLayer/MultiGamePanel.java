@@ -153,7 +153,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         if(right2){
             player2.moveRight();
         }    
-    
     }
     public void checkShoot(boolean pshoot , PlayerBulletController controller)
     {
@@ -316,10 +315,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {
-            shoot1=true;
-        }
+        shoot1=e.getButton()==e.BUTTON1;
+        
     }
 
     @Override
@@ -386,12 +383,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
     }
     private void checkConShoot(){
-        if(pscon.isButtonPressed(7)){
-            shoot2 = true;
-        }
-        else{
-            shoot2 = false;
-        }
+        shoot2 = pscon.isButtonPressed(7);
     }
     private void checkConAim(){
         this.aimX = pscon.getAxisValue(2)*1000;
@@ -400,31 +392,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
 
     private void checkConMove() {
-        if(pscon.getAxisValue(0)>0.5)
-        {
-            right2 = true;
-        }
-        else{
-            right2 = false;
-        }
-        if(pscon.getAxisValue(0)<-0.5){
-            left2 = true;
-        }
-        else{
-            left2 = false;
-        }
-        if(pscon.getAxisValue(1)>0.5){
-            down2 = true;
-        }
-        else{
-            down2 = false;
-        }
-        if(pscon.getAxisValue(1)<-0.5){
-            up2 = true;
-        }
-        else{
-            up2 = false;
-        }
+        right2 = pscon.getAxisValue(0)>0.5;
+        left2 = pscon.getAxisValue(0)<-0.5;
+        down2 = pscon.getAxisValue(1)>0.5;
+        up2 = pscon.getAxisValue(1)<-0.5;
     }
     public void setStatus(String status){
         this.status = status;

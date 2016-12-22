@@ -24,7 +24,7 @@ public class AdhdPowerup extends Powerup implements Runnable{
     public AdhdPowerup(String name, GamePanel gp, PlayerBulletController pbc) {
     super(gp);
     this.pbc = pbc;
-    this.boost=40;
+    this.boost=30;
     this.name = name;
     String link = "resources/gameSprites/adhd.png";
     super.loadImage(link);

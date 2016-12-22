@@ -43,7 +43,7 @@ public class EnemyController implements Runnable{
         thread.start();
         this.p = p;
         this.gp = gp;
-        SpawnSpeed = 2500;
+        SpawnSpeed = 2000;
         generateEnemies();
     }
     
