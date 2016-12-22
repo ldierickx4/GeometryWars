@@ -98,31 +98,16 @@ public class FirstPlayController implements Initializable {
     
     @FXML 
     private void handleStartButton() throws IOException{
-<<<<<<< Updated upstream
-        //Stage appStage = Game.stage;        
-        //GameFrame gameframe = new GameFrame();
-        System.out.println(Drone1.getSelectedToggle());
-        System.out.println(Drone2.getSelectedToggle());
-        System.out.println(players.getSelectedToggle());
-        if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
-            GameFrame gf = new GameFrame(2,"kill","attack",2);
-        }else{
-            GameFrame gf = new GameFrame(1,"kill",2);
-        }
-        
-        
-=======
         String drone1 = Drone1.getSelectedToggle().getUserData().toString();
         String drone2 = Drone2.getSelectedToggle().getUserData().toString();
         String difficulty = Difficulty.getSelectedToggle().getUserData().toString();
         int difficultyInt = getDifficulty(difficulty);
         System.out.println(difficultyInt);
         if ("two".equals(players.getSelectedToggle().getUserData().toString())){
-            GameFrame gf = new GameFrame(2, drone1 , drone2);
+            GameFrame gf = new GameFrame(2, drone1 , drone2, difficultyInt);
         }else{
-            GameFrame gf = new GameFrame(1, drone1);
+            GameFrame gf = new GameFrame(1, drone1, difficultyInt);
         }      
->>>>>>> Stashed changes
     } 
     
     @FXML
