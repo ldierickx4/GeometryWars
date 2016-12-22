@@ -85,7 +85,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public MultiGamePanel(GameFrame gf,String drone1,String drone2){
         this.gf =gf;
         controllerConnection();
-        createComponents();
+        createComponents(drone1,drone2);
+
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -100,17 +101,18 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-        player.makeDrone(drone1);
-        player2.makeDrone(drone2);
+
     }
     public void setAttackdrone(){
         this.attackDrone = true;
     }
-    public void createComponents()
+    public void createComponents(String drone1,String drone2)
     {
         background = new Background(gf);
         player = new Player(this,1);
         player2 = new Player(this,2);
+        player.makeDrone(drone1);
+        player2.makeDrone(drone2);
         players = new LinkedList<Player>();
         players.add(player);
         players.add(player2);
@@ -123,7 +125,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-        pscon = Controllers.getController(0);
+
+        pscon = Controllers.getController(7);
         Controllers.poll();
     }
     public void checkInput1(){
@@ -386,16 +389,45 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         shoot2 = pscon.isButtonPressed(7);
     }
     private void checkConAim(){
-        this.aimX = pscon.getAxisValue(2)*1000;
-        this.aimY = pscon.getAxisValue(3)*1000;
+        this.aimX = pscon.getAxisValue(1)*1000;
+        this.aimY = pscon.getAxisValue(0)*1000;
         player2.calculatePlayerAngle(aimX,aimY);
     }
 
     private void checkConMove() {
+<<<<<<< HEAD
         right2 = pscon.getAxisValue(0)>0.5;
         left2 = pscon.getAxisValue(0)<-0.5;
         down2 = pscon.getAxisValue(1)>0.5;
         up2 = pscon.getAxisValue(1)<-0.5;
+=======
+        //right2 = (pscon.getAxisValue(3)>0.5);
+        if(pscon.getAxisValue(3)>0.5)
+        {
+            right2 = true;
+        }
+        else{
+            right2 = false;
+        }
+        if(pscon.getAxisValue(3)<-0.5){
+            left2 = true;
+        }
+        else{
+            left2 = false;
+        }
+        if(pscon.getAxisValue(2)>0.5){
+            down2 = true;
+        }
+        else{
+            down2 = false;
+        }
+        if(pscon.getAxisValue(2)<-0.5){
+            up2 = true;
+        }
+        else{
+            up2 = false;
+        }
+>>>>>>> origin/master
     }
     public void setStatus(String status){
         this.status = status;

@@ -29,7 +29,6 @@ import javax.swing.JPanel;
  */
 public interface GamePanel{
     public void setAttackdrone();
-    public void createComponents();
     public void paintComponent(Graphics gr);
     public void playerDraw(Player p , Graphics gr);
     public void keyTyped(KeyEvent e);

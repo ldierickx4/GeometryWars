@@ -30,11 +30,12 @@ public class AttackDrone extends Drone implements Runnable{
         this.thread = new Thread(this);
         String link= "resources/gameSprites/attack1.png";
         super.loadImage(link);
-        thread.start();
         bullets = new LinkedList<Bullet>();
+        thread.start();
     }
     public void power(){
         Enemy e = gp.getEc().getRandomEnemy();
+        System.out.println(e);
         if(e!=null){
             Bullet b = new Bullet(super.getX(), super.getY(), e.getX(), e.getY(), "drone");
             (s.getSound()).play();
@@ -54,7 +55,7 @@ public class AttackDrone extends Drone implements Runnable{
         while(true){
             try {
                 thread.sleep(1000);
-                power();
+                this.power();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();
             }
