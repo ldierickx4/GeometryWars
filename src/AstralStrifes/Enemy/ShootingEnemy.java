@@ -8,6 +8,7 @@ package AstralStrifes.Enemy;
 import AstralStrifes.Bullet;
 import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -44,10 +45,12 @@ public class ShootingEnemy implements Enemy{
     private Thread thread;
     private LinkedList<Bullet> bullets;
     private Player p;
+    private GamePanel gp;
     
     
-    public ShootingEnemy(Player p,PlayerBulletController bC)
+    public ShootingEnemy(Player p,PlayerBulletController bC,GamePanel gp)
     {
+        this.gp=gp;
         this.alive = true;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
@@ -56,7 +59,7 @@ public class ShootingEnemy implements Enemy{
         createBoundries();
         this.bullets = new LinkedList<Bullet>();
         this.p = p ;
-        this.bC = bC;
+        this.bC = bC; 
     }
     @Override
     public void createBoundries() {

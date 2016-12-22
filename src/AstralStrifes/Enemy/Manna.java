@@ -53,5 +53,7 @@ public class Manna {
     public int getScore(){
         return this.score;
     }
-    
+    public int getMultiplier(){
+        return this.multiplier;
+    }
 }

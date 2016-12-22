@@ -42,9 +42,10 @@ public class AttackDrone extends Drone implements Runnable{
         }
     }
     public void renderBullets(Graphics g){
-        if(bullets.size()>0){
-            for(Bullet b: bullets){
-                b.draw(g);
+        int size=bullets.size();
+        if(size>0){
+            for(int i=0;i<size;i++){
+                bullets.get(i).draw(g);
             }
         }
     }

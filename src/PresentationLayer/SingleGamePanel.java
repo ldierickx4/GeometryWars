@@ -59,7 +59,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private EnemyBulletController ebc;
     private Boolean attackDrone = false;
     private LinkedList<Player> players;
-    private String type = "Single";
+    //private String type = "Single";
+    private String status = "playing";
     
     
     public SingleGamePanel(GameFrame gf,String drone){ 
@@ -179,6 +180,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             catch(Exception e) {
 		e.printStackTrace();
             }
+            checkStatus();
             player.updateBounds();
             player.getDrone().letOrbit();
             checkShoot();
@@ -189,8 +191,11 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             ebc.update();
             pc.updatePowerups();
             pc.checkForPOwerUp();
-            gf.updateScoreP1(player.getScore()+"");
-            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
+            gf.updateScoreP1(player.getScore());
+            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
+            gf.updateMultiplierP1(player.getMultiplier());
+            gf.updateWaves(ec.getWave());
+            gf.updateEnemiesLeft(ec.getEnemiesLeft());
             player.updateHealth();
             repaint();
         }
@@ -278,9 +283,23 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     public Background getBackGround(){
         return this.background;
     }
+    @Override
+    public void setStatus(String status) {
+        this.status = status;
+
+    }
 
     @Override
-    public String getType() {
-        return this.type;
+    public void checkStatus() {
+        switch(status){
+            case "playing":
+                break;
+            case "gameover":
+                System.out.println("GameOver");
+                break;
+            case "finished":
+                System.out.println("gewonnen");
+                break;
+        }
     }
 }
