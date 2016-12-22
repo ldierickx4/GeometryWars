@@ -10,7 +10,6 @@ import AstralStrifes.Player;
 import AstralStrifes.PowerUp.Powerup;
 import AstralStrifes.PowerUp.SwiftyPowerup;
 import PresentationLayer.GamePanel;
-import PresentationLayer.MultiGamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -24,7 +23,6 @@ public class PowerupController{
     private Player player;
     private LinkedList<Powerup> powerups;
     private LinkedList<Powerup> usedPowers;
-    private PlayerBulletController pbc;
     private GamePanel gp;
     private Thread t;
     private boolean spacebar = false;
@@ -33,8 +31,7 @@ public class PowerupController{
         this.powerups = new LinkedList<Powerup>();
         this.usedPowers = new LinkedList<Powerup>();
         this.player = player;
-        this.gp = gp;        
-        getPbc();
+        this.gp = gp;
     }
     public void addUsed(Powerup p){
         usedPowers.add(p);
@@ -45,27 +42,23 @@ public class PowerupController{
     
     public void updatePowerups(){
         score = player.getScore();
-        if(score%150 == 0 && score!=0 && powerups.size() == 0){
-            SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp,player);
+        if(score%3000 == 0 && score!=0 && powerups.size() == 0){
+            SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp);
             powerups.add(powerup);
         }   
     }
-    public void getPbc(){
-        this.pbc = gp.getBulletControler();
-        if(player.getPlayerStatus()==2){
-            MultiGamePanel mg = (MultiGamePanel)(gp);
-            this.pbc = mg.getBulletControler2();
-        }
-    }
+    
     public void useADHD(){
         if(player.getAmountOfAdhdPowerups() != 0){
-            AdhdPowerup powerup = new AdhdPowerup("ADHD" ,gp,pbc);
+            AdhdPowerup powerup = new AdhdPowerup("ADHD" , gp);
             powerups.add(powerup);
             powerup.start();
             player.reduceAdhd();
             powerups.clear();
+            //System.out.println("Using ADHD");
         }    
     }
+    
     public void checkForPOwerUp(){
         for(int i=0;i<usedPowers.size();i++){
             Powerup pu = usedPowers.get(i);
@@ -75,7 +68,7 @@ public class PowerupController{
                     sp.start();
                 }
                 catch(Exception ex){
-                    //System.out.println(ex.getMessage());
+                    System.out.println(ex);
                 }
             }
         }

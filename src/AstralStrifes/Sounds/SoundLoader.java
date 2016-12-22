@@ -18,22 +18,20 @@ import java.util.logging.Logger;
  */
 public class SoundLoader {
     private String soundLoaderName;
-    private String SPACESHIP_GUN_FIRE_PATH = "file:C:/Users/Jordy/Documents/Howest/2TI/Semester 3/Project/GeometryWars/resources/gameSounds/shot3.wav";
+    private String SPACESHIP_GUN_FIRE_PATH = "file:C:/Users/Jordy/Documents/Howest/2TI/Semester 3/Project/GeometryWars/resources/gameSounds/shot.wav";
     private String ENEMY_STEALTH_FIRE_PATH = "";
     private String ENEMY_RAINBOW_FIRE_PATH = "";
     private String ENEMY_SATURN_FIRE_PATH = "";
-    private String STANDARD_ENEMY_FIRE_PATH = "file:C:/Users/Jordy/Documents/Howest/2TI/Semester 3/Project/GeometryWars/resources/gameSounds/shot4.wav";
-    private AudioClip shot;
     
 
     public SoundLoader(String soundLoaderName) {
-        makeSound(soundLoaderName);
+        this.soundLoaderName = soundLoaderName;
     }
     
     public void loadSound(String sound){
         try {
             URL url = new URL(sound);
-            shot = Applet.newAudioClip(url);
+            AudioClip shot = Applet.newAudioClip(url);
         } catch (MalformedURLException ex) {
             Logger.getLogger(SoundLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,19 +47,8 @@ public class SoundLoader {
                 return ENEMY_RAINBOW_FIRE_PATH;
             case "Saturn" :
                 return ENEMY_SATURN_FIRE_PATH;
-            case "Enemy" :
-                return STANDARD_ENEMY_FIRE_PATH;
             default: 
                 return SPACESHIP_GUN_FIRE_PATH;
         }
-    }
-    
-    public void makeSound(String soundName){
-        String path = getSoundPath(soundName);
-        loadSound(path);       
-    }
-    
-    public AudioClip getSound(){
-        return this.shot;
     }
 }

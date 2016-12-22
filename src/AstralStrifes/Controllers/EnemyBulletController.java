@@ -10,7 +10,6 @@ import AstralStrifes.Enemy.Enemy;
 import AstralStrifes.Player;
 import AstralStrifes.Enemy.SaturnEnemy;
 import AstralStrifes.Enemy.ShootingEnemy;
-import AstralStrifes.Sounds.SoundLoader;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
@@ -28,7 +27,6 @@ public class EnemyBulletController implements Runnable {
     private LinkedList<Player> players;
     private Thread thread;
     private Random r = new Random();
-    private SoundLoader s = new SoundLoader("Enemy");
     
     public EnemyBulletController(LinkedList<Player> players, GamePanel gp)
     {   
@@ -96,13 +94,11 @@ public class EnemyBulletController implements Runnable {
             {
                 ShootingEnemy sE = (ShootingEnemy) e;
                 Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), p.getx(), p.gety(), "enemy");
-                (s.getSound()).play();
                 addBullet(b);
             }
             else if(e.getType().equals("saturn")){
                 SaturnEnemy sE = (SaturnEnemy) e;
                 Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), sE.randomInt(), sE.randomInt(), "senemy");
-                (s.getSound()).play();
                 addBullet(b);
             }
         }

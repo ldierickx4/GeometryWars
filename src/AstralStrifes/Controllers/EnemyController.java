@@ -163,14 +163,9 @@ public class EnemyController implements Runnable{
         return this.manna;
     }
 
-    public Manna removeManna(Manna m) {
-        Manna ma = null;
-        for(int i = 0;i<manna.size();i++){
-            if(manna.get(i)==m){
-                ma = manna.remove(i);
-            }
-        }
-        return ma;
+    public void removeManna(Manna m) {
+        p.addManna(m);
+        manna.remove(m);
     }
     public int getWave(){
         return this.wave;

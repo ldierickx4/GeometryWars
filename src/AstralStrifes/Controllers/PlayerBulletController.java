@@ -7,7 +7,6 @@ package AstralStrifes.Controllers;
 
 import AstralStrifes.Bullet;
 import AstralStrifes.Player;
-import AstralStrifes.Sounds.SoundLoader;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
@@ -30,7 +29,6 @@ public class PlayerBulletController implements Runnable{
     private int FIRING_RATE = 100;
     private double aimX;
     private double aimY;
-    private SoundLoader s = new SoundLoader("Spaceship");
     
     public PlayerBulletController(Player player,GamePanel gp,double aimx,double aimy)
     {   
@@ -43,8 +41,6 @@ public class PlayerBulletController implements Runnable{
     public void addBullet(Bullet b){
         bullets.add(b);
     }
-    
-    
     public void update(double aimX , double aimY){
         this.aimX = aimX;
         this.aimY = aimY;
@@ -58,12 +54,11 @@ public class PlayerBulletController implements Runnable{
             }            
         }
     }
-    
     public void render(Graphics g){
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
             tempBullet = bullets.get(i);     
-            tempBullet.draw(g); 
+            tempBullet.draw(g);                
         }
     } 
     public void setShooting()
@@ -88,7 +83,6 @@ public class PlayerBulletController implements Runnable{
 		e.printStackTrace();
 		}
             Bullet b = new Bullet(player.getx(),player.gety(),aimX,aimY,"player");
-            (s.getSound()).play();
             addBullet(b);
         }
         thread=null;
