@@ -9,6 +9,7 @@ import AstralStrifes.Enemy.Enemy;
 import AstralStrifes.Enemy.Manna;
 import AstralStrifes.Player;
 import AstralStrifes.PowerUp.Powerup;
+import AstralStrifes.Sounds.SoundLoader;
 import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -29,6 +30,8 @@ public class CollisionController {
     private EnemyBulletController ebc;
     private PowerupController pc;
     private LinkedList<Powerup> powerups;
+    private SoundLoader killed = new SoundLoader("Killed");
+    private SoundLoader powerupSound = new SoundLoader("Powerup");
     
     public CollisionController(Player p,PlayerBulletController c,EnemyController ec, EnemyBulletController ebc, PowerupController pc)
     {
@@ -47,6 +50,7 @@ public void checkIfPowerupGetsPickedUp(){
                 Rectangle powerupBounds = powerups.get(i).getBounds();
                 if(powerupBounds.intersects(player.getBounds())){       
                     Manna m = new Manna(150,1,10,10);
+                    (powerupSound.getSound()).play();
                     player.addManna(m);
                     powerup.setPickedUp();
                     pc.addUsed(powerup);
@@ -65,8 +69,9 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
+                    (killed.getSound()).play();
                     ec.addManna(tempe.getManna());
-                    ec.removeEnemy(tempe);
+                    ec.removeEnemy(tempe);    
                     bullets.get(index).setDead();
                 }
             }
@@ -94,6 +99,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             if(enemyR.intersects(player.getBounds()))
             {
                 if(!hitEnemies.contains(tempE)){
+                    (killed.getSound()).play();
                     hitEnemies.add(tempE);
                     player.reduceHealth(tempE.getDamage());
                     player.resetMultiplier();

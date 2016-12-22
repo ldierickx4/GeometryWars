@@ -28,7 +28,7 @@ public class EnemyBulletController implements Runnable {
     private LinkedList<Player> players;
     private Thread thread;
     private Random r = new Random();
-    private SoundLoader s = new SoundLoader("Enemy");
+    private SoundLoader rainbow = new SoundLoader("Koekoek");
     
     public EnemyBulletController(LinkedList<Player> players, GamePanel gp)
     {   
@@ -96,13 +96,13 @@ public class EnemyBulletController implements Runnable {
             {
                 ShootingEnemy sE = (ShootingEnemy) e;
                 Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), p.getx(), p.gety(), "enemy");
-                (s.getSound()).play();
+                (rainbow.getSound()).play();
                 addBullet(b);
             }
             else if(e.getType().equals("saturn")){
                 SaturnEnemy sE = (SaturnEnemy) e;
                 Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), sE.randomInt(), sE.randomInt(), "senemy");
-                (s.getSound()).play();
+                //(s.getSound()).play();
                 addBullet(b);
             }
         }

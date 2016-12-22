@@ -15,6 +15,7 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
+import AstralStrifes.Sounds.SoundLoader;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -78,7 +79,6 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
-           
     }
     public void setAttackdrone(){
         this.attackDrone = true;

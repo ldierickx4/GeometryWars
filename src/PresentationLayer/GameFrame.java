@@ -40,7 +40,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-        GameFrame gf = new GameFrame(1,"attack");   
+        GameFrame gf = new GameFrame(1,"kill");
     }
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2){

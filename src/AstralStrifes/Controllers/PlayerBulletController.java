@@ -88,6 +88,7 @@ public class PlayerBulletController implements Runnable{
 		e.printStackTrace();
 		}
             Bullet b = new Bullet(player.getx(),player.gety(),aimX,aimY,"player");
+            //System.out.println(s.getSound());
             (s.getSound()).play();
             addBullet(b);
         }

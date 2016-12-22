@@ -125,7 +125,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-
+        //for(int i = 0; i < Controllers.getControllerCount(); i++){
+        //   pscon = Controllers.getController(i);
+        //   System.out.println(i + ": " + pscon.getName());
+        //}
         pscon = Controllers.getController(7);
         Controllers.poll();
     }
@@ -404,6 +407,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
 
     private void checkConMove() {
         //right2 = (pscon.getAxisValue(3)>0.5);
+        //System.out.println(pscon.getAxisCount());
         if(pscon.getAxisValue(3)>0.5)
         {
             right2 = true;
