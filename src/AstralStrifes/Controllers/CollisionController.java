@@ -118,7 +118,8 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
                 Manna m = manna.get(i);
                 Rectangle mannaR =m.getBounds();
                 if(playerR.intersects(mannaR)){
-                ec.removeManna(m);
+                    Manna ma = ec.removeManna(m);
+                    player.addManna(ma);
                 }
             } catch(Exception ex) {
                 System.out.println(ex.getMessage());

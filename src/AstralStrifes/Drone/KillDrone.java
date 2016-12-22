@@ -26,7 +26,6 @@ public class KillDrone extends Drone implements Runnable{
         thread.start();
     }
     public void power(){
-        System.out.println(ec);
         ec.killRandomEnemy();
     }
     @Override

@@ -50,7 +50,6 @@ public interface GamePanel{
     public PlayerBulletController getBulletControler();
     public CollisionController getCC();
     public EnemyController getEc();
-    public JLabel getScore();
     public Background getBackGround();
     public void setStatus(String status);
     public void checkStatus();

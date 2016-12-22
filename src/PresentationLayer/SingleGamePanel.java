@@ -15,11 +15,8 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
-<<<<<<< HEAD
 import AstralStrifes.Sounds.SoundLoader;
-=======
 import AstralStrifes.Difficulty.Difficulty;
->>>>>>> origin/master
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

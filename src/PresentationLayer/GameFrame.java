@@ -41,11 +41,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-<<<<<<< HEAD
-        GameFrame gf = new GameFrame(1,"kill");
-=======
-        GameFrame gf = new GameFrame(1,"heal",3);   
->>>>>>> origin/master
+    GameFrame gf = new GameFrame(2,"heal","attack",1);   
     }
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2,int diff){
@@ -117,9 +113,7 @@ public class GameFrame extends JFrame implements KeyListener {
         multiGamePanel.add(adhdPowerupP1);
         multiGamePanel.add(multiplierP2);
         multiGamePanel.add(scoreP2);
-        multiGamePanel.add(adhdPowerupP2);
-        
-        
+        multiGamePanel.add(adhdPowerupP2);        
     }
     public void setScoresAndPowerups1(){
         scoreP1 = new JLabel();
@@ -127,7 +121,6 @@ public class GameFrame extends JFrame implements KeyListener {
         adhdPowerupP1 = new JLabel();
         enemiesleft = new JLabel();
         multiplierP1 = new JLabel();
-        //scoreP1.setText("Score Player 1: ");
         scoreP1.setForeground(Color.WHITE);
         wave.setForeground(Color.WHITE);
         adhdPowerupP1.setForeground(Color.WHITE);

@@ -201,7 +201,7 @@ public class Player {
         return this.health;
     }
   
-    public int getScore() {
+    public int getScore(){
         return score;
     }
     
@@ -228,7 +228,7 @@ public class Player {
     
     public void addManna(Manna m){
         multiplier+=m.getMultiplier();
-        score+=(m.getScore()*multiplier);
+        this.score+=(m.getScore()*multiplier);
         this.manna.add(m);
     }
     public GamePanel getgp(){

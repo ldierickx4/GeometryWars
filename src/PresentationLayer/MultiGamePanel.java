@@ -101,7 +101,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.cc2 = new CollisionController(player2,controller2, ec, ebc, pc2);
         thread = new Thread(this);
         thread.start();
-        score = new JLabel();
     }
     public void setAttackdrone(){
         this.attackDrone = true;
@@ -125,16 +124,11 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-<<<<<<< HEAD
         //for(int i = 0; i < Controllers.getControllerCount(); i++){
         //   pscon = Controllers.getController(i);
         //   System.out.println(i + ": " + pscon.getName());
         //}
-        pscon = Controllers.getController(7);
-=======
-
         pscon = Controllers.getController(0);
->>>>>>> origin/master
         Controllers.poll();
     }
     public void checkInput1(){
@@ -265,12 +259,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             pc2.checkForPOwerUp();
             updatePlayer(player);
             updatePlayer(player2);
+            gf.updateScoreP2(player2.getScore());
+            gf.updateScoreP1(player.getScore());
             gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
             gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups());
             gf.updateMultiplierP1(player.getMultiplier());
-            gf.updateMultiplierP2(player2.getMultiplier());
-            gf.updateScoreP1(player.getScore());
-            gf.updateScoreP2(player2.getScore());
+            gf.updateMultiplierP2(player2.getMultiplier());            
             gf.updateWaves(ec.getWave());
             gf.updateEnemiesLeft(ec.getEnemiesLeft());
             repaint();
@@ -361,9 +355,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     {
         return this.ec;
     }
-    public JLabel getScore() {
-        return score;
-    } 
     public Background getBackGround(){
         return this.background;
     }
@@ -403,40 +394,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
 
     private void checkConMove() {
-<<<<<<< HEAD
-        //right2 = (pscon.getAxisValue(3)>0.5);
-        //System.out.println(pscon.getAxisCount());
-        if(pscon.getAxisValue(3)>0.5)
-        {
-            right2 = true;
-        }
-        else{
-            right2 = false;
-        }
-        if(pscon.getAxisValue(3)<-0.5){
-            left2 = true;
-        }
-        else{
-            left2 = false;
-        }
-        if(pscon.getAxisValue(2)>0.5){
-            down2 = true;
-        }
-        else{
-            down2 = false;
-        }
-        if(pscon.getAxisValue(2)<-0.5){
-            up2 = true;
-        }
-        else{
-            up2 = false;
-        }
-=======
         right2 = pscon.getAxisValue(0)>0.5;
         left2 = pscon.getAxisValue(0)<-0.5;
         down2 = pscon.getAxisValue(1)>0.5;
         up2 = pscon.getAxisValue(1)<-0.5;
->>>>>>> origin/master
     }
     public void setStatus(String status){
         this.status = status;

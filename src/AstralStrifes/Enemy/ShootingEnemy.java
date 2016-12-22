@@ -134,7 +134,7 @@ public class ShootingEnemy implements Enemy{
     
     @Override
     public Manna getManna() {
-        return new Manna(150, 1, (int)getCenterX(), (int)getCenterY());
+        return new Manna(score, multiplie, (int)getCenterX(), (int)getCenterY());
     }
 
     @Override
