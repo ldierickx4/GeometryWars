@@ -28,8 +28,8 @@ public class Database {
     
     
     private static final String URL = "jdbc:mysql://localhost/astralstrifes";
-    private static final String USER = "Jens";
-    private static final String PWD = "jens";
+    private static final String USER = "Jordy";
+    private static final String PWD = "8335062393aC$";
     private static Connection con;
     private List<User> users;
     private boolean userExist;

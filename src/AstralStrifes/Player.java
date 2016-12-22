@@ -73,15 +73,17 @@ public class Player {
         amountOfAdhdPowerups = 1;
     }
     public void makeDrone(String drone){
-        if(drone.equals("heal")){
-            this.sd = new HealDrone(this);
-        }
-        else if(drone.equals("attack")){
-            this.sd = new AttackDrone(this, gp);
-            this.attackDroneStatus = true;
-        }
-        else{
-            this.sd = new KillDrone(this, gp);
+        switch (drone) {
+            case "heal":
+                this.sd = new HealDrone(this);
+                break;
+            case "attack":
+                this.sd = new AttackDrone(this, gp);
+                this.attackDroneStatus = true;
+                break;
+            default:
+                this.sd = new KillDrone(this, gp);
+                break;
         }
     }
     public Drone getDrone(){

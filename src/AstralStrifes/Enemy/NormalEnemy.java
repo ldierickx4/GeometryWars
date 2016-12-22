@@ -43,7 +43,7 @@ public class NormalEnemy implements Enemy{
 
     public NormalEnemy(GamePanel gp) {
         this.alive = true;
-        this.damage=10
+        this.damage= 10;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
@@ -125,6 +125,6 @@ public class NormalEnemy implements Enemy{
 
     @Override
     public int getDamage() {
-        return this.
+        return this.damage;
     }
 }

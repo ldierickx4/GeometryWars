@@ -40,7 +40,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-        GameFrame gf = new GameFrame(2,"attack","heal");   
+        GameFrame gf = new GameFrame(1,"attack");   
     }
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2){
@@ -126,10 +126,10 @@ public class GameFrame extends JFrame implements KeyListener {
         wave.setForeground(Color.WHITE);
         adhdPowerupP1.setForeground(Color.WHITE);
         enemiesleft.setForeground(Color.WHITE);
-        multiplierP1.setForeground(Color.WHITE);
+        singleGamePanel.setForeground(Color.WHITE);
         singleGamePanel.add(wave);
         singleGamePanel.add(enemiesleft);
-        multiGamePanel.add(multiplierP1);
+        singleGamePanel.add(multiplierP1);
         singleGamePanel.add(scoreP1);
         singleGamePanel.add(adhdPowerupP1);
         
