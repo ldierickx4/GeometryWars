@@ -5,10 +5,10 @@
  */
 package AstralStrifes.Controllers;
 
-import AstralStrifes.AdhdPowerup;
+import AstralStrifes.PowerUp.AdhdPowerup;
 import AstralStrifes.Player;
-import AstralStrifes.Powerup;
-import AstralStrifes.SwiftyPowerup;
+import AstralStrifes.PowerUp.Powerup;
+import AstralStrifes.PowerUp.SwiftyPowerup;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;

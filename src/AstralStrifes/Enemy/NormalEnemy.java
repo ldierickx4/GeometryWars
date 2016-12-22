@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import AstralStrifes.Enemy.Enemy;
+import PresentationLayer.GamePanel;
 
 /**
  *
@@ -24,11 +25,8 @@ import AstralStrifes.Enemy.Enemy;
  */
 public class NormalEnemy implements Enemy{
     private static final double SPEED = 0.2;
-
     private static final int VALUE = 150;
-
     private final String type ="normal";
-
     private BufferedImage image;
     private Graphics g;
     private double x;
@@ -37,16 +35,15 @@ public class NormalEnemy implements Enemy{
     private int height;
     private int rangeMin = 50;
     private int rangeMax = 750;
-    //private int reward;
-    //private int multiplier;
-    //private Player player;
+    private int damage;
     private SingleGamePanel gp;
     private Rectangle enemyBounds;
     private boolean alive;
     
 
-    public NormalEnemy() {
+    public NormalEnemy(GamePanel gp) {
         this.alive = true;
+        this.damage=10;
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
@@ -124,5 +121,10 @@ public class NormalEnemy implements Enemy{
     @Override
     public Manna getManna() {
         return new Manna(150, 1, (int)this.x, (int)this.y);
+    }
+
+    @Override
+    public int getDamage() {
+        return this.damage;
     }
 }

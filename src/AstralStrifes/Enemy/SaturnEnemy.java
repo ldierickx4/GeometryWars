@@ -5,6 +5,7 @@
  */
 package AstralStrifes.Enemy;
 
+import PresentationLayer.GamePanel;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -30,8 +31,11 @@ public class SaturnEnemy implements Enemy{
     private boolean right;
     private boolean alive;
     private Random r;
+    private GamePanel gp;
+    private int damage;
     
-    public SaturnEnemy(){
+    public SaturnEnemy(GamePanel gp){
+        this.gp = gp;
         alive=true;
         right=true;
         this.type="saturn";
@@ -40,6 +44,7 @@ public class SaturnEnemy implements Enemy{
         this.y = randomInt();
         loadImage();
         createBoundries();
+        this.damage=10;
     }
 
     @Override
@@ -141,5 +146,10 @@ public class SaturnEnemy implements Enemy{
 
     public double getCenterY() {
         return y+image.getWidth()/2;
+    }
+
+    @Override
+    public int getDamage() {
+        return this.damage;
     }
 }

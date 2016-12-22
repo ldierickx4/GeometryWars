@@ -28,6 +28,7 @@ import javax.imageio.ImageIO;
  *
  * @author Laurens
  */
+
 public class Player {
     private int SPEED = 2;
     private int health = 100;
@@ -41,7 +42,8 @@ public class Player {
     private double width;
     private double height;
     private double angle;
-    private int score;
+    private int score=0;
+    private int multiplier = 1;    
     private Rectangle playerBounds;
     private LinkedList<Manna> manna;
     private Drone sd;
@@ -52,19 +54,17 @@ public class Player {
     private int healthY;
 
     private int amountOfAdhdPowerups;
-
     private int playerstatus;
+
 
     
     public Player(GamePanel gp,int playerstatus){
-
         this.gp = gp;
         this.playerstatus = playerstatus;
         this.width=28;
         this.height=30;
         this.x = 170.0;
         this.y = 150.0;
-        this.score = 0;
         loadImage();
         createBounds();
         this.bgheight = gp.getBackGround().getHeight()-40;
@@ -73,6 +73,7 @@ public class Player {
         amountOfAdhdPowerups = 1;
     }
     public void makeDrone(String drone){
+<<<<<<< HEAD
         if(drone.equals("heal")){
             this.sd = new HealDrone(this);
         }
@@ -82,6 +83,19 @@ public class Player {
         }
         else{
             this.sd = new KillDrone(this, gp);
+=======
+        switch (drone) {
+            case "heal":
+                this.sd = new HealDrone(this);
+                break;
+            case "attack":
+                this.sd = new AttackDrone(this, gp);
+                this.attackDroneStatus = true;
+                break;
+            default:
+                this.sd = new KillDrone(this, gp);
+                break;
+>>>>>>> origin/master
         }
     }
     public Drone getDrone(){
@@ -191,7 +205,7 @@ public class Player {
     
     public void checkIfPlayerIsStillAlive(){ //TODO CONTINUE HIHI
         if(health <= 0){
-            System.out.println("Player iz dead");
+            gp.setStatus("gameover");
         }
     }
     public int getHealth()
@@ -200,10 +214,6 @@ public class Player {
     }
   
     public int getScore() {
-        int score = 0;
-        for(Manna m : manna){
-            score += m.getScore();
-        }
         return score;
     }
     
@@ -229,6 +239,8 @@ public class Player {
     }
     
     public void addManna(Manna m){
+        multiplier+=m.getMultiplier();
+        score+=(m.getScore()*multiplier);
         this.manna.add(m);
     }
     public GamePanel getgp(){
@@ -257,4 +269,20 @@ public class Player {
     public void reduceAdhd(){
         this.amountOfAdhdPowerups-= 1;
     }
+<<<<<<< HEAD
+=======
+    public boolean getAttackDroneStatus(){
+        return this.attackDroneStatus;
+    }
+    public int getPlayerStatus(){
+        return this.playerstatus;
+    }
+    public void resetMultiplier(){
+        this.multiplier=1;
+    }
+    public int getMultiplier(){
+        return this.multiplier;
+    }
+>>>>>>> origin/master
 }
+

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.PowerUp;
 
+import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
@@ -24,16 +25,26 @@ public class SwiftyPowerup extends Powerup implements Runnable{
     
     private Thread t;
     private GamePanel gp;
+<<<<<<< HEAD:src/AstralStrifes/SwiftyPowerup.java
+=======
+    private Player p;
+    private int duration;
+>>>>>>> origin/master:src/AstralStrifes/PowerUp/SwiftyPowerup.java
     //private boolean pickedUp = false;
     
     public SwiftyPowerup(String name,GamePanel gp) {
         super(gp);
         this.gp = gp;
         this.name = name;
+        this.duration=3000;
         String link = "resources/gameSprites/swifty.png";
         super.loadImage(link); 
         t = new Thread(this);
+<<<<<<< HEAD:src/AstralStrifes/SwiftyPowerup.java
         t.start();      
+=======
+        
+>>>>>>> origin/master:src/AstralStrifes/PowerUp/SwiftyPowerup.java
     }
     
     public void Boost(){
@@ -49,7 +60,7 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         super.used = true;
         while(super.pickedUp){
             long time = System.currentTimeMillis();
-            long end = time +3000;
+            long end = time +duration;
             while(System.currentTimeMillis()<= end) {
                 Boost();                  
             }

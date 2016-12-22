@@ -22,6 +22,7 @@ import java.util.Random;
  */
 public class EnemyBulletController implements Runnable {
     private GamePanel gp;
+    private int bulletSpeed;
     private LinkedList<Bullet> bullets;
     private LinkedList<Player> players;
     private Thread thread;
@@ -32,6 +33,7 @@ public class EnemyBulletController implements Runnable {
         this.bullets = new LinkedList<Bullet>();
         this.players = players;
         this.gp = gp;
+        bulletSpeed = 1000;
         this.thread = new Thread(this);        
         thread.start();
     }
@@ -61,7 +63,7 @@ public class EnemyBulletController implements Runnable {
         while(true)
         {            
             try {
-		Thread.sleep(1000);
+		Thread.sleep(bulletSpeed);
 		}
             catch(Exception e) {
 		e.printStackTrace();

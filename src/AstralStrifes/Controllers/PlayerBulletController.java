@@ -98,8 +98,8 @@ public class PlayerBulletController implements Runnable{
         return this.FIRING_RATE;
     }
     
-    public void boostFiringRate(){
-        this.FIRING_RATE = 40;
+    public void boostFiringRate(int fireBoost){
+        this.FIRING_RATE = fireBoost;
     }
     
     public void resetFiringRate(){

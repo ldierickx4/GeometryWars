@@ -8,7 +8,7 @@ import AstralStrifes.Bullet;
 import AstralStrifes.Enemy.Enemy;
 import AstralStrifes.Enemy.Manna;
 import AstralStrifes.Player;
-import AstralStrifes.Powerup;
+import AstralStrifes.PowerUp.Powerup;
 import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -80,6 +80,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             Rectangle bulletBounds = temp.getBorders();
             if(bulletBounds.intersects(player.getBounds())){
                 bullets.get(i).setDead();
+                player.resetMultiplier();
                 player.reduceHealth(5);
             }
         }
@@ -94,7 +95,8 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             {
                 if(!hitEnemies.contains(tempE)){
                     hitEnemies.add(tempE);
-                    player.reduceHealth(10);
+                    player.reduceHealth(tempE.getDamage());
+                    player.resetMultiplier();
                     ec.removeEnemy(tempE);
                 }
             }

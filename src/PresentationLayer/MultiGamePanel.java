@@ -72,9 +72,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private boolean up2 = false;
     private boolean left2 = false;
     private boolean right2 = false;
-    private double aimX=0;
-    private double aimY=0;
-    
+    private double aimX;
+    private double aimY;
+    private String status = "playing";
     private JLabel score;
     private GameFrame gf;
     
@@ -84,7 +84,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public MultiGamePanel(GameFrame gf){
         this.gf =gf;
         controllerConnection();
-        createComponents();
+        createComponents(drone1,drone2);
+
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -99,17 +100,23 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
         score = new JLabel();
+<<<<<<< HEAD
         player.makeDrone("heal");
         player2.makeDrone("heal");
+=======
+
+>>>>>>> origin/master
     }
     public void setAttackdrone(){
         this.attackDrone = true;
     }
-    public void createComponents()
+    public void createComponents(String drone1,String drone2)
     {
         background = new Background(gf);
         player = new Player(this,1);
         player2 = new Player(this,2);
+        player.makeDrone(drone1);
+        player2.makeDrone(drone2);
         players = new LinkedList<Player>();
         players.add(player);
         players.add(player2);
@@ -122,7 +129,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-        pscon = Controllers.getController(0);
+
+        pscon = Controllers.getController(7);
         Controllers.poll();
     }
     public void checkInput1(){
@@ -152,7 +160,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         if(right2){
             player2.moveRight();
         }    
-    
     }
     public void checkShoot(boolean pshoot , PlayerBulletController controller)
     {
@@ -233,6 +240,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             catch(Exception e) {
 		e.printStackTrace();
             }
+            checkStatus();
             checkShoot(shoot2,controller2);
             checkShoot(shoot1,controller);
             checkInput1();
@@ -249,10 +257,21 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             //player2.getDrone().letOrbit();
             updatePlayer(player);
             updatePlayer(player2);
+<<<<<<< HEAD
             gf.updateScoreP1(player.getScore()+"");
             gf.updateScoreP2(player2.getScore()+"");
             gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups()+"");
             gf.updateAdhdPowerupsP2(player.getAmountOfAdhdPowerups()+"");
+=======
+            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
+            gf.updateAdhdPowerupsP2(player2.getAmountOfAdhdPowerups());
+            gf.updateMultiplierP1(player.getMultiplier());
+            gf.updateMultiplierP2(player2.getMultiplier());
+            gf.updateScoreP1(player.getScore());
+            gf.updateScoreP2(player2.getScore());
+            gf.updateWaves(ec.getWave());
+            gf.updateEnemiesLeft(ec.getEnemiesLeft());
+>>>>>>> origin/master
             repaint();
         }
     }    
@@ -280,6 +299,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
         cc.checkEnemyPlayerCollision();
         cc.checkIfPowerupGetsPickedUp();
+<<<<<<< HEAD
+=======
+        cc2.checkIfPlayerGetsHitByEnemyBullet();
+>>>>>>> origin/master
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
     
@@ -306,10 +329,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {
-            shoot1=true;
-        }
+        shoot1=e.getButton()==e.BUTTON1;
+        
     }
 
     @Override
@@ -372,49 +393,40 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         }
     }
     private void checkConShoot(){
-        if(pscon.isButtonPressed(7)){
-            shoot2 = true;
-        }
-        else{
-            shoot2 = false;
-        }
+        shoot2 = pscon.isButtonPressed(7);
     }
     private void checkConAim(){
-        this.aimX = pscon.getAxisValue(2)*1000;
-        this.aimY = pscon.getAxisValue(3)*1000;
-        player2.calculatePlayerAngle(aimX,aimY) ;
+        this.aimX = pscon.getAxisValue(1)*1000;
+        this.aimY = pscon.getAxisValue(0)*1000;
+        player2.calculatePlayerAngle(aimX,aimY);
     }
 
     private void checkConMove() {
-        if(pscon.getAxisValue(0)>0.5)
-        {
-            right2 = true;
-        }
-        else{
-            right2 = false;
-        }
-        if(pscon.getAxisValue(0)<-0.5){
-            left2 = true;
-        }
-        else{
-            left2 = false;
-        }
-        if(pscon.getAxisValue(1)>0.5){
-            down2 = true;
-        }
-        else{
-            down2 = false;
-        }
-        if(pscon.getAxisValue(1)<-0.5){
-            up2 = true;
-        }
-        else{
-            up2 = false;
-        }
+        right2 = pscon.getAxisValue(0)>0.5;
+        left2 = pscon.getAxisValue(0)<-0.5;
+        down2 = pscon.getAxisValue(1)>0.5;
+        up2 = pscon.getAxisValue(1)<-0.5;
     }
+<<<<<<< HEAD
 
     @Override
     public String getType() {
         return this.type;
+=======
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public void checkStatus(){
+        switch(status){
+            case "playing":
+                break;
+            case "gameover":
+                System.out.println("GameOver");
+                break;
+            case "finished":
+                System.out.println("gewonnen");
+                break;
+        }
+>>>>>>> origin/master
     }
 }

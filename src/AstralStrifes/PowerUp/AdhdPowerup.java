@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AstralStrifes;
+package AstralStrifes.PowerUp;
 
 import PresentationLayer.GamePanel;
 import AstralStrifes.Controllers.PlayerBulletController;
@@ -17,14 +17,19 @@ import java.awt.image.BufferedImage;
  * @author Jordy
  */
 public class AdhdPowerup extends Powerup implements Runnable{
-    
+    private int boost;
     private Thread t;
     private GamePanel gp;
     private PlayerBulletController pbc;
      
     public AdhdPowerup(String name, GamePanel gp) {
     super(gp);
+<<<<<<< HEAD:src/AstralStrifes/AdhdPowerup.java
     this.gp=gp;
+=======
+    this.pbc = pbc;
+    this.boost=30;
+>>>>>>> origin/master:src/AstralStrifes/PowerUp/AdhdPowerup.java
     this.name = name;
     String link = "resources/gameSprites/adhd.png";
     super.loadImage(link);
@@ -49,8 +54,12 @@ public class AdhdPowerup extends Powerup implements Runnable{
     }
     
     public void boostGun(){
+<<<<<<< HEAD:src/AstralStrifes/AdhdPowerup.java
         pbc = gp.getBulletControler();
         pbc.boostFiringRate();
+=======
+        pbc.boostFiringRate(this.boost);
+>>>>>>> origin/master:src/AstralStrifes/PowerUp/AdhdPowerup.java
     }
     
     public void endBoost(){

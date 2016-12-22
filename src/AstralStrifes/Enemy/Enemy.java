@@ -28,4 +28,5 @@ public interface Enemy{
     public void die();
     public int getValue();
     public Manna getManna();
+    public int getDamage();
 }

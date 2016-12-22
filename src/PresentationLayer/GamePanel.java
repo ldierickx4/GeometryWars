@@ -29,7 +29,6 @@ import javax.swing.JPanel;
  */
 public interface GamePanel{
     public void setAttackdrone();
-    public void createComponents();
     public void paintComponent(Graphics gr);
     public void playerDraw(Player p , Graphics gr);
     public void keyTyped(KeyEvent e);
@@ -52,5 +51,6 @@ public interface GamePanel{
     public EnemyController getEc();
     public JLabel getScore();
     public Background getBackGround();
-    public String getType();
+    public void setStatus(String status);
+    public void checkStatus();
 }

@@ -28,20 +28,22 @@ public class AttackDrone extends Drone implements Runnable{
         this.thread = new Thread(this);
         String link= "resources/gameSprites/attack1.png";
         super.loadImage(link);
-        thread.start();
         bullets = new LinkedList<Bullet>();
+        thread.start();
     }
     public void power(){
         Enemy e = gp.getEc().getRandomEnemy();
+        System.out.println(e);
         if(e!=null){
             Bullet b = new Bullet(super.getX(), super.getY(), e.getX(), e.getY(), "drone");
             bullets.add(b);
         }
     }
     public void renderBullets(Graphics g){
-        if(bullets.size()>0){
-            for(Bullet b: bullets){
-                b.draw(g);
+        int size=bullets.size();
+        if(size>0){
+            for(int i=0;i<size;i++){
+                bullets.get(i).draw(g);
             }
         }
     }
@@ -50,7 +52,7 @@ public class AttackDrone extends Drone implements Runnable{
         while(true){
             try {
                 thread.sleep(1000);
-                power();
+                this.power();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();
             }
