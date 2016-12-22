@@ -14,37 +14,133 @@ import Data.Database;
 public class Difficulty {
     private int difficulty;
     private Database db;
+    private int spawnSpeed;
+    private int pbulletSpeed;
+    private int adhdPower;
+    private int swiftyPower;
+    private double neMove;
+    private int neScore;
+    private int neMultie;
+    private double seMove;
+    private int seScore;
+    private int seMultie;
+    private int shshoot;
+    private int shScore;
+    private int shMultie;
+    
+    
     public Difficulty(int difficulty){
         db = new Database();
         this.difficulty = difficulty;
+        setUp();
+    }
+    public void getEnemySpawnSpeed(){
+       this.spawnSpeed= db.getDifficultySpawnSpeed(difficulty);
+    }
+    public void getPlayerBulletSpeed(){
+        this.pbulletSpeed= db.getDifficultyPlShootSpeed(difficulty);
+    }
+    public void getAdhdPower(){
+        this.adhdPower= db.getDifficultyAdhdPower(difficulty);
+    }
+    public void getSwiftyPower(){
+        this.swiftyPower= db.getDifficultySwiftyDuration(difficulty);
+    }
+    //normal
+    public void getNormalEnemyMovement(){
+        this.neMove = (double)(db.getDifficultyNESpeed(difficulty));
+    }
+    public void getNormalEnemyScore(){
+        this.neScore= db.getDifficultyNEScore(difficulty);
+    }
+    public void getNormalEnemymultiplier(){
+        this.neMultie= db.getDifficultyNEMulti(difficulty);
+    }
+    //saturn
+    public void getSaturnEnemyscore(){
+        this.seScore= db.getDifficultySATScore(difficulty);
+    }
+    public void getSaturnEnemyMovement(){
+        this.seMove= (double)(db.getDifficultySATEMove(difficulty));
+    }
+    public void getSaturnEnemyMultie(){
+        this.seMultie= db.getDifficultySATEMulti(difficulty);
+    }
+    //shooting    
+    public void getShootingEnemyShootingSpeed(){
+        this.shshoot = db.getDifficultySEShoot(difficulty);
+    }
+    public void getShootingEnemyScore(){
+        this.shScore = db.getDifficultySEScore(difficulty);
+    }
+    public void getShootingEnemyMultie(){
+        this.shMultie= db.getDifficultySEMulti(difficulty);
     }
     
-    public int getEnemySpawnSpeed(){
-       return db.getDifficultySpawnSpeed(difficulty);
+    public int getSpawnSpeed() {
+        return spawnSpeed;
     }
-    public int getPlayerBulletSpeed(){
-        return db.getDifficultyPlShootSpeed(difficulty);
+
+    public int getPbulletSpeed() {
+        return pbulletSpeed;
     }
-    public int getAdhdPower(){
-        return db.getDifficultyAdhdPower(difficulty);
+
+    public double getNeMove() {
+        return neMove;
     }
-    public int getSwiftyPower(){
-        return db.getDifficultySwiftyDuration(difficulty);
+
+    public int getNeScore() {
+        return neScore;
     }
-    public double getNormalEnemyMovement(){
-        return (double)(db.getDifficultyNESpeed(difficulty));
+
+    public int getNeMultie() {
+        return neMultie;
     }
-    public int getNormalEnemySccore(){
-        return db.getDifficultyNEScore(difficulty);
+
+    public double getSeMove() {
+        return seMove;
     }
-    public int getNormalEnemymultiplier(){
-        return 3;
+
+    public int getSeScore() {
+        return seScore;
+    }
+
+    public int getSeMultie() {
+        return seMultie;
+    }
+
+    public int getShshoot() {
+        return shshoot;
+    }
+
+    public int getShScore() {
+        return shScore;
+    }
+
+    public int getShMultie() {
+        return shMultie;
+    }
+    public int getAdhd(){
+        return adhdPower;
+    }
+    public int getSwifty(){
+        return swiftyPower;
+    }
+    public void setUp(){
+        getEnemySpawnSpeed();
+        getNormalEnemyMovement();
+        getPlayerBulletSpeed();
+        getAdhdPower();
+        getSwiftyPower();
+        getNormalEnemyMovement();
+        getNormalEnemyScore();
+        getNormalEnemymultiplier();
+        getSaturnEnemyscore();
+        getSaturnEnemyMovement();
+        getSaturnEnemyMultie();
+        //getShootingEnemyShootingSpeed();
+        getShootingEnemyScore();
+        getShootingEnemyMultie();       
     }
     
-    public int getSaturnEnemyMovement(){
-        return 3;
-    }
-    public int getShootingEnemyShootingSpeed(){
-        return 3;
-    }
 }

@@ -33,7 +33,7 @@ public class SwiftyPowerup extends Powerup implements Runnable{
         super(gp);
         this.gp = gp;
         this.name = name;
-        this.duration=3000;
+        this.duration=gp.getDiff().getSwifty();
         String link = "resources/gameSprites/swifty.png";
         super.loadImage(link); 
         t = new Thread(this);

@@ -26,7 +26,7 @@ public class PlayerBulletController implements Runnable{
     private Player player;
     private Thread thread;
     private boolean shooting= false;
-    private int FIRING_RATE = 100;
+    private int FIRING_RATE;
     private double aimX;
     private double aimY;
     
@@ -34,6 +34,7 @@ public class PlayerBulletController implements Runnable{
     {   
         this.bullets = new LinkedList<Bullet>();
         this.player = player;
+        FIRING_RATE = gp.getDiff().getPbulletSpeed();
         this.gp = gp;
         this.aimX = aimX;
         this.aimY = aimY;

@@ -27,13 +27,15 @@ public class EnemyBulletController implements Runnable {
     private LinkedList<Player> players;
     private Thread thread;
     private Random r = new Random();
+    private int damage;
     
     public EnemyBulletController(LinkedList<Player> players, GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
         this.players = players;
         this.gp = gp;
-        bulletSpeed = 1000;
+        this.damage = 10;
+        bulletSpeed = gp.getDiff().getShshoot();
         this.thread = new Thread(this);        
         thread.start();
     }
@@ -87,22 +89,26 @@ public class EnemyBulletController implements Runnable {
     {   
         Player p = getRandomPlayer();
         LinkedList<Enemy> enemy = gp.getEc().giveEnemies();
-        for(int i=0; i<enemy.size();i++)
-        {
-            Enemy e = enemy.get(i);
-            if(e.getType().equals("shooting"))
+        if(enemy!=null){
+            for(int i=0; i<enemy.size();i++)
             {
-                ShootingEnemy sE = (ShootingEnemy) e;
-                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), p.getx(), p.gety(), "enemy");
-                addBullet(b);
-            }
-            else if(e.getType().equals("saturn")){
-                SaturnEnemy sE = (SaturnEnemy) e;
-                Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), sE.randomInt(), sE.randomInt(), "senemy");
-                addBullet(b);
+                Enemy e = enemy.get(i);
+                if(e.getType().equals("shooting"))
+                {
+                    ShootingEnemy sE = (ShootingEnemy) e;
+                    Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), p.getx(), p.gety(), "enemy");
+                    addBullet(b);
+                }
+                else if(e.getType().equals("saturn")){
+                    SaturnEnemy sE = (SaturnEnemy) e;
+                    Bullet b = new Bullet(sE.getCenterX(),sE.getCenterY(), sE.randomInt(), sE.randomInt(), "senemy");
+                    addBullet(b);
+                }
             }
         }
-        
+    }
+    public int getDamage(){
+        return this.damage;
     }
    
 }

@@ -43,7 +43,7 @@ public class EnemyController implements Runnable{
         thread.start();
         this.p = p;
         this.gp = gp;
-        SpawnSpeed = 2000;
+        SpawnSpeed = gp.getDiff().getSpawnSpeed();
         generateEnemies();
     }
     
@@ -128,7 +128,10 @@ public class EnemyController implements Runnable{
         return this.count;
     }
     public LinkedList<Enemy> giveEnemies(){
-        return this.enemies;
+        if(this.enemies!=null){
+            return this.enemies;
+        }
+        return null;
     }
     public void killRandomEnemy(){
         int bounds = enemies.size();

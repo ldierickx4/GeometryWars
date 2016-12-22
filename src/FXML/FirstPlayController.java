@@ -72,9 +72,9 @@ public class FirstPlayController implements Initializable {
         System.out.println(Drone2.getSelectedToggle());
         System.out.println(players.getSelectedToggle());
         if ("RadioButton[id=twoPlayer, styleClass=radio-button]'Two'".equals(players.getSelectedToggle().toString())){
-            GameFrame gf = new GameFrame(2,"kill","attack");
+            GameFrame gf = new GameFrame(2,"kill","attack",2);
         }else{
-            GameFrame gf = new GameFrame(1,"kill");
+            GameFrame gf = new GameFrame(1,"kill",2);
         }
         
         

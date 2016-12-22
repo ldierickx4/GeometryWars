@@ -15,6 +15,7 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
+import AstralStrifes.Difficulty.Difficulty;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -78,15 +79,15 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private String status = "playing";
     private JLabel score;
     private GameFrame gf;
-    
+    private Difficulty diff;
     private Boolean attackDrone = false;
     private String type = "Multi";
     
-    public MultiGamePanel(GameFrame gf,String drone1,String drone2){
+    public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff){
         this.gf =gf;
+        this.diff=diff;
         controllerConnection();
         createComponents(drone1,drone2);
-
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -413,5 +414,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
                 System.out.println("gewonnen");
                 break;
         }
+    }
+
+    @Override
+    public Difficulty getDiff() {
+        return this.diff;
     }
 }

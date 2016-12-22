@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import AstralStrifes.Background;
+import AstralStrifes.Difficulty.Difficulty;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -40,22 +41,22 @@ public class GameFrame extends JFrame implements KeyListener {
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-        GameFrame gf = new GameFrame(2,"attack","heal");   
+        GameFrame gf = new GameFrame(1,"attack",3);   
     }
     //private JLabel score;
-    public GameFrame(int playerCount,String drone1, String drone2){
+    public GameFrame(int playerCount,String drone1, String drone2,int diff){
         this.playerCount = playerCount;
         this.drone1 = drone1;
         this.drone2 = drone2;
-        initUi(); // HIER
+        initUi(diff); // HIER
     }
-    public GameFrame(int playerCount,String drone1){
+    public GameFrame(int playerCount,String drone1,int diff){
         this.playerCount = playerCount;
         this.drone1 = drone1;
-        initUi(); // HIER
+        initUi(diff); // HIER
     }
         
-    private void initUi() {
+    private void initUi(int diff) {
         //this.gamePanel = new SingleGamePanel(this);
         addKeyListener(this);
         //addMouseMotionListener(this);
@@ -70,17 +71,18 @@ public class GameFrame extends JFrame implements KeyListener {
         //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
         //gamePanel.add(score);
         //gamePanel = new MultiGamePanel(this); 
-        creatGame();
+        creatGame(diff);
         pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
         setVisible(true);
     }
-    public void creatGame(){
+    public void creatGame(int diff){
+        Difficulty dif = new Difficulty(diff);
         if(playerCount == 2){
-            this.multiGamePanel = new MultiGamePanel(this,drone1,drone2);
+            this.multiGamePanel = new MultiGamePanel(this,drone1,drone2,dif);
             setContentPane(multiGamePanel);
             setScoresAndPowerups2();
     }   else{
-            this.singleGamePanel = new SingleGamePanel(this,drone1);
+            this.singleGamePanel = new SingleGamePanel(this,drone1,dif);
             setContentPane(singleGamePanel);
             setScoresAndPowerups1();
     }

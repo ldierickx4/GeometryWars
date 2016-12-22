@@ -81,7 +81,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             if(bulletBounds.intersects(player.getBounds())){
                 bullets.get(i).setDead();
                 player.resetMultiplier();
-                player.reduceHealth(5);
+                player.reduceHealth(ebc.getDamage());
             }
         }
     }
