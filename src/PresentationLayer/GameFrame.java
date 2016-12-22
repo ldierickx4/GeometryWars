@@ -47,6 +47,9 @@ public class GameFrame extends JFrame implements ActionListener,KeyListener,Mous
 =======
         GameFrame gf = new GameFrame(1,"attack");   
 >>>>>>> origin/master
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
     }
     //private JLabel score;
