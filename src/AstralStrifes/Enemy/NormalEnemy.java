@@ -43,11 +43,7 @@ public class NormalEnemy implements Enemy{
 
     public NormalEnemy(GamePanel gp) {
         this.alive = true;
-<<<<<<< HEAD
         this.damage=10;
-=======
-        this.damage= 10;
->>>>>>> origin/master
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );

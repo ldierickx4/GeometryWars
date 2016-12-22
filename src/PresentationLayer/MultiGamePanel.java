@@ -395,39 +395,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
 
     private void checkConMove() {
-<<<<<<< HEAD
         right2 = pscon.getAxisValue(0)>0.5;
         left2 = pscon.getAxisValue(0)<-0.5;
         down2 = pscon.getAxisValue(1)>0.5;
         up2 = pscon.getAxisValue(1)<-0.5;
-=======
-        //right2 = (pscon.getAxisValue(3)>0.5);
-        if(pscon.getAxisValue(3)>0.5)
-        {
-            right2 = true;
-        }
-        else{
-            right2 = false;
-        }
-        if(pscon.getAxisValue(3)<-0.5){
-            left2 = true;
-        }
-        else{
-            left2 = false;
-        }
-        if(pscon.getAxisValue(2)>0.5){
-            down2 = true;
-        }
-        else{
-            down2 = false;
-        }
-        if(pscon.getAxisValue(2)<-0.5){
-            up2 = true;
-        }
-        else{
-            up2 = false;
-        }
->>>>>>> origin/master
     }
     public void setStatus(String status){
         this.status = status;
