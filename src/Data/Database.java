@@ -32,7 +32,6 @@ public class Database {
     private static final String USER = "Jens";
     private static final String PWD = "jens";
     private static Connection con;
-    private List<User> users;
     private boolean userExist;
     private boolean userAdded;
     private String username;
@@ -64,6 +63,7 @@ public class Database {
     private int adhdPower;
     private int spawnSpeed;
     private int playerShootSpeed;
+    private HashMap<User,Integer> usersHS = new HashMap<>();
             
     
     
@@ -629,6 +629,27 @@ public class Database {
         return playerShootSpeed;
     }
     
+    public HashMap getUsers(){
+        try{
+            String sql = "SELECT * FROM users";
+            Statement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String username = rs.getString("username");
+                String pw = rs.getString("password");
+                String email = rs.getString("email");
+                int highScore = rs.getInt("highscore");
+                User u = new User(username,pw,email);
+                this.usersHS.put(u, highScore);
+                
+                        
+            }    
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        
+        return usersHS;
+    }
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
@@ -642,6 +663,7 @@ public class Database {
       
         //p = new Player();
         //System.out.println(db.getEnemiesInWave(2));
+        /*
         System.out.println(db.getDifficultyName(1));
         System.out.println(db.getDifficultyAdhdPower(1));
         System.out.println(db.getDifficultyNEMulti(1));
@@ -656,6 +678,9 @@ public class Database {
         System.out.println(db.getDifficultySEShoot(1));
         System.out.println(db.getDifficultySpawnSpeed(1));
         System.out.println(db.getDifficultySwiftyDuration(1));
+*/        
+        System.out.println(db.getUsers());
+        
     }
     
     
