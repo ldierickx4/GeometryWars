@@ -79,6 +79,19 @@ public class Difficulty {
     public void getShootingEnemyMultie(){
         this.shMultie= db.getDifficultySEMulti(difficulty);
     }
+    public void getDifficultyNEDamage(){
+        this.nDamage = db.getDifficultyNEDamage(difficulty);
+    }
+    public void getDifficultySEDamage()
+    {
+        this.hDamage = db.getDifficultySEDamage(difficulty);
+    }
+    public void getDifficultySATEDamage(){
+        this.sDamage = db.getDifficultySATEDamage(difficulty);
+    }
+    public void getDifficultyEBulletDamage(){
+        this.eBdamage = db.getDifficultyEBulletDamage(difficulty);
+    }
     
     public int getSpawnSpeed() {
         return spawnSpeed;
@@ -155,7 +168,11 @@ public class Difficulty {
         getSaturnEnemyMultie();
         getShootingEnemyShootingSpeed();
         getShootingEnemyScore();
-        getShootingEnemyMultie();       
+        getShootingEnemyMultie();
+        getDifficultyNEDamage();
+        getDifficultySEDamage();
+        getDifficultySATEDamage();
+        getDifficultyEBulletDamage();
     }
     
 }
