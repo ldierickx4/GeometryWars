@@ -63,6 +63,10 @@ public class Database {
     private int adhdPower;
     private int spawnSpeed;
     private int playerShootSpeed;
+    private int neDamage;
+    private int seDamage;
+    private int satEDamage;
+    private int eBulletDamage;
     private HashMap<User,Integer> usersHS = new HashMap<>();
             
     
@@ -629,6 +633,81 @@ public class Database {
         return playerShootSpeed;
     }
     
+    public int getDifficultyNEDamage(int difficultyId){
+        try{
+            String sql = "SELECT normalEDamage FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int NEDamage = rs.getInt("normalEDamage");
+                this.neDamage = NEDamage;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return neDamage;
+    }
+    
+    public int getDifficultySEDamage(int difficultyId){
+        try{
+            String sql = "SELECT shootEDamage FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SEDamage = rs.getInt("shootEDamage");
+                this.seDamage = SEDamage;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return seDamage;
+    }
+    
+    public int getDifficultySATEDamage(int difficultyId){
+        try{
+            String sql = "SELECT satEDamage FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int SATEDamage = rs.getInt("satEDamage");
+                this.satEDamage = SATEDamage;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return satEDamage;
+    }
+    
+    public int getDifficultyEBulletDamage(int difficultyId){
+        try{
+            String sql = "SELECT eBulletDamage FROM difficulties WHERE difficulty_id = (?)";
+            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, difficultyId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int EBulletDamage = rs.getInt("eBulletDamage");
+                this.eBulletDamage = EBulletDamage;
+            }
+            pstmt.close();
+            rs.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return eBulletDamage;
+    }
+    
+    
+     
+    
     public HashMap getUsers(){
         try{
             String sql = "SELECT * FROM users";
@@ -655,34 +734,10 @@ public class Database {
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-        //LinkedList waveOne = new LinkedList<String>();
-        //int amount = db.getAmountInWave(2,1);
-        //db.putAmountEnemiesInWave(amount, db.getEnemyName(2));
-        //db.printLinkedList();
-        //String enemyNaam = db.getEnemyName(1);
-        //db.putAmountEnemiesInWave(amountNE,enemyNaam);
-        //db.printLinkedList();
-      
-        //p = new Player();
-        //System.out.println(db.getEnemiesInWave(2));
-        /*
-        System.out.println(db.getDifficultyName(1));
-        System.out.println(db.getDifficultyAdhdPower(1));
-        System.out.println(db.getDifficultyNEMulti(1));
-        System.out.println(db.getDifficultyNEScore(1));
-        System.out.println(db.getDifficultyNESpeed(1));
-        System.out.println(db.getDifficultyPlShootSpeed(1));
-        System.out.println(db.getDifficultySATEMove(1));
-        System.out.println(db.getDifficultySATEMulti(1));
-        System.out.println(db.getDifficultySATScore(1));
-        System.out.println(db.getDifficultySEMulti(1));
-        System.out.println(db.getDifficultySEScore(1));
-        System.out.println(db.getDifficultySEShoot(1));
-        System.out.println(db.getDifficultySpawnSpeed(1));
-        System.out.println(db.getDifficultySwiftyDuration(1));
-<<<<<<< HEAD
-*/        
-        System.out.println(db.getUsers());
+        System.out.println(db.getDifficultySATEDamage(1));
+        System.out.println(db.getDifficultyNEDamage(1));
+        System.out.println(db.getDifficultySEDamage(1));
+        System.out.println(db.getDifficultyEBulletDamage(1));
         
 
     }
