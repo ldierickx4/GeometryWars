@@ -23,17 +23,14 @@ public class AdhdPowerup extends Powerup implements Runnable{
     private PlayerBulletController pbc;
      
     public AdhdPowerup(String name, GamePanel gp) {
-    super(gp);
-<<<<<<< HEAD:src/AstralStrifes/AdhdPowerup.java
-    this.gp=gp;
-=======
-    this.pbc = pbc;
-    this.boost=30;
->>>>>>> origin/master:src/AstralStrifes/PowerUp/AdhdPowerup.java
-    this.name = name;
-    String link = "resources/gameSprites/adhd.png";
-    super.loadImage(link);
-    t = new Thread(this);
+        super(gp);
+        this.gp=gp;
+        this.pbc = pbc;
+        this.boost=30;
+        this.name = name;
+        String link = "resources/gameSprites/adhd.png";
+        super.loadImage(link);
+        t = new Thread(this);
     
 }
 
@@ -42,9 +39,7 @@ public class AdhdPowerup extends Powerup implements Runnable{
         long time = System.currentTimeMillis();
         long end = time +3000;
         while(System.currentTimeMillis()<= end) {
-            boostGun();              
-            //boostGun();
-            
+            boostGun();                          
         }
         endBoost();
     }
@@ -54,12 +49,8 @@ public class AdhdPowerup extends Powerup implements Runnable{
     }
     
     public void boostGun(){
-<<<<<<< HEAD:src/AstralStrifes/AdhdPowerup.java
         pbc = gp.getBulletControler();
-        pbc.boostFiringRate();
-=======
         pbc.boostFiringRate(this.boost);
->>>>>>> origin/master:src/AstralStrifes/PowerUp/AdhdPowerup.java
     }
     
     public void endBoost(){

@@ -52,7 +52,7 @@ public class Player {
     private int bgwidth;
     private int healthX;
     private int healthY;
-
+    private boolean attackDroneStatus;
     private int amountOfAdhdPowerups;
     private int playerstatus;
 

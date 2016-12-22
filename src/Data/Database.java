@@ -5,7 +5,9 @@
  */
 package Data;
 
+import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Enemy.*;
+import AstralStrifes.Player;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,13 +29,21 @@ public class Database {
     
     
     private static final String URL = "jdbc:mysql://localhost/astralstrifes";
-    private static final String USER = "root";
-    private static final String PWD = "root";
+    private static final String USER = "Jens";
+    private static final String PWD = "jens";
     private static Connection con;
     private List<User> users;
     private boolean userExist;
     private boolean userAdded;
     private String username;
+    private int userid;
+    private String pw;
+    private String email;
+    private int xp;
+    private int highScore;
+    private int astrals;
+    private int gameId;
+    private int rankId;
     private int amountEnemies;
     private int highScorePlayer;
     private String imgPath;
@@ -154,6 +164,105 @@ public class Database {
             ex.printStackTrace();
         }
     }
+      
+    public String getEnemyName(int enemy_id){
+        try{
+           String sql = "SELECT enemy_name FROM enemies WHERE enemy_id = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setInt(1, enemy_id);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String enemy = rs.getString("enemy_name");
+               this.enemyName = enemy;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return enemyName;
+    }
+
+    public String getUsername(String username){
+        try{
+           String sql = "SELECT username FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String usern = rs.getString("username");
+               this.username = usern;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return username;
+    }
+    
+    public int getUserid(String username){
+        try{
+           String sql = "SELECT userid FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int userid = rs.getInt("userid");
+               this.userid = userid;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return userid;
+    }
+    public boolean getUserExist(){
+        return this.userExist;      
+    }
+    
+    public String getPassword(String username){
+        try{
+           String sql = "SELECT password FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String userpw = rs.getString("password");
+               this.pw = userpw;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return pw;
+    }
+    
+    public String getEmail(String username){
+        try{
+           String sql = "SELECT username FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               String usermail = rs.getString("email");
+               this.email = usermail;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return email;
+    }
+    
+    public int getXP(String username){
+        try{
+           String sql = "SELECT XP FROM users WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int intxp = rs.getInt("XP");
+               this.xp = intxp;
+           }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return xp;
+    }
     
     public int getPlayerHighScore(String username){
         try{
@@ -173,52 +282,99 @@ public class Database {
         return highScorePlayer;
     }
     
-    public int getAmountOfTypeInWave(int enemyid){
-        //wave1 = new LinkedList<Enemy>();
+    public int getAstrals(String username){
         try{
-           String sql = "SELECT amount FROM wave_enemies WHERE enemy_id = (?)";
+           String sql = "SELECT astrals from users where username = (?)";
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-           pstmt.setInt(1, enemyid);           
+           pstmt.setString(1, username);           
            ResultSet rs = pstmt.executeQuery();
            if(rs.next()){
-               int amount = rs.getInt("amount");
-               String type = rs.getString("enemy_name");
-               if(type == "shootingenemy" ){
-                   //wave1.add(e);
-               }
-               this.amountEnemies = amount;
+               int astr = rs.getInt("astrals");
+               this.astrals = astr;
            }
            pstmt.close();
            rs.close();
         } catch(SQLException ex){
             ex.printStackTrace();
         }
-        return amountEnemies;
+        return astrals;
+    }
+
+    
+    public int getGameid(String username){
+        try{
+           String sql = "SELECT game_id from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int game = rs.getInt("game_id");
+               this.gameId = game;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return gameId;
     }
     
-    public boolean getUserExist(){
-        System.out.println(this.userExist);
-        return this.userExist;      
+    public int getRankid(String username){
+        try{
+           String sql = "SELECT rank_id from users where username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setString(1, username);           
+           ResultSet rs = pstmt.executeQuery();
+           if(rs.next()){
+               int rnk = rs.getInt("rank_id");
+               this.rankId = rnk;
+           }
+           pstmt.close();
+           rs.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return rankId;
     }
     
     public boolean getUserAdded(){
         return this.userAdded;
     }
     
-    public String getUsername(String username){
+   
+    public LinkedList getEnemiesInWave(int wave_id){
         try{
-           String sql = "SELECT username FROM users WHERE username = (?)";
+           String sql = "SELECT * FROM wave_enemies WHERE wave_id = (?)";
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-           pstmt.setString(1, username);           
+           pstmt.setInt(1, wave_id);           
            ResultSet rs = pstmt.executeQuery();
-           if(rs.next()){
-               String usern = rs.getString("username");
-               this.username = usern;
+           while(rs.next()){
+               //System.out.println(rs.getArray("enemy_id"));
+               int enemy = rs.getInt("enemy_id");
+               int amount = rs.getInt("amount");
+               if(enemy == 1){
+                   for(int i = 0;i < amount; i++){
+                       wave1.add("shootingenemy");
+                   }
+               }
+               if(enemy == 2){
+                   for(int i = 0;i < amount; i++){
+                       wave1.add("saturnenemy");
+                   }
+               }
+               if(enemy == 3){
+                   for(int i = 0;i < amount; i++){
+                       wave1.add("normalenemy");
+                   }
+               }
            }
-        } catch(SQLException ex){
+           pstmt.close();
+           rs.close();
+        }catch(SQLException ex){
             ex.printStackTrace();
         }
-        return username;
+        
+        return wave1;
     }
     
     public String getDifficultyName(int difficultyId){
@@ -476,13 +632,6 @@ public class Database {
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
-        //db.checkUserDB("AstralKing","astral123");
-        //db.getUserExist();
-        //db.setPlayerHighscore(5, 10000);
-        //db.getPlayerHighScore("VangeelJ");
-        //System.out.println(db.getUsername("VangeelJ"));
-        //System.out.println(db.getUsername("AstralKing"));
-
         //LinkedList waveOne = new LinkedList<String>();
         //int amount = db.getAmountInWave(2,1);
         //db.putAmountEnemiesInWave(amount, db.getEnemyName(2));
@@ -493,6 +642,7 @@ public class Database {
       
         //p = new Player();
         //System.out.println(db.getEnemiesInWave(2));
+        /*
         System.out.println(db.getDifficultyName(1));
         System.out.println(db.getDifficultyAdhdPower(1));
         System.out.println(db.getDifficultyNEMulti(1));
@@ -507,6 +657,7 @@ public class Database {
         System.out.println(db.getDifficultySEShoot(1));
         System.out.println(db.getDifficultySpawnSpeed(1));
         System.out.println(db.getDifficultySwiftyDuration(1));
+*/
     }
     
     
