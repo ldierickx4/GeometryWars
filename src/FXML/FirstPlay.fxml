@@ -148,7 +148,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <RadioButton layoutX="700.0" layoutY="106.0" mnemonicParsing="false" text="OS X" textFill="WHITE">
+      <RadioButton fx:id="osx" layoutX="700.0" layoutY="106.0" mnemonicParsing="false" text="OS X" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -156,7 +156,7 @@
             <ToggleGroup fx:id="os" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="800.0" layoutY="106.0" mnemonicParsing="false" text="Windows" textFill="WHITE" toggleGroup="$os">
+      <RadioButton fx:id="windows" layoutX="800.0" layoutY="106.0" mnemonicParsing="false" text="Windows" textFill="WHITE" toggleGroup="$os">
          <font>
             <Font size="18.0" />
          </font>
