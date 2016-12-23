@@ -154,12 +154,12 @@ public class Database {
         return imgPath;
     }
     
-    public void setPlayerHighscore(int userid, int score){
+    public void setPlayerHighscore(String username, int score){
         try{
-           String sql = "UPDATE users SET highscore = (?) WHERE userid = (?)";
+           String sql = "UPDATE users SET highscore = (?) WHERE username = (?)";
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
            pstmt.setInt(1, score);
-           pstmt.setInt(2,userid);
+           pstmt.setString(2,username);
            pstmt.executeUpdate();
            pstmt.close();
            

@@ -35,9 +35,6 @@ public class PlayerInfoController implements Initializable{
     private Label email;
     
     @FXML
-    private Label xp;
-    
-    @FXML
     private Label rank;
     
     @FXML
@@ -59,11 +56,9 @@ public class PlayerInfoController implements Initializable{
         User u = UserPlay.getinstance().getU();
         username.setText(u.getUsername());
         email.setText(u.getEmail());
-        String xpp = u.getXp()+"";
-        xp.setText(xpp);
-        String highscores = u.getHighscore()+"";
+        String highscores = db.getPlayerHighScore(u.getUsername())+"";
         highscore.setText(highscores);
-        String rankid = u.getRank_id()+"";
+        String rankid = db.getRankid(u.getUsername())+"";;
         rank.setText(rankid);
     }
 }
