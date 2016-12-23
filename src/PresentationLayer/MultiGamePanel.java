@@ -125,7 +125,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             e.getMessage();
         }
         for(int i = 0; i < Controllers.getControllerCount(); i++){
-           pscon = Controllers.getController(i);
+           if(Controllers.getController(i).getAxisCount()>1){
+                pscon = Controllers.getController(i);
+           }
         }
         //pscon = Controllers.getController(0);
         Controllers.poll();
