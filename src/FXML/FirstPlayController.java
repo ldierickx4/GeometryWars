@@ -8,6 +8,7 @@ package FXML;
 import AstralStrifes.Game;
 import Data.UserPlay;
 import PresentationLayer.GameFrame;
+import PresentationLayer.MultiGamePanel;
 import java.awt.Button;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
