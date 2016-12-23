@@ -41,6 +41,7 @@ public class AttackDrone extends Drone implements Runnable{
             bullets.add(b);
         }
     }
+    @Override
     public void renderBullets(Graphics g){
         int size=bullets.size();
         if(size>0){
@@ -60,7 +61,8 @@ public class AttackDrone extends Drone implements Runnable{
             }
         }
     }
+    @Override
     public LinkedList<Bullet> getBullets(){
-        return this.bullets;
+        return super.bullet = bullets;
     }
 }

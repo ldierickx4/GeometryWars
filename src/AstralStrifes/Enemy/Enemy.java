@@ -5,9 +5,11 @@
  */
 package AstralStrifes.Enemy;
 
+import AstralStrifes.Bullet;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.LinkedList;
 
 /**
  *

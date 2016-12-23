@@ -7,33 +7,20 @@ package PresentationLayer;
 
 
 
-import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Controllers.PowerupController;
 import AstralStrifes.Controllers.CollisionController;
 import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
-import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
 import AstralStrifes.Difficulty.Difficulty;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Controllers;
@@ -180,19 +167,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         pc.draw(gr);
         pc2.draw(gr);
     }
-    public void renderAttackDrone(Player p,Graphics gr){
-        if(p.getAttackDroneStatus()){
-            AttackDrone ad = (AttackDrone)(p.getDrone());
-            ad.renderBullets(gr);
-            cc.checkEnemyBulletCoulission(ad.getBullets());
-        }
-    }
     public void playerDraw(Player p , Graphics gr){
         p.draw(gr,this);
         p.getDrone().draw(gr);
+        p.getDrone().renderBullets(gr);
         p.checkIfPlayerIsStillAlive();
         p.drawHealth(gr);
-        renderAttackDrone(p, gr);
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -283,6 +263,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         cc2.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
         cc.checkEnemyBulletCoulission(controller2.giveBullets());
+        cc.checkEnemyBulletCoulission(player.getDrone().getBullets());
+        cc.checkEnemyBulletCoulission(player2.getDrone().getBullets());
         cc.checkEnemyPlayerCollision();
         cc2.checkEnemyPlayerCollision();
         cc2.checkIfPowerupGetsPickedUp();
@@ -395,7 +377,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     public LinkedList<Player> getPlayers(){
         return this.players;
     }
-
     @Override
     public boolean getGameLoop() {
         return this.game;

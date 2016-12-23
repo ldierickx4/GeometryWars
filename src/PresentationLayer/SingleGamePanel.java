@@ -13,13 +13,8 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.*;
 import AstralStrifes.Difficulty.Difficulty;
-<<<<<<< HEAD
-=======
 import Data.Database;
 import Data.UserPlay;
-import java.awt.Color;
-import java.awt.Font;
->>>>>>> origin/master
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -120,14 +115,11 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             ebc.render(gr);
             ec.render(gr);
             pc.draw(gr);
-            if(attackDrone){
-                AttackDrone ad = (AttackDrone)(player.getDrone());
-                ad.renderBullets(gr);        
-        }
     }
     public void playerDraw(Player p , Graphics gr){
         player.draw(gr,this);
         player.getDrone().draw(gr);
+        player.getDrone().renderBullets(gr);
         player.drawHealth(gr);
     }
     @Override
@@ -161,8 +153,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
                 pc.useADHD();
                 break;
         }    
-    }
-
+     }
     @Override
     public void run() {
         while(game)
@@ -206,15 +197,11 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     public void coullisionDetects(){
         cc.checkPlayerMannaPickup();
         cc.checkEnemyBulletCoulission(controller.giveBullets());
-        if(attackDrone){
-            AttackDrone ad = (AttackDrone)(player.getDrone());
-            cc.checkEnemyBulletCoulission(ad.getBullets());
-        }
+        cc.checkEnemyBulletCoulission(player.getDrone().getBullets());
         cc.checkEnemyPlayerCollision();
         cc.checkIfPowerupGetsPickedUp();
         cc.checkIfPlayerGetsHitByEnemyBullet();
-    }
-    
+    } 
     @Override
     public void mouseDragged(MouseEvent e) {
         calcPlayer(e);

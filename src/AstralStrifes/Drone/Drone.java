@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package AstralStrifes.Drone;
+import AstralStrifes.Bullet;
 import AstralStrifes.Enemy.Manna;
 import AstralStrifes.Player;
 import java.awt.Graphics;
@@ -11,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 /**
@@ -36,6 +38,7 @@ public class Drone{
     private Method power;
     public int upgrade;
     private int level;
+    public LinkedList<Bullet> bullet = new LinkedList<Bullet>();
     
     public Drone(Player p,int upgrade){
         this.p=p;
@@ -77,5 +80,10 @@ public class Drone{
             p.addManna(new Manna(0, 0, 0, 0));
             upgrade();
         }
+    }
+    public LinkedList<Bullet> getBullets(){
+        return this.bullet;
+    }
+    public void renderBullets(Graphics g){
     }
 }
