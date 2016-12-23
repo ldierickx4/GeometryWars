@@ -13,13 +13,10 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.*;
 import AstralStrifes.Difficulty.Difficulty;
-<<<<<<< HEAD
-=======
 import Data.Database;
 import Data.UserPlay;
 import java.awt.Color;
 import java.awt.Font;
->>>>>>> origin/master
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
