@@ -22,14 +22,15 @@ import javax.sound.sampled.Clip;
  * @author Jordy
  */
 public class SoundLoader {
-    private String SPACESHIP_GUN_FIRE_PATH = "spaceship.wav";
-    private String ENEMY_RAINBOW_FIRE_PATH = "rainbow.wav";
+    private String SPACESHIP_GUN_FIRE_PATH = "spaceship";
+    private String ENEMY_RAINBOW_FIRE_PATH = "rainbow";
     private String ENEMY_SATURN_FIRE_PATH = "";
-    private String ENEMY_KILLED_PATH = "killed2.wav";
-    private String POWERUP_ACTIVATED = "powerup.wav";
-    private String STANDARD_ENEMY_FIRE_PATH = "file:C:/Users/Jordy/Documents/Howest/2TI/Semester 3/Project/GeometryWars/resources/gameSounds/shot4.wav";
+    private String ENEMY_KILLED_PATH = "killed2";
+    private String POWERUP_ACTIVATED = "powerup";
+    private String MANNA_PICKED_UP = "manna";
+    private String STANDARD_ENEMY_FIRE_PATH = "spaceship";
     private AudioClip shot;
-    private String KOEKOEK_JONGUH = "koekoek.wav";
+    private String KOEKOEK_JONGUH = "koekoek";
     
 
     public SoundLoader(String soundLoaderName) {
@@ -38,7 +39,7 @@ public class SoundLoader {
 
     public void loadSound(String sound){
         try {
-            URL url = new URL("file:resources/gameSounds/" + sound);
+            URL url = new URL("file:resources/gameSounds/" + sound + ".wav");
             shot = Applet.newAudioClip(url);
 
         } catch (MalformedURLException ex) {
@@ -62,6 +63,8 @@ public class SoundLoader {
                 return POWERUP_ACTIVATED;
             case "Koekoek" :
                 return KOEKOEK_JONGUH;
+            case "Manna" : 
+                return MANNA_PICKED_UP;
             default: 
                 return SPACESHIP_GUN_FIRE_PATH;
         }
