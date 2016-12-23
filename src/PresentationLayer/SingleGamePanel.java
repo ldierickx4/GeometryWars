@@ -295,13 +295,15 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         switch(status){
             case "playing":
                 break;
-            case "gameover":
+                
+            case "gameover":        
                 this.game=false;
                 end = new GameOver(gf,status);
                 end.setScore(player.getScore());
                 gf.setPanel(end);
                 break;
-            case "finished":
+                
+            case "finished":            
                 this.game=false;
                 end = new GameOver(gf,status);
                 end.setScore(player.getScore());

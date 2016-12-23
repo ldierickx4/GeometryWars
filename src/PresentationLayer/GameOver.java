@@ -6,11 +6,17 @@
 package PresentationLayer;
 
 import AstralStrifes.Game;
+import Data.UserPlay;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -120,7 +126,22 @@ public class GameOver extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Stage appStage = Game.stage;
+        Parent loginParent;
+        //try {
+        //    if(UserPlay.getinstance().getU() == null){
+        //        
+        //        loginParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        //    } else{
+        //        loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));
+        //    }   
+        //} catch (IOException ex) {
+        //    Logger.getLogger(GameOver.class.getName()).log(Level.SEVERE, null, ex);
+        //    loginParent = null;
+        //}
+        appStage.setHeight(800);
+        appStage.setWidth(1000);
+        //Game.borderPane.setCenter(loginParent);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
