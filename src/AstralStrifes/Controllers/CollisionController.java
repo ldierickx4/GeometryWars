@@ -49,9 +49,7 @@ public void checkIfPowerupGetsPickedUp(){
                 Powerup powerup = powerups.get(i);
                 Rectangle powerupBounds = powerups.get(i).getBounds();
                 if(powerupBounds.intersects(player.getBounds())){       
-                    Manna m = new Manna(150,1,10,10);
                     (powerupSound.getSound()).play();
-                    player.addManna(m);
                     powerup.setPickedUp();
                     pc.addUsed(powerup);
                     pc.clear();

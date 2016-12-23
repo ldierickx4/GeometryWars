@@ -30,16 +30,16 @@ public class Bullet{
     private double bulletVelocity;
     private double xVelocity;
     private double yVelocity;
-    private double destX;
-    private double destY;
+    private final double destX;
+    private final double destY;
     private double originX;
     private double originY; 
     private double angle;
     private double Yvelocity;
     private double Xvelocity;
     private boolean alive;
-    private Rectangle borders;
-    private String type;
+    private final Rectangle borders;
+    private final String type;
     
             
     public Bullet(double originX , double originY , double destX  , double destY,String types){

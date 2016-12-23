@@ -21,6 +21,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -54,4 +55,5 @@ public interface GamePanel{
     public void setStatus(String status);
     public void checkStatus();
     public Difficulty getDiff();
+    public LinkedList<Player> getPlayers();
 }

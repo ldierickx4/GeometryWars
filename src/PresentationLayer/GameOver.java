@@ -162,7 +162,7 @@ public class GameOver extends javax.swing.JPanel {
     }
     public void setScore2(int score1 , int score2){
         jLabel2.setForeground(Color.red);
-        jLabel2.setText("score player 1: "+score1+"score player 2: "+score2);
+        jLabel2.setText("score player 1: "+score1+" score player 2: "+score2);
     }
     public void paintComponent(Graphics gr) {
         //this.paintComponent(gr);

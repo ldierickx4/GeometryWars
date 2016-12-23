@@ -109,6 +109,7 @@ public class EnemyController implements Runnable{
         }
         else{
             this.wave++;
+            addAdhd();
             generateEnemies();
         }
     }
@@ -135,9 +136,9 @@ public class EnemyController implements Runnable{
     public void killRandomEnemy(){
         int bounds = enemies.size();
             if(bounds > 0){
-            Random r = new Random();    
-            int rE = r.nextInt(enemies.size());
-            Enemy e = enemies.get(rE);
+                Random r = new Random();    
+                int rE = r.nextInt(enemies.size());
+                Enemy e = enemies.get(rE);
             if(e!=null){
                 removeEnemy(e);
             }
@@ -181,6 +182,11 @@ public class EnemyController implements Runnable{
         for(int i = 0;i<manna.size();i++){
             Manna m = manna.remove(i);
             p.addManna(m);
+        }
+    }
+    public void addAdhd(){
+        for(Player p:gp.getPlayers()){
+            p.addOneAdhdPowerup();
         }
     }
 }

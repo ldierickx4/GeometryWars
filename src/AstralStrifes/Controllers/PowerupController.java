@@ -19,7 +19,6 @@ import java.util.LinkedList;
  * @author Jordy
  */
 public class PowerupController{
-    private int score;
     private Player player;
     private LinkedList<Powerup> powerups;
     private LinkedList<Powerup> usedPowers;
@@ -27,6 +26,8 @@ public class PowerupController{
     private GamePanel gp;
     private Thread t;
     private boolean spacebar = false;
+    public boolean added=false;
+    public boolean addedhd=false;
 
     public PowerupController(Player player,PlayerBulletController pbc,GamePanel gp) {
         this.powerups = new LinkedList<Powerup>();
@@ -41,21 +42,23 @@ public class PowerupController{
     public void removePowerup(Powerup p){
         usedPowers.remove(p);
     }
-    
     public void updatePowerups(){
-        score = player.getScore();
-        if(score%15 == 0 && score!=0 && powerups.size() == 0){
-            SwiftyPowerup powerup = new SwiftyPowerup(player,gp);
-            powerups.add(powerup);
-        }   
+        int kills = player.getManna().size();
+        checkforPowerup(kills, 10);
     }
-    
+    public void checkforPowerup(int kills,int killcount){
+        if(kills%killcount == 0 && kills!=0){
+            SwiftyPowerup spowerup = new SwiftyPowerup(player,gp);
+            powerups.add(spowerup);
+            added = true;
+        }
+    }
     public void useADHD(){
-        if(player.getAmountOfAdhdPowerups() != 0){
+        if(player.getAmountOfAdhdPowerups()!=0){
+            player.reduceAdhd();
             AdhdPowerup powerup = new AdhdPowerup(pbc,gp);
             powerups.add(powerup);
             powerup.start();
-            player.reduceAdhd();
             powerups.clear();
         }    
     }
@@ -81,7 +84,7 @@ public class PowerupController{
     }
     
     public void draw(Graphics g){
-        if(powerups.size() > 0){
+        if(powerups.size()>0){
             for(Powerup p : powerups){
                 p.draw(g);
             }

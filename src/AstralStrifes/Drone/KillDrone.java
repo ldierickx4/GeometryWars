@@ -17,6 +17,7 @@ import PresentationLayer.SingleGamePanel;
 public class KillDrone extends Drone implements Runnable{
     private Thread thread;
     private EnemyController ec;
+    
     public KillDrone(Player p,GamePanel gp) {
         super(p,10000);
         this.ec = gp.getEc();

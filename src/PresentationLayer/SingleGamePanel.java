@@ -318,7 +318,10 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         }
         
     }
-
+    @Override
+    public LinkedList<Player> getPlayers(){
+        return this.players;
+    }    
     @Override
     public Difficulty getDiff() {
         return this.diff;

@@ -45,7 +45,6 @@ import org.lwjgl.input.Controller;
 public class MultiGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener,GamePanel{
     private Player player;
     private Player player2;
-    private Thread thread2;
     private Background background;
     private boolean running = true;
     private Thread thread;
@@ -77,14 +76,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private double aimX;
     private double aimY;
     private String status = "playing";
-    private JLabel score;
     private GameFrame gf;
     private Difficulty diff;
     private Boolean attackDrone = false;
     private String type = "Multi";
     private GameOver end;
     private boolean game=true;
-
     
     public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff){
         this.gf =gf;
@@ -97,7 +94,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
         this.controller2 = new PlayerBulletController(player2, this,aimX,aimY);
         this.ebc = new EnemyBulletController(players, this);
-        this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, controller,this);
         this.pc2 = new PowerupController(player2,controller2,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
@@ -106,12 +102,13 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread.start();
     }
     public void setAttackdrone(){
-        this.attackDrone = true;
+        attackDrone = true;
     }
     public void createComponents(String drone1,String drone2)
     {
         background = new Background(gf);
         player = new Player(this,1);
+        this.ec = new EnemyController(player,this);
         player2 = new Player(this,2);
         player.makeDrone(drone1);
         player2.makeDrone(drone2);
@@ -237,15 +234,15 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
     @Override
     public void run() {   
-        while(true)
-        {           
+        while(game)
+        {         
+            checkStatus();
             try {
 		Thread.sleep(4);
             }
             catch(Exception e) {
 		e.printStackTrace();
             }
-            checkStatus();
             checkShoot(shoot2,controller2);
             checkShoot(shoot1,controller);
             checkInput1();
@@ -415,6 +412,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
                 end = new GameOver(gf,status);
                 end.setScore2(player.getScore(),player2.getScore());
                 gf.setPanel(end);
+                gf.endGameMulti();
                 break;
             case "finished":
                 this.game=false;
@@ -422,11 +420,16 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
                 end = new GameOver(gf,status);
                 end.setScore2(player.getScore(),player2.getScore());
                 gf.setPanel(end);
+                gf.endGameMulti();
                 break;
         }
     }
     @Override
     public Difficulty getDiff() {
         return this.diff;
+    }
+    @Override
+    public LinkedList<Player> getPlayers(){
+        return this.players;
     }
 }
