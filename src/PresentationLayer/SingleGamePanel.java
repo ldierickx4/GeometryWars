@@ -13,6 +13,13 @@ import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
 import AstralStrifes.*;
 import AstralStrifes.Difficulty.Difficulty;
+<<<<<<< HEAD
+=======
+import Data.Database;
+import Data.UserPlay;
+import java.awt.Color;
+import java.awt.Font;
+>>>>>>> origin/master
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -268,12 +275,19 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
 
     @Override
     public void checkStatus() {
+        
+        
+
         switch(status){
             case "playing":
                 break;
                 
             case "gameover":        
                 this.game=false;
+                Database db = new Database();
+                if(UserPlay.getinstance().getU() != null && db.getPlayerHighScore(UserPlay.getinstance().getU().getUsername()) < player.getScore()){
+                    db.setPlayerHighscore(UserPlay.getinstance().getU().getUsername(), player.getScore());
+                }
                 end = new GameOver(gf,status);
                 end.setScore(player.getScore());
                 gf.setPanel(end);
@@ -281,6 +295,10 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
                 
             case "finished":            
                 this.game=false;
+                Database da = new Database();
+                if(UserPlay.getinstance().getU() != null && da.getPlayerHighScore(UserPlay.getinstance().getU().getUsername()) < player.getScore()){
+                    da.setPlayerHighscore(UserPlay.getinstance().getU().getUsername(), player.getScore());
+                }
                 end = new GameOver(gf,status);
                 end.setScore(player.getScore());
                 gf.setPanel(end);

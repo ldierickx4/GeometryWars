@@ -7,7 +7,7 @@ package PresentationLayer;
 
 
 import AstralStrifes.Game;
-import Data.UserPlay;
+import Data.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -27,6 +27,7 @@ import javax.imageio.ImageIO;
 public class GameOver extends javax.swing.JPanel {
     private GameFrame gf;
     private String state;
+    private int score;
     /**
      * Creates new form GameOver
      */
@@ -127,6 +128,7 @@ public class GameOver extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
         gf.dispose();
         Stage appStage = Game.stage;
         appStage.setHeight(800);
@@ -180,10 +182,12 @@ public class GameOver extends javax.swing.JPanel {
     }
     }
     public void setScore(int score){
+        this.score = score;
         jLabel2.setForeground(Color.red);
         jLabel2.setText("score: "+score);
     }
     public void setScore2(int score1 , int score2){
+        this.score = score1;
         jLabel2.setForeground(Color.red);
         jLabel2.setText("score player 1: "+score1+" score player 2: "+score2);
     }
