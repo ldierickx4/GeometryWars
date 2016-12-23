@@ -90,6 +90,15 @@ public class FirstPlayController implements Initializable {
     private AnchorPane controllerNotPluggedIn;
     
     @FXML
+    private RadioButton windows;
+    
+    @FXML
+    private RadioButton osx;
+    
+    @FXML
+    private ToggleGroup os;
+    
+    @FXML
     private void handleBackButton() throws IOException{
         Stage appStage = Game.stage;
         if (UserPlay.getinstance().getU() != null){
@@ -103,10 +112,16 @@ public class FirstPlayController implements Initializable {
     
     @FXML 
     private void handleStartButton() throws IOException, Exception{
+        String selectedOS = os.getSelectedToggle().getUserData().toString();
         String drone1 = Drone1.getSelectedToggle().getUserData().toString();
         String drone2 = Drone2.getSelectedToggle().getUserData().toString();
         String difficulty = Difficulty.getSelectedToggle().getUserData().toString();
         int difficultyInt = getDifficulty(difficulty);
+        if ("windows".equals(selectedOS)){
+            
+        }else{
+            
+        }
         if ("two".equals(players.getSelectedToggle().getUserData().toString())){
             try{          
                 Stage appStage = Game.stage;
@@ -168,5 +183,7 @@ public class FirstPlayController implements Initializable {
         easy.setUserData("easy");
         medium.setUserData("medium");
         hard.setUserData("hard");
+        osx.setUserData("osx");
+        windows.setUserData("windows");
     }       
 }

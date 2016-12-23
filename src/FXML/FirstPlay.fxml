@@ -143,5 +143,23 @@
             <TextArea layoutX="32.0" layoutY="69.0" prefHeight="51.0" prefWidth="238.0" text="You have to connect a controller if you want to play our multiplayer." wrapText="true" />
          </children>
       </AnchorPane>
+      <Label layoutX="702.0" layoutY="58.0" text="Choose your OS!" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="700.0" layoutY="106.0" mnemonicParsing="false" text="OS X" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="os" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="800.0" layoutY="106.0" mnemonicParsing="false" text="Windows" textFill="WHITE" toggleGroup="$os">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
    </children>
 </AnchorPane>

@@ -67,6 +67,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private String type = "Multi";
     private GameOver end;
     private boolean game=true;
+    public static final int[] os={};
     
     public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff){
         this.gf =gf;
@@ -86,6 +87,7 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         thread = new Thread(this);
         thread.start();
     }
+    
     public void setAttackdrone(){
         attackDrone = true;
     }
