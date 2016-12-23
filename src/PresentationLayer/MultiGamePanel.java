@@ -67,12 +67,13 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private String type = "Multi";
     private GameOver end;
     private boolean game=true;
-    public static final int[] os={};
+    public int[] os;
     
-    public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff){
+    public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff,String oss){
         this.gf =gf;
         this.diff=diff;
         controllerConnection();
+        controllerSet(oss);
         createComponents(drone1,drone2);
         addKeyListener(this);
         addMouseMotionListener(this);
@@ -86,6 +87,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.cc2 = new CollisionController(player2,controller2, ec, ebc, pc2);
         thread = new Thread(this);
         thread.start();
+    }
+    public void controllerSet(String oss){
+        this.os=new int[]{1,0,3,3,2,2};
+        if(oss.equals("osx")){
+            this.os=new int[]{2,3,0,0,1,1};
+        }
     }
     
     public void setAttackdrone(){
@@ -339,16 +346,16 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         shoot2 = pscon.isButtonPressed(7);
     }
     private void checkConAim(){
-        this.aimX = pscon.getAxisValue(2)*1000;
-        this.aimY = pscon.getAxisValue(3)*1000;
+        this.aimX = pscon.getAxisValue(os[0])*1000;
+        this.aimY = pscon.getAxisValue(os[1])*1000;
         player2.calculatePlayerAngle(aimX,aimY);
     }
 
     private void checkConMove() {
-        right2 = pscon.getAxisValue(0)>0.5;
-        left2 = pscon.getAxisValue(0)<-0.5;
-        down2 = pscon.getAxisValue(1)>0.5;
-        up2 = pscon.getAxisValue(1)<-0.5;
+        right2 = pscon.getAxisValue(os[2])>0.5;
+        left2 = pscon.getAxisValue(os[3])<-0.5;
+        down2 = pscon.getAxisValue(os[4])>0.5;
+        up2 = pscon.getAxisValue(os[5])<-0.5;
     }
     public void setStatus(String status){
         this.status = status;

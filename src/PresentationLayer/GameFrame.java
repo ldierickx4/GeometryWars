@@ -45,8 +45,10 @@ public class GameFrame extends JFrame implements KeyListener {
     private int playerCount;
     private String drone1;
     private String drone2;
+    private String os;
     
-    public GameFrame(int playerCount,String drone1, String drone2,int diff){
+    public GameFrame(int playerCount,String drone1, String drone2,int diff,String os){
+        this.os=os;
         this.playerCount = playerCount;
         this.drone1 = drone1;
         this.drone2 = drone2;
@@ -72,7 +74,7 @@ public class GameFrame extends JFrame implements KeyListener {
     public void creatGame(int diff){
         Difficulty dif = new Difficulty(diff);
         if(playerCount == 2){
-            this.gp = new MultiGamePanel(this,drone1,drone2,dif);
+            this.gp = new MultiGamePanel(this,drone1,drone2,dif,os);
             MultiGamePanel mp = (MultiGamePanel) gp;
             setContentPane(mp);
             setScoresAndPowerups2();
