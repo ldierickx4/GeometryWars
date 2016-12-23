@@ -26,7 +26,13 @@ public class Game extends Application{
      * @throws java.io.IOException
      */
     public static Stage stage;
+    public static Game game;
     public static BorderPane borderPane = new BorderPane();
+
+    public Game()
+    {
+        game = this;
+    }
     
     public static void main(String[] args) throws IOException {
         launch(args);
@@ -41,6 +47,7 @@ public class Game extends Application{
         this.borderPane.setCenter(mainPane);
         scene.getStylesheets().add("@../../FXML/FXMLSS.css");
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show(); 
+        //primaryStage.hide();
     }    
 }

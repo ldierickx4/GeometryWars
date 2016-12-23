@@ -20,11 +20,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author Jens
  */
+
 public class Database {
     
     
@@ -67,9 +70,6 @@ public class Database {
     private int seDamage;
     private int satEDamage;
     private int eBulletDamage;
-    private HashMap<User,Integer> usersHS = new HashMap<>();
-            
-    
     
     public Database() {
         //Server registreren
@@ -136,7 +136,6 @@ public class Database {
     }
     
     public String getEnemyImage(String enemyName){
-        //String imgPath = null;
         try {
             
             String sql = "select image from enemies where enemy_name = (?)";
@@ -164,6 +163,19 @@ public class Database {
            pstmt.executeUpdate();
            pstmt.close();
            
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void setPlayerRank_id(String username, int rank){
+        try{
+           String sql = "UPDATE users SET rank_id = (?) WHERE username = (?)";
+           PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+           pstmt.setInt(1, rank);
+           pstmt.setString(2, username);
+           pstmt.executeUpdate();
+           pstmt.close();     
         } catch(SQLException ex){
             ex.printStackTrace();
         }
@@ -238,7 +250,7 @@ public class Database {
     
     public String getEmail(String username){
         try{
-           String sql = "SELECT username FROM users WHERE username = (?)";
+           String sql = "SELECT email FROM users WHERE username = (?)";
            PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
            pstmt.setString(1, username);           
            ResultSet rs = pstmt.executeQuery();
@@ -704,33 +716,32 @@ public class Database {
         }
         return eBulletDamage;
     }
-    
-    
-     
-    
-    public HashMap getUsers(){
+      
+    public ObservableList getUsers(){
+        ObservableList<User> UserList = FXCollections.observableArrayList();
         try{
-            String sql = "SELECT * FROM users";
+            String sql = "SELECT * FROM users ORDER BY highscore DESC";
             Statement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
+            int rank = 1;
+            //FXCollections.observableArrayList(new User("jorre", "jeep", "email", 20, 2000))       
             while(rs.next()){
                 String username = rs.getString("username");
                 String pw = rs.getString("password");
                 String email = rs.getString("email");
                 int highScore = rs.getInt("highscore");
                 int xp = rs.getInt("XP");
-            
-                User u = new User(username,pw,email,xp,highScore);
-                this.usersHS.put(u, highScore);
-                
-                        
+                this.setPlayerRank_id(username, rank);
+                User u = new User(username,pw,email,xp,highScore,rank);              
+                UserList.add(u);
+                rank++;
             }    
         }catch(SQLException ex){
             ex.printStackTrace();
-        }
-        
-        return usersHS;
+        }    
+        return UserList;
     }
+    
     public static void main(String[] args) {
         // TODO code application logic here
         Database db = new Database();
@@ -738,9 +749,5 @@ public class Database {
         System.out.println(db.getDifficultyNEDamage(1));
         System.out.println(db.getDifficultySEDamage(1));
         System.out.println(db.getDifficultyEBulletDamage(1));
-        System.out.println(db.getEnemiesInWave(6).size());
-
     }
-    
-    
 }

@@ -46,6 +46,7 @@ public class PlayerInfoController implements Initializable{
     @FXML
     private Label username;
     
+    
     @FXML
     private void handleBackController() throws IOException{
         Stage appStage = Game.stage;
@@ -61,7 +62,9 @@ public class PlayerInfoController implements Initializable{
         String xpp = u.getXp()+"";
         xp.setText(xpp);
         String highscores = u.getHighscore()+"";
-        highscore.setText(highscores);     
+        highscore.setText(highscores);
+        String rankid = u.getRank_id()+"";
+        rank.setText(rankid);
     }
 }
 

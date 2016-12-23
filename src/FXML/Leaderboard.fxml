@@ -3,7 +3,8 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,6 +26,12 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <ListView layoutX="186.0" layoutY="379.0" prefHeight="251.0" prefWidth="600.0" />
+      <TableView fx:id="naam" layoutX="187.0" layoutY="366.0" prefHeight="312.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="Rank" prefWidth="75.0" text="Rank" />
+          <TableColumn fx:id="Username" prefWidth="328.9792175292969" text="Username" />
+            <TableColumn fx:id="Highscore" minWidth="0.0" prefWidth="195.02072143554688" text="Highscore" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

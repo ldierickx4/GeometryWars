@@ -20,7 +20,7 @@ public class User {
 
     
 
-    public User(String username, String pw, String email, int xp, int Highscore) {
+    public User(String username, String pw, String email, int xp, int Highscore, int rank_id) {
         this.username = username;
         this.pw = pw;
         this.email = email;

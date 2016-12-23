@@ -89,5 +89,15 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Label layoutX="217.0" layoutY="542.0" text="Rank:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="rank" fx:id="rank" layoutX="320.0" layoutY="542.0" text="Rank:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

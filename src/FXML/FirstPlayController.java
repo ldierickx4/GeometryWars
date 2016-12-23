@@ -10,15 +10,18 @@ import Data.UserPlay;
 import PresentationLayer.GameFrame;
 import java.awt.Button;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -83,6 +86,8 @@ public class FirstPlayController implements Initializable {
     @FXML
     private ToggleGroup Difficulty;
     
+    @FXML
+    private AnchorPane controllerNotPluggedIn;
     
     @FXML
     private void handleBackButton() throws IOException{
@@ -97,18 +102,37 @@ public class FirstPlayController implements Initializable {
     }
     
     @FXML 
-    private void handleStartButton() throws IOException{
+    private void handleStartButton() throws IOException, Exception{
         String drone1 = Drone1.getSelectedToggle().getUserData().toString();
         String drone2 = Drone2.getSelectedToggle().getUserData().toString();
         String difficulty = Difficulty.getSelectedToggle().getUserData().toString();
         int difficultyInt = getDifficulty(difficulty);
         System.out.println(difficultyInt);
         if ("two".equals(players.getSelectedToggle().getUserData().toString())){
-            GameFrame gf = new GameFrame(2, drone1 , drone2, difficultyInt);
+            try{
+                Stage appStage = Game.stage;
+                appStage.hide();
+                GameFrame gf = new GameFrame(2, drone1 , drone2, difficultyInt);         
+            } catch(Exception ex){
+                controllerNotPluggedIn.setVisible(true);
+                ex.printStackTrace();               
+            }           
         }else{
+            System.out.println("huh??");
+            
+            Stage appStage = Game.stage;
+            
             GameFrame gf = new GameFrame(1, drone1, difficultyInt);
+            appStage.setScene(null);
+            appStage.setHeight(1);
+            appStage.setWidth(1);
         }      
-    } 
+    }
+    
+    @FXML
+    private void handleBackControllerButton(){
+        controllerNotPluggedIn.setVisible(false);
+    }
     
     @FXML
     private void changeSelectedRadio(){      

@@ -7,12 +7,15 @@ package PresentationLayer;
 
 import AstralStrifes.Background;
 import AstralStrifes.Difficulty.Difficulty;
+import AstralStrifes.Game;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -21,6 +24,7 @@ import javax.imageio.ImageIO;
  */
 //implements ActionListener,KeyListener,MouseMotionListener,MouseListener
 public class GameFrame extends JFrame implements KeyListener {
+    //private BorderPane borderpane = Game.borderPane;
     private SingleGamePanel singleGamePanel;
     private MultiGamePanel multiGamePanel;
     private static final int HEIGHT = 800;
@@ -40,9 +44,11 @@ public class GameFrame extends JFrame implements KeyListener {
     private int playerCount;
     private String drone1;
     private String drone2;
-    public static void main(String[] args){
-        GameFrame gf = new GameFrame(2,"attack","attack",2);   
-    }
+
+//  public static void main(String[] args){
+//      GameFrame gf = new GameFrame(1,"heal",3);   
+//  }
+
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2,int diff){
         this.playerCount = playerCount;
@@ -83,6 +89,7 @@ public class GameFrame extends JFrame implements KeyListener {
             setScoresAndPowerups2();
     }   else{
             this.singleGamePanel = new SingleGamePanel(this,drone1,dif);
+          
             setContentPane(singleGamePanel);
             setScoresAndPowerups1();
     }

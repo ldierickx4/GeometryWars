@@ -46,7 +46,7 @@ public class LoginController {
         this.db.checkUserDB(usernameLogin.getText(), passwordLogin.getText());
         if (this.db.getUserExist()){
             String userName = usernameLogin.getText();
-            User ingelogdeUser = new User(db.getUsername(userName), db.getPassword(userName), db.getEmail(userName), db.getXP(userName),  db.getPlayerHighScore(userName));  
+            User ingelogdeUser = new User(db.getUsername(userName), db.getPassword(userName), db.getEmail(userName), db.getXP(userName),  db.getPlayerHighScore(userName), db.getRankid(userName));  
             UserPlay.getinstance().setU(ingelogdeUser);
             Stage appStage = Game.stage;
             Parent loginParent = FXMLLoader.load(getClass().getResource("MenuLoggedIn.fxml"));
