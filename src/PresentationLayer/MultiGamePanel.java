@@ -124,7 +124,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-        pscon = Controllers.getController(0);
+        for(int i = 0; i < Controllers.getControllerCount(); i++){
+           pscon = Controllers.getController(i);
+        }
+        //pscon = Controllers.getController(0);
         Controllers.poll();
     }
     public void checkInput1(){
