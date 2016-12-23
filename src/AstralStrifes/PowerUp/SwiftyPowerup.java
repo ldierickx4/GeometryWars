@@ -41,7 +41,7 @@ public class SwiftyPowerup extends Powerup implements Runnable{
     }
     
     public void Boost(){
-        p.boostSpeed(40);
+        p.boostSpeed(3);
     }
     public void endBoost(){
         p.boostSpeed(2);
