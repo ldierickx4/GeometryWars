@@ -5,34 +5,21 @@
  */
 package PresentationLayer;
 
-
-
 import AstralStrifes.Drone.AttackDrone;
 import AstralStrifes.Controllers.EnemyController;
 import AstralStrifes.Controllers.PowerupController;
 import AstralStrifes.Controllers.CollisionController;
 import AstralStrifes.Controllers.PlayerBulletController;
 import AstralStrifes.Controllers.EnemyBulletController;
-import AstralStrifes.Enemy.NormalEnemy;
 import AstralStrifes.*;
-import AstralStrifes.Sounds.SoundLoader;
 import AstralStrifes.Difficulty.Difficulty;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -63,12 +50,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private EnemyBulletController ebc;
     private Boolean attackDrone = false;
     private LinkedList<Player> players;
-    //private String type = "Single";
     private String status = "playing";
     private GameOver end;
-    
-    
-    
     public SingleGamePanel(GameFrame gf,String drone,Difficulty diff){ 
         this.gf =gf;
         this.diff = diff;
@@ -115,16 +98,15 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     {
         if(shoot)
         {
-            if(controller.getStatus()==false)controller.setShooting();
+            if(!(controller.getStatus()))controller.setShooting();
         }
         else{
-            if(controller.getStatus()==true)controller.setNotShooting();
+            if(controller.getStatus())controller.setNotShooting();
         }
     }
     @Override
     public void paintComponent(Graphics gr){
             super.paintComponent(gr);
-            Graphics2D g = (Graphics2D)gr;
             gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
             playerDraw(player , gr);
             controller.render(gr);
@@ -148,7 +130,6 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     public void keyPressed(KeyEvent e){
         int typed = e.getKeyCode();
         processKey(typed, true);
-
     }
     @Override
     public void keyReleased(KeyEvent e){
@@ -204,7 +185,6 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             catch(Exception e) {
 		e.printStackTrace();
             }
-
         }
     }    
     public double getMouseX(){
@@ -230,18 +210,14 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     
     @Override
     public void mouseDragged(MouseEvent e) {
-        mouseX=e.getX();
-        mouseY=e.getY();
-        player.calculatePlayerAngle(mouseX,mouseY);
+        calcPlayer(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mouseX=e.getX();
-        mouseY=e.getY();       
-        player.calculatePlayerAngle(mouseX,mouseY);
-        
+        calcPlayer(e);
     }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -323,5 +299,12 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     @Override
     public boolean getGameLoop() {
         return this.game;
+    }
+
+    @Override
+    public void calcPlayer(MouseEvent e) {
+        mouseX=e.getX();
+        mouseY=e.getY();
+        player.calculatePlayerAngle(mouseX,mouseY);
     }
 }

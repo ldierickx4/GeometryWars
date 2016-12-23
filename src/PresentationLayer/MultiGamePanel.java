@@ -46,14 +46,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private Player player;
     private Player player2;
     private Background background;
-    private boolean running = true;
     private Thread thread;
     private boolean down1 = false;
     private boolean up1 = false;
     private boolean left1 = false;
     private boolean right1 = false;
     private boolean shoot1 = false;
-    private double imageAngleRad = 0;
     private EnemyBulletController ebc;
     private LinkedList<Player> players;
     //player 1
@@ -129,7 +127,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
                 pscon = Controllers.getController(i);
            }
         }
-        //pscon = Controllers.getController(0);
         Controllers.poll();
     }
     public void checkInput1(){
@@ -164,16 +161,15 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     {
         if(pshoot)
         {
-            if(controller.getStatus()==false)controller.setShooting();
+            if(!(controller.getStatus()))controller.setShooting();
         }
         else{
-            if(controller.getStatus()==true)controller.setNotShooting();
+            if(controller.getStatus())controller.setNotShooting();
         }
     }
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        Graphics2D g = (Graphics2D)gr;
         gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this);
         playerDraw(player , gr);
         playerDraw(player2 , gr);
@@ -200,15 +196,12 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     }
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
         int typed = e.getKeyCode();
         processKey(typed, true);
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
         int typed = e.getKeyCode();
@@ -297,41 +290,32 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         cc2.checkIfPlayerGetsHitByEnemyBullet();
         cc.checkIfPlayerGetsHitByEnemyBullet();
     }
-    
     @Override
     public void mouseDragged(MouseEvent e) {
-        mouseX=e.getX();
-        mouseY=e.getY();
-        player.calculatePlayerAngle(mouseX,mouseY);
+        calcPlayer(e);
     }
-
     @Override
     public void mouseMoved(MouseEvent e) {
+        calcPlayer(e);
+    }
+    public void calcPlayer(MouseEvent e){
         mouseX=e.getX();
         mouseY=e.getY();
         player.calculatePlayerAngle(mouseX,mouseY);
-        
     }
-
     @Override
-    public void mouseClicked(MouseEvent e) {
-                
+    public void mouseClicked(MouseEvent e) {                
     }
-    
-
     @Override
     public void mousePressed(MouseEvent e) {
         shoot1=e.getButton()==e.BUTTON1;
     }
-
     @Override
     public void mouseReleased(MouseEvent e) {
         shoot1=!(e.getButton()==e.BUTTON1);
-    }
-    
+    }    
     @Override
-    public void mouseEntered(MouseEvent e) {
-    
+    public void mouseEntered(MouseEvent e) {    
     }
     @Override
     public void mouseExited(MouseEvent e) {
@@ -390,20 +374,16 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             case "playing":
                 break;
             case "gameover":
-                this.game=false;
-                this.ec=null; 
+                this.game=false; 
                 end = new GameOver(gf,status);
                 end.setScore2(player.getScore(),player2.getScore());
                 gf.setPanel(end);
-                gf.endGameMulti();
                 break;
             case "finished":
                 this.game=false;
-                this.ec=null;
                 end = new GameOver(gf,status);
                 end.setScore2(player.getScore(),player2.getScore());
                 gf.setPanel(end);
-                gf.endGameMulti();
                 break;
         }
     }

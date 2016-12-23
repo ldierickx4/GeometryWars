@@ -57,4 +57,5 @@ public interface GamePanel{
     public Difficulty getDiff();
     public LinkedList<Player> getPlayers();
     public boolean getGameLoop();
+    public void calcPlayer(MouseEvent e);
 }

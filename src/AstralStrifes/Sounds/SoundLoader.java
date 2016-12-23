@@ -20,15 +20,11 @@ import java.util.logging.Logger;
 public class SoundLoader {
     private String SPACESHIP_GUN_FIRE_PATH = "spaceship";
     private String ENEMY_RAINBOW_FIRE_PATH = "rainbow";
-    private String ENEMY_SATURN_FIRE_PATH = "";
     private String ENEMY_KILLED_PATH = "killed2";
     private String POWERUP_ACTIVATED = "powerup";
     private String MANNA_PICKED_UP = "manna";
-    private String STANDARD_ENEMY_FIRE_PATH = "spaceship";
     private AudioClip shot;
-    private String KOEKOEK_JONGUH = "koekoek";
     
-
     public SoundLoader(String soundLoaderName) {
         makeSound(soundLoaderName);    
     }
@@ -49,16 +45,10 @@ public class SoundLoader {
                 return SPACESHIP_GUN_FIRE_PATH;
             case "Rainbow" :
                 return ENEMY_RAINBOW_FIRE_PATH;
-            case "Saturn" :
-                return ENEMY_SATURN_FIRE_PATH;
-            case "Enemy" :
-                return STANDARD_ENEMY_FIRE_PATH;
             case "Killed" :
                 return ENEMY_KILLED_PATH;
             case "Powerup" :
                 return POWERUP_ACTIVATED;
-            case "Koekoek" :
-                return KOEKOEK_JONGUH;
             case "Manna" : 
                 return MANNA_PICKED_UP;
             default: 

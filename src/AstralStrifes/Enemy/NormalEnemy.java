@@ -69,6 +69,7 @@ public class NormalEnemy implements Enemy{
         }
         image = i;
     }
+    @Override
     public void moveTo(double x, double y){
         double MoveToX = x;
         double MoveToY = y;

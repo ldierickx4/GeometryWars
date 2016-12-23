@@ -54,18 +54,7 @@ public class EnemyController implements Runnable{
         Enemy tempEnemy;
         for(int i=0; i<enemies.size();i++){           
             tempEnemy = enemies.get(i);
-            try{
-                NormalEnemy ne = (NormalEnemy) tempEnemy;
-                ne.moveTo(p.getPlayerCenterX(),p.getPlayerCenterY());
-            }
-            catch(ClassCastException e)
-            {      
-            }
-            try {
-                SaturnEnemy se = (SaturnEnemy) tempEnemy;
-                se.slide();
-            } catch (Exception e) {
-            }
+            tempEnemy.moveTo(p.getPlayerCenterX(), p.getPlayerCenterY());
         }
     }
     public void render(Graphics g){

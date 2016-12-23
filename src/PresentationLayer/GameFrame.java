@@ -25,8 +25,9 @@ import javax.imageio.ImageIO;
 //implements ActionListener,KeyListener,MouseMotionListener,MouseListener
 public class GameFrame extends JFrame implements KeyListener {
     //private BorderPane borderpane = Game.borderPane;
-    private SingleGamePanel singleGamePanel;
-    private MultiGamePanel multiGamePanel;
+    //private SingleGamePanel singleGamePanel;
+    //private MultiGamePanel multiGamePanel;
+    private GamePanel gp;
     private static final int HEIGHT = 800;
     private static final int WIDTH = 1000;
     private Background bg;
@@ -44,12 +45,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private int playerCount;
     private String drone1;
     private String drone2;
-
-//  public static void main(String[] args){
-//      GameFrame gf = new GameFrame(1,"heal",3);   
-//  }
-
-    //private JLabel score;
+    
     public GameFrame(int playerCount,String drone1, String drone2,int diff){
         this.playerCount = playerCount;
         this.drone1 = drone1;
@@ -63,34 +59,27 @@ public class GameFrame extends JFrame implements KeyListener {
     }
         
     private void initUi(int diff) {
-        //this.gamePanel = new SingleGamePanel(this);
         addKeyListener(this);
-        //addMouseMotionListener(this);
-        //addMouseListener(this);
         setTitle("Astral Strifes");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setLocation(y, x);
-        //scoreTitle.setLocation(500, 500);
-        //JLabel score = new JLabel();
-        //score.setFont(new Font("Baskerville Old Face",Font.PLAIN,18));
-        //gamePanel.add(score);
-        //gamePanel = new MultiGamePanel(this); 
         creatGame(diff);
-        pack(); // de pack method zegt aan uw layoutmanager ik ben klaar, zet alle layouts maar goed
+        pack();
         setVisible(true);
     }
     public void creatGame(int diff){
         Difficulty dif = new Difficulty(diff);
         if(playerCount == 2){
-            this.multiGamePanel = new MultiGamePanel(this,drone1,drone2,dif);
-            setContentPane(multiGamePanel);
+            this.gp = new MultiGamePanel(this,drone1,drone2,dif);
+            MultiGamePanel mp = (MultiGamePanel) gp;
+            setContentPane(mp);
             setScoresAndPowerups2();
     }   else{
-            this.singleGamePanel = new SingleGamePanel(this,drone1,dif);
-          
-            setContentPane(singleGamePanel);
+            this.gp = new SingleGamePanel(this,drone1,dif);
+            SingleGamePanel sp = (SingleGamePanel) gp;
+            setContentPane(sp);
             setScoresAndPowerups1();
     }
     
@@ -113,6 +102,7 @@ public class GameFrame extends JFrame implements KeyListener {
         adhdPowerupP2.setForeground(Color.WHITE);
         multiplierP1.setForeground(Color.WHITE);
         multiplierP2.setForeground(Color.WHITE);
+        MultiGamePanel multiGamePanel = (MultiGamePanel) gp;
         multiGamePanel.add(wave);
         multiGamePanel.add(enemiesleft);
         multiGamePanel.add(multiplierP1);
@@ -132,8 +122,9 @@ public class GameFrame extends JFrame implements KeyListener {
         wave.setForeground(Color.WHITE);
         adhdPowerupP1.setForeground(Color.WHITE);
         enemiesleft.setForeground(Color.WHITE);
-        singleGamePanel.setForeground(Color.WHITE);
         multiplierP1.setForeground(Color.WHITE);
+        SingleGamePanel singleGamePanel = (SingleGamePanel) gp;
+        singleGamePanel.setForeground(Color.WHITE);        
         singleGamePanel.add(wave);
         singleGamePanel.add(enemiesleft);
         singleGamePanel.add(multiplierP1);
@@ -165,7 +156,6 @@ public class GameFrame extends JFrame implements KeyListener {
         String add = "ADHD Powerups Player 1: " + amount + "     ";
         this.adhdPowerupP1.setText(add);
     }
-    
     public void updateAdhdPowerupsP2(int amount){
         String add = "ADHD Powerups Player 2: " + amount;
         this.adhdPowerupP2.setText(add);
@@ -178,41 +168,21 @@ public class GameFrame extends JFrame implements KeyListener {
         String add = "enemies left: "+amount;
         this.enemiesleft.setText(add);
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
-        
     }
     @Override
     public void keyPressed(KeyEvent e) {
-        if(multiGamePanel==null){
-            singleGamePanel.keyPressed(e);
-        }
-        else{
-            multiGamePanel.keyPressed(e);
-        }
+        gp.keyPressed(e);
     }
-    public void endGameSingle(){
-        this.singleGamePanel = null;
-    }
-    public void endGameMulti(){
-        this.multiGamePanel = null;
-    }
-
     @Override
     public void keyReleased(KeyEvent e) {
-        if(multiGamePanel==null){
-            singleGamePanel.keyReleased(e);
-        }
-        else{
-            multiGamePanel.keyReleased(e);
-        }
+        gp.keyReleased(e);      
     }
     public void setPanel(JPanel panel){
         this.setContentPane(panel);
         pack();
     }
-    
     public int getHeight(){
         return this.HEIGHT;
     }

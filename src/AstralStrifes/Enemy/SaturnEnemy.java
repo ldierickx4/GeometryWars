@@ -157,4 +157,8 @@ public class SaturnEnemy implements Enemy{
     public int getDamage() {
         return this.damage;
     }
+
+    @Override
+    public void moveTo(double x, double y) {
+    }
 }

@@ -29,4 +29,5 @@ public interface Enemy{
     public int getValue();
     public Manna getManna();
     public int getDamage();
+    public void moveTo(double x,double y);
 }

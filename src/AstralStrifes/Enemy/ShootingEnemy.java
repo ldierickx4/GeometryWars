@@ -142,4 +142,8 @@ public class ShootingEnemy implements Enemy{
         return this.damage;
     }
 
+    @Override
+    public void moveTo(double x, double y) {
+    }
+
 }
