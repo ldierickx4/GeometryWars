@@ -30,8 +30,9 @@ public class CollisionController {
     private EnemyBulletController ebc;
     private PowerupController pc;
     private LinkedList<Powerup> powerups;
-    private SoundLoader killed = new SoundLoader("Killed");
+    private SoundLoader killedSound = new SoundLoader("Killed");
     private SoundLoader powerupSound = new SoundLoader("Powerup");
+    private SoundLoader mannaSound = new SoundLoader("Manna");
     
     public CollisionController(Player p,PlayerBulletController c,EnemyController ec, EnemyBulletController ebc, PowerupController pc)
     {
@@ -67,7 +68,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             for(int index = 0; index<bullets.size();index++){
                 Rectangle tempb = bullets.get(index).getBorders();
                 if(enemyR.intersects(tempb)){
-                    (killed.getSound()).play();
+                    (killedSound.getSound()).play();
                     ec.addManna(tempe.getManna());
                     ec.removeEnemy(tempe);    
                     bullets.get(index).setDead();
@@ -97,7 +98,7 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
             if(enemyR.intersects(player.getBounds()))
             {
                 if(!hitEnemies.contains(tempE)){
-                    (killed.getSound()).play();
+                    (killedSound.getSound()).play();
                     hitEnemies.add(tempE);
                     player.reduceHealth(tempE.getDamage());
                     player.resetMultiplier();
@@ -116,8 +117,10 @@ public void checkEnemyBulletCoulission(LinkedList<Bullet> bullets)
                 Manna m = manna.get(i);
                 Rectangle mannaR =m.getBounds();
                 if(playerR.intersects(mannaR)){
+                    (mannaSound.getSound()).play();
                     Manna ma = ec.removeManna(m);
                     player.addManna(ma);
+                    
                 }
             } catch(Exception ex) {
                 System.out.println(ex.getMessage());
