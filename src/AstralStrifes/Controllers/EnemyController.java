@@ -78,25 +78,27 @@ public class EnemyController implements Runnable{
         }
     }
     public void generateEnemies(){
-        LinkedList<String> enemies = db.getEnemiesInWave(wave);
-        if(enemies!=null){
+        LinkedList<String> enemies=db.getEnemiesInWave(wave);
+        if(enemies.size()>0){
             LinkedList<Enemy> genEnemies= new LinkedList<Enemy>();
             for(String e:enemies){
-                if(e.equals("saturnenemy")){
-                    genEnemies.add(new SaturnEnemy(gp));
-                }
-                else if(e.equals("shootingenemy")){
-                    genEnemies.add(new ShootingEnemy(p,gp.getBulletControler(),gp));
-                }
-                else{
-                    genEnemies.add(new NormalEnemy(gp));
+                switch (e) {
+                    case "saturnenemy":
+                        genEnemies.add(new SaturnEnemy(gp));
+                        break;
+                    case "shootingenemy":
+                        genEnemies.add(new ShootingEnemy(p,gp.getBulletControler(),gp));
+                        break;
+                    default:
+                        genEnemies.add(new NormalEnemy(gp));
+                        break;
                 }
             }
             Collections.shuffle(genEnemies);
             this.toAddEnemies = genEnemies;
         }
         else{
-            gp.setAttackdrone();
+            gp.setStatus("finished");
         }
     }
     public void makeNewEnemy()
@@ -118,7 +120,7 @@ public class EnemyController implements Runnable{
             try {
 		Thread.sleep(SpawnSpeed);
 		}
-            catch(InterruptedException e) {
+            catch(InterruptedException e){
 		e.printStackTrace();
 		}
             makeNewEnemy();
@@ -128,10 +130,7 @@ public class EnemyController implements Runnable{
         return this.count;
     }
     public LinkedList<Enemy> giveEnemies(){
-        if(this.enemies!=null){
-            return this.enemies;
-        }
-        return null;
+         return this.enemies;
     }
     public void killRandomEnemy(){
         int bounds = enemies.size();

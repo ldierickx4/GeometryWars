@@ -29,23 +29,21 @@ public class SwiftyPowerup extends Powerup implements Runnable{
     private int duration;
     //private boolean pickedUp = false;
     
-    public SwiftyPowerup(String name,GamePanel gp) {
+    public SwiftyPowerup(Player p,GamePanel gp) {
         super(gp);
         this.gp = gp;
         this.name = name;
+        this.p=p;
         this.duration=gp.getDiff().getSwifty();
         String link = "resources/gameSprites/swifty.png";
         super.loadImage(link); 
-        t = new Thread(this);
-        t.start();      
+        t = new Thread(this);     
     }
     
     public void Boost(){
-        Player p = gp.getPlayer();
         p.boostSpeed(40);
     }
     public void endBoost(){
-        Player p = gp.getPlayer();
         p.boostSpeed(2);
     }
     @Override

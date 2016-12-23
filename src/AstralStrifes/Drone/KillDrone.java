@@ -18,7 +18,7 @@ public class KillDrone extends Drone implements Runnable{
     private Thread thread;
     private EnemyController ec;
     public KillDrone(Player p,GamePanel gp) {
-        super(p);
+        super(p,10000);
         this.ec = gp.getEc();
         String link = "resources/gameSprites/attack2.png";
         super.loadImage(link);
@@ -32,7 +32,7 @@ public class KillDrone extends Drone implements Runnable{
     public void run() {
         while(true){
             try {
-                thread.sleep(10000);
+                thread.sleep(super.upgrade);
                 power();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();

@@ -82,6 +82,9 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     private Difficulty diff;
     private Boolean attackDrone = false;
     private String type = "Multi";
+    private GameOver end;
+    private boolean game=true;
+
     
     public MultiGamePanel(GameFrame gf,String drone1,String drone2,Difficulty diff){
         this.gf =gf;
@@ -95,8 +98,8 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         this.controller2 = new PlayerBulletController(player2, this,aimX,aimY);
         this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
-        this.pc = new PowerupController(player, this);
-        this.pc2 = new PowerupController(player2,this);
+        this.pc = new PowerupController(player, controller,this);
+        this.pc2 = new PowerupController(player2,controller2,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
         this.cc2 = new CollisionController(player2,controller2, ec, ebc, pc2);
         thread = new Thread(this);
@@ -407,14 +410,21 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
             case "playing":
                 break;
             case "gameover":
-                System.out.println("GameOver");
+                this.game=false;
+                this.ec=null; 
+                end = new GameOver(gf,status);
+                end.setScore2(player.getScore(),player2.getScore());
+                gf.setPanel(end);
                 break;
             case "finished":
-                System.out.println("gewonnen");
+                this.game=false;
+                this.ec=null;
+                end = new GameOver(gf,status);
+                end.setScore2(player.getScore(),player2.getScore());
+                gf.setPanel(end);
                 break;
         }
     }
-
     @Override
     public Difficulty getDiff() {
         return this.diff;

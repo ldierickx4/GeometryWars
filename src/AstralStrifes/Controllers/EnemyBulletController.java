@@ -28,7 +28,7 @@ public class EnemyBulletController implements Runnable {
     private LinkedList<Player> players;
     private Thread thread;
     private Random r = new Random();
-    private SoundLoader rainbow = new SoundLoader("Koekoek");
+    private SoundLoader rainbow = new SoundLoader("Rainbow");
     private SoundLoader s = new SoundLoader("Rainbow");
 
     private int damage;

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package AstralStrifes.Drone;
+import AstralStrifes.Enemy.Manna;
 import AstralStrifes.Player;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -33,9 +34,13 @@ public class Drone{
     private Thread thread;
     private double radian= ORBITSPEED * timeInterval;
     private Method power;
+    public int upgrade;
+    private int level;
     
-    public Drone(Player p){
+    public Drone(Player p,int upgrade){
         this.p=p;
+        this.upgrade=upgrade;
+        
     }
     public void loadImage(String link){
         BufferedImage i = null;
@@ -54,11 +59,23 @@ public class Drone{
         this.radian = ORBITSPEED * timeInterval;
         this.x = (int)(p.getx() + orbitRadius * Math.cos(radian));
         this.y =(int)(p.gety() + orbitRadius * Math.sin(radian));
+        checkUpgrade();
     } 
     public int getY(){
         return this.y;
     }
     public int getX(){
         return this.x;
+    }
+    public void upgrade(){
+        int up = this.upgrade/100;
+        this.upgrade-=up;
+    }
+    public void checkUpgrade(){
+        int size = p.getManna().size();
+        if(size%5==0&&size!=0){
+            p.addManna(new Manna(0, 0, 0, 0));
+            upgrade();
+        }
     }
 }

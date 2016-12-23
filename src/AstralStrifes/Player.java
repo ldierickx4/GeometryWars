@@ -176,7 +176,9 @@ public class Player {
         g2.rotate(getPlayerAngle(),getx(),gety());
         g2.drawImage(giveImage(),getPlayerCenterX(), getPlayerCenterY(),image.getWidth(),image.getHeight(),null);
         g2.setTransform(reset);
+        
     }
+
 
     public void calculatePlayerAngle(double mouseX, double mouseY) {
         this.angle = Math.atan2(gety() - mouseY, getx() - mouseX);
@@ -222,7 +224,6 @@ public class Player {
    }
 
     public int updateHealth(){
-        
         return health;
     }
     
@@ -268,6 +269,9 @@ public class Player {
     }
     public int getMultiplier(){
         return this.multiplier;
+    }
+    public LinkedList<Manna> getManna(){
+        return this.manna;
     }
 }
 

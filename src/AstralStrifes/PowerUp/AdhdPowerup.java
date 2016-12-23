@@ -7,6 +7,7 @@ package AstralStrifes.PowerUp;
 
 import PresentationLayer.GamePanel;
 import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Rectangle;
@@ -22,7 +23,7 @@ public class AdhdPowerup extends Powerup implements Runnable{
     private GamePanel gp;
     private PlayerBulletController pbc;
      
-    public AdhdPowerup(String name, GamePanel gp) {
+    public AdhdPowerup(PlayerBulletController pbc,GamePanel gp) {
         super(gp);
         this.gp=gp;
         this.pbc = pbc;
@@ -49,12 +50,10 @@ public class AdhdPowerup extends Powerup implements Runnable{
     }
     
     public void boostGun(){
-        pbc = gp.getBulletControler();
         pbc.boostFiringRate(this.boost);
     }
     
     public void endBoost(){
-        pbc = gp.getBulletControler();
         pbc.resetFiringRate();
     }
     

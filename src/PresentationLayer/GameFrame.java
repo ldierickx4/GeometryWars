@@ -41,7 +41,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private String drone1;
     private String drone2;
     public static void main(String[] args){
-    GameFrame gf = new GameFrame(2,"heal","attack",1);   
+        GameFrame gf = new GameFrame(2,"heal","attack",3);   
     }
     //private JLabel score;
     public GameFrame(int playerCount,String drone1, String drone2,int diff){
@@ -184,6 +184,9 @@ public class GameFrame extends JFrame implements KeyListener {
             multiGamePanel.keyPressed(e);
         }
     }
+    public void endGameSingle(){
+        this.singleGamePanel = null;
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -193,7 +196,10 @@ public class GameFrame extends JFrame implements KeyListener {
         else{
             multiGamePanel.keyReleased(e);
         }
-        
+    }
+    public void setPanel(JPanel panel){
+        this.setContentPane(panel);
+        pack();
     }
     
     public int getHeight(){

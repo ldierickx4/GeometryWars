@@ -15,7 +15,7 @@ public class HealDrone extends Drone implements Runnable{
     
     private Thread thread;
     public HealDrone(Player p) {
-        super(p);
+        super(p,10000);
         String link= "resources/gameSprites/healdrone.png";
         super.loadImage(link);
         thread = new Thread(this);
@@ -26,12 +26,11 @@ public class HealDrone extends Drone implements Runnable{
             super.p.heal(10);
         }
     }
-
     @Override
     public void run() {
         while(true){
             try {
-                thread.sleep(10000);
+                thread.sleep(super.upgrade);
                 power();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();

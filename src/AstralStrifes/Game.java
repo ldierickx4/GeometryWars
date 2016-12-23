@@ -19,10 +19,7 @@ import javafx.stage.Stage;
  *
  * @author Laurens
  */
-public class Game extends Application{
-    
-    
-
+public class Game extends Application{    
     /**
      * @param primaryStage
      * @param args the command line arguments
@@ -32,11 +29,8 @@ public class Game extends Application{
     public static BorderPane borderPane = new BorderPane();
     
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        //GameFrame window = new GameFrame();
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) throws Exception { 
         this.stage = primaryStage;

@@ -23,15 +23,17 @@ public class PowerupController{
     private Player player;
     private LinkedList<Powerup> powerups;
     private LinkedList<Powerup> usedPowers;
+    private PlayerBulletController pbc;
     private GamePanel gp;
     private Thread t;
     private boolean spacebar = false;
 
-    public PowerupController(Player player, GamePanel gp) {
+    public PowerupController(Player player,PlayerBulletController pbc,GamePanel gp) {
         this.powerups = new LinkedList<Powerup>();
         this.usedPowers = new LinkedList<Powerup>();
         this.player = player;
-        this.gp = gp;
+        this.gp=gp;
+        this.pbc=pbc;
     }
     public void addUsed(Powerup p){
         usedPowers.add(p);
@@ -42,20 +44,19 @@ public class PowerupController{
     
     public void updatePowerups(){
         score = player.getScore();
-        if(score%3000 == 0 && score!=0 && powerups.size() == 0){
-            SwiftyPowerup powerup = new SwiftyPowerup("Swifty", gp);
+        if(score%15 == 0 && score!=0 && powerups.size() == 0){
+            SwiftyPowerup powerup = new SwiftyPowerup(player,gp);
             powerups.add(powerup);
         }   
     }
     
     public void useADHD(){
         if(player.getAmountOfAdhdPowerups() != 0){
-            AdhdPowerup powerup = new AdhdPowerup("ADHD" , gp);
+            AdhdPowerup powerup = new AdhdPowerup(pbc,gp);
             powerups.add(powerup);
             powerup.start();
             player.reduceAdhd();
             powerups.clear();
-            //System.out.println("Using ADHD");
         }    
     }
     
@@ -68,7 +69,6 @@ public class PowerupController{
                     sp.start();
                 }
                 catch(Exception ex){
-                    System.out.println(ex);
                 }
             }
         }

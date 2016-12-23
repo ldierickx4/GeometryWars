@@ -28,9 +28,9 @@ import java.util.logging.Logger;
 public class Database {
     
     
-    private static final String URL = "jdbc:mysql://localhost/astralstrifes";
-    private static final String USER = "Jens";
-    private static final String PWD = "jens";
+    private static final String URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7150659";
+    private static final String USER = "sql7150659";
+    private static final String PWD = "WIv3sEI3sK";
     private static Connection con;
     private boolean userExist;
     private boolean userAdded;
@@ -738,7 +738,7 @@ public class Database {
         System.out.println(db.getDifficultyNEDamage(1));
         System.out.println(db.getDifficultySEDamage(1));
         System.out.println(db.getDifficultyEBulletDamage(1));
-        
+        System.out.println(db.getEnemiesInWave(6).size());
 
     }
     

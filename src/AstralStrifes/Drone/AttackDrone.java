@@ -24,7 +24,7 @@ public class AttackDrone extends Drone implements Runnable{
     private GamePanel gp;
     //private SoundLoader s = new SoundLoader("Spaceship");
     public AttackDrone(Player p ,GamePanel gp) {
-        super(p);
+        super(p,1000);
         this.gp=gp;
         gp.setAttackdrone();
         this.thread = new Thread(this);
@@ -35,7 +35,6 @@ public class AttackDrone extends Drone implements Runnable{
     }
     public void power(){
         Enemy e = gp.getEc().getRandomEnemy();
-        System.out.println(e);
         if(e!=null){
             Bullet b = new Bullet(super.getX(), super.getY(), e.getX(), e.getY(), "drone");
             //(s.getSound()).play();
@@ -54,7 +53,7 @@ public class AttackDrone extends Drone implements Runnable{
     public void run() {
         while(true){
             try {
-                thread.sleep(1000);
+                thread.sleep(super.upgrade);
                 this.power();
             } catch (InterruptedException ex) {
                 ex.getStackTrace();
@@ -64,6 +63,4 @@ public class AttackDrone extends Drone implements Runnable{
     public LinkedList<Bullet> getBullets(){
         return this.bullets;
     }
-    
-    
 }

@@ -42,6 +42,7 @@ import javax.swing.*;
 public class SingleGamePanel extends JPanel implements KeyListener,Runnable,MouseMotionListener,MouseListener,GamePanel{
     private Player player;
     private Background background;
+    private boolean game = true;
     private boolean running = true;
     private Thread thread;
     private boolean down = false;
@@ -64,6 +65,8 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     private LinkedList<Player> players;
     //private String type = "Single";
     private String status = "playing";
+    private GameOver end;
+    
     
     
     public SingleGamePanel(GameFrame gf,String drone,Difficulty diff){ 
@@ -77,7 +80,7 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
         this.ebc = new EnemyBulletController(players, this);
         this.ec = new EnemyController(player,this);
-        this.pc = new PowerupController(player, this);
+        this.pc = new PowerupController(player, controller,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
         thread = new Thread(this);
         thread.start();
@@ -119,25 +122,24 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         }
     }
     @Override
-    public void paintComponent(Graphics gr) {
-        super.paintComponent(gr);
-        Graphics2D g = (Graphics2D)gr;
-        gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
-        playerDraw(player , gr);
-        controller.render(gr);
-        ebc.render(gr);
-        ec.render(gr);
-        pc.draw(gr);
-        if(attackDrone){
-            AttackDrone ad = (AttackDrone)(player.getDrone());
-            ad.renderBullets(gr);        
+    public void paintComponent(Graphics gr){
+            super.paintComponent(gr);
+            Graphics2D g = (Graphics2D)gr;
+            gr.drawImage(background.getBackground(), 0, 0, background.getWidth(), background.getHeight(), this); //Moet hier anders draait de achtergrond me
+            playerDraw(player , gr);
+            controller.render(gr);
+            ebc.render(gr);
+            ec.render(gr);
+            pc.draw(gr);
+            if(attackDrone){
+                AttackDrone ad = (AttackDrone)(player.getDrone());
+                ad.renderBullets(gr);        
         }
     }
     public void playerDraw(Player p , Graphics gr){
         player.draw(gr,this);
         player.getDrone().draw(gr);
         player.drawHealth(gr);
-        player.checkIfPlayerIsStillAlive();
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -175,32 +177,34 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
 
     @Override
     public void run() {
-        while(true)
-        {            
+        while(game)
+        {       
             try {
 		Thread.sleep(4);
+                player.checkIfPlayerIsStillAlive();
+                ec.update();
+                player.updateHealth();
+                player.updateBounds();
+                player.getDrone().letOrbit();
+                checkShoot();
+                checkInput();
+                coullisionDetects();
+                controller.update(mouseX,mouseY);
+                ebc.update();
+                pc.updatePowerups();
+                pc.checkForPOwerUp();               
+                gf.updateScoreP1(player.getScore());
+                gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
+                gf.updateMultiplierP1(player.getMultiplier());
+                gf.updateWaves(ec.getWave());
+                gf.updateEnemiesLeft(ec.getEnemiesLeft());
+                repaint();
+                checkStatus();
             }
             catch(Exception e) {
 		e.printStackTrace();
             }
-            checkStatus();
-            player.updateBounds();
-            player.getDrone().letOrbit();
-            checkShoot();
-            checkInput();
-            coullisionDetects();
-            controller.update(mouseX,mouseY);
-            ec.update();
-            ebc.update();
-            pc.updatePowerups();
-            pc.checkForPOwerUp();
-            gf.updateScoreP1(player.getScore());
-            gf.updateAdhdPowerupsP1(player.getAmountOfAdhdPowerups());
-            gf.updateMultiplierP1(player.getMultiplier());
-            gf.updateWaves(ec.getWave());
-            gf.updateEnemiesLeft(ec.getEnemiesLeft());
-            player.updateHealth();
-            repaint();
+
         }
     }    
     public double getMouseX(){
@@ -298,12 +302,21 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
             case "playing":
                 break;
             case "gameover":
-                System.out.println("GameOver");
+                this.game=false;
+                end = new GameOver(gf,status);
+                end.setScore(player.getScore());
+                this.ec=null;                
+                gf.setPanel(end);
                 break;
             case "finished":
-                System.out.println("gewonnen");
+                this.game=false;
+                end = new GameOver(gf,status);
+                this.ec=null;
+                end.setScore(player.getScore());
+                gf.setPanel(end);
                 break;
         }
+        
     }
 
     @Override

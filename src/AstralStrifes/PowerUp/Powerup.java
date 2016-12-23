@@ -5,6 +5,8 @@
  */
 package AstralStrifes.PowerUp;
 
+import AstralStrifes.Controllers.PlayerBulletController;
+import AstralStrifes.Player;
 import PresentationLayer.GamePanel;
 import PresentationLayer.SingleGamePanel;
 import java.awt.Graphics;
@@ -38,9 +40,6 @@ public class Powerup{
         Random r = new Random(); 
         this.x = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
         this.y = rangeMin + r.nextInt( rangeMax - rangeMin + 1 );
-        this.gp = gp;
-        //t = new Thread(this);
-        //t.start();
     } 
     
     
@@ -49,7 +48,7 @@ public class Powerup{
         try {
             i = ImageIO.read(new File(link));
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            ex.getMessage();
         }
         image = i; 
         this.bounds = new Rectangle(x, y, image.getWidth(), image.getHeight());
