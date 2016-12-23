@@ -15,6 +15,11 @@ import AstralStrifes.*;
 import AstralStrifes.Difficulty.Difficulty;
 import Data.Database;
 import Data.UserPlay;
+<<<<<<< HEAD
+=======
+import java.awt.Color;
+import java.awt.Font;
+>>>>>>> origin/master
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
