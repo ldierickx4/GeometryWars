@@ -152,7 +152,6 @@ public class GameOver extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO exit
         gf.dispose();
     }//GEN-LAST:event_jButton3MouseClicked
         public void loadImage(){
@@ -189,7 +188,6 @@ public class GameOver extends javax.swing.JPanel {
     public void paintComponent(Graphics gr) {
         //this.paintComponent(gr);
         gr.drawImage(background, 0, 0, 1000, 800, this); //Moet hier anders draait de achtergrond me
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

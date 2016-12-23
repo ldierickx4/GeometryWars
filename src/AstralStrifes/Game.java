@@ -33,7 +33,6 @@ public class Game extends Application{
     {
         game = this;
     }
-    
     public static void main(String[] args) throws IOException {
         launch(args);
     }
