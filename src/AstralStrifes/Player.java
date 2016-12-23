@@ -75,7 +75,7 @@ public class Player {
     public void makeDrone(String drone){
         switch (drone) {
             case "heal":
-                this.sd = new HealDrone(this);
+                this.sd = new HealDrone(this,gp);
                 break;
             case "attack":
                 this.sd = new AttackDrone(this, gp);

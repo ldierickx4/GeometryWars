@@ -6,16 +6,18 @@
 package AstralStrifes.Drone;
 
 import AstralStrifes.Player;
+import PresentationLayer.GamePanel;
 
 /**
  *
  * @author laurensdierickx
  */
 public class HealDrone extends Drone implements Runnable{
-    
+    private GamePanel gp;
     private Thread thread;
-    public HealDrone(Player p) {
+    public HealDrone(Player p,GamePanel gp) {
         super(p,10000);
+        this.gp=gp;
         String link= "resources/gameSprites/healdrone.png";
         super.loadImage(link);
         thread = new Thread(this);
@@ -28,7 +30,7 @@ public class HealDrone extends Drone implements Runnable{
     }
     @Override
     public void run() {
-        while(true){
+        while(gp.getGameLoop()){
             try {
                 thread.sleep(super.upgrade);
                 power();

@@ -73,13 +73,13 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
         this.gf =gf;
         this.diff = diff;
         createComponents();
+        this.ec = new EnemyController(player,this);
         player.makeDrone(drone);
         addKeyListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
         this.controller = new PlayerBulletController(player,this,mouseX,mouseY);
         this.ebc = new EnemyBulletController(players, this);
-        this.ec = new EnemyController(player,this);
         this.pc = new PowerupController(player, controller,this);
         this.cc = new CollisionController(player,controller, ec, ebc, pc);
         thread = new Thread(this);
@@ -251,18 +251,13 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {
-            shoot=true;
-        }
+        shoot=e.getButton()==e.BUTTON1;
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {
-            shoot=false;
-        }
+        shoot=!(e.getButton()==e.BUTTON1);
     }
     
     @Override
@@ -293,7 +288,6 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     @Override
     public void setStatus(String status) {
         this.status = status;
-
     }
 
     @Override
@@ -305,13 +299,11 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
                 this.game=false;
                 end = new GameOver(gf,status);
                 end.setScore(player.getScore());
-                this.ec=null;                
                 gf.setPanel(end);
                 break;
             case "finished":
                 this.game=false;
                 end = new GameOver(gf,status);
-                this.ec=null;
                 end.setScore(player.getScore());
                 gf.setPanel(end);
                 break;
@@ -325,5 +317,9 @@ public class SingleGamePanel extends JPanel implements KeyListener,Runnable,Mous
     @Override
     public Difficulty getDiff() {
         return this.diff;
+    }
+    @Override
+    public boolean getGameLoop() {
+        return this.game;
     }
 }

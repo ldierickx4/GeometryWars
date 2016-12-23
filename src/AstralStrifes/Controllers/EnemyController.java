@@ -115,8 +115,7 @@ public class EnemyController implements Runnable{
     }
     @Override
     public void run() {
-        Thread current = Thread.currentThread();
-        while(current == thread)
+        while(gp.getGameLoop())
         {            
             try {
 		Thread.sleep(SpawnSpeed);
@@ -131,7 +130,10 @@ public class EnemyController implements Runnable{
         return this.count;
     }
     public LinkedList<Enemy> giveEnemies(){
-         return this.enemies;
+        if(enemies.size()>0){
+            return this.enemies;
+        }
+        return new LinkedList<Enemy>();
     }
     public void killRandomEnemy(){
         int bounds = enemies.size();

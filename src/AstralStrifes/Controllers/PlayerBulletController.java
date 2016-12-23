@@ -77,7 +77,7 @@ public class PlayerBulletController implements Runnable{
 
     @Override
     public void run() {
-        while(this.shooting)
+        while(this.shooting&&gp.getGameLoop())
         {            
             try {
 		Thread.sleep(FIRING_RATE);

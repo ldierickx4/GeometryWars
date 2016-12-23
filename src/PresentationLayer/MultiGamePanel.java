@@ -124,10 +124,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         catch(LWJGLException e){
             e.getMessage();
         }
-        //for(int i = 0; i < Controllers.getControllerCount(); i++){
-        //   pscon = Controllers.getController(i);
-        //   System.out.println(i + ": " + pscon.getName());
-        //}
         pscon = Controllers.getController(0);
         Controllers.poll();
     }
@@ -321,15 +317,11 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     @Override
     public void mousePressed(MouseEvent e) {
         shoot1=e.getButton()==e.BUTTON1;
-        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton()==e.BUTTON1)
-        {
-            shoot1=false;
-        }
+        shoot1=!(e.getButton()==e.BUTTON1);
     }
     
     @Override
@@ -364,20 +356,6 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
         checkConAim();
         checkConShoot();
         checkUseAdhd();
-       //System.out.println(pscon.isButtonPressed(3)+"driehoek");
-       //System.out.println(pscon.isButtonPressed(0)+"vierkant");
-       //System.out.println(pscon.isButtonPressed(1)+"kruis");
-       //System.out.println(pscon.isButtonPressed(2)+"bol");
-       //System.out.println(pscon.isButtonPressed(4)+"l1");
-       //System.out.println(pscon.isButtonPressed(5)+"R1");
-       //System.out.println(pscon.isButtonPressed(6)+"l2");
-       //System.out.println(pscon.isButtonPressed(7)+"r2");
-       //System.out.println(pscon.isButtonPressed(8)+"share");
-       //System.out.println(pscon.isButtonPressed(9)+"options");
-       //System.out.println(pscon.isButtonPressed(10)+"links stick push");
-       //System.out.println(pscon.isButtonPressed(11)+"rechts stick push");
-       //System.out.println(pscon.isButtonPressed(12)+"ps4knop");
-       //System.out.println(pscon.isButtonPressed(13)+"touchpad");
     }
     private void checkUseAdhd(){
         if(pscon.isButtonPressed(1)){
@@ -431,5 +409,10 @@ public class MultiGamePanel extends JPanel implements KeyListener,Runnable,Mouse
     @Override
     public LinkedList<Player> getPlayers(){
         return this.players;
+    }
+
+    @Override
+    public boolean getGameLoop() {
+        return this.game;
     }
 }

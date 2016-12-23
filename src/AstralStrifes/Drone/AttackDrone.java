@@ -51,7 +51,7 @@ public class AttackDrone extends Drone implements Runnable{
     }
     @Override
     public void run() {
-        while(true){
+        while(gp.getGameLoop()){
             try {
                 thread.sleep(super.upgrade);
                 this.power();

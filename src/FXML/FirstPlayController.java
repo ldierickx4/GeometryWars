@@ -110,18 +110,16 @@ public class FirstPlayController implements Initializable {
         System.out.println(difficultyInt);
         if ("two".equals(players.getSelectedToggle().getUserData().toString())){
             try{
+                GameFrame gf = new GameFrame(2, drone1 , drone2, difficultyInt);
                 Stage appStage = Game.stage;
                 appStage.hide();
-                GameFrame gf = new GameFrame(2, drone1 , drone2, difficultyInt);         
+                         
             } catch(Exception ex){
                 controllerNotPluggedIn.setVisible(true);
                 ex.printStackTrace();               
             }           
-        }else{
-            System.out.println("huh??");
-            
+        }else{            
             Stage appStage = Game.stage;
-            
             GameFrame gf = new GameFrame(1, drone1, difficultyInt);
             appStage.setScene(null);
             appStage.setHeight(1);

@@ -17,9 +17,10 @@ import PresentationLayer.SingleGamePanel;
 public class KillDrone extends Drone implements Runnable{
     private Thread thread;
     private EnemyController ec;
-    
+    private GamePanel gp;
     public KillDrone(Player p,GamePanel gp) {
         super(p,10000);
+        this.gp=gp;
         this.ec = gp.getEc();
         String link = "resources/gameSprites/attack2.png";
         super.loadImage(link);
@@ -31,7 +32,7 @@ public class KillDrone extends Drone implements Runnable{
     }
     @Override
     public void run() {
-        while(true){
+        while(gp.getGameLoop()){
             try {
                 thread.sleep(super.upgrade);
                 power();

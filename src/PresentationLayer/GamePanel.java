@@ -56,4 +56,5 @@ public interface GamePanel{
     public void checkStatus();
     public Difficulty getDiff();
     public LinkedList<Player> getPlayers();
+    public boolean getGameLoop();
 }

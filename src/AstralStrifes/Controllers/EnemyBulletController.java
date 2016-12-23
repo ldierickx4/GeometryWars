@@ -21,11 +21,12 @@ import java.util.Random;
  *
  * @author laurensdierickx
  */
-public class EnemyBulletController implements Runnable {
+public class EnemyBulletController implements Runnable{
     private GamePanel gp;
     private int bulletSpeed;
     private LinkedList<Bullet> bullets;
     private LinkedList<Player> players;
+    private LinkedList<Enemy> enemy;
     private Thread thread;
     private Random r = new Random();
     private SoundLoader rainbow = new SoundLoader("Rainbow");
@@ -36,6 +37,7 @@ public class EnemyBulletController implements Runnable {
     public EnemyBulletController(LinkedList<Player> players, GamePanel gp)
     {   
         this.bullets = new LinkedList<Bullet>();
+        this.enemy = new LinkedList<Enemy>();
         this.players = players;
         this.gp = gp;
         this.damage = 10;
@@ -60,21 +62,7 @@ public class EnemyBulletController implements Runnable {
     public void render(Graphics g){
         Bullet tempBullet;
         for(int i=0;i<bullets.size();i++){
-            tempBullet = bullets.get(i);     
-            tempBullet.draw(g);
-        }
-    }
-    @Override
-    public void run() {
-        while(true)
-        {            
-            try {
-		Thread.sleep(bulletSpeed);
-		}
-            catch(Exception e) {
-		e.printStackTrace();
-		}
-            updateEnemyBullets();
+            bullets.get(i).draw(g);     
         }
     }
     public LinkedList<Bullet> giveBullets(){
@@ -92,8 +80,9 @@ public class EnemyBulletController implements Runnable {
     public void updateEnemyBullets()
     {   
         Player p = getRandomPlayer();
-        LinkedList<Enemy> enemy = gp.getEc().giveEnemies();
-        if(enemy!=null){
+        EnemyController ec = gp.getEc();
+        this.enemy = ec.giveEnemies();
+        if(enemy.size()>0){
             for(int i=0; i<enemy.size();i++)
             {
                 Enemy e = enemy.get(i);
@@ -115,6 +104,19 @@ public class EnemyBulletController implements Runnable {
     }
     public int getDamage(){
         return this.damage;
+    }
+        @Override
+    public void run() {
+        while(gp.getGameLoop())
+        {            
+            try {
+		Thread.sleep(bulletSpeed);
+		}
+            catch(Exception e) {
+		e.printStackTrace();
+		}
+            updateEnemyBullets();
+        }
     }
    
 }

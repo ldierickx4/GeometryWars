@@ -365,7 +365,6 @@ public class Database {
            pstmt.setInt(1, wave_id);           
            ResultSet rs = pstmt.executeQuery();
            while(rs.next()){
-               //System.out.println(rs.getArray("enemy_id"));
                int enemy = rs.getInt("enemy_id");
                int amount = rs.getInt("amount");
                if(enemy == 1){
@@ -740,14 +739,5 @@ public class Database {
             ex.printStackTrace();
         }    
         return UserList;
-    }
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Database db = new Database();
-        System.out.println(db.getDifficultySATEDamage(1));
-        System.out.println(db.getDifficultyNEDamage(1));
-        System.out.println(db.getDifficultySEDamage(1));
-        System.out.println(db.getDifficultyEBulletDamage(1));
     }
 }

@@ -7,15 +7,11 @@ package AstralStrifes.Sounds;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-//import sun.applet.Main;
+
 
 /**
  *
